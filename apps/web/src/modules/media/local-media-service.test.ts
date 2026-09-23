@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { validateLocalRecording } from "./local-media-service";
+describe("local recording validation", () => { it("accepts supported recordings within the limit", () => { expect(() => validateLocalRecording("audio/webm", 1024)).not.toThrow(); expect(() => validateLocalRecording("audio/webm;codecs=opus", 1024)).not.toThrow(); }); it("rejects unsafe MIME types and oversized files", () => { expect(() => validateLocalRecording("text/html", 100)).toThrow("Unsupported"); expect(() => validateLocalRecording("audio/webm", 16 * 1024 * 1024)).toThrow("15 MB"); }); });

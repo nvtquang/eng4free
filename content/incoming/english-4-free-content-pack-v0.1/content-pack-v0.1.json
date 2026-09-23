@@ -1,0 +1,5485 @@
+{
+  "pack_version": "0.1.0",
+  "generated_at": "2026-09-22T00:00:00.000Z",
+  "license": "CC0-1.0",
+  "provenance": {
+    "source_name": "English 4 Free original seed content",
+    "source_url": null,
+    "original_or_adapted": "original",
+    "license_verified_at": "2026-09-22T00:00:00.000Z"
+  },
+  "records": {
+    "content_batches": [
+      {
+        "id": "batch_content_pack_v01",
+        "name": "Content Pack v0.1 Original",
+        "status": "approved",
+        "source_type": "original",
+        "license": "CC0-1.0",
+        "source_url": null,
+        "created_at": "2026-09-22T00:00:00.000Z",
+        "reviewed_at": "2026-09-22T00:00:00.000Z"
+      }
+    ],
+    "courses": [
+      {
+        "id": "course_a1",
+        "slug": "cefr-a1",
+        "title": "CEFR A1: Everyday beginnings",
+        "track": "cefr",
+        "cefr_level": "A1",
+        "status": "published",
+        "description": "Introduce yourself and talk about simple routines",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_a2",
+        "slug": "cefr-a2",
+        "title": "CEFR A2: Everyday connections",
+        "track": "cefr",
+        "cefr_level": "A2",
+        "status": "published",
+        "description": "Make plans and describe familiar experiences",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_b1",
+        "slug": "cefr-b1",
+        "title": "CEFR B1: Independent communication",
+        "track": "cefr",
+        "cefr_level": "B1",
+        "status": "published",
+        "description": "Explain experiences and give clear reasons",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_b2",
+        "slug": "cefr-b2",
+        "title": "CEFR B2: Confident discussion",
+        "track": "cefr",
+        "cefr_level": "B2",
+        "status": "published",
+        "description": "Compare options and develop an argument",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_c1",
+        "slug": "cefr-c1",
+        "title": "CEFR C1: Precise communication",
+        "track": "cefr",
+        "cefr_level": "C1",
+        "status": "published",
+        "description": "Evaluate complex ideas with controlled language",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_c2",
+        "slug": "cefr-c2",
+        "title": "CEFR C2: Nuanced expression",
+        "track": "cefr",
+        "cefr_level": "C2",
+        "status": "published",
+        "description": "Interpret and communicate subtle meaning",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_toeic",
+        "slug": "toeic",
+        "title": "TOEIC Practice",
+        "track": "exam",
+        "cefr_level": null,
+        "status": "published",
+        "description": "Original TOEIC-style fixtures for testing the exam engine.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "course_ielts",
+        "slug": "ielts",
+        "title": "IELTS Practice",
+        "track": "exam",
+        "cefr_level": null,
+        "status": "published",
+        "description": "Original IELTS-style Listening and Reading fixtures for testing the exam engine.",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "course_levels": [
+      {
+        "id": "course_level_a1",
+        "course_id": "course_a1",
+        "cefr_level": "A1",
+        "position": 1,
+        "title": "A1"
+      },
+      {
+        "id": "course_level_a2",
+        "course_id": "course_a2",
+        "cefr_level": "A2",
+        "position": 2,
+        "title": "A2"
+      },
+      {
+        "id": "course_level_b1",
+        "course_id": "course_b1",
+        "cefr_level": "B1",
+        "position": 3,
+        "title": "B1"
+      },
+      {
+        "id": "course_level_b2",
+        "course_id": "course_b2",
+        "cefr_level": "B2",
+        "position": 4,
+        "title": "B2"
+      },
+      {
+        "id": "course_level_c1",
+        "course_id": "course_c1",
+        "cefr_level": "C1",
+        "position": 5,
+        "title": "C1"
+      },
+      {
+        "id": "course_level_c2",
+        "course_id": "course_c2",
+        "cefr_level": "C2",
+        "position": 6,
+        "title": "C2"
+      }
+    ],
+    "lessons": [
+      {
+        "id": "lesson_a1_1",
+        "course_id": "course_a1",
+        "course_level_id": "course_level_a1",
+        "slug": "a1-be-present",
+        "title": "Be: affirmative and negative",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "status": "published",
+        "position": 1,
+        "summary": "Use am, is and are to state facts about people and things.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_a1_2",
+        "course_id": "course_a1",
+        "course_level_id": "course_level_a1",
+        "slug": "a1-present-simple",
+        "title": "Present simple routines",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "status": "published",
+        "position": 2,
+        "summary": "Use the base verb for regular habits and timetables.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_a2_1",
+        "course_id": "course_a2",
+        "course_level_id": "course_level_a2",
+        "slug": "a2-past-simple",
+        "title": "Past simple experiences",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "status": "published",
+        "position": 1,
+        "summary": "Use regular and common irregular past forms for finished events.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_a2_2",
+        "course_id": "course_a2",
+        "course_level_id": "course_level_a2",
+        "slug": "a2-future-plans",
+        "title": "Going to for plans",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "status": "published",
+        "position": 2,
+        "summary": "Use going to for an intention decided before speaking.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_b1_1",
+        "course_id": "course_b1",
+        "course_level_id": "course_level_b1",
+        "slug": "b1-present-perfect",
+        "title": "Present perfect and experience",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "status": "published",
+        "position": 1,
+        "summary": "Connect a past experience with the present.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_b1_2",
+        "course_id": "course_b1",
+        "course_level_id": "course_level_b1",
+        "slug": "b1-conditionals-one",
+        "title": "First conditional choices",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "status": "published",
+        "position": 2,
+        "summary": "Describe a likely result of a future condition.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_b2_1",
+        "course_id": "course_b2",
+        "course_level_id": "course_level_b2",
+        "slug": "b2-modals-deduction",
+        "title": "Modals of deduction",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "status": "published",
+        "position": 1,
+        "summary": "Express certainty and possibility about a situation.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_b2_2",
+        "course_id": "course_b2",
+        "course_level_id": "course_level_b2",
+        "slug": "b2-relative-clauses",
+        "title": "Defining and non-defining clauses",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "status": "published",
+        "position": 2,
+        "summary": "Add precise information without repeating a noun.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_c1_1",
+        "course_id": "course_c1",
+        "course_level_id": "course_level_c1",
+        "slug": "c1-inversion",
+        "title": "Inversion for emphasis",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "status": "published",
+        "position": 1,
+        "summary": "Use inversion carefully to create formal emphasis.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_c1_2",
+        "course_id": "course_c1",
+        "course_level_id": "course_level_c1",
+        "slug": "c1-nominalisation",
+        "title": "Nominalisation in formal writing",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "status": "published",
+        "position": 2,
+        "summary": "Turn verbs and adjectives into nouns when a formal register helps.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_c2_1",
+        "course_id": "course_c2",
+        "course_level_id": "course_level_c2",
+        "slug": "c2-hedging",
+        "title": "Hedging and qualified claims",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "status": "published",
+        "position": 1,
+        "summary": "Make academic claims accurate rather than absolute.",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "lesson_c2_2",
+        "course_id": "course_c2",
+        "course_level_id": "course_level_c2",
+        "slug": "c2-register",
+        "title": "Register and rhetorical control",
+        "lesson_type": "grammar",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "status": "published",
+        "position": 2,
+        "summary": "Select language that fits audience, purpose and relationship.",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "lesson_blocks": [
+      {
+        "id": "block_a1_1_intro",
+        "lesson_id": "lesson_a1_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Be: affirmative and negative",
+          "body": "Use am, is and are to state facts about people and things."
+        }
+      },
+      {
+        "id": "block_a1_1_example",
+        "lesson_id": "lesson_a1_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Be: affirmative and negative.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "be-present"
+        }
+      },
+      {
+        "id": "block_a1_2_intro",
+        "lesson_id": "lesson_a1_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Present simple routines",
+          "body": "Use the base verb for regular habits and timetables."
+        }
+      },
+      {
+        "id": "block_a1_2_example",
+        "lesson_id": "lesson_a1_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Present simple routines.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "present-simple"
+        }
+      },
+      {
+        "id": "block_a2_1_intro",
+        "lesson_id": "lesson_a2_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Past simple experiences",
+          "body": "Use regular and common irregular past forms for finished events."
+        }
+      },
+      {
+        "id": "block_a2_1_example",
+        "lesson_id": "lesson_a2_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Past simple experiences.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "past-simple"
+        }
+      },
+      {
+        "id": "block_a2_2_intro",
+        "lesson_id": "lesson_a2_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Going to for plans",
+          "body": "Use going to for an intention decided before speaking."
+        }
+      },
+      {
+        "id": "block_a2_2_example",
+        "lesson_id": "lesson_a2_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Going to for plans.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "future-plans"
+        }
+      },
+      {
+        "id": "block_b1_1_intro",
+        "lesson_id": "lesson_b1_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Present perfect and experience",
+          "body": "Connect a past experience with the present."
+        }
+      },
+      {
+        "id": "block_b1_1_example",
+        "lesson_id": "lesson_b1_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Present perfect and experience.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "present-perfect"
+        }
+      },
+      {
+        "id": "block_b1_2_intro",
+        "lesson_id": "lesson_b1_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "First conditional choices",
+          "body": "Describe a likely result of a future condition."
+        }
+      },
+      {
+        "id": "block_b1_2_example",
+        "lesson_id": "lesson_b1_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for First conditional choices.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "conditionals-one"
+        }
+      },
+      {
+        "id": "block_b2_1_intro",
+        "lesson_id": "lesson_b2_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Modals of deduction",
+          "body": "Express certainty and possibility about a situation."
+        }
+      },
+      {
+        "id": "block_b2_1_example",
+        "lesson_id": "lesson_b2_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Modals of deduction.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "modals-deduction"
+        }
+      },
+      {
+        "id": "block_b2_2_intro",
+        "lesson_id": "lesson_b2_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Defining and non-defining clauses",
+          "body": "Add precise information without repeating a noun."
+        }
+      },
+      {
+        "id": "block_b2_2_example",
+        "lesson_id": "lesson_b2_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Defining and non-defining clauses.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "relative-clauses"
+        }
+      },
+      {
+        "id": "block_c1_1_intro",
+        "lesson_id": "lesson_c1_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Inversion for emphasis",
+          "body": "Use inversion carefully to create formal emphasis."
+        }
+      },
+      {
+        "id": "block_c1_1_example",
+        "lesson_id": "lesson_c1_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Inversion for emphasis.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "inversion"
+        }
+      },
+      {
+        "id": "block_c1_2_intro",
+        "lesson_id": "lesson_c1_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Nominalisation in formal writing",
+          "body": "Turn verbs and adjectives into nouns when a formal register helps."
+        }
+      },
+      {
+        "id": "block_c1_2_example",
+        "lesson_id": "lesson_c1_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Nominalisation in formal writing.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "nominalisation"
+        }
+      },
+      {
+        "id": "block_c2_1_intro",
+        "lesson_id": "lesson_c2_1",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Hedging and qualified claims",
+          "body": "Make academic claims accurate rather than absolute."
+        }
+      },
+      {
+        "id": "block_c2_1_example",
+        "lesson_id": "lesson_c2_1",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Hedging and qualified claims.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "hedging"
+        }
+      },
+      {
+        "id": "block_c2_2_intro",
+        "lesson_id": "lesson_c2_2",
+        "block_type": "text",
+        "position": 1,
+        "content": {
+          "heading": "Register and rhetorical control",
+          "body": "Select language that fits audience, purpose and relationship."
+        }
+      },
+      {
+        "id": "block_c2_2_example",
+        "lesson_id": "lesson_c2_2",
+        "block_type": "example",
+        "position": 2,
+        "content": {
+          "english": "Original example for Register and rhetorical control.",
+          "vietnamese": "Ví dụ gốc để kiểm tra renderer lesson.",
+          "highlight": "register"
+        }
+      }
+    ],
+    "vocab_cards": [
+      {
+        "id": "vocab_a1_01",
+        "term": "apple",
+        "ipa": "/ˈæp.əl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "quả táo",
+        "example_en": "I eat an apple after lunch.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_02",
+        "term": "book",
+        "ipa": "/bʊk/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "quyển sách",
+        "example_en": "This book is new.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_03",
+        "term": "chair",
+        "ipa": "/tʃeər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "cái ghế",
+        "example_en": "The chair is near the window.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_04",
+        "term": "clean",
+        "ipa": "/kliːn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sạch; làm sạch",
+        "example_en": "Please clean the table.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_05",
+        "term": "coffee",
+        "ipa": "/ˈkɒf.i/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "cà phê",
+        "example_en": "My father drinks coffee.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_06",
+        "term": "early",
+        "ipa": "/ˈɜː.li/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sớm",
+        "example_en": "We leave early on Monday.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_07",
+        "term": "family",
+        "ipa": "/ˈfæm.əl.i/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "gia đình",
+        "example_en": "My family lives in Hanoi.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_08",
+        "term": "friend",
+        "ipa": "/frend/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bạn",
+        "example_en": "Lan is my best friend.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_09",
+        "term": "happy",
+        "ipa": "/ˈhæp.i/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "vui",
+        "example_en": "The children are happy today.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_10",
+        "term": "house",
+        "ipa": "/haʊs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "ngôi nhà",
+        "example_en": "Their house has a small garden.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_11",
+        "term": "learn",
+        "ipa": "/lɜːn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "học",
+        "example_en": "I learn English every day.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_12",
+        "term": "market",
+        "ipa": "/ˈmɑː.kɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chợ",
+        "example_en": "The market opens at seven.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_13",
+        "term": "morning",
+        "ipa": "/ˈmɔː.nɪŋ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "buổi sáng",
+        "example_en": "Good morning, Ms Hoa.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_14",
+        "term": "music",
+        "ipa": "/ˈmjuː.zɪk/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "âm nhạc",
+        "example_en": "We listen to music at home.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_15",
+        "term": "name",
+        "ipa": "/neɪm/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tên",
+        "example_en": "What is your name?",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_16",
+        "term": "open",
+        "ipa": "/ˈəʊ.pən/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mở",
+        "example_en": "Open your notebook, please.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_17",
+        "term": "picture",
+        "ipa": "/ˈpɪk.tʃər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bức ảnh",
+        "example_en": "This picture is beautiful.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_18",
+        "term": "quiet",
+        "ipa": "/ˈkwaɪ.ət/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "yên tĩnh",
+        "example_en": "The library is quiet.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_19",
+        "term": "school",
+        "ipa": "/skuːl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "trường học",
+        "example_en": "Her school is close to our house.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a1_20",
+        "term": "walk",
+        "ipa": "/wɔːk/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đi bộ",
+        "example_en": "We walk to the bus stop.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A1",
+        "tags": [
+          "a1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_01",
+        "term": "arrive",
+        "ipa": "/əˈraɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đến nơi",
+        "example_en": "The train will arrive at noon.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_02",
+        "term": "borrow",
+        "ipa": "/ˈbɒr.əʊ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mượn",
+        "example_en": "Can I borrow your pen?",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_03",
+        "term": "choose",
+        "ipa": "/tʃuːz/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chọn",
+        "example_en": "Choose a seat by the door.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_04",
+        "term": "delicious",
+        "ipa": "/dɪˈlɪʃ.əs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "ngon",
+        "example_en": "The soup was delicious.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_05",
+        "term": "enough",
+        "ipa": "/ɪˈnʌf/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đủ",
+        "example_en": "We have enough time.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_06",
+        "term": "festival",
+        "ipa": "/ˈfes.tɪ.vəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "lễ hội",
+        "example_en": "The town holds a spring festival.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_07",
+        "term": "gift",
+        "ipa": "/ɡɪft/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "món quà",
+        "example_en": "I bought a gift for my sister.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_08",
+        "term": "healthy",
+        "ipa": "/ˈhel.θi/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khỏe mạnh",
+        "example_en": "Walking is a healthy habit.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_09",
+        "term": "invite",
+        "ipa": "/ɪnˈvaɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mời",
+        "example_en": "They invited us to dinner.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_10",
+        "term": "journey",
+        "ipa": "/ˈdʒɜː.ni/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chuyến đi",
+        "example_en": "The journey took three hours.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_11",
+        "term": "kitchen",
+        "ipa": "/ˈkɪtʃ.ɪn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhà bếp",
+        "example_en": "The kitchen is bright and warm.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_12",
+        "term": "later",
+        "ipa": "/ˈleɪ.tər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sau đó",
+        "example_en": "I will call you later.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_13",
+        "term": "message",
+        "ipa": "/ˈmes.ɪdʒ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tin nhắn",
+        "example_en": "Please send me a message.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_14",
+        "term": "normal",
+        "ipa": "/ˈnɔː.məl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bình thường",
+        "example_en": "It is normal to feel nervous.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_15",
+        "term": "order",
+        "ipa": "/ˈɔː.dər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "gọi món; đặt hàng",
+        "example_en": "We ordered two bowls of noodles.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_16",
+        "term": "popular",
+        "ipa": "/ˈpɒp.jə.lər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "phổ biến",
+        "example_en": "This café is popular with students.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_17",
+        "term": "question",
+        "ipa": "/ˈkwes.tʃən/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "câu hỏi",
+        "example_en": "She asked a useful question.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_18",
+        "term": "return",
+        "ipa": "/rɪˈtɜːn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "trở lại",
+        "example_en": "I will return the book tomorrow.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_19",
+        "term": "ticket",
+        "ipa": "/ˈtɪk.ɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "vé",
+        "example_en": "Keep your ticket in a safe place.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_a2_20",
+        "term": "weather",
+        "ipa": "/ˈweð.ər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "thời tiết",
+        "example_en": "The weather is sunny today.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "A2",
+        "tags": [
+          "a2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_01",
+        "term": "achieve",
+        "ipa": "/əˈtʃiːv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đạt được",
+        "example_en": "She achieved her weekly study goal.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_02",
+        "term": "balance",
+        "ipa": "/ˈbæl.əns/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "cân bằng",
+        "example_en": "A balance between work and rest matters.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_03",
+        "term": "challenge",
+        "ipa": "/ˈtʃæl.ɪndʒ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "thử thách",
+        "example_en": "Speaking in public is a challenge for him.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_04",
+        "term": "depend",
+        "ipa": "/dɪˈpend/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "phụ thuộc",
+        "example_en": "The result depends on careful planning.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_05",
+        "term": "environment",
+        "ipa": "/ɪnˈvaɪ.rən.mənt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "môi trường",
+        "example_en": "We should protect the local environment.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_06",
+        "term": "feature",
+        "ipa": "/ˈfiː.tʃər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đặc điểm",
+        "example_en": "The app has a useful search feature.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_07",
+        "term": "generally",
+        "ipa": "/ˈdʒen.ər.əl.i/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhìn chung",
+        "example_en": "Generally, buses are cheaper than taxis.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_08",
+        "term": "habit",
+        "ipa": "/ˈhæb.ɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "thói quen",
+        "example_en": "Reading before bed is a good habit.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_09",
+        "term": "improve",
+        "ipa": "/ɪmˈpruːv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "cải thiện",
+        "example_en": "Practice will improve your listening.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_10",
+        "term": "journal",
+        "ipa": "/ˈdʒɜː.nəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhật ký",
+        "example_en": "He keeps a journal of new words.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_11",
+        "term": "knowledge",
+        "ipa": "/ˈnɒl.ɪdʒ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "kiến thức",
+        "example_en": "Travel can increase your knowledge.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_12",
+        "term": "local",
+        "ipa": "/ˈləʊ.kəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "địa phương",
+        "example_en": "We bought fruit from a local shop.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_13",
+        "term": "manage",
+        "ipa": "/ˈmæn.ɪdʒ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "quản lý",
+        "example_en": "Can you manage your time better?",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_14",
+        "term": "notice",
+        "ipa": "/ˈnəʊ.tɪs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhận ra; thông báo",
+        "example_en": "I noticed a mistake in the report.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_15",
+        "term": "opportunity",
+        "ipa": "/ˌɒp.əˈtʃuː.nə.ti/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "cơ hội",
+        "example_en": "The course offers an opportunity to practise.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_16",
+        "term": "prepare",
+        "ipa": "/prɪˈpeər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chuẩn bị",
+        "example_en": "Please prepare your ideas first.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_17",
+        "term": "recommend",
+        "ipa": "/ˌrek.əˈmend/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đề xuất",
+        "example_en": "I recommend this podcast to beginners.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_18",
+        "term": "solution",
+        "ipa": "/səˈluː.ʃən/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "giải pháp",
+        "example_en": "We found a simple solution.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_19",
+        "term": "throughout",
+        "ipa": "/θruːˈaʊt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "xuyên suốt",
+        "example_en": "It rained throughout the afternoon.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b1_20",
+        "term": "volunteer",
+        "ipa": "/ˌvɒl.ənˈtɪər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tình nguyện viên",
+        "example_en": "A volunteer welcomed visitors.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B1",
+        "tags": [
+          "b1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_01",
+        "term": "adapt",
+        "ipa": "/əˈdæpt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "thích nghi",
+        "example_en": "Teams must adapt to changing needs.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_02",
+        "term": "benefit",
+        "ipa": "/ˈben.ɪ.fɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "lợi ích",
+        "example_en": "Regular feedback has a clear benefit.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_03",
+        "term": "consequence",
+        "ipa": "/ˈkɒn.sɪ.kwəns/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "hệ quả",
+        "example_en": "Every decision has a consequence.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_04",
+        "term": "demonstrate",
+        "ipa": "/ˈdem.ən.streɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chứng minh",
+        "example_en": "The chart demonstrates a steady rise.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_05",
+        "term": "efficient",
+        "ipa": "/ɪˈfɪʃ.ənt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "hiệu quả",
+        "example_en": "A clear plan makes the process efficient.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_06",
+        "term": "flexible",
+        "ipa": "/ˈflek.sə.bəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "linh hoạt",
+        "example_en": "Remote work can offer flexible hours.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_07",
+        "term": "generate",
+        "ipa": "/ˈdʒen.ə.reɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tạo ra",
+        "example_en": "The campaign generated new interest.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_08",
+        "term": "highlight",
+        "ipa": "/ˈhaɪ.laɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhấn mạnh",
+        "example_en": "The speaker highlighted two risks.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_09",
+        "term": "influence",
+        "ipa": "/ˈɪn.flu.əns/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "ảnh hưởng",
+        "example_en": "Friends can influence our choices.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_10",
+        "term": "justify",
+        "ipa": "/ˈdʒʌs.tɪ.faɪ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "biện minh",
+        "example_en": "You need to justify your opinion.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_11",
+        "term": "maintain",
+        "ipa": "/meɪnˈteɪn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "duy trì",
+        "example_en": "The company maintains high standards.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_12",
+        "term": "negotiate",
+        "ipa": "/nɪˈɡəʊ.ʃi.eɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đàm phán",
+        "example_en": "They negotiated a fair price.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_13",
+        "term": "outcome",
+        "ipa": "/ˈaʊt.kʌm/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "kết quả",
+        "example_en": "The outcome was better than expected.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_14",
+        "term": "perspective",
+        "ipa": "/pəˈspek.tɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "góc nhìn",
+        "example_en": "Try to see the issue from another perspective.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_15",
+        "term": "reliable",
+        "ipa": "/rɪˈlaɪ.ə.bəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đáng tin cậy",
+        "example_en": "Use reliable information sources.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_16",
+        "term": "significant",
+        "ipa": "/sɪɡˈnɪf.ɪ.kənt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đáng kể",
+        "example_en": "There was a significant improvement.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_17",
+        "term": "strategy",
+        "ipa": "/ˈstræt.ə.dʒi/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chiến lược",
+        "example_en": "Their strategy focused on customer needs.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_18",
+        "term": "transfer",
+        "ipa": "/trænsˈfɜːr/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chuyển giao",
+        "example_en": "The skill transfers to other tasks.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_19",
+        "term": "vary",
+        "ipa": "/ˈveə.ri/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khác nhau",
+        "example_en": "Prices vary by season.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_b2_20",
+        "term": "willing",
+        "ipa": "/ˈwɪl.ɪŋ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sẵn lòng",
+        "example_en": "She is willing to try again.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "B2",
+        "tags": [
+          "b2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_01",
+        "term": "ambiguous",
+        "ipa": "/æmˈbɪɡ.ju.əs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mơ hồ",
+        "example_en": "The instruction was ambiguous.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_02",
+        "term": "coherent",
+        "ipa": "/kəʊˈhɪə.rənt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mạch lạc",
+        "example_en": "Her argument is coherent and focused.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_03",
+        "term": "derive",
+        "ipa": "/dɪˈraɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "rút ra",
+        "example_en": "The team derived insight from the survey.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_04",
+        "term": "enhance",
+        "ipa": "/ɪnˈhɑːns/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nâng cao",
+        "example_en": "Examples enhance the explanation.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_05",
+        "term": "framework",
+        "ipa": "/ˈfreɪm.wɜːk/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khung",
+        "example_en": "The framework guides every decision.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_06",
+        "term": "inherent",
+        "ipa": "/ɪnˈhɪə.rənt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "vốn có",
+        "example_en": "Risk is inherent in innovation.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_07",
+        "term": "justify",
+        "ipa": "/ˈdʒʌs.tɪ.faɪ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chứng minh",
+        "example_en": "The evidence does not justify that claim.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_08",
+        "term": "likewise",
+        "ipa": "/ˈlaɪk.waɪz/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tương tự",
+        "example_en": "Likewise, small teams need clear goals.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_09",
+        "term": "modify",
+        "ipa": "/ˈmɒd.ɪ.faɪ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "điều chỉnh",
+        "example_en": "We modified the plan after testing.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_10",
+        "term": "notion",
+        "ipa": "/ˈnəʊ.ʃən/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khái niệm",
+        "example_en": "The notion of success varies widely.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_11",
+        "term": "offset",
+        "ipa": "/ˈɒf.set/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bù đắp",
+        "example_en": "Savings may offset the initial cost.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_12",
+        "term": "preliminary",
+        "ipa": "/prɪˈlɪm.ɪ.nər.i/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sơ bộ",
+        "example_en": "These are preliminary findings.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_13",
+        "term": "reinforce",
+        "ipa": "/ˌriː.ɪnˈfɔːs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "củng cố",
+        "example_en": "Practice reinforces long-term memory.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_14",
+        "term": "specify",
+        "ipa": "/ˈspes.ɪ.faɪ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nêu rõ",
+        "example_en": "Please specify the expected result.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_15",
+        "term": "sustainable",
+        "ipa": "/səˈsteɪ.nə.bəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bền vững",
+        "example_en": "We need a sustainable workflow.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_16",
+        "term": "tentative",
+        "ipa": "/ˈten.tə.tɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tạm thời",
+        "example_en": "The date is still tentative.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_17",
+        "term": "underlying",
+        "ipa": "/ˌʌn.dəˈlaɪ.ɪŋ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tiềm ẩn",
+        "example_en": "We should address the underlying cause.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_18",
+        "term": "valid",
+        "ipa": "/ˈvæl.ɪd/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "hợp lệ",
+        "example_en": "The comparison is valid only in context.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_19",
+        "term": "widespread",
+        "ipa": "/ˈwaɪd.spred/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "phổ biến rộng",
+        "example_en": "The change received widespread support.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c1_20",
+        "term": "yield",
+        "ipa": "/jiːld/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "mang lại",
+        "example_en": "The experiment may yield useful data.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C1",
+        "tags": [
+          "c1",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_01",
+        "term": "articulate",
+        "ipa": "/ɑːˈtɪk.jə.lət/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "diễn đạt rõ",
+        "example_en": "She articulated a nuanced position.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_02",
+        "term": "constrain",
+        "ipa": "/kənˈstreɪn/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "hạn chế",
+        "example_en": "Limited time constrained the analysis.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_03",
+        "term": "discerning",
+        "ipa": "/dɪˈsɜː.nɪŋ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "có óc đánh giá",
+        "example_en": "A discerning reader notices tone.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_04",
+        "term": "elusive",
+        "ipa": "/ɪˈluː.sɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khó nắm bắt",
+        "example_en": "A simple definition can be elusive.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_05",
+        "term": "formulate",
+        "ipa": "/ˈfɔː.mjə.leɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "xây dựng",
+        "example_en": "They formulated a precise question.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_06",
+        "term": "granular",
+        "ipa": "/ˈɡræn.jə.lər/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chi tiết",
+        "example_en": "The report provides granular evidence.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_07",
+        "term": "incongruous",
+        "ipa": "/ɪnˈkɒŋ.ɡru.əs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "không phù hợp",
+        "example_en": "The cheerful tone felt incongruous.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_08",
+        "term": "juxtapose",
+        "ipa": "/ˌdʒʌk.stəˈpəʊz/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "đặt cạnh để đối chiếu",
+        "example_en": "The author juxtaposes fact and opinion.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_09",
+        "term": "meticulous",
+        "ipa": "/məˈtɪk.jə.ləs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "tỉ mỉ",
+        "example_en": "Her notes are meticulous.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_10",
+        "term": "nuance",
+        "ipa": "/ˈnjuː.ɑːns/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "sắc thái",
+        "example_en": "Translation can lose cultural nuance.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_11",
+        "term": "overarching",
+        "ipa": "/ˌəʊ.vərˈɑː.tʃɪŋ/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "bao quát",
+        "example_en": "The overarching aim is clarity.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_12",
+        "term": "pragmatic",
+        "ipa": "/præɡˈmæt.ɪk/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "thực tế",
+        "example_en": "We chose a pragmatic solution.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_13",
+        "term": "reconcile",
+        "ipa": "/ˈrek.ən.saɪl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "dung hòa",
+        "example_en": "The policy reconciles two priorities.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_14",
+        "term": "scrutinise",
+        "ipa": "/ˈskruː.tɪ.naɪz/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "xem xét kỹ",
+        "example_en": "Readers should scrutinise the evidence.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_15",
+        "term": "substantiate",
+        "ipa": "/səbˈstæn.ʃi.eɪt/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chứng thực",
+        "example_en": "Data must substantiate the conclusion.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_16",
+        "term": "tentative",
+        "ipa": "/ˈten.tə.tɪv/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "dè dặt",
+        "example_en": "He offered a tentative interpretation.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_17",
+        "term": "unequivocal",
+        "ipa": "/ˌʌn.ɪˈkwɪv.ə.kəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "rõ ràng dứt khoát",
+        "example_en": "The results were not unequivocal.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_18",
+        "term": "viable",
+        "ipa": "/ˈvaɪ.ə.bəl/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "khả thi",
+        "example_en": "The proposal is financially viable.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_19",
+        "term": "withstand",
+        "ipa": "/wɪðˈstænd/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "chịu được",
+        "example_en": "The claim must withstand criticism.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "vocab_c2_20",
+        "term": "zealous",
+        "ipa": "/ˈzel.əs/",
+        "part_of_speech": "mixed",
+        "meaning_vi": "nhiệt thành",
+        "example_en": "She is zealous about quality.",
+        "example_vi": "Ví dụ tự biên soạn.",
+        "cefr_level": "C2",
+        "tags": [
+          "c2",
+          "content-pack-v01"
+        ],
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "pronunciation_items": [
+      {
+        "id": "pron_01",
+        "item_type": "ipa",
+        "title": "/iː/",
+        "script": "sheep",
+        "tip": "Keep the lips relaxed and the tongue high.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_02",
+        "item_type": "ipa",
+        "title": "/ɪ/",
+        "script": "ship",
+        "tip": "Use a shorter, looser vowel than /iː/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_03",
+        "item_type": "ipa",
+        "title": "/æ/",
+        "script": "cat",
+        "tip": "Open the jaw and keep the front of the tongue low.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_04",
+        "item_type": "ipa",
+        "title": "/ʌ/",
+        "script": "cup",
+        "tip": "Use a short central vowel.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_05",
+        "item_type": "ipa",
+        "title": "/θ/",
+        "script": "think",
+        "tip": "Place the tongue lightly between the teeth and release air.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_06",
+        "item_type": "ipa",
+        "title": "/ð/",
+        "script": "this",
+        "tip": "Use the voiced version of /θ/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_07",
+        "item_type": "minimal_pair",
+        "title": "sheep–ship",
+        "script": "I saw a sheep by the ship.",
+        "tip": "Contrast /iː/ and /ɪ/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_08",
+        "item_type": "minimal_pair",
+        "title": "cat–cut",
+        "script": "The cat touched the cup.",
+        "tip": "Contrast /æ/ and /ʌ/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_09",
+        "item_type": "minimal_pair",
+        "title": "thin–then",
+        "script": "Think, then speak.",
+        "tip": "Contrast /θ/ and /ð/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_10",
+        "item_type": "minimal_pair",
+        "title": "rice–lice",
+        "script": "Rice and lice are different words.",
+        "tip": "Contrast /r/ and /l/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_11",
+        "item_type": "minimal_pair",
+        "title": "fan–van",
+        "script": "The fan is beside the van.",
+        "tip": "Contrast /f/ and /v/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_12",
+        "item_type": "minimal_pair",
+        "title": "seat–sheet",
+        "script": "Take a seat near the sheet.",
+        "tip": "Contrast /s/ and /ʃ/.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_13",
+        "item_type": "shadowing",
+        "title": "A1 greeting",
+        "script": "Hello, I am Mai. I study English every evening.",
+        "tip": "Aim for a calm, even rhythm.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_14",
+        "item_type": "shadowing",
+        "title": "A2 plan",
+        "script": "I am going to meet my friend after work.",
+        "tip": "Link going to naturally.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_15",
+        "item_type": "shadowing",
+        "title": "B1 opinion",
+        "script": "In my view, a short daily habit is easier to maintain.",
+        "tip": "Stress view, daily, easier and maintain.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_16",
+        "item_type": "shadowing",
+        "title": "B2 comparison",
+        "script": "Although the first option is cheaper, the second is more reliable.",
+        "tip": "Use contrastive stress on cheaper and reliable.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_17",
+        "item_type": "shadowing",
+        "title": "C1 analysis",
+        "script": "The evidence suggests a pattern, but it does not establish a cause.",
+        "tip": "Pause before but.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "pron_18",
+        "item_type": "shadowing",
+        "title": "C2 nuance",
+        "script": "The proposal is promising, albeit dependent on several assumptions.",
+        "tip": "Keep albeit and assumptions clear.",
+        "audio_url": null,
+        "source_license": "CC0-1.0",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "passages": [
+      {
+        "id": "passage_cefr-a1-read",
+        "medium": "reading",
+        "cefr_level": "A1",
+        "exam_type": null,
+        "title": "My New Neighbour",
+        "body": "Mai has a new neighbour named Ben. Ben has a small dog and walks it every morning. On Saturday, Mai and Ben drink tea in the garden.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_cefr-a2-listen",
+        "medium": "listening",
+        "cefr_level": "A2",
+        "exam_type": null,
+        "title": "A Change of Plan",
+        "body": "The museum is closed this afternoon, so Linh and her cousin will visit the riverside market instead. They will meet at the bus stop at two thirty.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_cefr-b1-read",
+        "medium": "reading",
+        "cefr_level": "B1",
+        "exam_type": null,
+        "title": "The Shared Garden",
+        "body": "Residents turned an empty corner into a shared garden. They meet twice a month, grow vegetables and give extra food to neighbours.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_cefr-b2-listen",
+        "medium": "listening",
+        "cefr_level": "B2",
+        "exam_type": null,
+        "title": "Choosing a Workshop",
+        "body": "The team chose the longer workshop because it included practice, individual feedback and a follow-up session.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_toeic-p3",
+        "medium": "audio",
+        "cefr_level": null,
+        "exam_type": "TOEIC",
+        "title": "Office Visitor",
+        "body": "Good morning. The lift to the fifth floor is being repaired, so please use the stairs near reception. Your meeting room has not changed.",
+        "transcript": "Good morning. The lift to the fifth floor is being repaired, so please use the stairs near reception. Your meeting room has not changed.",
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_toeic-p4",
+        "medium": "audio",
+        "cefr_level": null,
+        "exam_type": "TOEIC",
+        "title": "Station Announcement",
+        "body": "The 8:15 train to Da Nang will leave from platform four today. Passengers requiring assistance should speak to a member of staff.",
+        "transcript": "The 8:15 train to Da Nang will leave from platform four today. Passengers requiring assistance should speak to a member of staff.",
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_toeic-p6",
+        "medium": "reading",
+        "cefr_level": null,
+        "exam_type": "TOEIC",
+        "title": "Team Update Email",
+        "body": "Thank you for joining yesterday’s product meeting. Please send your comments on the draft by Thursday so we can prepare the final version on Friday.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_toeic-p7",
+        "medium": "reading",
+        "cefr_level": null,
+        "exam_type": "TOEIC",
+        "title": "Community Centre Notice",
+        "body": "The community centre will extend its evening opening hours during October. The study room will remain available until 9 p.m., while the sports hall will close at 8 p.m.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_ielts-listen",
+        "medium": "audio",
+        "cefr_level": null,
+        "exam_type": "IELTS",
+        "title": "Library Orientation",
+        "body": "The new library workshop begins at 10:30 in Room B12. Students should bring their campus card. The session includes a tour and a short database demonstration.",
+        "transcript": "The new library workshop begins at 10:30 in Room B12. Students should bring their campus card. The session includes a tour and a short database demonstration.",
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "passage_ielts-read",
+        "medium": "reading",
+        "cefr_level": null,
+        "exam_type": "IELTS",
+        "title": "Urban Trees",
+        "body": "Trees in cities can lower local temperatures and reduce noise. Their benefits depend on species, location and long-term maintenance, not simply on the number planted.",
+        "transcript": null,
+        "audio_url": null,
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "questions": [
+      {
+        "id": "question_a1_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "prompt": "Choose the best form for this A1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "a1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_a1_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "prompt": "Choose the best form for this A1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "a1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_a1_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "prompt": "Write one suitable word for this A1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "a1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_a1_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "A1",
+        "prompt": "Write one suitable word for this A1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "a1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_a2_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "prompt": "Choose the best form for this A2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "a2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_a2_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "prompt": "Choose the best form for this A2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "a2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_a2_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "prompt": "Write one suitable word for this A2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "a2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_a2_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "A2",
+        "prompt": "Write one suitable word for this A2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "a2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_b1_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "prompt": "Choose the best form for this B1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "b1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_b1_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "prompt": "Choose the best form for this B1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "b1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_b1_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "prompt": "Write one suitable word for this B1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "b1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_b1_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "B1",
+        "prompt": "Write one suitable word for this B1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "b1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_b2_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "prompt": "Choose the best form for this B2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "b2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_b2_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "prompt": "Choose the best form for this B2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "b2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_b2_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "prompt": "Write one suitable word for this B2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "b2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_b2_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "B2",
+        "prompt": "Write one suitable word for this B2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "b2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_c1_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "prompt": "Choose the best form for this C1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "c1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_c1_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "prompt": "Choose the best form for this C1 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "c1",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_c1_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "prompt": "Write one suitable word for this C1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "c1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_c1_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "C1",
+        "prompt": "Write one suitable word for this C1 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "c1",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_c2_lesson_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "prompt": "Choose the best form for this C2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "c2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_c2_lesson_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "mcq",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "prompt": "Choose the best form for this C2 lesson fixture: “She ___ ready.”",
+        "options": [
+          "am",
+          "is",
+          "are",
+          "be"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Use is with she.",
+        "points": 1,
+        "tags": [
+          "c2",
+          "lesson"
+        ]
+      },
+      {
+        "id": "question_c2_practice_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "prompt": "Write one suitable word for this C2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "c2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_c2_practice_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "question_type": "fill_in",
+        "skill": "grammar",
+        "cefr_level": "C2",
+        "prompt": "Write one suitable word for this C2 practice fixture: “They ___ every day.”",
+        "answer": {
+          "accepted": [
+            "study",
+            "practise",
+            "learn"
+          ]
+        },
+        "explanation": "Several present-tense verbs are accepted for this flexible fixture.",
+        "points": 1,
+        "tags": [
+          "c2",
+          "practice"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p1_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 1",
+        "question_type": "image_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Look at the image placeholder. Which statement is most likely correct?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-1"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p2_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 2",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": null,
+        "prompt": "Listen to the question placeholder. Choose the best response.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-2"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p3_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 3",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p3",
+        "prompt": "Listen to the office conversation fixture. What should visitors do?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-3"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p4_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 4",
+        "question_type": "audio_mcq",
+        "skill": "listening",
+        "passage_id": "passage_toeic-p4",
+        "prompt": "Listen to the announcement fixture. Where will the train leave from?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-4"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p5_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 5",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": null,
+        "prompt": "Choose the word that best completes the sentence: “The report ___ by noon.”",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-5"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p6_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 6",
+        "question_type": "fill_in",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p6",
+        "prompt": "Complete the email fixture with one suitable word.",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-6"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_toeic_p7_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "TOEIC",
+        "exam_part": "Part 7",
+        "question_type": "reading_mcq",
+        "skill": "reading",
+        "passage_id": "passage_toeic-p7",
+        "prompt": "Read the notice fixture. What time does the study room close?",
+        "options": [
+          "At noon",
+          "At eight",
+          "At nine",
+          "On Friday"
+        ],
+        "answer": {
+          "correct_option_index": 2
+        },
+        "explanation": "Original TOEIC-style engine fixture; it is not an ETS question.",
+        "points": 1,
+        "tags": [
+          "toeic",
+          "fixture",
+          "part-7"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "mcq",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "fill_in",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "matching",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "fill_in",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "mcq",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "matching",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_7",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "mcq",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_8",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "fill_in",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_9",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "matching",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_10",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "fill_in",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_11",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "mcq",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "What should students bring to the workshop?",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_listening_12",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Listening",
+        "question_type": "matching",
+        "skill": "listening",
+        "passage_id": "passage_ielts-listen",
+        "prompt": "Complete: The workshop begins at ___.",
+        "options": [
+          "A campus card",
+          "A passport",
+          "A laptop",
+          "A map"
+        ],
+        "answer": {
+          "accepted": [
+            "10:30",
+            "10.30",
+            "ten thirty"
+          ]
+        },
+        "explanation": "Original IELTS-style Listening fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "listening"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_1",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_2",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "matching",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_3",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "true_false_not_given",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_4",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "matching",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_5",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_6",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "true_false_not_given",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_7",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_8",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "matching",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_9",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "true_false_not_given",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_10",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "matching",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_11",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "mcq",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "According to the passage, what affects the benefits of urban trees?",
+        "options": [
+          "Species, location and maintenance",
+          "Only height",
+          "Only age",
+          "Only cost"
+        ],
+        "answer": {
+          "correct_option_index": 0
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      },
+      {
+        "id": "question_ielts_reading_12",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01",
+        "exam_type": "IELTS",
+        "exam_part": "Reading",
+        "question_type": "true_false_not_given",
+        "skill": "reading",
+        "passage_id": "passage_ielts-read",
+        "prompt": "The passage says that planting more trees alone guarantees all benefits. Choose True, False or Not Given.",
+        "options": [
+          "True",
+          "False",
+          "Not Given"
+        ],
+        "answer": {
+          "correct_option_index": 1
+        },
+        "explanation": "Original IELTS-style Reading fixture; it is not IELTS material.",
+        "points": 1,
+        "tags": [
+          "ielts",
+          "fixture",
+          "reading"
+        ]
+      }
+    ],
+    "exams": [
+      {
+        "id": "exam_toeic_v01",
+        "slug": "toeic-fixture-v01",
+        "title": "TOEIC Engine Fixture v0.1",
+        "exam_type": "TOEIC",
+        "mode": "practice",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      },
+      {
+        "id": "exam_ielts_v01",
+        "slug": "ielts-fixture-v01",
+        "title": "IELTS Listening and Reading Fixture v0.1",
+        "exam_type": "IELTS",
+        "mode": "practice",
+        "status": "published",
+        "content_batch_id": "batch_content_pack_v01"
+      }
+    ],
+    "exam_parts": [
+      {
+        "id": "exam_part_toeic_1",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 1,
+        "title": "TOEIC Part 1",
+        "skill": "listening",
+        "question_ids": [
+          "question_toeic_p1_1",
+          "question_toeic_p1_2",
+          "question_toeic_p1_3",
+          "question_toeic_p1_4",
+          "question_toeic_p1_5",
+          "question_toeic_p1_6"
+        ],
+        "position": 1
+      },
+      {
+        "id": "exam_part_toeic_2",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 2,
+        "title": "TOEIC Part 2",
+        "skill": "listening",
+        "question_ids": [
+          "question_toeic_p2_1",
+          "question_toeic_p2_2",
+          "question_toeic_p2_3",
+          "question_toeic_p2_4",
+          "question_toeic_p2_5",
+          "question_toeic_p2_6"
+        ],
+        "position": 2
+      },
+      {
+        "id": "exam_part_toeic_3",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 3,
+        "title": "TOEIC Part 3",
+        "skill": "listening",
+        "question_ids": [
+          "question_toeic_p3_1",
+          "question_toeic_p3_2",
+          "question_toeic_p3_3",
+          "question_toeic_p3_4",
+          "question_toeic_p3_5",
+          "question_toeic_p3_6"
+        ],
+        "position": 3
+      },
+      {
+        "id": "exam_part_toeic_4",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 4,
+        "title": "TOEIC Part 4",
+        "skill": "listening",
+        "question_ids": [
+          "question_toeic_p4_1",
+          "question_toeic_p4_2",
+          "question_toeic_p4_3",
+          "question_toeic_p4_4",
+          "question_toeic_p4_5",
+          "question_toeic_p4_6"
+        ],
+        "position": 4
+      },
+      {
+        "id": "exam_part_toeic_5",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 5,
+        "title": "TOEIC Part 5",
+        "skill": "reading",
+        "question_ids": [
+          "question_toeic_p5_1",
+          "question_toeic_p5_2",
+          "question_toeic_p5_3",
+          "question_toeic_p5_4",
+          "question_toeic_p5_5",
+          "question_toeic_p5_6"
+        ],
+        "position": 5
+      },
+      {
+        "id": "exam_part_toeic_6",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 6,
+        "title": "TOEIC Part 6",
+        "skill": "reading",
+        "question_ids": [
+          "question_toeic_p6_1",
+          "question_toeic_p6_2",
+          "question_toeic_p6_3",
+          "question_toeic_p6_4",
+          "question_toeic_p6_5",
+          "question_toeic_p6_6"
+        ],
+        "position": 6
+      },
+      {
+        "id": "exam_part_toeic_7",
+        "exam_id": "exam_toeic_v01",
+        "part_number": 7,
+        "title": "TOEIC Part 7",
+        "skill": "reading",
+        "question_ids": [
+          "question_toeic_p7_1",
+          "question_toeic_p7_2",
+          "question_toeic_p7_3",
+          "question_toeic_p7_4",
+          "question_toeic_p7_5",
+          "question_toeic_p7_6"
+        ],
+        "position": 7
+      },
+      {
+        "id": "exam_part_ielts_listening",
+        "exam_id": "exam_ielts_v01",
+        "part_number": 1,
+        "title": "IELTS Listening",
+        "skill": "listening",
+        "question_ids": [
+          "question_ielts_listening_1",
+          "question_ielts_listening_2",
+          "question_ielts_listening_3",
+          "question_ielts_listening_4",
+          "question_ielts_listening_5",
+          "question_ielts_listening_6",
+          "question_ielts_listening_7",
+          "question_ielts_listening_8",
+          "question_ielts_listening_9",
+          "question_ielts_listening_10",
+          "question_ielts_listening_11",
+          "question_ielts_listening_12"
+        ],
+        "position": 1
+      },
+      {
+        "id": "exam_part_ielts_reading",
+        "exam_id": "exam_ielts_v01",
+        "part_number": 2,
+        "title": "IELTS Reading",
+        "skill": "reading",
+        "question_ids": [
+          "question_ielts_reading_1",
+          "question_ielts_reading_2",
+          "question_ielts_reading_3",
+          "question_ielts_reading_4",
+          "question_ielts_reading_5",
+          "question_ielts_reading_6",
+          "question_ielts_reading_7",
+          "question_ielts_reading_8",
+          "question_ielts_reading_9",
+          "question_ielts_reading_10",
+          "question_ielts_reading_11",
+          "question_ielts_reading_12"
+        ],
+        "position": 2
+      }
+    ]
+  },
+  "record_counts": {
+    "content_batches": 1,
+    "courses": 8,
+    "course_levels": 6,
+    "lessons": 12,
+    "lesson_blocks": 24,
+    "vocab_cards": 120,
+    "pronunciation_items": 18,
+    "passages": 10,
+    "questions": 90,
+    "exams": 2,
+    "exam_parts": 9,
+    "total": 300
+  }
+}

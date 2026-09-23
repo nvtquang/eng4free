@@ -1,0 +1,8 @@
+services:
+  speech:
+    build:
+      context: ../services/speech
+    ports:
+      - "8001:8001"
+    environment:
+      SPEECH_SERVICE_API_KEY: ${SPEECH_SERVICE_API_KEY:-}

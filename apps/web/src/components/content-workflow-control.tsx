@@ -1,0 +1,5 @@
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+type Batch = { id: string; status: string };
+export function ContentWorkflowControl({ batch }: { batch: Batch }) { const [status, setStatus] = useState(batch.status); const [pending, setPending] = useState(false); const next: Record<string, string[]> = { DRAFT: ["REVIEW"], REVIEW: ["DRAFT", "APPROVED"], APPROVED: ["REVIEW", "PUBLISHED"], PUBLISHED: ["ARCHIVED"], ARCHIVED: ["DRAFT"] }; async function transition(nextStatus: string) { setPending(true); try { const response = await fetch("/api/admin/content/transition", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ batchId: batch.id, nextStatus }) }); if (response.ok) setStatus(nextStatus); } finally { setPending(false); } } return <div className="mt-3 flex flex-wrap items-center gap-2"><span className="rounded-full bg-band px-3 py-1 text-xs font-bold">{status}</span>{(next[status] ?? []).map((target) => <Button className="min-h-8 px-3 text-xs" variant="secondary" disabled={pending} onClick={() => transition(target)} key={target}>{target}</Button>)}</div>; }

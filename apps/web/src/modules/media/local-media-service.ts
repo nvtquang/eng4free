@@ -1,0 +1,14 @@
+import { mkdir, readFile, writeFile } from "node:fs/promises";
+import { resolve } from "node:path";
+import { randomUUID } from "node:crypto";
+
+const maxRecordingBytes = 15 * 1024 * 1024;
+const allowedRecordingTypes = new Set(["audio/webm", "audio/ogg", "audio/mp4", "audio/wav"]);
+const allowedContentTypes = new Map([["audio/mpeg", "mp3"], ["audio/wav", "wav"], ["audio/ogg", "ogg"], ["image/png", "png"], ["image/jpeg", "jpg"], ["image/webp", "webp"]]);
+function recordingDirectory() { return resolve(process.cwd(), ".local-media", "recordings"); }
+function baseContentType(contentType: string) { return contentType.split(";", 1)[0].trim().toLowerCase(); }
+export function validateLocalRecording(contentType: string, byteSize: number) { if (!allowedRecordingTypes.has(baseContentType(contentType))) throw new Error("Unsupported recording type"); if (byteSize <= 0 || byteSize > maxRecordingBytes) throw new Error("Recording must be between 1 byte and 15 MB"); }
+export async function saveLocalRecording(input: { bytes: Uint8Array; contentType: string }) { validateLocalRecording(input.contentType, input.bytes.byteLength); const type = baseContentType(input.contentType); const extension = type === "audio/ogg" ? "ogg" : type === "audio/mp4" ? "m4a" : type === "audio/wav" ? "wav" : "webm"; const filename = `${randomUUID()}.${extension}`; await mkdir(recordingDirectory(), { recursive: true }); await writeFile(resolve(recordingDirectory(), filename), input.bytes); return { storageKey: `local-recordings/${filename}`, byteSize: input.bytes.byteLength }; }
+export async function readLocalRecording(storageKey: string) { const match = /^local-recordings\/([a-f0-9-]+\.(?:webm|ogg|m4a|wav))$/u.exec(storageKey); if (!match) throw new Error("Invalid local recording key"); return readFile(resolve(recordingDirectory(), match[1])); }
+export async function saveLocalContentMedia(input: { bytes: Uint8Array; contentType: string }) { const extension = allowedContentTypes.get(input.contentType); if (!extension) throw new Error("Only MP3, WAV, OGG, PNG, JPEG and WebP files are supported"); if (input.bytes.byteLength <= 0 || input.bytes.byteLength > 25 * 1024 * 1024) throw new Error("Content media must be between 1 byte and 25 MB"); const filename = `${randomUUID()}.${extension}`; const directory = resolve(process.cwd(), ".local-media", "uploads"); await mkdir(directory, { recursive: true }); await writeFile(resolve(directory, filename), input.bytes); return { storageKey: `local-uploads/${filename}`, byteSize: input.bytes.byteLength }; }
+export async function readLocalContentMedia(storageKey: string) { const match = /^local-uploads\/([a-f0-9-]+\.(?:mp3|wav|ogg|png|jpg|webp))$/u.exec(storageKey); if (!match) throw new Error("Invalid local content-media key"); return readFile(resolve(process.cwd(), ".local-media", "uploads", match[1])); }

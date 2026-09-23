@@ -1,0 +1,5 @@
+"use client";
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+type Feedback = { correct: boolean; explanation: string; nextStep: string; providerUsed: boolean };
+export function TutorExplanation({ attemptId, questionId, learnerAnswer }: { attemptId: string; questionId: string; learnerAnswer: string | null }) { const [feedback, setFeedback] = useState<Feedback | null>(null); const [pending, setPending] = useState(false); if (!learnerAnswer) return null; async function ask() { setPending(true); try { const response = await fetch("/api/ai/tutor", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ attemptId, questionId, learnerAnswer }) }); if (response.ok) setFeedback(await response.json() as Feedback); } finally { setPending(false); } } return <div className="mt-3"><Button variant="secondary" className="min-h-8 px-3 text-xs" disabled={pending} onClick={ask}>Ask AI Tutor</Button>{feedback && <div className="mt-3 rounded-ui bg-brand-soft p-4 text-sm leading-6"><p>{feedback.explanation}</p><p className="mt-2 font-bold">Next: {feedback.nextStep}</p></div>}</div>; }

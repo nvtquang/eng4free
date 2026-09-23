@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { ipaSounds, minimalPairs, shadowingItems } from "./content";
+describe("pronunciation content", () => { it("keeps minimal-pair contrasts distinct", () => { expect(minimalPairs.every((pair) => pair.contrast[0] !== pair.contrast[1])).toBe(true); }); it("provides a target and focus sounds for each shadowing item", () => { expect(shadowingItems.every((item) => item.targetText.length > 0 && item.focusSounds.length > 0)).toBe(true); }); it("contains both vowels and consonants in the initial IPA set", () => { expect(new Set(ipaSounds.map((sound) => sound.kind))).toEqual(new Set(["vowel", "consonant"])); }); });

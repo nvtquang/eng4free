@@ -1,0 +1,50 @@
+{
+  "name": "@english4free/web",
+  "private": true,
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "next dev --turbopack",
+    "build": "next build",
+    "start": "next start",
+    "start:e2e": "next start -p 3100",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run",
+    "test:e2e": "pnpm --dir ../.. qa:prepare && pnpm build && playwright test"
+  },
+  "dependencies": {
+    "@auth/drizzle-adapter": "^1.10.0",
+    "@aws-sdk/client-s3": "^3.1136.0",
+    "@aws-sdk/s3-request-presigner": "^3.1136.0",
+    "@english4free/content-schemas": "workspace:*",
+    "@english4free/scoring-core": "workspace:*",
+    "@english4free/shared-types": "workspace:*",
+    "@english4free/srs": "workspace:^",
+    "clsx": "^2.1.1",
+    "drizzle-orm": "^0.44.5",
+    "mammoth": "^1.12.3",
+    "next": "^15.2.0",
+    "next-auth": "^5.0.0-beta.30",
+    "pdf-parse": "2.4.5",
+    "postgres": "^3.4.7",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "tailwind-merge": "^3.7.0",
+    "xlsx": "^0.18.5",
+    "zod": "^3.24.2"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.52.0",
+    "@types/node": "^22.13.4",
+    "@types/pdf-parse": "^1.1.5",
+    "@types/react": "^19.0.8",
+    "@types/react-dom": "^19.0.3",
+    "autoprefixer": "^10.6.1",
+    "eslint": "^9",
+    "eslint-config-next": "15.5.25",
+    "postcss": "^8.5.28",
+    "tailwindcss": "3.4.17",
+    "typescript": "^5.7.3",
+    "vitest": "^3.2.7"
+  }
+}

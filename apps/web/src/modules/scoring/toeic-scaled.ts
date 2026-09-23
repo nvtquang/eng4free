@@ -1,0 +1,3 @@
+export type ToeicScoreEstimate = { listening: number; reading: number; total: number; label: "PRACTICE_ESTIMATE" };
+function estimateSkill(raw: number) { if (!Number.isInteger(raw) || raw < 0 || raw > 100) throw new RangeError("TOEIC raw skill score must be an integer from 0 to 100"); return Math.max(5, Math.min(495, 5 + Math.round(raw * 4.9 / 5) * 5)); }
+export function estimateToeicScaledScore(listeningCorrect: number, readingCorrect: number): ToeicScoreEstimate { const listening = estimateSkill(listeningCorrect); const reading = estimateSkill(readingCorrect); return { listening, reading, total: listening + reading, label: "PRACTICE_ESTIMATE" }; }

@@ -1,0 +1,10 @@
+{
+  "name": "@english4free/content-schemas",
+  "private": true,
+  "version": "0.0.1",
+  "exports": { ".": "./src/index.ts" },
+  "dependencies": {
+    "@english4free/shared-types": "workspace:*",
+    "zod": "^3.24.2"
+  }
+}

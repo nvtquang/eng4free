@@ -1,0 +1,261 @@
+{
+  "schemaVersion": 1,
+  "pack": {
+    "version": "0.1.0",
+    "generatedAt": "2026-09-22T00:00:00.000Z",
+    "license": "CC0-1.0",
+    "sourceName": "English 4 Free original seed content"
+  },
+  "ids": {
+    "contentBatchId": "1798e4d7-53eb-514d-ac59-2e406b90ec0b"
+  },
+  "imported": {
+    "contentBatches": 1,
+    "courses": 8,
+    "courseLevels": 6,
+    "generatedCourseUnits": 6,
+    "lessons": 12,
+    "lessonBlocks": 36,
+    "vocabulary": 120,
+    "exams": 2,
+    "examParts": 9,
+    "passages": 6,
+    "questions": 60
+  },
+  "deferred": {
+    "questions": [
+      {
+        "id": "question_ielts_listening_2",
+        "sourceQuestionType": "fill_in",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      },
+      {
+        "id": "question_ielts_listening_4",
+        "sourceQuestionType": "fill_in",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      },
+      {
+        "id": "question_ielts_listening_6",
+        "sourceQuestionType": "matching",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      },
+      {
+        "id": "question_ielts_listening_8",
+        "sourceQuestionType": "fill_in",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      },
+      {
+        "id": "question_ielts_listening_10",
+        "sourceQuestionType": "fill_in",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      },
+      {
+        "id": "question_ielts_listening_12",
+        "sourceQuestionType": "matching",
+        "examPartId": "exam_part_ielts_listening",
+        "reason": "The current Question Engine supports deterministic MCQ only."
+      }
+    ],
+    "practiceQuestions": [
+      {
+        "id": "question_a1_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_a1_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_a2_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_a2_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_b1_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_b1_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_b2_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_b2_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_c1_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_c1_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_c2_practice_1",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      },
+      {
+        "id": "question_c2_practice_2",
+        "sourceQuestionType": "fill_in",
+        "reason": "No generalized practice-bank relationship exists yet."
+      }
+    ],
+    "passages": [
+      {
+        "id": "passage_cefr-a1-read",
+        "medium": "reading",
+        "reason": "The current passage table requires an exam part; this CEFR practice passage has no source question group."
+      },
+      {
+        "id": "passage_cefr-a2-listen",
+        "medium": "listening",
+        "reason": "The current passage table requires an exam part; this CEFR practice passage has no source question group."
+      },
+      {
+        "id": "passage_cefr-b1-read",
+        "medium": "reading",
+        "reason": "The current passage table requires an exam part; this CEFR practice passage has no source question group."
+      },
+      {
+        "id": "passage_cefr-b2-listen",
+        "medium": "listening",
+        "reason": "The current passage table requires an exam part; this CEFR practice passage has no source question group."
+      }
+    ],
+    "pronunciation": [
+      {
+        "id": "pron_01",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_02",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_03",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_04",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_05",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_06",
+        "itemType": "ipa",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_07",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_08",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_09",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_10",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_11",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_12",
+        "itemType": "minimal_pair",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_13",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_14",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_15",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_16",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_17",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      },
+      {
+        "id": "pron_18",
+        "itemType": "shadowing",
+        "reason": "No pronunciation-content persistence model exists yet; raw source is retained."
+      }
+    ],
+    "media": [
+      {
+        "passageId": "passage_toeic-p3",
+        "reason": "No audio asset was supplied. Transcript is preserved for future media attachment/browser TTS."
+      },
+      {
+        "passageId": "passage_toeic-p4",
+        "reason": "No audio asset was supplied. Transcript is preserved for future media attachment/browser TTS."
+      },
+      {
+        "passageId": "passage_ielts-listen",
+        "reason": "No audio asset was supplied. Transcript is preserved for future media attachment/browser TTS."
+      }
+    ]
+  },
+  "mappings": {
+    "sourceIdStrategy": "Deterministic UUIDv5-like SHA-256 mapping scoped to content-pack-v0.1.",
+    "supportedQuestionEngine": "MCQ with correct_option_index",
+    "courseUnitSlug": "content-pack-v0.1",
+    "exampleBlocks": "Mapped to GRAMMAR rich-text blocks; original English and Vietnamese fields are retained in raw source."
+  }
+}

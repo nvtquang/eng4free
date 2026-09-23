@@ -1,0 +1,3 @@
+import { describe, expect, it } from "vitest";
+import { calculateIeltsBand, calculateOverallIeltsBand } from "./ielts-band";
+describe("IELTS band scoring", () => { it("uses different threshold tables for listening and academic reading", () => { expect(calculateIeltsBand("LISTENING", 32)).toBe(7.5); expect(calculateIeltsBand("ACADEMIC_READING", 32)).toBe(7); }); it("rounds overall bands to the nearest IELTS half band", () => { expect(calculateOverallIeltsBand([6, 6.5, 6.5, 7])).toBe(6.5); }); it("rejects impossible raw scores", () => { expect(() => calculateIeltsBand("LISTENING", 41)).toThrow(RangeError); }); });

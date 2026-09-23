@@ -1,0 +1,6 @@
+{
+  "name": "@english4free/shared-types",
+  "private": true,
+  "version": "0.0.1",
+  "exports": { ".": "./src/index.ts" }
+}

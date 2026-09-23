@@ -1,0 +1,9 @@
+[project]
+name = "english4free-speech"
+version = "0.1.0"
+description = "Speech-service boundary for English 4 Free"
+requires-python = ">=3.11"
+dependencies = ["fastapi>=0.115,<1", "uvicorn[standard]>=0.30,<1"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

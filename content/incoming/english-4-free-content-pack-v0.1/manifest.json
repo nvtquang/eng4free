@@ -1,0 +1,18 @@
+{
+  "pack_version": "0.1.0",
+  "total_records": 300,
+  "record_counts": {
+    "content_batches": 1,
+    "courses": 8,
+    "course_levels": 6,
+    "lessons": 12,
+    "lesson_blocks": 24,
+    "vocab_cards": 120,
+    "pronunciation_items": 18,
+    "passages": 10,
+    "questions": 90,
+    "exams": 2,
+    "exam_parts": 9
+  },
+  "entrypoint": "content-pack-v0.1.json"
+}

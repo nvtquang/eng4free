@@ -1,0 +1,7 @@
+import { randomUUID } from "node:crypto";
+import { NextResponse } from "next/server";
+import { createDatabase } from "@/db/client";
+import { media } from "@/db/schema";
+import { getAdminActor } from "@/modules/auth/authorization";
+import { saveLocalContentMedia } from "@/modules/media/local-media-service";
+export async function POST(request: Request) { const admin = await getAdminActor(); if (!admin.isAdmin) return NextResponse.json({ error: "Admin access required" }, { status: 403 }); const length = Number(request.headers.get("content-length") ?? 0); if (length > 26 * 1024 * 1024) return NextResponse.json({ error: "File is too large" }, { status: 413 }); try { const form = await request.formData(); const file = form.get("file"); if (!(file instanceof File)) return NextResponse.json({ error: "File is required" }, { status: 400 }); const stored = await saveLocalContentMedia({ bytes: new Uint8Array(await file.arrayBuffer()), contentType: file.type }); const db = createDatabase(); if (!db) throw new Error("DATABASE_URL is required"); const id = randomUUID(); const kind = file.type.startsWith("audio/") ? "AUDIO" : "IMAGE"; await db.insert(media).values({ id, kind, storageKey: stored.storageKey, contentType: file.type, byteSize: stored.byteSize, status: "READY" }); return NextResponse.json({ id, kind, playbackUrl: `/api/content-media/${id}` }, { status: 201 }); } catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Upload failed" }, { status: 400 }); } }

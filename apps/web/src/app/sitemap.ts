@@ -1,0 +1,2 @@
+import type { MetadataRoute } from "next";
+export default function sitemap(): MetadataRoute.Sitemap { const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"; return ["", "/learn", "/vocabulary", "/grammar", "/pronunciation", "/toeic", "/ielts", "/about", "/blog"].map((path) => ({ url: new URL(path || "/", baseUrl).toString(), lastModified: new Date(), changeFrequency: path === "" ? "weekly" : "monthly", priority: path === "" ? 1 : 0.7 })); }

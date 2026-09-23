@@ -1,0 +1,33 @@
+{
+  "name": "english-4-free",
+  "private": true,
+  "packageManager": "pnpm@9.15.5",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "build": "pnpm --filter @english4free/web build",
+    "test": "pnpm -r --if-present test",
+    "typecheck": "pnpm --filter @english4free/web typecheck",
+    "verify": "pnpm typecheck && pnpm test && pnpm build",
+    "db:migrate": "tsx scripts/migrate.ts",
+    "db:reset": "tsx scripts/reset-db.ts",
+    "db:seed": "pnpm seed:qa-user && pnpm seed:toeic-part5 && pnpm seed:a1-demo && pnpm seed:local-content-pack && pnpm seed:local-exam-pack && pnpm seed:content-pack-v01",
+    "qa:prepare": "pnpm db:reset && pnpm db:migrate && pnpm db:seed",
+    "lint": "pnpm --filter @english4free/web lint",
+    "test:all": "pnpm lint && pnpm typecheck && pnpm test && pnpm build && pnpm --filter @english4free/web test:e2e",
+    "seed:toeic-part5": "tsx scripts/seed/toeic-part5.ts",
+    "seed:qa-user": "tsx scripts/seed/qa-user.ts",
+    "seed:a1-demo": "tsx scripts/seed/a1-introduce-yourself.ts",
+    "seed:local-content-pack": "tsx scripts/seed/local-content-pack.ts",
+    "seed:local-exam-pack": "tsx scripts/seed/local-exam-pack.ts",
+    "seed:content-pack-v01": "pnpm content:pack-v01:import",
+    "content:pack-v01:check": "tsx scripts/import/content-pack-v0.1.ts --check",
+    "content:pack-v01:normalize": "tsx scripts/import/content-pack-v0.1.ts --normalize",
+    "content:pack-v01:import": "tsx scripts/import/content-pack-v0.1.ts --import",
+    "import:cefr:check": "tsx scripts/import/cefr/words-cefr.ts",
+    "import:cefr:write": "tsx scripts/import/cefr/words-cefr.ts --write"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.3",
+    "typescript": "^5.7.3"
+  }
+}

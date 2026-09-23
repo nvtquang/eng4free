@@ -1,0 +1,4 @@
+import { NextResponse } from "next/server";
+import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { startOrResumeExam } from "@/modules/exams/exam-engine";
+export async function POST(_: Request, { params }: { params: Promise<{ slug: string }> }) { try { const { slug } = await params; const { actor, createdGuestId } = await getRequestActor(true); const result = await startOrResumeExam(slug, actor); const response = NextResponse.json(result, { status: result.resumed ? 200 : 201 }); if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 }); return response; } catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Could not start exam" }, { status: 400 }); } }

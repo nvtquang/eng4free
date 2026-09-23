@@ -1,0 +1,3 @@
+CREATE TABLE "media" ("id" uuid PRIMARY KEY, "owner_user_id" uuid REFERENCES "users"("id"), "owner_guest_id" uuid, "kind" varchar(32) NOT NULL, "storage_key" text NOT NULL UNIQUE, "content_type" varchar(128) NOT NULL, "byte_size" integer NOT NULL, "status" varchar(32) NOT NULL DEFAULT 'PENDING', "created_at" timestamptz NOT NULL DEFAULT now());
+CREATE TABLE "media_processing_jobs" ("id" uuid PRIMARY KEY, "type" varchar(64) NOT NULL, "status" varchar(32) NOT NULL DEFAULT 'PENDING', "payload" jsonb NOT NULL, "attempts" integer NOT NULL DEFAULT 0, "error" text, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now());
+CREATE INDEX "media_processing_jobs_claim_idx" ON "media_processing_jobs"("status", "created_at");

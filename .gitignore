@@ -1,0 +1,32 @@
+node_modules/
+.next/
+.next-dev/
+dist/
+coverage/
+test-results/
+playwright-report/
+.turbo/
+.env
+.env.local
+*.log
+.local-media/
+.local-imports/
+__pycache__/
+.pytest_cache/
+*.py[cod]
+*.tsbuildinfo
+.cache-recovery/
+.zcode/
+
+# Reference repositories are audited in place and must never become production source.
+AI tutor/
+CEFR/
+IELTS/
+Listening/
+Pratices/
+Speaking/
+TOEIC/
+Writing/
+fe/node_modules/
+fe/dist/
+fe/

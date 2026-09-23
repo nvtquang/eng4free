@@ -1,0 +1,9 @@
+{
+  "name": "@english4free/scoring-core",
+  "private": true,
+  "version": "0.0.1",
+  "exports": { ".": "./src/index.ts" },
+  "scripts": { "test": "vitest run" },
+  "dependencies": { "@english4free/content-schemas": "workspace:*" },
+  "devDependencies": { "vitest": "^3.0.5" }
+}

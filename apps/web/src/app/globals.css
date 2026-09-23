@@ -1,0 +1,15 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root { color-scheme: light; --canvas: #f7f5ef; --surface: #fcfbf7; --band: #f2efe6; --ink: #202522; --muted: #5c635d; --line: #ddd9cf; --brand: #506a58; --brand-deep: #435a4a; --brand-soft: #e4ece3; --terra: #bf765b; --ochre: #c69a4b; --navy: #405266; }
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+body { min-width: 320px; margin: 0; background: var(--canvas); color: var(--ink); font-family: var(--font-inter), Arial, sans-serif; }
+button, input, textarea, select { font: inherit; }
+a { color: inherit; text-decoration: none; }
+.skip-link { position: fixed; left: 1rem; top: -5rem; z-index: 100; border-radius: .4rem; background: var(--ink); color: white; padding: .75rem 1rem; }
+.skip-link:focus { top: 1rem; outline: 2px solid var(--ochre); outline-offset: 2px; }
+.exam-shell { width: min(760px, calc(100% - 32px)); margin: 40px auto; }.exam-header { display: flex; justify-content: space-between; gap: 24px; align-items: center; }.eyebrow { color: var(--brand); font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }.timer { font-variant-numeric: tabular-nums; font-size: 1.5rem; font-weight: 700; }.exam-progress { color: var(--muted); }
+.question-card, .result-card { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; padding: 22px; margin: 18px 0; box-shadow: 0 10px 30px rgb(32 37 34 / .05); }.question-card h2 { font-size: 1rem; margin: 0 0 12px; }.options { display: grid; gap: 10px; margin-top: 16px; }.options label { cursor: pointer; }.question-card button, .result-card button { background: var(--brand); border: 0; border-radius: 8px; color: #fff; cursor: pointer; font-weight: 700; padding: 12px 18px; }.question-card button:disabled, .result-card button:disabled { cursor: wait; opacity: .6; }.correct { color: #0a7b45; }.incorrect, .error { color: #b42318; }
+@media (prefers-reduced-motion: reduce) { *, *::before, *::after { scroll-behavior: auto !important; transition-duration: .01ms !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; } }
