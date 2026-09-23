@@ -1,0 +1,6 @@
+import { NextResponse } from "next/server";
+import { SpeakingSessionInputSchema } from "@english4free/content-schemas";
+import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { createSpeakingSession, listSpeakingHistory } from "@/modules/speaking/repository";
+export async function GET() { try { const { actor } = await getRequestActor(false); return NextResponse.json({ sessions: await listSpeakingHistory(actor) }); } catch { return NextResponse.json({ sessions: [] }); } }
+export async function POST(request: Request) { const parsed = SpeakingSessionInputSchema.safeParse(await request.json().catch(() => null)); if (!parsed.success) return NextResponse.json({ error: "Invalid speaking prompt", issues: parsed.error.flatten() }, { status: 400 }); try { const { actor, createdGuestId } = await getRequestActor(true); const created = await createSpeakingSession(actor, parsed.data); const response = NextResponse.json(created, { status: 201 }); if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 }); return response; } catch (error) { return NextResponse.json({ error: error instanceof Error ? error.message : "Could not create speaking session" }, { status: 400 }); } }
