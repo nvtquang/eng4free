@@ -16,7 +16,12 @@ const examCopy = {
     correctAnswer: "Đáp án đúng",
     result: "Kết quả",
     submitting: "Đang nộp…",
-    submit: "Nộp bài"
+    submit: "Nộp bài",
+    saving: "Đang tự động lưu…",
+    review: "Xem lại bài làm",
+    timeExpired: "Đã hết giờ — kết quả được chấm từ đáp án đã tự động lưu.",
+    tryAgain: "Làm lại",
+    history: "Lịch sử bài thi"
   },
   en: {
     localDemo: "Original local demo · answers are scored on the server.",
@@ -33,7 +38,12 @@ const examCopy = {
     correctAnswer: "Correct answer",
     result: "Result",
     submitting: "Submitting…",
-    submit: "Submit exam"
+    submit: "Submit exam",
+    saving: "Autosaving…",
+    review: "Review your attempt",
+    timeExpired: "Time expired — saved answers were scored.",
+    tryAgain: "Try again",
+    history: "Exam history"
   }
 } as const;
 

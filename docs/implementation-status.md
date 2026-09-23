@@ -2,6 +2,20 @@
 
 Updated: 2026-09-23
 
+## Stage 5 — stable exam experience: PASS
+
+- TOEIC catalog now exposes individual Part practice, a mini test and a
+  full-format demo; IELTS catalog exposes Listening and Reading practice.
+- All modes use the same server-owned attempt lifecycle: a fixed deadline,
+  sequenced autosave, reload/resume, idempotent scoring and progress events.
+- A submitted or expired attempt has its own protected result URL. Review is
+  durable across browser refreshes and exam history links back to that exact
+  attempt; answer keys remain unavailable before submission.
+- When time expires, only answers successfully persisted before the deadline
+  are scored. The learner receives a review rather than a generic submit error.
+
+Validation: TypeScript, ESLint, 41 unit tests and 19 Playwright journeys pass.
+
 ## Content Importer — draft-to-review workflow: PASS
 
 - Admins can upload `.xlsx`, `.csv`, `.docx` and `.pdf` source files to a

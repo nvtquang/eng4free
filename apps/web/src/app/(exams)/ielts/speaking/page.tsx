@@ -1,0 +1,5 @@
+import { AudioRecorder } from "@/components/audio-recorder";
+import { Card } from "@/components/ui/card";
+import { Eyebrow, Section } from "@/components/ui/section";
+import { getLocale, getMessages } from "@/lib/i18n";
+export default async function IeltsSpeakingPage() { const messages = getMessages(await getLocale()); const copy = messages.ielts; const instruction = (await getLocale()) === "vi" ? "Hãy sắp xếp ý tưởng, sau đó ghi âm và trả lời tự nhiên." : "Take a moment to organise your response, then record and answer naturally."; return <Section className="max-w-4xl"><Eyebrow>{copy.eyebrow} · {copy.speaking}</Eyebrow><h1 className="mt-4 font-serif text-5xl font-bold tracking-tight">{copy.speakingTitle}</h1><p className="mt-5 max-w-2xl text-lg leading-8 text-muted">{copy.speakingDescription}</p><div className="mt-12 grid gap-8 lg:grid-cols-2"><Card><p className="text-sm font-bold text-brand">Part 1</p><h2 className="mt-4 font-serif text-3xl font-bold">{copy.speakingPrompt}</h2><p className="mt-5 leading-7 text-muted">{instruction}</p></Card><AudioRecorder copy={messages.pronunciation} /></div></Section>; }

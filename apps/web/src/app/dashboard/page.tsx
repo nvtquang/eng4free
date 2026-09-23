@@ -1,4 +1,5 @@
 import { Card } from "@/components/ui/card";
+import Link from "next/link";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getDashboardDetailsCopy } from "@/lib/dashboard-copy";
 import { getLocale, getMessages } from "@/lib/i18n";
@@ -46,7 +47,7 @@ export default async function DashboardPage() {
     <Card className="mt-8"><h2 className="font-serif text-2xl font-bold">{copy.skillActivity}</h2><p className="mt-2 text-sm text-muted">{locale === "vi" ? "Mỗi thanh thể hiện số hoạt động đã hoàn thành trong bản demo local." : "Each bar shows completed activities in this local demo."}</p><div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">{(Object.keys(skillLabels) as Array<keyof typeof skillLabels>).map((skill) => <SkillProgress key={skill} label={skillLabels[skill]} count={snapshot.skillEvents[skill] ?? 0} />)}</div></Card>
     <div className="mt-8 grid gap-6 lg:grid-cols-2">
       <HistoryCard title={details.activityHistory} empty={details.noData} scrollable>{events.map((event) => <HistoryRow key={event.id} title={details.events[event.type]} meta={event.occurredAt.toLocaleString(locale === "vi" ? "vi-VN" : "en-US")} />)}</HistoryCard>
-      <HistoryCard title={details.examHistory} empty={details.noData} scrollable>{exams.map((item) => <HistoryRow key={item.id} title={item.examTitle} meta={`${details.score}: ${item.rawScore ?? 0}/${item.totalQuestions}`} />)}</HistoryCard>
+      <HistoryCard title={details.examHistory} empty={details.noData} scrollable>{exams.map((item) => <Link className="block rounded-ui focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand" href={"/exams/" + item.examSlug + "/results/" + item.id} key={item.id}><HistoryRow title={item.examTitle} meta={`${details.score}: ${item.rawScore ?? 0}/${item.totalQuestions}`} /></Link>)}</HistoryCard>
       <HistoryCard title={details.writingHistory} empty={details.noData}>{writings.map((item) => <HistoryRow key={item.id} title={item.prompt.text ?? item.taskType} meta={`${item.wordCount} words · ${item.status}`} />)}</HistoryCard>
       <HistoryCard title={details.speakingHistory} empty={details.noData}>{speaking.map((item) => <HistoryRow key={item.id} title={item.prompt} meta={`${details.recording}: ${item.turns.length}`} />)}</HistoryCard>
     </div>
