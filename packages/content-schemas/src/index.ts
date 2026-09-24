@@ -111,6 +111,17 @@ export const WritingSubmissionSchema = z.object({
 });
 export const WritingPersistenceSchema = z.object({ submissionId: z.string().uuid().optional(), promptId: z.string().min(1).max(128), taskType: z.enum(["IELTS_TASK_1", "IELTS_TASK_2", "GENERAL"]), promptText: z.string().min(1).max(8_000), text: z.string().max(12_000), action: z.enum(["SAVE_DRAFT", "SUBMIT"]), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() }).superRefine(({ text, action }, context) => { if (action === "SUBMIT" && !text.trim()) context.addIssue({ code: z.ZodIssueCode.custom, path: ["text"], message: "Submitted writing cannot be empty" }); });
 export const SpeakingSessionInputSchema = z.object({ promptId: z.string().min(1).max(128), prompt: z.string().min(1).max(8_000), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() });
+export const SpeakingRubricLevelSchema = z.enum(["NEEDS_WORK", "DEVELOPING", "SECURE"]);
+export const SpeakingRubricCriterionSchema = z.object({ level: SpeakingRubricLevelSchema, feedback: z.string().min(1).max(2_000) });
+export const SpeakingFeedbackSchema = z.object({
+  transcript: z.string().min(1).max(20_000),
+  summary: z.string().min(1).max(4_000),
+  rubric: z.object({ taskResponse: SpeakingRubricCriterionSchema, fluency: SpeakingRubricCriterionSchema, grammar: SpeakingRubricCriterionSchema, vocabulary: SpeakingRubricCriterionSchema }),
+  corrections: z.array(z.object({ original: z.string().min(1).max(1_000), correction: z.string().min(1).max(1_000), explanation: z.string().min(1).max(2_000) })).max(12),
+  strengths: z.array(z.string().min(1).max(1_000)).max(10),
+  nextSteps: z.array(z.string().min(1).max(1_000)).max(10),
+  disclaimer: z.string().min(1).max(500)
+});
 
 export const WritingDiagnosticsSchema = z.object({
   wordCount: z.number().int().nonnegative(),
@@ -119,17 +130,22 @@ export const WritingDiagnosticsSchema = z.object({
   notices: z.array(z.string())
 });
 
+export const WritingRubricLevelSchema = z.enum(["NEEDS_WORK", "DEVELOPING", "SECURE"]);
+export const WritingRubricCriterionSchema = z.object({ level: WritingRubricLevelSchema, feedback: z.string().min(1).max(2_000) });
 export const WritingFeedbackSchema = z.object({
-  summary: z.string().min(1),
-  rubric: z.object({ taskResponse: z.number().min(0).max(9).nullable(), coherenceAndCohesion: z.number().min(0).max(9).nullable(), lexicalResource: z.number().min(0).max(9).nullable(), grammaticalRangeAndAccuracy: z.number().min(0).max(9).nullable() }),
-  grammarIssues: z.array(z.object({ message: z.string(), start: z.number().int().nonnegative(), end: z.number().int().nonnegative(), suggestion: z.string().optional() })),
-  vocabularyIssues: z.array(z.object({ message: z.string(), start: z.number().int().nonnegative(), end: z.number().int().nonnegative(), suggestion: z.string().optional() })),
-  coherenceIssues: z.array(z.string()),
-  revisionSuggestions: z.array(z.string())
+  summary: z.string().min(1).max(4_000),
+  /** Deliberately descriptive: these are not claimed IELTS band scores. */
+  rubric: z.object({ taskResponse: WritingRubricCriterionSchema, coherenceAndCohesion: WritingRubricCriterionSchema, lexicalResource: WritingRubricCriterionSchema, grammaticalRangeAndAccuracy: WritingRubricCriterionSchema }),
+  grammarIssues: z.array(z.object({ message: z.string().min(1).max(1_000), start: z.number().int().nonnegative(), end: z.number().int().nonnegative(), suggestion: z.string().min(1).max(1_000).optional() })).max(20),
+  vocabularyIssues: z.array(z.object({ message: z.string().min(1).max(1_000), start: z.number().int().nonnegative(), end: z.number().int().nonnegative(), suggestion: z.string().min(1).max(1_000).optional() })).max(20),
+  coherenceIssues: z.array(z.string().min(1).max(1_000)).max(10),
+  revisionSuggestions: z.array(z.string().min(1).max(1_000)).max(10),
+  rubricDisclaimer: z.string().min(1).max(500)
 });
 
 export const TutorRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), learnerAnswer: z.string().min(1).max(128) });
 export const TutorFeedbackSchema = z.object({ correct: z.boolean(), explanation: z.string().min(1), nextStep: z.string().min(1), providerUsed: z.boolean() });
+export const WritingEvaluationRequestSchema = z.object({ submissionId: z.string().uuid() });
 
 export const AdminContentBatchSchema = z.object({ source: z.string().min(3).max(500), license: z.string().min(1).max(255), author: z.string().min(1).max(255).optional(), version: z.string().min(1).max(64) });
 export const AdminCourseSchema = z.object({ slug: z.string().regex(/^[a-z0-9-]+$/).max(128), title: z.string().min(1).max(255), description: z.string().max(4_000).optional(), cefrLevel: z.enum(CEFR_LEVELS), unitTitle: z.string().min(1).max(255), contentBatchId: z.string().uuid().optional() });
@@ -175,8 +191,10 @@ export type PronunciationAnalysis = z.infer<typeof PronunciationAnalysisSchema>;
 export type WritingSubmission = z.infer<typeof WritingSubmissionSchema>;
 export type WritingDiagnostics = z.infer<typeof WritingDiagnosticsSchema>;
 export type WritingFeedback = z.infer<typeof WritingFeedbackSchema>;
+export type WritingEvaluationRequest = z.infer<typeof WritingEvaluationRequestSchema>;
 export type WritingPersistence = z.infer<typeof WritingPersistenceSchema>;
 export type SpeakingSessionInput = z.infer<typeof SpeakingSessionInputSchema>;
+export type SpeakingFeedback = z.infer<typeof SpeakingFeedbackSchema>;
 export type TutorRequest = z.infer<typeof TutorRequestSchema>;
 export type TutorFeedback = z.infer<typeof TutorFeedbackSchema>;
 export type LessonQuestionSetContent = z.infer<typeof LessonQuestionSetContentSchema>;
