@@ -2,6 +2,77 @@
 
 Updated: 2026-09-23
 
+## Stage 6 — Gemini AI foundation: PASS (local fallback remains enabled)
+
+- Added a provider abstraction shared by AI Tutor and AI Writing; the first
+  implementation is a Gemini REST adapter using structured JSON output.
+- `GEMINI_API_KEY` is read only in server modules and sent only to Gemini in an
+  `x-goog-api-key` request header. It is never placed in client code, responses,
+  cache keys or audit logs.
+- Added per-operation/learner rate limiting, SHA-256 cache keys, Zod validation
+  of every provider response, short-lived response caching, and best-effort
+  PostgreSQL usage logs with token counts and latency.
+- Without `GEMINI_API_KEY`, existing safe local behavior is retained: Tutor
+  shows the official explanation; Writing returns deterministic diagnostics.
+
+Migration: `0010_ai_foundation.sql`.
+
+Validation: local PostgreSQL migration, 46 Vitest tests, ESLint and TypeScript
+all pass. Production build is intentionally not run while the local Next.js dev
+server is active, because this project keeps its dev and production build caches
+separate to avoid invalidating a running browser session.
+
+Known operational limitation: rate-limit memory is per process. Replace it with
+Redis/Upstash before running multiple web instances.
+
+## Stage 6b — AI Tutor and AI Writing workflows: PASS (requires Gemini key for generated feedback)
+
+- Tutor feedback is now saved and restored per submitted attempt, question and
+  learner answer. The model receives only the learner outcome and approved
+  explanation; the server's answer-key identifier is never included in its
+  prompt or stored in the feedback record.
+- Writing is first saved as a submission/revision, then evaluated from the
+  server-owned revision. Generated feedback is persisted per revision and is
+  visible again from Writing history.
+- Writing rubric uses the descriptive levels `NEEDS_WORK`, `DEVELOPING` and
+  `SECURE` for task response, cohesion, vocabulary and grammar. It deliberately
+  has no numeric band field, and every response displays a practice-only,
+  non-official-band disclaimer.
+- Retry is idempotent per provider/revision, while a changed submission creates
+  a new revision and can keep its own feedback history.
+
+Migrations: `0011_ai_feedback_history.sql`,
+`0012_drop_legacy_writing_feedback_unique.sql`.
+
+Validation: migration on local PostgreSQL; 48 Vitest tests; ESLint and
+TypeScript pass. Local end-to-end smoke checks pass for Writing
+submit → evaluate fallback → history and TOEIC submit → Tutor feedback →
+history. Actual generated feedback awaits `GEMINI_API_KEY`.
+
+## Stage 6c — AI Speaking push-to-talk: PASS (realtime deferred)
+
+- The existing browser recorder now drives one push-to-talk flow: record,
+  protected local save, server-side Gemini transcription, structured feedback,
+  persistent history and playback.
+- Transcription uses a dedicated server-only Gemini adapter with inline audio,
+  verbatim mode and `store: false`. The API key is never sent to the browser.
+- Transcript and feedback are stored on the owned Speaking turn and survive a
+  page refresh. Repeated requests reuse saved results and the shared AI cache.
+- Speaking feedback uses descriptive `NEEDS_WORK`, `DEVELOPING` and `SECURE`
+  levels. It does not claim an official band, numeric score, acoustic quality or
+  phoneme-level pronunciation result.
+- Without `GEMINI_API_KEY`, microphone recording, playback and history still
+  work; the UI clearly reports that STT and generated feedback are unavailable.
+
+Validation: ESLint, TypeScript, production build and the complete Vitest suite
+pass (25 files, 52 tests), including the Gemini audio request contract, provider
+errors, transcript caching and feedback schema. A browser smoke test passes for
+record, stop, local playback, save, history and reload with no Gemini key
+configured.
+
+Deferred by design: realtime/full-duplex conversation, streaming WebRTC and
+phoneme/acoustic pronunciation scoring.
+
 ## Stage 5 — stable exam experience: PASS
 
 - TOEIC catalog now exposes individual Part practice, a mini test and a
@@ -207,14 +278,14 @@ Final clean-database gate (2026-09-22):
 - Demo exams are compact, original-format fixtures, not licensed ETS/Cambridge
   full-length test content.
 - Writing has deterministic metadata and revision history, not AI evaluation.
-- Speaking records and replays audio, but has no transcription or pronunciation
-  score.
+- Speaking transcription and feedback require `GEMINI_API_KEY`; pronunciation
+  scoring remains deferred because transcript-only AI cannot assess phonemes.
 - P3–P7 learner, exam and structured CMS controls are available in Vietnamese
   and English; authored demo content itself remains English learning material.
 - Google OAuth is optional and requires credentials only when sign-in is tested.
 
 ## Intentionally deferred external services
 
-AI Tutor provider, AI Writing evaluation, AI Speaking, cloud speech/alignment,
-Cloudflare R2/S3 production storage, production domain/deployment, Sentry and
-PostHog are deferred. No local acceptance journey depends on them.
+Realtime AI Speaking, cloud speech/alignment, Cloudflare R2/S3 production
+storage, production domain/deployment, Sentry and PostHog are deferred. Local
+recording/playback remains usable without any external provider.

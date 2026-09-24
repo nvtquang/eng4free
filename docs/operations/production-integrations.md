@@ -70,22 +70,38 @@ URL. The browser must not receive R2/S3 credentials.
 
 ## AI providers
 
-Writing and Tutor call provider URLs server-side, enforce a timeout, send
-`Authorization: Bearer <key>` when a key is configured, then validate returned
-JSON with the product Zod schema.
+Tutor, Writing and Speaking use server-side Gemini provider boundaries. The browser only
+calls English 4 Free routes; `GEMINI_API_KEY` is sent by the server to Gemini in
+the `x-goog-api-key` header and is never returned to the client. Gemini is asked
+for JSON, then the result is validated again with the product Zod schema.
 
 ```env
-AI_WRITING_PROVIDER_URL=https://provider.example/v1/writing/evaluate
-AI_WRITING_PROVIDER_API_KEY=...
-AI_TUTOR_PROVIDER_URL=https://provider.example/v1/tutor/explain
-AI_TUTOR_PROVIDER_API_KEY=...
+GEMINI_API_KEY=...
+GEMINI_MODEL=gemini-3.8-flash
+GEMINI_TRANSCRIBE_MODEL=gemini-3.5-transcribe
+GEMINI_API_BASE_URL=https://generativelanguage.googleapis.com/v1beta
 AI_PROVIDER_TIMEOUT_MS=12000
+AI_RATE_LIMIT_MAX_REQUESTS=10
+AI_RATE_LIMIT_WINDOW_MS=3600000
+AI_CACHE_TTL_SECONDS=900
 ```
 
-An omitted URL retains the safe fallback: Writing returns deterministic
-diagnostics only and Tutor returns the official explanation. Provider endpoints
-must be server-to-server adapters that return schemas from
-`packages/content-schemas`; never expose an LLM key to the client.
+The adapter uses Gemini's recommended Interactions REST endpoint with structured
+output. The shared layer rate-limits per learner and operation, caches validated
+structured results, and writes audit-safe usage records (`ai_usage_logs`). Logs
+contain hashes, metadata and token counts—not API keys or raw learner input.
+`ai_response_cache` has its own expiry. The in-process rate limiter is suitable
+for local/single-instance operation; replace its storage with Redis before
+multi-instance production deployment. With no key, Writing returns deterministic
+diagnostics and Tutor returns the official explanation.
+
+Speaking starts with push-to-talk, not realtime conversation. The browser saves
+the owned recording first, then the server sends at most 15 MB of audio to the
+Gemini transcription model as inline data with verbatim mode and `store: false`.
+The transcript is passed through the shared structured-feedback boundary and
+both results are stored on the Speaking turn. Feedback is transcript-based and
+must not be presented as an official band or phoneme/acoustic assessment. With
+no Gemini key, recording, playback and history still work locally.
 
 ## Speech service
 
