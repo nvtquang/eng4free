@@ -1,2 +1,6 @@
-const hits = new Map<string, { count: number; resetAt: number }>();
-export function allowTutorRequest(key: string, limit = 10, windowMs = 60 * 60 * 1_000) { const now = Date.now(); const current = hits.get(key); if (!current || now >= current.resetAt) { hits.set(key, { count: 1, resetAt: now + windowMs }); return true; } if (current.count >= limit) return false; current.count += 1; return true; }
+import { allowAiRequest } from "@/modules/ai-foundation/rate-limit";
+
+/** @deprecated Use allowAiRequest with an operation-scoped key. */
+export function allowTutorRequest(key: string, limit = 10, windowMs = 60 * 60 * 1_000): boolean {
+  return allowAiRequest(`TUTOR_EXPLANATION:${key}`, limit, windowMs);
+}

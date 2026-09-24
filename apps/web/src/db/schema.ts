@@ -1,4 +1,4 @@
-import { jsonb, pgEnum, pgTable, primaryKey, text, timestamp, uuid, varchar, integer, real, uniqueIndex } from "drizzle-orm/pg-core";
+import { boolean, jsonb, pgEnum, pgTable, primaryKey, text, timestamp, uuid, varchar, integer, real, uniqueIndex, index } from "drizzle-orm/pg-core";
 
 export const contentStatus = pgEnum("content_status", ["DRAFT", "REVIEW", "APPROVED", "PUBLISHED", "ARCHIVED"]);
 export const examType = pgEnum("exam_type", ["TOEIC", "IELTS"]);
@@ -159,9 +159,43 @@ export const vocabulary = pgTable("vocabulary", { id: uuid("id").primaryKey(), h
 export const vocabularyReviews = pgTable("vocabulary_reviews", { id: uuid("id").primaryKey(), userId: uuid("user_id").notNull(), vocabularyId: uuid("vocabulary_id").notNull().references(() => vocabulary.id, { onDelete: "cascade" }), dueAt: timestamp("due_at", { withTimezone: true }).notNull(), lastReview: timestamp("last_review", { withTimezone: true }), difficulty: real("difficulty").notNull(), stability: real("stability").notNull(), retrievability: real("retrievability").notNull(), elapsedDays: integer("elapsed_days").notNull(), scheduledDays: integer("scheduled_days").notNull(), learningSteps: integer("learning_steps").notNull(), repetitions: integer("repetitions").notNull(), lapses: integer("lapses").notNull(), fsrsState: integer("fsrs_state").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow() }, (table) => [uniqueIndex("vocabulary_reviews_user_vocab_idx").on(table.userId, table.vocabularyId)]);
 export const writingSubmissions = pgTable("writing_submissions", { id: uuid("id").primaryKey(), userId: uuid("user_id").references(() => users.id), guestId: uuid("guest_id"), examType: examType("exam_type"), promptId: varchar("prompt_id", { length: 128 }).notNull().default("general-writing"), taskType: varchar("task_type", { length: 64 }).notNull(), prompt: jsonb("prompt").notNull(), text: text("text").notNull(), wordCount: integer("word_count").notNull().default(0), status: writingSubmissionStatus("status").notNull().default("DRAFT"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow(), submittedAt: timestamp("submitted_at", { withTimezone: true }) });
 export const writingRevisions = pgTable("writing_revisions", { id: uuid("id").primaryKey(), submissionId: uuid("submission_id").notNull().references(() => writingSubmissions.id, { onDelete: "cascade" }), text: text("text").notNull(), wordCount: integer("word_count").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() });
-export const writingFeedback = pgTable("writing_feedback", { id: uuid("id").primaryKey(), submissionId: uuid("submission_id").notNull().references(() => writingSubmissions.id, { onDelete: "cascade" }).unique(), provider: varchar("provider", { length: 128 }).notNull(), model: varchar("model", { length: 128 }), content: jsonb("content").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() });
+export const writingFeedback = pgTable("writing_feedback", { id: uuid("id").primaryKey(), submissionId: uuid("submission_id").notNull().references(() => writingSubmissions.id, { onDelete: "cascade" }), revisionId: uuid("revision_id").references(() => writingRevisions.id, { onDelete: "set null" }), provider: varchar("provider", { length: 128 }).notNull(), model: varchar("model", { length: 128 }), kind: varchar("kind", { length: 32 }).notNull().default("AI_PRACTICE"), content: jsonb("content").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() }, (table) => [index("writing_feedback_submission_created_idx").on(table.submissionId, table.createdAt), uniqueIndex("writing_feedback_revision_provider_idx").on(table.revisionId, table.provider)]);
+/** Explanation history is scoped to a submitted attempt and never exposes an answer key. */
+export const tutorFeedback = pgTable("tutor_feedback", { id: uuid("id").primaryKey(), attemptId: uuid("attempt_id").notNull().references(() => attempts.id, { onDelete: "cascade" }), questionId: uuid("question_id").notNull(), learnerAnswer: varchar("learner_answer", { length: 128 }).notNull(), provider: varchar("provider", { length: 64 }).notNull(), content: jsonb("content").notNull(), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() }, (table) => [uniqueIndex("tutor_feedback_attempt_question_answer_idx").on(table.attemptId, table.questionId, table.learnerAnswer), index("tutor_feedback_attempt_created_idx").on(table.attemptId, table.createdAt)]);
 export const speakingSessions = pgTable("speaking_sessions", { id: uuid("id").primaryKey(), userId: uuid("user_id").references(() => users.id), guestId: uuid("guest_id"), examType: examType("exam_type"), promptId: varchar("prompt_id", { length: 128 }).notNull().default("general-speaking"), prompt: text("prompt").notNull().default("Speak about the topic."), status: speakingSessionStatus("status").notNull().default("IN_PROGRESS"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), completedAt: timestamp("completed_at", { withTimezone: true }) });
 export const speakingTurns = pgTable("speaking_turns", { id: uuid("id").primaryKey(), sessionId: uuid("session_id").notNull().references(() => speakingSessions.id, { onDelete: "cascade" }), turnOrder: integer("turn_order").notNull(), prompt: text("prompt"), transcript: text("transcript"), audioMediaId: uuid("audio_media_id"), durationMs: integer("duration_ms"), feedback: jsonb("feedback"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() }, (table) => [uniqueIndex("speaking_turns_session_order_idx").on(table.sessionId, table.turnOrder)]);
 export const progressEvents = pgTable("progress_events", { id: uuid("id").primaryKey(), userId: uuid("user_id").references(() => users.id), guestId: uuid("guest_id"), type: varchar("type", { length: 64 }).notNull(), skill: varchar("skill", { length: 16 }), sourceType: varchar("source_type", { length: 64 }), sourceId: varchar("source_id", { length: 128 }), idempotencyKey: varchar("idempotency_key", { length: 255 }), metadata: jsonb("metadata").notNull().default({}), occurredAt: timestamp("occurred_at", { withTimezone: true }).notNull().defaultNow() }, (table) => [uniqueIndex("progress_events_idempotency_idx").on(table.idempotencyKey)]);
 export const media = pgTable("media", { id: uuid("id").primaryKey(), ownerUserId: uuid("owner_user_id").references(() => users.id), ownerGuestId: uuid("owner_guest_id"), kind: varchar("kind", { length: 32 }).notNull(), storageKey: text("storage_key").notNull().unique(), contentType: varchar("content_type", { length: 128 }).notNull(), byteSize: integer("byte_size").notNull(), status: varchar("status", { length: 32 }).notNull().default("PENDING"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow() });
 export const mediaProcessingJobs = pgTable("media_processing_jobs", { id: uuid("id").primaryKey(), type: varchar("type", { length: 64 }).notNull(), status: varchar("status", { length: 32 }).notNull().default("PENDING"), payload: jsonb("payload").notNull(), attempts: integer("attempts").notNull().default(0), error: text("error"), createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow(), updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow() });
+
+/**
+ * Operational records for server-side AI calls. Neither table stores API keys or
+ * raw request text: cache keys and usage input hashes are SHA-256 digests.
+ */
+export const aiResponseCache = pgTable("ai_response_cache", {
+  id: uuid("id").primaryKey(),
+  cacheKey: varchar("cache_key", { length: 64 }).notNull().unique(),
+  operation: varchar("operation", { length: 64 }).notNull(),
+  provider: varchar("provider", { length: 64 }).notNull(),
+  model: varchar("model", { length: 128 }).notNull(),
+  response: jsonb("response").notNull(),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull(),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+}, (table) => [index("ai_response_cache_expiry_idx").on(table.expiresAt)]);
+
+export const aiUsageLogs = pgTable("ai_usage_logs", {
+  id: uuid("id").primaryKey(),
+  userId: uuid("user_id").references(() => users.id, { onDelete: "set null" }),
+  guestId: uuid("guest_id"),
+  operation: varchar("operation", { length: 64 }).notNull(),
+  provider: varchar("provider", { length: 64 }).notNull(),
+  model: varchar("model", { length: 128 }),
+  inputHash: varchar("input_hash", { length: 64 }).notNull(),
+  cacheHit: boolean("cache_hit").notNull().default(false),
+  status: varchar("status", { length: 32 }).notNull(),
+  latencyMs: integer("latency_ms"),
+  promptTokens: integer("prompt_tokens"),
+  responseTokens: integer("response_tokens"),
+  metadata: jsonb("metadata").notNull().default({}),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+}, (table) => [index("ai_usage_logs_actor_created_idx").on(table.userId, table.guestId, table.createdAt), index("ai_usage_logs_operation_created_idx").on(table.operation, table.createdAt)]);

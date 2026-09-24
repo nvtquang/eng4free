@@ -2,6 +2,7 @@ import { NextResponse } from "next/server";
 import { sql } from "drizzle-orm";
 import { createDatabase } from "@/db/client";
 import { isS3StorageConfigured } from "@/modules/media/s3-media-service";
+import { isGeminiConfigured } from "@/modules/ai-foundation/gemini-provider";
 
 export async function GET() {
   const database = createDatabase();
@@ -21,8 +22,14 @@ export async function GET() {
       database: { configured: Boolean(database), reachable: databaseReachable },
       objectStorage: { configured: isS3StorageConfigured() },
       googleOAuth: { configured: Boolean(process.env.AUTH_GOOGLE_ID && process.env.AUTH_GOOGLE_SECRET) },
-      aiWriting: { configured: Boolean(process.env.AI_WRITING_PROVIDER_URL) },
-      aiTutor: { configured: Boolean(process.env.AI_TUTOR_PROVIDER_URL) },
+      gemini: { configured: isGeminiConfigured(), model: process.env.GEMINI_MODEL?.trim() || null },
+      aiWriting: { configured: isGeminiConfigured() },
+      aiTutor: { configured: isGeminiConfigured() },
+      aiSpeaking: {
+        configured: isGeminiConfigured(),
+        mode: "push-to-talk",
+        transcriptionModel: process.env.GEMINI_TRANSCRIBE_MODEL?.trim() || null
+      },
       speech: { configured: Boolean(process.env.SPEECH_SERVICE_URL) }
     }
   };

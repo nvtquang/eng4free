@@ -17,7 +17,7 @@ const client = postgres(connectionString, { prepare: false });
 async function migrate() {
   await client.unsafe("CREATE TABLE IF NOT EXISTS _e4f_migrations (id varchar(128) PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())");
   const migrationDirectory = resolve(process.cwd(), "apps/web/src/db/migrations");
-  const migrationFiles = ["0000_phase1_toeic.sql", "0001_phase2_learning_core.sql", "0002_phase1b_auth.sql", "0003_phase4_ielts_ai.sql", "0004_phase6_progress.sql", "0005_phase8_media_jobs.sql", "0006_p1_lesson_completion.sql", "0007_p3_p5_foundation.sql", "0008_vocabulary_level_identity.sql", "0009_content_importer.sql"];
+  const migrationFiles = ["0000_phase1_toeic.sql", "0001_phase2_learning_core.sql", "0002_phase1b_auth.sql", "0003_phase4_ielts_ai.sql", "0004_phase6_progress.sql", "0005_phase8_media_jobs.sql", "0006_p1_lesson_completion.sql", "0007_p3_p5_foundation.sql", "0008_vocabulary_level_identity.sql", "0009_content_importer.sql", "0010_ai_foundation.sql", "0011_ai_feedback_history.sql", "0012_drop_legacy_writing_feedback_unique.sql"];
   for (const filename of migrationFiles) {
     const id = filename.replace(/\.sql$/, "");
     const applied = await client<{ id: string }[]>`SELECT id FROM _e4f_migrations WHERE id = ${id}`;
