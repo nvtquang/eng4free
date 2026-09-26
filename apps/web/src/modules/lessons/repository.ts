@@ -1,6 +1,7 @@
 import { and, asc, desc, eq, or } from "drizzle-orm";
 import { LessonListeningContentSchema, LessonQuestionSetContentSchema, LessonRichTextContentSchema, type LessonQuestionSetContent } from "@english4free/content-schemas";
 import { createDatabase } from "@/db/client";
+import { demoAudioUrl } from "@/modules/media/demo-audio";
 import { courseLevels, courseUnits, courses, lessonBlocks, lessonCompletions, lessons, media } from "@/db/schema";
 
 export type LearnerLessonBlock =
@@ -50,7 +51,7 @@ export async function findPublishedLesson(level: string, slug: string): Promise<
     }
     if (row.type === "MEDIA") {
       const parsed = LessonListeningContentSchema.safeParse(row.content);
-      if (parsed.success) { let mediaUrl: string | undefined; if (parsed.data.mediaId) { const [asset] = await db.select({ id: media.id }).from(media).where(and(eq(media.id, parsed.data.mediaId), eq(media.status, "READY"))); if (asset) mediaUrl = `/api/content-media/${asset.id}`; } blocks.push({ id: row.id, type: "MEDIA", sortOrder: row.sortOrder, content: { ...parsed.data, mediaUrl } }); }
+      if (parsed.success) { let mediaUrl: string | undefined; if (parsed.data.mediaId) { const [asset] = await db.select({ id: media.id }).from(media).where(and(eq(media.id, parsed.data.mediaId), eq(media.status, "READY"))); if (asset) mediaUrl = `/api/content-media/${asset.id}`; } mediaUrl ??= demoAudioUrl(parsed.data.playbackText); blocks.push({ id: row.id, type: "MEDIA", sortOrder: row.sortOrder, content: { ...parsed.data, mediaUrl } }); }
     }
   }
   return { ...lesson, blocks };

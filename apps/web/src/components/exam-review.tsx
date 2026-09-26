@@ -7,6 +7,17 @@ import type { ExamAttemptResult, PublicExam } from "@/modules/exams/exam-engine"
 import { questionLabels } from "@/components/questions/numbering";
 import { QuestionReview } from "@/components/questions/question-review";
 
+/** After submitting, learners can replay the recording freely and read the script. */
+function ListeningRecap({ copy, metadata }: { copy: ExamCopy; metadata: Record<string, unknown> }) {
+  const audioUrl = typeof metadata.audioUrl === "string" ? metadata.audioUrl : undefined;
+  const transcript = typeof metadata.transcript === "string" ? metadata.transcript : undefined;
+  if (!audioUrl && !transcript) return null;
+  return <div className="mt-5 rounded-ui bg-band/40 p-4">
+    {audioUrl && <><p className="text-sm font-bold text-muted">{copy.listenAgain}</p><audio className="mt-2 w-full" controls preload="none" src={audioUrl} /></>}
+    {transcript && <details className={audioUrl ? "mt-4" : ""}><summary className="cursor-pointer font-bold text-brand">{copy.transcript}</summary><p className="mt-3 whitespace-pre-line leading-7">{transcript}</p></details>}
+  </div>;
+}
+
 export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: ExamAttemptResult; copy: ExamCopy }) {
   const review = new Map(result.results.map((item) => [item.questionId, item]));
   const questionSkills = new Map(exam.parts.flatMap((part) => part.questions.map((question) => [question.id, part.skill] as const)));
@@ -31,6 +42,7 @@ export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: E
     <div className="mt-8 space-y-8">{exam.parts.map((part) => <Card key={part.id}>
       <p className="text-sm font-bold text-brand">{copy.part} {part.partNumber} · {examSkillLabel(copy, part.skill)}</p>
       <h2 className="mt-2 font-serif text-3xl font-bold">{part.title}</h2>
+      <ListeningRecap copy={copy} metadata={part.metadata} />
       {part.passages.map((passage) => <article className="mt-6 rounded-ui bg-band/40 p-5" key={passage.id}><h3 className="font-bold">{passage.title}</h3><p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>)}
       <div className="mt-7 space-y-7">{part.questions.map((question) => {
         const item = review.get(question.id);

@@ -4,6 +4,7 @@ import { isResponseAnswered, parseAuthoredQuestion, parseLearnerResponse, parseP
 import { scoreQuestion } from "@english4free/scoring-core";
 import { createDatabase } from "@/db/client";
 import { attemptAnswers, attempts, examParts, exams, passages, questions } from "@/db/schema";
+import { demoAudioUrl } from "@/modules/media/demo-audio";
 import { appendProgressEvent } from "@/modules/progress/repository";
 import type { AttemptActor } from "@/modules/attempts/types";
 
@@ -21,6 +22,27 @@ function dbOrThrow() {
   const db = createDatabase();
   if (!db) throw new Error("DATABASE_URL is required for the shared exam engine");
   return db;
+}
+
+/**
+ * Listening scripts are answer material: while an attempt is running the learner only
+ * gets the generated recording. The script itself is sent only when no recording exists
+ * (browser speech fallback) or for the post-submit review (`transcript`).
+ */
+const generationOnlyKeys = new Set(["playbackText", "audioVoices", "audioVoice", "audioPauseMs"]);
+export function publicPartMetadata(metadata: Record<string, unknown>, options: { includeTranscript?: boolean } = {}) {
+  const rest = Object.fromEntries(Object.entries(metadata).filter(([key]) => !generationOnlyKeys.has(key)));
+  const playbackText = metadata.playbackText;
+  if (typeof playbackText !== "string" || !playbackText.trim()) return rest;
+  const audioUrl = demoAudioUrl(playbackText);
+  return { ...rest, ...(audioUrl ? { audioUrl } : { playbackText }), ...(options.includeTranscript ? { transcript: playbackText } : {}) };
+}
+
+export function withGeneratedAudio(question: PublicQuestionDefinition): PublicQuestionDefinition {
+  if (question.type !== "DICTATION" || question.content.mediaId || !question.content.playbackText) return question;
+  const audioUrl = demoAudioUrl(question.content.playbackText);
+  if (!audioUrl) return question;
+  return { ...question, content: { ...question.content, playbackText: undefined, audioUrl } };
 }
 
 function owner(actor: AttemptActor) {
@@ -48,7 +70,7 @@ function storedResponse(row: { response: unknown; selectedOptionId: string | nul
   return (row.response as QuestionResponse | null) ?? (row.selectedOptionId ? { optionId: row.selectedOptionId } : null);
 }
 
-export async function getPublicExamBySlug(slug: string): Promise<PublicExam | null> {
+export async function getPublicExamBySlug(slug: string, options: { includeTranscripts?: boolean } = {}): Promise<PublicExam | null> {
   const db = dbOrThrow();
   const [exam] = await db.select().from(exams).where(and(eq(exams.slug, slug), eq(exams.status, "PUBLISHED")));
   if (!exam) return null;
@@ -57,9 +79,9 @@ export async function getPublicExamBySlug(slug: string): Promise<PublicExam | nu
     const passageRows = await db.select().from(passages).where(eq(passages.examPartId, part.id)).orderBy(asc(passages.sortOrder));
     const questionRows = await db.select({ id: questions.id, type: questions.type, content: questions.content, passageId: questions.passageId }).from(questions).where(and(eq(questions.examPartId, part.id), eq(questions.status, "PUBLISHED"))).orderBy(asc(questions.createdAt));
     return {
-      id: part.id, partNumber: part.partNumber, title: part.title, instructions: part.instructions, skill: part.skill, metadata: part.metadata as Record<string, unknown>,
+      id: part.id, partNumber: part.partNumber, title: part.title, instructions: part.instructions, skill: part.skill, metadata: publicPartMetadata(part.metadata as Record<string, unknown>, { includeTranscript: options.includeTranscripts }),
       passages: passageRows.map((item) => ({ id: item.id, title: item.title, content: item.content })),
-      questions: questionRows.map((item): PublicQuestion => { const question = parsePublicQuestion(item); return { ...question, id: item.id, passageId: item.passageId, points: questionPoints(question) }; })
+      questions: questionRows.map((item): PublicQuestion => { const question = withGeneratedAudio(parsePublicQuestion(item)); return { ...question, id: item.id, passageId: item.passageId, points: questionPoints(question) }; })
     };
   }));
   const allQuestions = parts.flatMap((part) => part.questions);
@@ -169,7 +191,7 @@ export async function submitExamAttempt(attemptId: string, actor: AttemptActor, 
 }
 
 export async function getExamAttemptReview(slug: string, attemptId: string, actor: AttemptActor) {
-  const exam = await getPublicExamBySlug(slug);
+  const exam = await getPublicExamBySlug(slug, { includeTranscripts: true });
   if (!exam) return null;
   let attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.examId !== exam.id) return null;

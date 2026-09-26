@@ -1,5 +1,6 @@
 import { blankTokens, type PublicQuestion, type QuestionAnswer, type QuestionResponse } from "@english4free/content-schemas";
 import type { ExamCopy } from "@/lib/exam-copy";
+import { QuestionImage } from "@/components/questions/question-image";
 
 type Copy = ExamCopy["questions"];
 type Result = { response: QuestionResponse | null; answer: QuestionAnswer; correct: boolean; earnedPoints: number; availablePoints: number; explanation: string | null };
@@ -14,7 +15,7 @@ function Row({ label, value, tone }: { label: string; value: string; tone?: stri
 /** Shows a submitted answer next to the key, for any gradable type. */
 export function QuestionReview({ question, result, copy, label, correctLabel }: { question: PublicQuestion; result: Result; copy: Copy; label: string; correctLabel: string }) {
   const response = result.response as Record<string, unknown> | null;
-  const header = <p className="flex flex-wrap items-baseline justify-between gap-2 font-bold"><span><span className="text-brand">{label}</span> {"prompt" in question.content && question.type !== "FILL_BLANK" ? question.content.prompt : ""}</span>{result.availablePoints > 1 && <span className="text-sm text-muted">{result.earnedPoints}/{result.availablePoints} {copy.points}</span>}</p>;
+  const header = <><p className="flex flex-wrap items-baseline justify-between gap-2 font-bold"><span><span className="text-brand">{label}</span> {"prompt" in question.content && question.type !== "FILL_BLANK" ? question.content.prompt : ""}</span>{result.availablePoints > 1 && <span className="text-sm text-muted">{result.earnedPoints}/{result.availablePoints} {copy.points}</span>}</p><div className="mt-3"><QuestionImage question={question} /></div></>;
   let body: React.ReactNode = null;
   switch (question.type) {
     case "MCQ":
