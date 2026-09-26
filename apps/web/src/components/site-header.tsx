@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 
 export function SiteHeader({ locale, messages, viewer }: { locale: Locale; messages: Messages; viewer: { name: string | null; email: string } | null }) {
   const [open, setOpen] = useState(false);
-  const nav = [["/learn", messages.nav.learn], ["/skills", messages.nav.skills], ["/vocabulary", messages.nav.vocabulary], ["/grammar", messages.nav.grammar], ["/pronunciation", messages.nav.pronunciation], ["/toeic", messages.nav.toeic], ["/ielts", messages.nav.ielts]] as const;
+  const nav = [["/learn", messages.nav.learn], ["/skills", messages.nav.skills], ["/vocabulary", messages.nav.vocabulary], ["/grammar", messages.nav.grammar], ["/pronunciation", messages.nav.pronunciation], ["/toeic", messages.nav.toeic], ["/ielts", messages.nav.ielts], ["/dashboard", messages.common.dashboard]] as const;
   useEffect(() => { const onKeyDown = (event: KeyboardEvent) => { if (event.key === "Escape") setOpen(false); }; document.addEventListener("keydown", onKeyDown); return () => document.removeEventListener("keydown", onKeyDown); }, []);
   return <header className="sticky top-0 z-40 border-b border-line/80 bg-canvas/95 backdrop-blur"><div className="mx-auto flex h-[72px] max-w-7xl items-center justify-between gap-4 px-5 sm:px-8">
     <Link href="/" className="font-serif text-xl font-bold tracking-tight text-ink focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand">English <span className="text-brand">4 Free</span></Link>

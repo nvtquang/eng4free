@@ -20,47 +20,10 @@
     "exams": 2,
     "examParts": 9,
     "passages": 6,
-    "questions": 60
+    "questions": 66
   },
   "deferred": {
-    "questions": [
-      {
-        "id": "question_ielts_listening_2",
-        "sourceQuestionType": "fill_in",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      },
-      {
-        "id": "question_ielts_listening_4",
-        "sourceQuestionType": "fill_in",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      },
-      {
-        "id": "question_ielts_listening_6",
-        "sourceQuestionType": "matching",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      },
-      {
-        "id": "question_ielts_listening_8",
-        "sourceQuestionType": "fill_in",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      },
-      {
-        "id": "question_ielts_listening_10",
-        "sourceQuestionType": "fill_in",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      },
-      {
-        "id": "question_ielts_listening_12",
-        "sourceQuestionType": "matching",
-        "examPartId": "exam_part_ielts_listening",
-        "reason": "The current Question Engine supports deterministic MCQ only."
-      }
-    ],
+    "questions": [],
     "practiceQuestions": [
       {
         "id": "question_a1_practice_1",
@@ -254,7 +217,7 @@
   },
   "mappings": {
     "sourceIdStrategy": "Deterministic UUIDv5-like SHA-256 mapping scoped to content-pack-v0.1.",
-    "supportedQuestionEngine": "MCQ with correct_option_index",
+    "supportedQuestionEngine": "Exam questions are classified by answer shape: accepted → FILL_BLANK, True/False/Not Given options → TRUE_FALSE, other options → MCQ.",
     "courseUnitSlug": "content-pack-v0.1",
     "exampleBlocks": "Mapped to GRAMMAR rich-text blocks; original English and Vietnamese fields are retained in raw source."
   }

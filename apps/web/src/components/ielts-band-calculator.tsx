@@ -1,6 +1,0 @@
-"use client";
-import { useState } from "react";
-import { Button } from "@/components/ui/button";
-import { calculateIeltsBand } from "@/modules/scoring/ielts-band";
-type Copy = { correctAnswers: string; calculate: string; estimatedBand: string; invalidScore: string };
-export function IeltsBandCalculator({ copy }: { copy: Copy }) { const [raw, setRaw] = useState("30"); const [band, setBand] = useState<number | null>(null); const [error, setError] = useState(false); function calculate() { const value = Number(raw); if (!Number.isInteger(value) || value < 0 || value > 40) { setError(true); setBand(null); return; } setError(false); setBand(calculateIeltsBand("ACADEMIC_READING", value)); } return <div className="rounded-ui border border-line bg-band p-5"><label className="text-sm font-bold" htmlFor="ielts-correct">{copy.correctAnswers}</label><div className="mt-3 flex flex-wrap gap-3"><input id="ielts-correct" className="w-24 rounded-ui border border-line bg-surface px-3 py-2" inputMode="numeric" value={raw} onChange={(event) => setRaw(event.target.value)} /><Button onClick={calculate}>{copy.calculate}</Button></div>{error ? <p className="mt-3 text-sm text-red-700">{copy.invalidScore}</p> : band !== null && <p className="mt-4 text-sm text-muted">{copy.estimatedBand}: <strong className="text-xl text-ink">{band.toFixed(1)}</strong></p>}</div>; }

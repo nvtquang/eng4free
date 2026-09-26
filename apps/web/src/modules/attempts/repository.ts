@@ -56,14 +56,14 @@ class PostgresAttemptRepository implements AttemptRepository {
     const [attempt] = await this.db.select().from(attempts).where(eq(attempts.id, id)).limit(1);
     if (!attempt || !attempt.guestId) return null;
     const saved = await this.db.select().from(attemptAnswers).where(eq(attemptAnswers.attemptId, id));
-    return { id: attempt.id, examId: attempt.examId, userId: attempt.userId, guestId: attempt.guestId, status: attempt.status, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, rawScore: attempt.rawScore, totalQuestions: attempt.totalQuestions, answers: saved.map(({ questionId, selectedOptionId }) => ({ questionId, selectedOptionId })) };
+    return { id: attempt.id, examId: attempt.examId, userId: attempt.userId, guestId: attempt.guestId, status: attempt.status, startedAt: attempt.startedAt, submittedAt: attempt.submittedAt, rawScore: attempt.rawScore, totalQuestions: attempt.totalQuestions, answers: saved.flatMap(({ questionId, selectedOptionId }) => selectedOptionId ? [{ questionId, selectedOptionId }] : []) };
   }
 
   async saveAnswers(id: string, savedAnswers: SavedAnswer[]): Promise<Attempt> {
     const attempt = await this.findById(id);
     if (!attempt || attempt.status !== "IN_PROGRESS") throw new Error("Attempt is not editable");
     for (const answer of savedAnswers) {
-      await this.db.insert(attemptAnswers).values({ attemptId: id, questionId: answer.questionId, selectedOptionId: answer.selectedOptionId }).onConflictDoUpdate({ target: [attemptAnswers.attemptId, attemptAnswers.questionId], set: { selectedOptionId: answer.selectedOptionId, updatedAt: new Date() } });
+      await this.db.insert(attemptAnswers).values({ attemptId: id, questionId: answer.questionId, selectedOptionId: answer.selectedOptionId, response: { optionId: answer.selectedOptionId } }).onConflictDoUpdate({ target: [attemptAnswers.attemptId, attemptAnswers.questionId], set: { selectedOptionId: answer.selectedOptionId, response: { optionId: answer.selectedOptionId }, updatedAt: new Date() } });
     }
     return (await this.findById(id))!;
   }

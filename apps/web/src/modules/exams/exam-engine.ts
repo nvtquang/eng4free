@@ -1,15 +1,21 @@
 import { randomUUID } from "node:crypto";
 import { and, asc, desc, eq, or } from "drizzle-orm";
-import { McqContentSchema } from "@english4free/content-schemas";
+import { isResponseAnswered, parseAuthoredQuestion, parseLearnerResponse, parsePublicQuestion, questionPoints, type GradableQuestionType, type PublicQuestion as PublicQuestionDefinition, type QuestionAnswer, type QuestionResponse } from "@english4free/content-schemas";
+import { scoreQuestion } from "@english4free/scoring-core";
 import { createDatabase } from "@/db/client";
 import { attemptAnswers, attempts, examParts, exams, passages, questions } from "@/db/schema";
 import { appendProgressEvent } from "@/modules/progress/repository";
-import type { AttemptActor, SavedAnswer } from "@/modules/attempts/types";
+import type { AttemptActor } from "@/modules/attempts/types";
 
-type PublicQuestion = { id: string; content: { prompt: string; options: Array<{ id: string; text: string }> }; passageId: string | null };
+type PublicQuestion = PublicQuestionDefinition & { id: string; passageId: string | null; points: number };
+/** A learner response for one question, validated against that question's type before it is stored. */
+export type ExamAnswerInput = { questionId: string; response: unknown };
+export type StoredExamAnswer = { questionId: string; response: QuestionResponse | null };
+export type QuestionResult = { questionId: string; type: GradableQuestionType; response: QuestionResponse | null; answer: QuestionAnswer; correct: boolean; earnedPoints: number; availablePoints: number; explanation: string | null };
 type PublicPart = { id: string; partNumber: number; title: string; instructions: string | null; skill: string | null; metadata: Record<string, unknown>; passages: Array<{ id: string; title: string | null; content: string }>; questions: PublicQuestion[] };
-export type PublicExam = { id: string; slug: string; title: string; type: "TOEIC" | "IELTS"; mode: "PRACTICE" | "MINI_TEST" | "FULL_MOCK"; durationSeconds: number; parts: PublicPart[]; totalQuestions: number };
-export type ExamAttemptResult = { attempt: { id: string; status: "SUBMITTED" | "EXPIRED"; rawScore: number; totalQuestions: number; submittedAt: Date | null }; results: Array<{ questionId: string; selectedOptionId: string | null; correctOptionId: string; correct: boolean; explanation: string | null }> };
+/** totalPoints is the number of marks (a blank or matched item is one mark); attempts store it as totalQuestions. */
+export type PublicExam = { id: string; slug: string; title: string; type: "TOEIC" | "IELTS"; mode: "PRACTICE" | "MINI_TEST" | "FULL_MOCK"; durationSeconds: number; parts: PublicPart[]; totalQuestions: number; totalPoints: number };
+export type ExamAttemptResult = { attempt: { id: string; status: "SUBMITTED" | "EXPIRED"; rawScore: number; totalQuestions: number; submittedAt: Date | null }; results: QuestionResult[] };
 
 function dbOrThrow() {
   const db = createDatabase();
@@ -27,14 +33,19 @@ export function isAttemptExpired(expiresAt: Date | null, now = new Date()) {
   return Boolean(expiresAt && expiresAt <= now);
 }
 
-export function scoreStoredAnswers(questionRows: Array<{ id: string; answer: unknown; explanation: string | null }>, saved: Array<{ questionId: string; selectedOptionId: string }>) {
-  const answerMap = new Map(saved.map((item) => [item.questionId, item.selectedOptionId]));
-  const results = questionRows.map((item) => {
-    const correctOptionId = (item.answer as { correctOptionId: string }).correctOptionId;
-    const selectedOptionId = answerMap.get(item.id) ?? null;
-    return { questionId: item.id, selectedOptionId, correctOptionId, correct: selectedOptionId === correctOptionId, explanation: item.explanation };
+export function scoreStoredAnswers(questionRows: Array<{ id: string; type: string; content: unknown; answer: unknown; explanation: string | null }>, saved: StoredExamAnswer[]) {
+  const answerMap = new Map(saved.map((item) => [item.questionId, item.response]));
+  const results = questionRows.map((item): QuestionResult => {
+    const question = parseAuthoredQuestion(item);
+    const response = answerMap.get(item.id) ?? null;
+    return { questionId: item.id, type: question.type, response, answer: question.answer, ...scoreQuestion(question, response), explanation: item.explanation };
   });
-  return { rawScore: results.filter((item) => item.correct).length, results };
+  return { rawScore: results.reduce((sum, item) => sum + item.earnedPoints, 0), results };
+}
+
+/** Rows written before structured answers only have the MCQ option. */
+function storedResponse(row: { response: unknown; selectedOptionId: string | null }): QuestionResponse | null {
+  return (row.response as QuestionResponse | null) ?? (row.selectedOptionId ? { optionId: row.selectedOptionId } : null);
 }
 
 export async function getPublicExamBySlug(slug: string): Promise<PublicExam | null> {
@@ -44,14 +55,15 @@ export async function getPublicExamBySlug(slug: string): Promise<PublicExam | nu
   const partRows = await db.select().from(examParts).where(eq(examParts.examId, exam.id)).orderBy(asc(examParts.sortOrder));
   const parts = await Promise.all(partRows.map(async (part) => {
     const passageRows = await db.select().from(passages).where(eq(passages.examPartId, part.id)).orderBy(asc(passages.sortOrder));
-    const questionRows = await db.select({ id: questions.id, content: questions.content, passageId: questions.passageId }).from(questions).where(and(eq(questions.examPartId, part.id), eq(questions.status, "PUBLISHED"))).orderBy(asc(questions.createdAt));
+    const questionRows = await db.select({ id: questions.id, type: questions.type, content: questions.content, passageId: questions.passageId }).from(questions).where(and(eq(questions.examPartId, part.id), eq(questions.status, "PUBLISHED"))).orderBy(asc(questions.createdAt));
     return {
       id: part.id, partNumber: part.partNumber, title: part.title, instructions: part.instructions, skill: part.skill, metadata: part.metadata as Record<string, unknown>,
       passages: passageRows.map((item) => ({ id: item.id, title: item.title, content: item.content })),
-      questions: questionRows.map((item) => ({ id: item.id, passageId: item.passageId, content: McqContentSchema.parse(item.content) }))
+      questions: questionRows.map((item): PublicQuestion => { const question = parsePublicQuestion(item); return { ...question, id: item.id, passageId: item.passageId, points: questionPoints(question) }; })
     };
   }));
-  return { id: exam.id, slug: exam.slug, title: exam.title, type: exam.type, mode: exam.mode as PublicExam["mode"], durationSeconds: exam.durationSeconds, parts, totalQuestions: parts.reduce((sum, part) => sum + part.questions.length, 0) };
+  const allQuestions = parts.flatMap((part) => part.questions);
+  return { id: exam.id, slug: exam.slug, title: exam.title, type: exam.type, mode: exam.mode as PublicExam["mode"], durationSeconds: exam.durationSeconds, parts, totalQuestions: allQuestions.length, totalPoints: allQuestions.reduce((sum, question) => sum + question.points, 0) };
 }
 
 export async function listPublicExams(type: "TOEIC" | "IELTS") {
@@ -71,22 +83,29 @@ async function getOwnedAttempt(attemptId: string, actor: AttemptActor) {
 
 async function getQuestionRows(examId: string) {
   const db = dbOrThrow();
-  return db.select({ id: questions.id, answer: questions.answer, explanation: questions.explanation }).from(questions).innerJoin(examParts, eq(questions.examPartId, examParts.id)).where(and(eq(examParts.examId, examId), eq(questions.status, "PUBLISHED")));
+  return db.select({ id: questions.id, type: questions.type, content: questions.content, answer: questions.answer, explanation: questions.explanation }).from(questions).innerJoin(examParts, eq(questions.examPartId, examParts.id)).where(and(eq(examParts.examId, examId), eq(questions.status, "PUBLISHED")));
 }
 
-async function getSavedAnswers(attemptId: string) {
+async function getSavedAnswers(attemptId: string): Promise<StoredExamAnswer[]> {
   const db = dbOrThrow();
-  return db.select({ questionId: attemptAnswers.questionId, selectedOptionId: attemptAnswers.selectedOptionId }).from(attemptAnswers).where(eq(attemptAnswers.attemptId, attemptId));
+  const rows = await db.select({ questionId: attemptAnswers.questionId, selectedOptionId: attemptAnswers.selectedOptionId, response: attemptAnswers.response }).from(attemptAnswers).where(eq(attemptAnswers.attemptId, attemptId));
+  return rows.map((row) => ({ questionId: row.questionId, response: storedResponse(row) }));
 }
 
-async function validateAndPersistAnswers(attemptId: string, examId: string, answers: SavedAnswer[]) {
+async function validateAndPersistAnswers(attemptId: string, examId: string, answers: ExamAnswerInput[]) {
   const db = dbOrThrow();
-  const allowedRows = await db.select({ id: questions.id, content: questions.content }).from(questions).innerJoin(examParts, eq(questions.examPartId, examParts.id)).where(and(eq(examParts.examId, examId), eq(questions.status, "PUBLISHED")));
-  const allowed = new Map(allowedRows.map((row) => [row.id, McqContentSchema.parse(row.content)]));
-  for (const answer of answers) {
-    const content = allowed.get(answer.questionId);
-    if (!content?.options.some((option) => option.id === answer.selectedOptionId)) throw new Error("Invalid answer for this exam");
-    await db.insert(attemptAnswers).values({ attemptId, questionId: answer.questionId, selectedOptionId: answer.selectedOptionId }).onConflictDoUpdate({ target: [attemptAnswers.attemptId, attemptAnswers.questionId], set: { selectedOptionId: answer.selectedOptionId, updatedAt: new Date() } });
+  const allowedRows = await db.select({ id: questions.id, type: questions.type, content: questions.content }).from(questions).innerJoin(examParts, eq(questions.examPartId, examParts.id)).where(and(eq(examParts.examId, examId), eq(questions.status, "PUBLISHED")));
+  const allowed = new Map(allowedRows.map((row) => [row.id, parsePublicQuestion(row)]));
+  const validated = answers.map((answer) => {
+    const question = allowed.get(answer.questionId);
+    const response = question ? parseLearnerResponse(question, answer.response) : null;
+    if (!question || !response) throw new Error("Invalid answer for this exam");
+    return { questionId: answer.questionId, response, answered: isResponseAnswered(question.type, response), selectedOptionId: question.type === "MCQ" ? (response as QuestionResponse<"MCQ">).optionId : null };
+  });
+  for (const answer of validated) {
+    // Clearing every blank or selection removes the stored answer instead of saving an empty one.
+    if (!answer.answered) { await db.delete(attemptAnswers).where(and(eq(attemptAnswers.attemptId, attemptId), eq(attemptAnswers.questionId, answer.questionId))); continue; }
+    await db.insert(attemptAnswers).values({ attemptId, questionId: answer.questionId, selectedOptionId: answer.selectedOptionId, response: answer.response }).onConflictDoUpdate({ target: [attemptAnswers.attemptId, attemptAnswers.questionId], set: { selectedOptionId: answer.selectedOptionId, response: answer.response, updatedAt: new Date() } });
   }
 }
 
@@ -123,16 +142,16 @@ export async function startOrResumeExam(slug: string, actor: AttemptActor) {
   if (active) await completeExamAttempt(active.id, actor, true);
   const id = randomUUID();
   const expiresAt = new Date(now.getTime() + exam.durationSeconds * 1000);
-  await db.insert(attempts).values({ id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS", startedAt: now, expiresAt, totalQuestions: exam.totalQuestions });
+  await db.insert(attempts).values({ id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS", startedAt: now, expiresAt, totalQuestions: exam.totalPoints });
   await appendProgressEvent({
     userId: actor.userId, guestId: actor.guestId, type: "EXAM_STARTED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: id,
     idempotencyKey: "exam:" + id + ":started",
     metadata: { examId: exam.id, mode: exam.mode }
   });
-  return { attempt: { id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS" as const, startedAt: now, expiresAt, submittedAt: null, rawScore: null, totalQuestions: exam.totalQuestions, answers: [] }, exam, resumed: false };
+  return { attempt: { id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS" as const, startedAt: now, expiresAt, submittedAt: null, rawScore: null, totalQuestions: exam.totalPoints, answers: [] as StoredExamAnswer[] }, exam, resumed: false };
 }
 
-export async function saveExamAnswers(attemptId: string, actor: AttemptActor, answers: SavedAnswer[]) {
+export async function saveExamAnswers(attemptId: string, actor: AttemptActor, answers: ExamAnswerInput[]) {
   const attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.status !== "IN_PROGRESS") throw new Error("Attempt is not editable");
   if (isAttemptExpired(attempt.expiresAt)) {
@@ -143,7 +162,7 @@ export async function saveExamAnswers(attemptId: string, actor: AttemptActor, an
   return { attemptId, savedAnswers: (await getSavedAnswers(attemptId)).length };
 }
 
-export async function submitExamAttempt(attemptId: string, actor: AttemptActor, submittedAnswers: SavedAnswer[]) {
+export async function submitExamAttempt(attemptId: string, actor: AttemptActor, submittedAnswers: ExamAnswerInput[]) {
   const attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.status === "IN_PROGRESS" && !isAttemptExpired(attempt.expiresAt)) await validateAndPersistAnswers(attemptId, attempt.examId, submittedAnswers);
   return completeExamAttempt(attemptId, actor, isAttemptExpired(attempt.expiresAt));

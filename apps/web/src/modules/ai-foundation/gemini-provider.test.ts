@@ -22,6 +22,26 @@ describe("GeminiProvider", () => {
     expect(result).toEqual({ value: { message: "ok" }, usage: { promptTokens: 12, responseTokens: 4 } });
   });
 
+  it("requests low thinking so structured feedback stays within the request budget", async () => {
+    let requestBody: unknown;
+    const provider = new GeminiProvider("gemini-test", "secret-key", "https://gemini.test", 1_000, async (_url, init) => {
+      requestBody = JSON.parse(String(init?.body));
+      return new Response(JSON.stringify({ output_text: '{"message":"ok"}' }), { status: 200 });
+    });
+    await provider.generateJson({ prompt: "hello", systemInstruction: "be helpful", responseSchema: schema });
+    expect(requestBody).toMatchObject({ generation_config: { thinking_level: "low" } });
+  });
+
+  it("retries once when the provider is temporarily overloaded", async () => {
+    let calls = 0;
+    const provider = new GeminiProvider("gemini-test", "secret-key", "https://gemini.test", 1_000, async () => {
+      calls += 1;
+      return calls === 1 ? new Response("overloaded", { status: 503 }) : new Response(JSON.stringify({ output_text: '{"message":"ok"}' }), { status: 200 });
+    });
+    await expect(provider.generateJson({ prompt: "hello", systemInstruction: "be helpful", responseSchema: schema })).resolves.toMatchObject({ value: { message: "ok" } });
+    expect(calls).toBe(2);
+  });
+
   it("normalizes an unavailable provider without exposing provider details to callers", async () => {
     const provider = new GeminiProvider("gemini-test", "secret-key", "https://gemini.test", 1_000, async () => new Response("unavailable", { status: 503 }));
     await expect(provider.generateJson({ prompt: "hello", systemInstruction: "be helpful", responseSchema: schema })).rejects.toBeInstanceOf(AiProviderUnavailableError);

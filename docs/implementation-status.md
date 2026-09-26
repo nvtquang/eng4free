@@ -1,6 +1,71 @@
 # Implementation status
 
-Updated: 2026-09-23
+Updated: 2026-09-26
+
+## D1 — Question Engine question types: PASS
+
+- Seven gradable types share one engine: MCQ, MULTI_SELECT, TRUE_FALSE
+  (True/False/Not Given, Yes/No/Not Given, True/False), FILL_BLANK, MATCHING,
+  ORDERING and DICTATION. Each has a Zod content schema (learner-safe), a key
+  schema (server-only), a response schema and cross-validation of key against
+  content (`packages/content-schemas/src/questions.ts`).
+- `scoring-core` scores every type deterministically. Short answers ignore case,
+  extra whitespace, typographic quotes and surrounding punctuation; dictation also
+  ignores inner punctuation; several accepted answers and word limits are
+  supported. Marks follow IELTS conventions: one per blank, matched item or
+  required selection; ordering and dictation are all-or-nothing.
+- Attempt answers are stored as structured JSON (`attempt_answers.response`,
+  migration `0014`); legacy MCQ rows and `selectedOptionId` payloads still work.
+  Raw score and totals are in marks, and the IELTS/TOEIC estimate uses marks.
+- One flat authoring format (`question-authoring.ts`) drives the CMS question form
+  (type-aware, validated in the browser with the same rules) and the spreadsheet
+  importer (new type, accepted-answers, items, option E/F, audio-text and
+  word-limit columns). Publishing validates every stored question.
+- Content Pack v0.1 is classified by answer shape; 0 exam questions are deferred
+  (66 imported, previously 60).
+- New original seed `ielts-practice-test-1` (22 marks: form and summary completion,
+  choose-two, MCQ, matching, matching headings, True/False/Not Given) and
+  `ielts-skills-drill-dictation-order`.
+
+Known limits: lesson question sets are still MCQ-only; listening parts and
+dictation use browser speech, so their transcript is present in the page until
+recorded audio replaces it (D2); AI Tutor still covers the legacy Part 5 runner only.
+
+Validation: ESLint, TypeScript, 79 unit tests (16 scoring-core, 61 web, 2 SRS) and
+22 Playwright journeys pass, including a perfect-score IELTS attempt through the
+UI with reload/resume, dictation + ordering, and a CMS-authored gap-fill question.
+
+## D0-fix — demo hygiene and learner-facing cleanup: PASS
+
+Scope and acceptance criteria: `docs/roadmap/demo-acceptance.md`.
+
+- `pnpm test:e2e` runs against a dedicated `english4free_e2e` database (or
+  `E2E_DATABASE_URL`) and creates it when missing, so E2E never resets or
+  pollutes the demo database. `pnpm db:clean-test-content` removes content that
+  earlier E2E runs published into the current database.
+- Vocabulary FSRS schedules are stored server-side per learner (guest or
+  account) in `vocabulary_reviews`; the vocabulary page queues due words first
+  and holds back words scheduled for later. Browser storage is no longer used.
+- Exam results show a practice-only TOEIC scaled score / IELTS band estimate per
+  skill, projected from the attempt's accuracy.
+- Listening, Reading and Grammar list published lessons from the database;
+  IELTS Writing/Speaking reuse the persisted Writing workspace and push-to-talk
+  Speaking flows and are reachable from `/ielts`.
+- Learner-facing copy no longer mentions internal components; exam modes,
+  skills and statuses are localized; About and Privacy pages replace the
+  placeholder section route; the placement-test button no longer links to a
+  missing feature.
+
+- Gemini structured feedback was timing out: the default thinking depth took
+  ~12 s against a 12 s budget. The provider now requests `thinking_level: low`
+  (`AI_THINKING_LEVEL`), uses a 30 s default timeout and retries once on
+  500/502/503. Writing history updates as soon as a submission is saved, before
+  AI feedback arrives.
+
+Migration: `0013_vocabulary_review_owner.sql`.
+
+Validation: ESLint, TypeScript, 62 unit tests and 19 Playwright journeys pass
+(E2E on the isolated `english4free_e2e` database, with Gemini configured).
 
 ## Stage 6 — Gemini AI foundation: PASS (local fallback remains enabled)
 

@@ -39,8 +39,11 @@ pnpm lint
 pnpm typecheck
 pnpm test
 pnpm build
-pnpm --filter @english4free/web test:e2e
+pnpm test:e2e
 ```
+
+`pnpm test:e2e` uses its own database (`english4free_e2e` by default, or
+`E2E_DATABASE_URL`), so it never resets your local demo data.
 
 `pnpm qa:prepare` is destructive: it only accepts a PostgreSQL host of
 `localhost`, `127.0.0.1` or `::1` and a database named `english4free` or beginning
