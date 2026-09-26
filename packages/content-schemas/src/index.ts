@@ -1,9 +1,13 @@
 import { CEFR_LEVELS, CONTENT_STATUSES, QUESTION_TYPES, SKILLS } from "@english4free/shared-types";
 import { z } from "zod";
+import { McqContentSchema } from "./questions";
+import { QuestionAuthoringSchema } from "./question-authoring";
 
 // Re-exporting the validator keeps import/normalization scripts on the same
 // Zod version as the application schemas.
 export { z } from "zod";
+export * from "./questions";
+export * from "./question-authoring";
 
 export const ProvenanceSchema = z.object({
   source: z.string().url(),
@@ -15,16 +19,6 @@ export const ProvenanceSchema = z.object({
   version: z.string().min(1)
 });
 
-export const McqContentSchema = z.object({
-  prompt: z.string().min(1),
-  options: z.array(z.object({ id: z.string().min(1), text: z.string().min(1) })).min(2),
-  passageId: z.string().uuid().optional(),
-  mediaId: z.string().uuid().optional()
-}).superRefine(({ options }, context) => {
-  if (new Set(options.map((option) => option.id)).size !== options.length) {
-    context.addIssue({ code: z.ZodIssueCode.custom, message: "MCQ option IDs must be unique", path: ["options"] });
-  }
-});
 
 export const QuestionDefinitionSchema = z.object({
   id: z.string().uuid(),
@@ -164,6 +158,10 @@ export const AdminPublishLessonSchema = z.object({ lessonId: z.string().uuid() }
 export const AdminExamSchema = z.object({ slug: z.string().regex(/^[a-z0-9-]+$/).max(128), title: z.string().min(1).max(255), type: z.enum(["TOEIC", "IELTS"]), mode: z.enum(["PRACTICE", "MINI_TEST", "FULL_MOCK"]).default("PRACTICE"), durationSeconds: z.number().int().positive().max(24 * 60 * 60), partNumber: z.number().int().positive().max(7), partTitle: z.string().min(1).max(255), skill: z.enum(SKILLS), contentBatchId: z.string().uuid().optional() });
 export const AdminExamPartSchema = z.object({ examId: z.string().uuid(), partNumber: z.number().int().positive().max(7), title: z.string().min(1).max(255), skill: z.enum(SKILLS), instructions: z.string().max(8_000).optional(), durationSeconds: z.number().int().positive().max(24 * 60 * 60).optional() });
 export const AdminMcqQuestionSchema = z.object({ examPartId: z.string().uuid(), passageId: z.string().uuid().optional(), prompt: z.string().min(1).max(8_000), options: z.array(z.object({ id: z.string().min(1).max(32), text: z.string().min(1).max(2_000) })).min(2).max(8), correctOptionId: z.string().min(1).max(32), explanation: z.string().min(1).max(8_000), tags: z.array(z.string().min(1).max(64)).max(20).default([]) }).superRefine(({ options, correctOptionId }, context) => { if (!options.some((option) => option.id === correctOptionId)) context.addIssue({ code: z.ZodIssueCode.custom, path: ["correctOptionId"], message: "Correct option must exist" }); });
+/** CMS question in the shared flat authoring format; any gradable type. */
+export const AdminQuestionSchema = z.object({ examPartId: z.string().uuid(), passageId: z.string().uuid().optional(), explanation: z.string().min(1).max(8_000), tags: z.array(z.string().min(1).max(64)).max(20).default([]), authoring: QuestionAuthoringSchema });
+/** Accepts the current payload and the original MCQ-only payload. */
+export const AdminAnyQuestionSchema = z.union([AdminQuestionSchema, AdminMcqQuestionSchema]);
 export const AdminMediaSchema = z.object({ kind: z.enum(["AUDIO", "IMAGE", "RECORDING"]), storageKey: z.string().min(3).max(1_000), contentType: z.string().min(3).max(128), byteSize: z.number().int().positive().max(250_000_000) });
 export const AdminVocabularySchema = z.object({ headword: z.string().min(1).max(255), partOfSpeech: z.string().min(1).max(64), cefrLevel: z.enum(CEFR_LEVELS), ipa: z.string().max(255).optional(), meaning: z.string().min(1).max(4_000), example: z.string().min(1).max(4_000), tags: z.array(z.string().min(1).max(64)).max(20).default([]), contentBatchId: z.string().uuid().optional() });
 export const AdminPassageSchema = z.object({ examPartId: z.string().uuid(), title: z.string().min(1).max(255), content: z.string().min(1).max(30_000), sortOrder: z.number().int().positive().max(1000) });
@@ -175,7 +173,7 @@ export const ContentImportLessonMappingSchema = z.object({
   importId: z.string().uuid(), target: z.literal("LESSON"), unitId: z.string().uuid(), slug: z.string().regex(/^[a-z0-9-]+$/).max(128), title: z.string().min(1).max(255), skill: z.enum(SKILLS), estimatedMinutes: z.number().int().positive().max(600), sectionIndexes: z.array(z.number().int().nonnegative()).min(1).optional()
 });
 export const ContentImportExamMappingSchema = z.object({
-  importId: z.string().uuid(), target: z.literal("EXAM"), slug: z.string().regex(/^[a-z0-9-]+$/).max(128), title: z.string().min(1).max(255), type: z.enum(["TOEIC", "IELTS"]), mode: z.enum(["PRACTICE", "MINI_TEST", "FULL_MOCK"]), durationSeconds: z.number().int().positive().max(24 * 60 * 60), sheetName: z.string().min(1).max(255), defaultPartNumber: z.number().int().positive().max(7), defaultPartTitle: z.string().min(1).max(255), defaultSkill: z.enum(["LISTENING", "READING"]), columns: z.object({ partNumber: z.string().max(255).optional(), partTitle: z.string().max(255).optional(), skill: z.string().max(255).optional(), passageTitle: z.string().max(255).optional(), passage: z.string().max(255).optional(), question: z.string().min(1).max(255), optionA: z.string().min(1).max(255), optionB: z.string().min(1).max(255), optionC: z.string().max(255).optional(), optionD: z.string().max(255).optional(), correctOption: z.string().min(1).max(255), explanation: z.string().max(255).optional(), tags: z.string().max(255).optional() })
+  importId: z.string().uuid(), target: z.literal("EXAM"), slug: z.string().regex(/^[a-z0-9-]+$/).max(128), title: z.string().min(1).max(255), type: z.enum(["TOEIC", "IELTS"]), mode: z.enum(["PRACTICE", "MINI_TEST", "FULL_MOCK"]), durationSeconds: z.number().int().positive().max(24 * 60 * 60), sheetName: z.string().min(1).max(255), defaultPartNumber: z.number().int().positive().max(7), defaultPartTitle: z.string().min(1).max(255), defaultSkill: z.enum(["LISTENING", "READING"]), columns: z.object({ partNumber: z.string().max(255).optional(), partTitle: z.string().max(255).optional(), skill: z.string().max(255).optional(), passageTitle: z.string().max(255).optional(), passage: z.string().max(255).optional(), questionType: z.string().max(255).optional(), question: z.string().min(1).max(255), optionA: z.string().max(255).optional(), optionB: z.string().max(255).optional(), optionC: z.string().max(255).optional(), optionD: z.string().max(255).optional(), optionE: z.string().max(255).optional(), optionF: z.string().max(255).optional(), correctOption: z.string().max(255).optional(), acceptedAnswers: z.string().max(255).optional(), items: z.string().max(255).optional(), audioText: z.string().max(255).optional(), wordLimit: z.string().max(255).optional(), explanation: z.string().max(255).optional(), tags: z.string().max(255).optional() })
 });
 export const ContentImportApplySchema = z.discriminatedUnion("target", [ContentImportLessonMappingSchema, ContentImportExamMappingSchema]);
 

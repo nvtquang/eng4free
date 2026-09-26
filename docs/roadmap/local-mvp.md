@@ -7,6 +7,9 @@ Current audited state and active priority order: see
 `docs/roadmap/local-mvp-audit.md`. The local P3–P7 implementation and QA status is
 tracked in `docs/implementation-status.md`.
 
+Demo scope, scenarios and acceptance checklist (D0, 2026-09-26): see
+`docs/roadmap/demo-acceptance.md`.
+
 ## Scope rule
 
 The local MVP includes CEFR A1-C2 learning, vocabulary, grammar, educational

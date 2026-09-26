@@ -14,7 +14,7 @@ export default async function SpeakingPage() {
 
   return (
     <Section>
-      <Eyebrow>{locale === "vi" ? "Nói" : "Speaking"}</Eyebrow>
+      <Eyebrow>{copy.speakingEyebrow}</Eyebrow>
       <h1 className="mt-4 font-serif text-5xl font-bold">{copy.speakingTitle}</h1>
       <p className="mt-4 text-muted">{aiCopy.description}</p>
       <div className="mt-10">

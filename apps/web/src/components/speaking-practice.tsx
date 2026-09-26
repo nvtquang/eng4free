@@ -9,7 +9,7 @@ import type { AiSpeakingCopy } from "@/lib/ai-speaking-copy";
 type Copy = ReturnType<typeof import("@/lib/skills-copy").getSkillsCopy>;
 type History = { id: string; prompt: string; status: string; createdAt: string; turns: Array<{ id: string; durationMs: number | null; audioMediaId: string | null; transcript: string | null; feedback: SpeakingFeedback | null }> };
 
-export function SpeakingPractice({ copy, aiCopy, prompt }: { copy: Copy; aiCopy: AiSpeakingCopy; prompt: string }) {
+export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speaking-skill", examType = null }: { copy: Copy; aiCopy: AiSpeakingCopy; prompt: string; promptId?: string; examType?: "TOEIC" | "IELTS" | null }) {
   const recorder = useRef<MediaRecorder | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const chunks = useRef<Blob[]>([]);
@@ -52,7 +52,7 @@ export function SpeakingPractice({ copy, aiCopy, prompt }: { copy: Copy; aiCopy:
     if (!blob) return;
     setPending(true); setError(undefined); setMessage(undefined);
     try {
-      const created = await fetch("/api/speaking/sessions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId: "local-speaking-skill", prompt, examType: null }) });
+      const created = await fetch("/api/speaking/sessions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId, prompt, examType }) });
       const session = await created.json() as { id?: string; error?: string };
       if (!created.ok || !session.id) throw new Error(session.error ?? "Session failed");
       const form = new FormData(); form.set("recording", new File([blob], "recording.webm", { type: blob.type || "audio/webm" })); form.set("durationMs", String(durationMs));

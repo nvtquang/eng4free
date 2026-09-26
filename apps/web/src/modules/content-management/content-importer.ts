@@ -3,7 +3,7 @@ import mammoth from "mammoth";
 import { PDFParse } from "pdf-parse";
 import * as XLSX from "xlsx";
 import { and, asc, eq } from "drizzle-orm";
-import { ContentImportApplySchema, type ContentImportApply } from "@english4free/content-schemas";
+import { buildQuestionFromAuthoring, ContentImportApplySchema, parseQuestionTypeLabel, splitAuthoringList, type AuthoredQuestion, type ContentImportApply } from "@english4free/content-schemas";
 import { createDatabase } from "@/db/client";
 import { contentBatches, contentImports, courseUnits, examParts, exams, lessonBlocks, lessons, passages, questions } from "@/db/schema";
 import { saveLocalContentImport, type ImportFileType } from "./local-import-storage";
@@ -65,15 +65,39 @@ export async function applyLessonImport(raw: ContentImportApply) {
   return { lessonId, lessonSlug: input.slug };
 }
 
-type DraftQuestion = { partNumber: number; partTitle: string; skill: "LISTENING" | "READING"; passageTitle?: string; passage?: string; prompt: string; options: Array<{ id: string; text: string }>; correctOptionId: string; explanation: string; tags: string[] };
+type DraftQuestion = { partNumber: number; partTitle: string; skill: "LISTENING" | "READING"; passageTitle?: string; passage?: string; question: AuthoredQuestion; explanation: string; tags: string[] };
 function headerValue(row: Record<string, string>, header: string | undefined) { return header ? row[header]?.trim() ?? "" : ""; }
-function normalizeCorrect(value: string) { const normalized = value.trim().toLowerCase(); const single = /^([a-d])(?:[.)\s].*)?$/u.exec(normalized); return single?.[1] ?? normalized; }
-function parseQuestions(rows: Array<Record<string, string>>, input: Extract<ContentImportApply, { target: "EXAM" }>) {
-  const invalid: string[] = []; const questions = rows.map((row, index): DraftQuestion | null => { const c = input.columns; const prompt = headerValue(row, c.question); const optionValues = [["a", headerValue(row, c.optionA)], ["b", headerValue(row, c.optionB)], ["c", headerValue(row, c.optionC)], ["d", headerValue(row, c.optionD)]] as const; const options = optionValues.filter(([, text]) => text).map(([id, text]) => ({ id, text })); const correctOptionId = normalizeCorrect(headerValue(row, c.correctOption)); const partNumber = Number(headerValue(row, c.partNumber) || input.defaultPartNumber); const rawSkill = (headerValue(row, c.skill) || input.defaultSkill).toUpperCase(); if (!prompt || options.length < 2 || !options.some((option) => option.id === correctOptionId) || !Number.isInteger(partNumber) || partNumber < 1 || partNumber > 7 || !["LISTENING", "READING"].includes(rawSkill)) { invalid.push(`Row ${index + 2}: question, two options, valid correct option, part number and LISTENING/READING skill are required`); return null; } return { partNumber, partTitle: headerValue(row, c.partTitle) || input.defaultPartTitle, skill: rawSkill as "LISTENING" | "READING", passageTitle: headerValue(row, c.passageTitle) || undefined, passage: headerValue(row, c.passage) || undefined, prompt, options, correctOptionId, explanation: headerValue(row, c.explanation) || "Review the source material before continuing.", tags: headerValue(row, c.tags).split(",").map((tag) => tag.trim()).filter(Boolean) }; }).filter((item): item is DraftQuestion => Boolean(item));
+/** "B) the answer" → "b" for single-choice keys typed with their option text. */
+function normalizeCorrect(value: string) { const normalized = value.trim().toLowerCase(); const single = /^([a-f])(?:[.)\s].*)?$/u.exec(normalized); return single?.[1] ?? normalized; }
+/** Each row uses the shared flat authoring format, so imports accept every gradable type the CMS form does. */
+export function parseQuestions(rows: Array<Record<string, string>>, input: Extract<ContentImportApply, { target: "EXAM" }>) {
+  const invalid: string[] = [];
+  const questions = rows.map((row, index): DraftQuestion | null => {
+    const c = input.columns;
+    const rowLabel = `Row ${index + 2}`;
+    const type = parseQuestionTypeLabel(headerValue(row, c.questionType));
+    const partNumber = Number(headerValue(row, c.partNumber) || input.defaultPartNumber);
+    const rawSkill = (headerValue(row, c.skill) || input.defaultSkill).toUpperCase();
+    if (!type) { invalid.push(`${rowLabel}: unknown question type "${headerValue(row, c.questionType)}"`); return null; }
+    if (!Number.isInteger(partNumber) || partNumber < 1 || partNumber > 7 || !["LISTENING", "READING"].includes(rawSkill)) { invalid.push(`${rowLabel}: part number 1–7 and LISTENING/READING skill are required`); return null; }
+    const correct = headerValue(row, c.correctOption);
+    const wordLimit = Number(headerValue(row, c.wordLimit));
+    const built = buildQuestionFromAuthoring({
+      type, prompt: headerValue(row, c.question),
+      options: [c.optionA, c.optionB, c.optionC, c.optionD, c.optionE, c.optionF].map((header) => headerValue(row, header)),
+      correct: type === "MCQ" ? normalizeCorrect(correct) : correct || undefined,
+      acceptedAnswers: headerValue(row, c.acceptedAnswers) || undefined,
+      items: splitAuthoringList(headerValue(row, c.items)),
+      audioText: headerValue(row, c.audioText) || undefined,
+      wordLimit: Number.isInteger(wordLimit) && wordLimit > 0 ? wordLimit : undefined
+    });
+    if (!built.success) { invalid.push(`${rowLabel} (${type}): ${built.error}`); return null; }
+    return { partNumber, partTitle: headerValue(row, c.partTitle) || input.defaultPartTitle, skill: rawSkill as "LISTENING" | "READING", passageTitle: headerValue(row, c.passageTitle) || undefined, passage: headerValue(row, c.passage) || undefined, question: built.data, explanation: headerValue(row, c.explanation) || "Review the source material before continuing.", tags: headerValue(row, c.tags).split(",").map((tag) => tag.trim()).filter(Boolean) };
+  }).filter((item): item is DraftQuestion => Boolean(item));
   if (invalid.length) throw new Error(`Import validation failed. ${invalid.slice(0, 10).join(" ")}`); if (!questions.length) throw new Error("No question rows were found in the selected sheet"); return questions;
 }
 export async function applyExamImport(raw: ContentImportApply) {
   const input = ContentImportApplySchema.parse(raw); if (input.target !== "EXAM") throw new Error("Expected exam mapping"); const item = await findContentImport(input.importId); if (!item) throw new Error("Import not found"); if (item.status === "READY_FOR_REVIEW") return item.result; if (item.status !== "EXTRACTED" || item.extraction.kind !== "SPREADSHEET") throw new Error("This import is not a staged spreadsheet"); const sheet = item.extraction.sheets.find((candidate) => candidate.name === input.sheetName); if (!sheet) throw new Error("Selected spreadsheet sheet was not found"); const allowedHeaders = new Set(sheet.headers); for (const header of Object.values(input.columns)) if (header && !allowedHeaders.has(header)) throw new Error(`Mapped column not found: ${header}`); const draftQuestions = parseQuestions(sheet.rows, input); const db = dbOrThrow(); const examId = randomUUID(); const partByNumber = new Map<number, string>(); const passageByKey = new Map<string, string>();
-  await db.transaction(async (tx) => { await tx.insert(exams).values({ id: examId, slug: input.slug, title: input.title, type: input.type, mode: input.mode, durationSeconds: input.durationSeconds, contentBatchId: item.contentBatchId, status: "DRAFT" }); for (const question of draftQuestions) { let partId = partByNumber.get(question.partNumber); if (!partId) { partId = randomUUID(); partByNumber.set(question.partNumber, partId); await tx.insert(examParts).values({ id: partId, examId, partNumber: question.partNumber, title: question.partTitle, sortOrder: question.partNumber, skill: question.skill }); } let passageId: string | undefined; if (question.passage) { const key = `${partId}:${question.passageTitle ?? ""}:${question.passage}`; passageId = passageByKey.get(key); if (!passageId) { passageId = randomUUID(); passageByKey.set(key, passageId); await tx.insert(passages).values({ id: passageId, examPartId: partId, title: question.passageTitle ?? null, content: question.passage, sortOrder: passageByKey.size }); } } await tx.insert(questions).values({ id: randomUUID(), examPartId: partId, passageId, schemaVersion: 1, type: "MCQ", content: { prompt: question.prompt, options: question.options }, answer: { correctOptionId: question.correctOptionId }, explanation: question.explanation, tags: question.tags, status: "DRAFT", contentBatchId: item.contentBatchId }); } await tx.update(contentImports).set({ status: "READY_FOR_REVIEW", mapping: input, result: { examId, examSlug: input.slug, partCount: partByNumber.size, questionCount: draftQuestions.length }, updatedAt: new Date() }).where(and(eq(contentImports.id, item.id), eq(contentImports.status, "EXTRACTED"))); });
+  await db.transaction(async (tx) => { await tx.insert(exams).values({ id: examId, slug: input.slug, title: input.title, type: input.type, mode: input.mode, durationSeconds: input.durationSeconds, contentBatchId: item.contentBatchId, status: "DRAFT" }); for (const question of draftQuestions) { let partId = partByNumber.get(question.partNumber); if (!partId) { partId = randomUUID(); partByNumber.set(question.partNumber, partId); await tx.insert(examParts).values({ id: partId, examId, partNumber: question.partNumber, title: question.partTitle, sortOrder: question.partNumber, skill: question.skill }); } let passageId: string | undefined; if (question.passage) { const key = `${partId}:${question.passageTitle ?? ""}:${question.passage}`; passageId = passageByKey.get(key); if (!passageId) { passageId = randomUUID(); passageByKey.set(key, passageId); await tx.insert(passages).values({ id: passageId, examPartId: partId, title: question.passageTitle ?? null, content: question.passage, sortOrder: passageByKey.size }); } } await tx.insert(questions).values({ id: randomUUID(), examPartId: partId, passageId, schemaVersion: 1, type: question.question.type, content: question.question.content, answer: question.question.answer, explanation: question.explanation, tags: question.tags, status: "DRAFT", contentBatchId: item.contentBatchId }); } await tx.update(contentImports).set({ status: "READY_FOR_REVIEW", mapping: input, result: { examId, examSlug: input.slug, partCount: partByNumber.size, questionCount: draftQuestions.length }, updatedAt: new Date() }).where(and(eq(contentImports.id, item.id), eq(contentImports.status, "EXTRACTED"))); });
   return { examId, examSlug: input.slug, partCount: partByNumber.size, questionCount: draftQuestions.length };
 }

@@ -13,6 +13,15 @@ function positiveInteger(value: string | undefined, fallback: number): number {
   return Number.isInteger(parsed) && parsed > 0 ? parsed : fallback;
 }
 
+/** Gemini 3 models think by default; "low" keeps structured feedback well inside the request budget. */
+function configuredThinkingLevel(value: string | undefined): string {
+  const level = value?.trim().toLowerCase();
+  return level === "minimal" || level === "low" || level === "medium" || level === "high" ? level : "low";
+}
+
+/** Transient provider overload; one retry usually succeeds. */
+const retryableStatuses = new Set([500, 502, 503]);
+
 function configuredBaseUrl(value: string | undefined): string {
   return (value?.trim() || "https://generativelanguage.googleapis.com/v1beta").replace(/\/$/u, "");
 }
@@ -28,40 +37,45 @@ export class GeminiProvider implements StructuredAiProvider {
     readonly model: string,
     private readonly apiKey: string,
     private readonly baseUrl = configuredBaseUrl(process.env.GEMINI_API_BASE_URL),
-    private readonly timeoutMs = positiveInteger(process.env.AI_PROVIDER_TIMEOUT_MS, 12_000),
-    private readonly request = fetch
+    private readonly timeoutMs = positiveInteger(process.env.AI_PROVIDER_TIMEOUT_MS, 30_000),
+    private readonly request = fetch,
+    private readonly thinkingLevel = configuredThinkingLevel(process.env.AI_THINKING_LEVEL)
   ) {}
 
   async generateJson(input: StructuredProviderRequest): Promise<StructuredProviderResponse> {
-    let response: Response;
-    try {
-      response = await this.request(`${this.baseUrl}/interactions`, {
-        method: "POST",
-        headers: { "content-type": "application/json", "x-goog-api-key": this.apiKey },
-        body: JSON.stringify({
-          model: this.model,
-          system_instruction: input.systemInstruction,
-          input: input.prompt,
-          generation_config: { temperature: 0.2 },
-          response_format: { type: "text", mime_type: "application/json", schema: input.responseSchema }
-        }),
-        cache: "no-store",
-        signal: AbortSignal.timeout(this.timeoutMs)
-      });
-    } catch {
-      throw new AiProviderUnavailableError();
+    const body = JSON.stringify({
+      model: this.model,
+      system_instruction: input.systemInstruction,
+      input: input.prompt,
+      generation_config: { temperature: 0.2, thinking_level: this.thinkingLevel },
+      response_format: { type: "text", mime_type: "application/json", schema: input.responseSchema }
+    });
+    let response: Response | undefined;
+    for (let attempt = 0; attempt < 2 && (!response || retryableStatuses.has(response.status)); attempt += 1) {
+      try {
+        response = await this.request(`${this.baseUrl}/interactions`, {
+          method: "POST",
+          headers: { "content-type": "application/json", "x-goog-api-key": this.apiKey },
+          body,
+          cache: "no-store",
+          signal: AbortSignal.timeout(this.timeoutMs)
+        });
+      } catch {
+        throw new AiProviderUnavailableError();
+      }
     }
+    if (!response) throw new AiProviderUnavailableError();
 
-    const body = await response.json().catch(() => null) as GeminiResponse | null;
-    if (!response.ok) throw new AiProviderUnavailableError(body?.error?.message || `Gemini request failed (${response.status})`);
-    const text = (body?.output_text ?? body?.steps?.flatMap((step) => step.content ?? []).filter((content) => content.type === "text").map((content) => content.text ?? "").join(" ") ?? "").trim();
+    const result = await response.json().catch(() => null) as GeminiResponse | null;
+    if (!response.ok) throw new AiProviderUnavailableError(result?.error?.message || `Gemini request failed (${response.status})`);
+    const text = (result?.output_text ?? result?.steps?.flatMap((step) => step.content ?? []).filter((content) => content.type === "text").map((content) => content.text ?? "").join(" ") ?? "").trim();
     if (!text) throw new AiProviderUnavailableError("Gemini returned no response text");
     try {
       return {
         value: JSON.parse(text),
         usage: {
-          promptTokens: body?.usage?.total_input_tokens ?? null,
-          responseTokens: body?.usage?.total_output_tokens ?? null
+          promptTokens: result?.usage?.total_input_tokens ?? null,
+          responseTokens: result?.usage?.total_output_tokens ?? null
         }
       };
     } catch {

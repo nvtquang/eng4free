@@ -2,7 +2,34 @@ import type { Locale } from "./i18n";
 
 const examCopy = {
   vi: {
-    localDemo: "Bản demo nội dung gốc chạy local · đáp án được chấm ở máy chủ.",
+    intro: "Đáp án được tự động lưu — bạn có thể tải lại trang và làm tiếp bất cứ lúc nào.",
+    modes: { PRACTICE: "Luyện tập", MINI_TEST: "Mini test", FULL_MOCK: "Thi thử" },
+    skills: { LISTENING: "Nghe", READING: "Đọc", WRITING: "Viết", SPEAKING: "Nói" },
+    estimateTitle: "Điểm quy đổi ước tính",
+    estimateNote: "Ước tính để luyện tập: tỉ lệ đúng được quy đổi sang thang điểm của đề đầy đủ. Không phải điểm chính thức.",
+    estimateTotal: "Tổng",
+    estimateBand: "Band",
+    notCovered: "Không có trong đề",
+    questions: {
+      question: "Câu",
+      points: "điểm",
+      chooseCount: "Chọn {count} đáp án.",
+      trueFalse: { TRUE: "True", FALSE: "False", NOT_GIVEN: "Not Given" },
+      yesNo: { TRUE: "Yes", FALSE: "No", NOT_GIVEN: "Not Given" },
+      blank: "Ô trống",
+      wordLimit: "Không quá {count} từ cho mỗi ô.",
+      chooseMatch: "Chọn…",
+      matchOptions: "Lựa chọn",
+      reorderHint: "Dùng nút mũi tên để sắp xếp lại theo đúng thứ tự.",
+      moveUp: "Chuyển lên",
+      moveDown: "Chuyển xuống",
+      playDictation: "Nghe",
+      dictationPlaceholder: "Gõ lại chính xác những gì bạn nghe…",
+      yourAnswer: "Bạn trả lời",
+      correctAnswer: "Đáp án đúng",
+      noAnswer: "Chưa trả lời",
+      acceptedAnswers: "Chấp nhận"
+    },
     couldNotStart: "Không thể bắt đầu bài thi",
     loading: "Đang tải bài thi…",
     autosaveFailed: "Không thể tự động lưu đáp án",
@@ -24,7 +51,34 @@ const examCopy = {
     history: "Lịch sử bài thi"
   },
   en: {
-    localDemo: "Original local demo · answers are scored on the server.",
+    intro: "Answers save automatically — you can reload the page and continue at any time.",
+    modes: { PRACTICE: "Practice", MINI_TEST: "Mini test", FULL_MOCK: "Mock test" },
+    skills: { LISTENING: "Listening", READING: "Reading", WRITING: "Writing", SPEAKING: "Speaking" },
+    estimateTitle: "Estimated scaled score",
+    estimateNote: "Practice estimate: your accuracy is projected onto the full-length test scale. This is not an official score.",
+    estimateTotal: "Total",
+    estimateBand: "Band",
+    notCovered: "Not in this test",
+    questions: {
+      question: "Question",
+      points: "marks",
+      chooseCount: "Choose {count} answers.",
+      trueFalse: { TRUE: "True", FALSE: "False", NOT_GIVEN: "Not Given" },
+      yesNo: { TRUE: "Yes", FALSE: "No", NOT_GIVEN: "Not Given" },
+      blank: "Blank",
+      wordLimit: "No more than {count} word(s) for each answer.",
+      chooseMatch: "Choose…",
+      matchOptions: "Options",
+      reorderHint: "Use the arrow buttons to put the items in the correct order.",
+      moveUp: "Move up",
+      moveDown: "Move down",
+      playDictation: "Listen",
+      dictationPlaceholder: "Type exactly what you hear…",
+      yourAnswer: "Your answer",
+      correctAnswer: "Correct answer",
+      noAnswer: "Not answered",
+      acceptedAnswers: "Accepted"
+    },
     couldNotStart: "Could not start exam",
     loading: "Loading exam…",
     autosaveFailed: "Autosave failed",
@@ -49,3 +103,5 @@ const examCopy = {
 
 export type ExamCopy = (typeof examCopy)[Locale];
 export function getExamCopy(locale: Locale): ExamCopy { return examCopy[locale]; }
+export function examModeLabel(copy: ExamCopy, mode: string): string { return (copy.modes as Record<string, string>)[mode] ?? mode; }
+export function examSkillLabel(copy: ExamCopy, skill: string | null): string { return skill ? (copy.skills as Record<string, string>)[skill] ?? skill : ""; }

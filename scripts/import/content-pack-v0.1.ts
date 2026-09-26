@@ -4,7 +4,7 @@ import { resolve } from "node:path";
 import { drizzle } from "drizzle-orm/postgres-js";
 import { and, eq, isNull } from "drizzle-orm";
 import postgres from "postgres";
-import { z } from "@english4free/content-schemas";
+import { buildQuestionFromAuthoring, z, type AuthoredQuestion } from "@english4free/content-schemas";
 import { contentBatches, courseLevels, courseUnits, courses, examParts, exams, lessonBlocks, lessons, passages, questions, vocabulary } from "../../apps/web/src/db/schema";
 
 const root = process.cwd();
@@ -58,6 +58,33 @@ const questionContent = (question: SourceQuestion) => {
 };
 const lessonSkill = (value: string) => value.toUpperCase();
 
+/**
+ * Exam questions are classified by the shape of their answer, not their source
+ * label: the pack labels some option questions "matching" and some typed
+ * answers "matching" too. Typed answers become FILL_BLANK; True/False/Not Given
+ * options become TRUE_FALSE; other option questions stay MCQ.
+ */
+const trueFalseLabels = ["true", "false", "not given"];
+function examQuestion(question: SourceQuestion): AuthoredQuestion | null {
+  const accepted = question.answer.accepted;
+  if (accepted?.length) {
+    const prompt = /_{3,}/u.test(question.prompt) ? question.prompt : `${question.prompt}\n___`;
+    const built = buildQuestionFromAuthoring({ type: "FILL_BLANK", prompt, acceptedAnswers: accepted.join("|") });
+    return built.success ? built.data : null;
+  }
+  const index = question.answer.correct_option_index;
+  if (!question.options || index === undefined || index >= question.options.length) return null;
+  const isTrueFalse = question.options.length === 3 && question.options.every((option, position) => option.trim().toLowerCase() === trueFalseLabels[position]);
+  const built = isTrueFalse
+    ? buildQuestionFromAuthoring({ type: "TRUE_FALSE", prompt: question.prompt.replace(/\s*Choose True, False or Not Given\.?$/iu, ""), correct: question.options[index] })
+    : buildQuestionFromAuthoring({ type: "MCQ", prompt: question.prompt, options: question.options, correct: optionIds[index] });
+  return built.success ? built.data : null;
+}
+
+/** The source pack names its exams as engine fixtures; learners see these titles instead. */
+const learnerExamTitles: Record<string, string> = { "toeic-fixture-v01": "TOEIC Practice Set 1 (Parts 1–7)", "ielts-fixture-v01": "IELTS Listening & Reading Practice Set 1" };
+function learnerExamTitle(exam: { slug: string; title: string }): string { return learnerExamTitles[exam.slug] ?? exam.title; }
+
 function loadPack(): SourcePack {
   if (!existsSync(sourcePath)) throw new Error(`Content pack source is missing: ${sourcePath}`);
   const parsed = sourcePackSchema.safeParse(JSON.parse(readFileSync(sourcePath, "utf8")));
@@ -76,8 +103,8 @@ function normalize(pack: SourcePack) {
   for (const block of pack.records.lesson_blocks) lessonBlocksByLesson.set(block.lesson_id, [...(lessonBlocksByLesson.get(block.lesson_id) ?? []), block]);
   const lessonQuestions = pack.records.questions.filter((question) => /^question_(a1|a2|b1|b2|c1|c2)_lesson_[12]$/.test(question.id) && isRunnableMcq(question));
   const lessonQuestionByLesson = new Map(lessonQuestions.map((question) => [question.id.replace(/^question_(.+)_lesson_([12])$/, "lesson_$1_$2"), question]));
-  const runnableExamQuestions = pack.records.exam_parts.flatMap((part) => part.question_ids.map((id) => ({ part, question: questionsById.get(id) }))).filter((entry): entry is { part: SourcePack["records"]["exam_parts"][number]; question: SourceQuestion } => Boolean(entry.question)).filter(({ question }) => isRunnableMcq(question));
-  const unsupportedExamQuestions = pack.records.exam_parts.flatMap((part) => part.question_ids.map((id) => ({ partId: part.id, question: questionsById.get(id) }))).filter((entry): entry is { partId: string; question: SourceQuestion } => Boolean(entry.question)).filter(({ question }) => !isRunnableMcq(question));
+  const runnableExamQuestions = pack.records.exam_parts.flatMap((part) => part.question_ids.map((id) => ({ part, question: questionsById.get(id) }))).filter((entry): entry is { part: SourcePack["records"]["exam_parts"][number]; question: SourceQuestion } => Boolean(entry.question)).filter(({ question }) => examQuestion(question) !== null);
+  const unsupportedExamQuestions = pack.records.exam_parts.flatMap((part) => part.question_ids.map((id) => ({ partId: part.id, question: questionsById.get(id) }))).filter((entry): entry is { partId: string; question: SourceQuestion } => Boolean(entry.question)).filter(({ question }) => examQuestion(question) === null);
   const passagePartId = (sourceId: string) => {
     const toeic = /^passage_toeic-p([3467])$/.exec(sourceId);
     if (toeic) return `exam_part_toeic_${toeic[1]}`;
@@ -100,13 +127,13 @@ function normalize(pack: SourcePack) {
       exams: pack.records.exams.length, examParts: pack.records.exam_parts.length, passages: importedPassages.length, questions: runnableExamQuestions.length
     },
     deferred: {
-      questions: unsupportedExamQuestions.map(({ partId, question }) => ({ id: question.id, sourceQuestionType: question.question_type, examPartId: partId, reason: "The current Question Engine supports deterministic MCQ only." })),
+      questions: unsupportedExamQuestions.map(({ partId, question }) => ({ id: question.id, sourceQuestionType: question.question_type, examPartId: partId, reason: "The answer shape is not supported by the Question Engine." })),
       practiceQuestions: pack.records.questions.filter((question) => !question.id.includes("_lesson_") && !pack.records.exam_parts.some((part) => part.question_ids.includes(question.id))).map((question) => ({ id: question.id, sourceQuestionType: question.question_type, reason: "No generalized practice-bank relationship exists yet." })),
       passages: pack.records.passages.filter((passage) => !passagePartId(passage.id)).map((passage) => ({ id: passage.id, medium: passage.medium, reason: "The current passage table requires an exam part; this CEFR practice passage has no source question group." })),
       pronunciation: pack.records.pronunciation_items.map((item) => ({ id: item.id, itemType: item.item_type, reason: "No pronunciation-content persistence model exists yet; raw source is retained." })),
       media: pack.records.passages.filter((passage) => passage.medium === "audio" && !passage.audio_url).map((passage) => ({ passageId: passage.id, reason: "No audio asset was supplied. Transcript is preserved for future media attachment/browser TTS." }))
     },
-    mappings: { sourceIdStrategy: "Deterministic UUIDv5-like SHA-256 mapping scoped to content-pack-v0.1.", supportedQuestionEngine: "MCQ with correct_option_index", courseUnitSlug: "content-pack-v0.1", exampleBlocks: "Mapped to GRAMMAR rich-text blocks; original English and Vietnamese fields are retained in raw source." }
+    mappings: { sourceIdStrategy: "Deterministic UUIDv5-like SHA-256 mapping scoped to content-pack-v0.1.", supportedQuestionEngine: "Exam questions are classified by answer shape: accepted → FILL_BLANK, True/False/Not Given options → TRUE_FALSE, other options → MCQ.", courseUnitSlug: "content-pack-v0.1", exampleBlocks: "Mapped to GRAMMAR rich-text blocks; original English and Vietnamese fields are retained in raw source." }
   };
   return { batch, questionsById, lessonBlocksByLesson, lessonQuestionByLesson, runnableExamQuestions, importedPassages, passageByPartId, report };
 }
@@ -163,16 +190,16 @@ async function importPack(pack: SourcePack, normalized: ReturnType<typeof normal
         if (existing) await tx.update(vocabulary).set(values).where(eq(vocabulary.id, existing.id));
         else await tx.insert(vocabulary).values({ id: sourceId, ...values });
       }
-      for (const exam of pack.records.exams) await tx.insert(exams).values({ id: uuid(`exam:${exam.id}`), slug: exam.slug, title: exam.title, type: exam.exam_type, mode: "PRACTICE", durationSeconds: exam.exam_type === "TOEIC" ? 1800 : 1200, metadata: { sourcePack: "content-pack-v0.1", sourceMode: exam.mode, durationEstimated: true }, status: toStatus(exam.status), contentBatchId: batchId }).onConflictDoUpdate({ target: exams.id, set: { title: exam.title, mode: "PRACTICE", durationSeconds: exam.exam_type === "TOEIC" ? 1800 : 1200, status: toStatus(exam.status), contentBatchId: batchId, updatedAt: new Date() } });
+      for (const exam of pack.records.exams) await tx.insert(exams).values({ id: uuid(`exam:${exam.id}`), slug: exam.slug, title: learnerExamTitle(exam), type: exam.exam_type, mode: "PRACTICE", durationSeconds: exam.exam_type === "TOEIC" ? 1800 : 1200, metadata: { sourcePack: "content-pack-v0.1", sourceMode: exam.mode, durationEstimated: true }, status: toStatus(exam.status), contentBatchId: batchId }).onConflictDoUpdate({ target: exams.id, set: { title: learnerExamTitle(exam), mode: "PRACTICE", durationSeconds: exam.exam_type === "TOEIC" ? 1800 : 1200, status: toStatus(exam.status), contentBatchId: batchId, updatedAt: new Date() } });
       for (const part of pack.records.exam_parts) {
         const sourcePassage = normalized.passageByPartId.get(part.id);
-        await tx.insert(examParts).values({ id: uuid(`exam-part:${part.id}`), examId: uuid(`exam:${part.exam_id}`), partNumber: part.part_number, title: part.title, sortOrder: part.position, instructions: part.skill === "listening" ? "Listen to the available transcript and choose the best answer." : "Read and choose the best answer.", skill: part.skill.toUpperCase(), metadata: sourcePassage?.medium === "audio" ? { mediaKind: "BROWSER_TTS", playbackText: sourcePassage.transcript ?? sourcePassage.body, playbackLimit: 1, sourceAudioMissing: !sourcePassage.audio_url } : { sourcePack: "content-pack-v0.1" } }).onConflictDoUpdate({ target: examParts.id, set: { title: part.title, sortOrder: part.position, skill: part.skill.toUpperCase() } });
+        await tx.insert(examParts).values({ id: uuid(`exam-part:${part.id}`), examId: uuid(`exam:${part.exam_id}`), partNumber: part.part_number, title: part.title, sortOrder: part.position, instructions: part.skill === "listening" ? "Listen to the recording and answer the questions." : "Read the passage and answer the questions.", skill: part.skill.toUpperCase(), metadata: sourcePassage?.medium === "audio" ? { mediaKind: "BROWSER_TTS", playbackText: sourcePassage.transcript ?? sourcePassage.body, playbackLimit: 1, sourceAudioMissing: !sourcePassage.audio_url } : { sourcePack: "content-pack-v0.1" } }).onConflictDoUpdate({ target: examParts.id, set: { title: part.title, sortOrder: part.position, skill: part.skill.toUpperCase(), instructions: part.skill === "listening" ? "Listen to the recording and answer the questions." : "Read the passage and answer the questions." } });
       }
       for (const passage of normalized.importedPassages) await tx.insert(passages).values({ id: uuid(`passage:${passage.id}`), examPartId: uuid(`exam-part:${passage.partId}`), title: passage.title, content: passage.body, sortOrder: 1, metadata: { medium: passage.medium, transcript: passage.transcript, sourceAudioUrl: passage.audio_url, cefrLevel: passage.cefr_level } }).onConflictDoUpdate({ target: passages.id, set: { title: passage.title, content: passage.body, metadata: { medium: passage.medium, transcript: passage.transcript, sourceAudioUrl: passage.audio_url, cefrLevel: passage.cefr_level } } });
       for (const { part, question } of normalized.runnableExamQuestions) {
-        const adapted = questionContent(question);
+        const adapted = examQuestion(question)!;
         const sourcePassage = normalized.passageByPartId.get(part.id);
-        await tx.insert(questions).values({ id: uuid(`question:${question.id}`), examPartId: uuid(`exam-part:${part.id}`), passageId: sourcePassage ? uuid(`passage:${sourcePassage.id}`) : null, groupKey: `source:${part.id}`, schemaVersion: 1, type: "MCQ", content: adapted.content, answer: adapted.answer, explanation: question.explanation, tags: [...question.tags, "content-pack-v0.1", `source-type:${question.question_type}`], status: toStatus(question.status), contentBatchId: batchId }).onConflictDoUpdate({ target: questions.id, set: { passageId: sourcePassage ? uuid(`passage:${sourcePassage.id}`) : null, content: adapted.content, answer: adapted.answer, explanation: question.explanation, tags: [...question.tags, "content-pack-v0.1", `source-type:${question.question_type}`], status: toStatus(question.status), contentBatchId: batchId, updatedAt: new Date() } });
+        await tx.insert(questions).values({ id: uuid(`question:${question.id}`), examPartId: uuid(`exam-part:${part.id}`), passageId: sourcePassage ? uuid(`passage:${sourcePassage.id}`) : null, groupKey: `source:${part.id}`, schemaVersion: 1, type: adapted.type, content: adapted.content, answer: adapted.answer, explanation: question.explanation, tags: [...question.tags, "content-pack-v0.1", `source-type:${question.question_type}`], status: toStatus(question.status), contentBatchId: batchId }).onConflictDoUpdate({ target: questions.id, set: { passageId: sourcePassage ? uuid(`passage:${sourcePassage.id}`) : null, type: adapted.type, content: adapted.content, answer: adapted.answer, explanation: question.explanation, tags: [...question.tags, "content-pack-v0.1", `source-type:${question.question_type}`], status: toStatus(question.status), contentBatchId: batchId, updatedAt: new Date() } });
       }
     });
     console.log(`Imported Content Pack v${pack.pack_version}: ${normalized.report.imported.lessons} lessons, ${normalized.report.imported.vocabulary} vocabulary cards, ${normalized.report.imported.questions} runnable exam questions.`);
@@ -184,4 +211,4 @@ const pack = loadPack();
 const normalized = normalize(pack);
 if (mode === "normalize" || mode === "import") writeNormalizedReport(normalized.report);
 if (mode === "import") importPack(pack, normalized).catch((error: unknown) => { console.error(error); process.exitCode = 1; });
-else console.log(`Validated Content Pack v${pack.pack_version}. ${normalized.report.imported.questions} of ${pack.records.questions.length} questions are runnable with the current MCQ engine; ${normalized.report.deferred.questions.length} exam questions are deferred.`);
+else console.log(`Validated Content Pack v${pack.pack_version}. ${normalized.report.imported.questions} of ${pack.records.questions.length} questions are runnable by the Question Engine; ${normalized.report.deferred.questions.length} exam questions are deferred.`);
