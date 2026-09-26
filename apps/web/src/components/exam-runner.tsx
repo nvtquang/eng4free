@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { isResponseAnswered, type PublicQuestion, type QuestionResponse } from "@english4free/content-schemas";
 import { questionLabels } from "@/components/questions/numbering";
+import { LimitedAudio } from "@/components/questions/limited-audio";
 import { QuestionInput } from "@/components/questions/question-input";
 import { examModeLabel, examSkillLabel, type ExamCopy } from "@/lib/exam-copy";
 
@@ -15,21 +16,12 @@ type Started = { resumed: boolean; attempt: { id: string; expiresAt: string; ans
 type SaveAnswer = { questionId: string; response: unknown };
 type SubmitResponse = { attempt: { id: string }; error?: string };
 
-function ExamAudio({ copy, text, limit }: { copy: ExamCopy; text: string; limit: number }) {
-  const [plays, setPlays] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  function play() {
-    if (!("speechSynthesis" in window) || plays >= limit) return;
-    const utterance = new SpeechSynthesisUtterance(text);
-    utterance.lang = "en-US";
-    utterance.rate = 0.85;
-    utterance.onend = () => setPlaying(false);
-    utterance.onerror = () => setPlaying(false);
-    setPlaying(true);
-    setPlays((value) => value + 1);
-    window.speechSynthesis.speak(utterance);
-  }
-  return <div className="mt-4 rounded-ui bg-band p-4"><Button disabled={playing || plays >= limit} onClick={play}>{playing ? copy.playing : copy.playAudio + " (" + plays + "/" + limit + ")"}</Button></div>;
+function ExamAudio({ copy, metadata }: { copy: ExamCopy; metadata: Record<string, unknown> }) {
+  const url = typeof metadata.audioUrl === "string" ? metadata.audioUrl : undefined;
+  const text = typeof metadata.playbackText === "string" ? metadata.playbackText : undefined;
+  if (!url && !text) return null;
+  const limit = typeof metadata.playbackLimit === "number" ? metadata.playbackLimit : 1;
+  return <div className="mt-4 rounded-ui bg-band p-4"><LimitedAudio url={url} text={text} limit={limit} rate={0.85} labels={{ play: copy.playAudio, playing: copy.playing, unavailable: copy.questions.audioUnavailable }} /></div>;
 }
 
 export function ExamRunner({ slug, copy }: { slug: string; copy: ExamCopy }) {
@@ -125,7 +117,7 @@ export function ExamRunner({ slug, copy }: { slug: string; copy: ExamCopy }) {
     <nav className="mt-5 flex flex-wrap gap-2">{started.exam.parts.map((part) => <a className="rounded-full bg-band px-3 py-2 text-xs font-bold" href={"#part-" + part.partNumber} key={part.id}>{copy.part} {part.partNumber}</a>)}</nav>
     <div className="mt-8 space-y-8">{started.exam.parts.map((part) => <Card id={"part-" + part.partNumber} key={part.id}>
       <p className="text-sm font-bold text-brand">{copy.part} {part.partNumber} · {examSkillLabel(copy, part.skill)}</p><h2 className="mt-2 font-serif text-3xl font-bold">{part.title}</h2><p className="mt-3 text-muted">{part.instructions}</p>
-      {typeof part.metadata.playbackText === "string" && <ExamAudio copy={copy} text={part.metadata.playbackText} limit={typeof part.metadata.playbackLimit === "number" ? part.metadata.playbackLimit : 1} />}
+      <ExamAudio copy={copy} metadata={part.metadata} />
       {part.passages.map((passage) => <article className="mt-6 rounded-ui bg-band/40 p-5" key={passage.id}><h3 className="font-bold">{passage.title}</h3><p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>)}
       <div className="mt-7 space-y-8">{part.questions.map((question) => <QuestionInput key={question.id} question={question} value={answers[question.id]} disabled={pending} copy={copy.questions} label={labels.get(question.id) ?? ""} onChange={(response) => choose(question.id, response)} />)}</div>
     </Card>)}</div>

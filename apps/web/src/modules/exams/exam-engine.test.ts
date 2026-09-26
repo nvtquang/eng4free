@@ -1,9 +1,22 @@
 import { describe, expect, it } from "vitest";
-import { isAttemptExpired, scoreStoredAnswers } from "./exam-engine";
+import { isAttemptExpired, publicPartMetadata, scoreStoredAnswers } from "./exam-engine";
 import { localExamFixtures } from "../../../../../content/seed/local-exam-pack";
 describe("shared exam engine", () => {
   it("ships all TOEIC parts and IELTS Listening/Reading fixtures", () => { const full = localExamFixtures.find((exam) => exam.mode === "FULL_MOCK"); expect(full?.parts.map((part) => part.partNumber)).toEqual([1, 2, 3, 4, 5, 6, 7]); expect(localExamFixtures.some((exam) => exam.slug === "ielts-listening-demo")).toBe(true); expect(localExamFixtures.some((exam) => exam.slug === "ielts-reading-demo")).toBe(true); });
   it("scores only stored server answers", () => { const mcq = (id: string, correctOptionId: string) => ({ id, type: "MCQ", content: { prompt: "p", options: [{ id: "a", text: "A" }, { id: "b", text: "B" }] }, answer: { correctOptionId }, explanation: "e" }); const scored = scoreStoredAnswers([mcq("q1", "a"), mcq("q2", "b")], [{ questionId: "q1", response: { optionId: "a" } }, { questionId: "q2", response: { optionId: "a" } }]); expect(scored.rawScore).toBe(1); expect(scored.results[0]?.answer).toEqual({ correctOptionId: "a" }); });
   it("sums partial marks across question types", () => { const blank = { id: "f", type: "FILL_BLANK", content: { prompt: "{{1}} and {{2}}" }, answer: { blanks: { "1": ["tea"], "2": ["coffee"] } }, explanation: null }; const tf = { id: "t", type: "TRUE_FALSE", content: { prompt: "s", variant: "TRUE_FALSE_NOT_GIVEN" }, answer: { correct: "NOT_GIVEN" }, explanation: null }; const scored = scoreStoredAnswers([blank, tf], [{ questionId: "f", response: { blanks: { "1": " Tea ", "2": "milk" } } }, { questionId: "t", response: { value: "NOT_GIVEN" } }]); expect(scored.rawScore).toBe(2); expect(scored.results.map((item) => [item.earnedPoints, item.availablePoints])).toEqual([[1, 2], [1, 1]]); });
   it("expires exactly at the deadline", () => { const deadline = new Date("2026-01-01T00:00:00Z"); expect(isAttemptExpired(deadline, deadline)).toBe(true); expect(isAttemptExpired(deadline, new Date("2025-12-31T23:59:59Z"))).toBe(false); });
+  it("never sends generation settings and keeps the script only as a speech fallback", () => {
+    const metadata = { playbackText: "A script with no generated recording.", playbackLimit: 2, audioVoices: { Woman: "en-GB-SoniaNeural" }, audioPauseMs: 900 };
+    expect(publicPartMetadata(metadata)).toEqual({ playbackText: "A script with no generated recording.", playbackLimit: 2 });
+    expect(publicPartMetadata(metadata, { includeTranscript: true })).toMatchObject({ transcript: "A script with no generated recording." });
+    expect(publicPartMetadata({ sourcePack: "v0.1" })).toEqual({ sourcePack: "v0.1" });
+  });
+  it("replaces the script with the committed recording when one exists", () => {
+    const full = localExamFixtures.find((exam) => exam.mode === "FULL_MOCK")!;
+    const conversation = full.parts.find((part) => part.partNumber === 3)!;
+    const metadata = publicPartMetadata(conversation.metadata);
+    expect(metadata.audioUrl).toMatch(/^\/demo-media\/audio\/.+\.mp3$/u);
+    expect(metadata).not.toHaveProperty("playbackText");
+  });
 });

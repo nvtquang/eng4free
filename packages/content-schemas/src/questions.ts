@@ -17,7 +17,9 @@ const Text = z.string().trim().min(1);
 const ChoiceSchema = z.object({ id: z.string().min(1).max(32), text: Text.max(2_000) });
 type Choice = z.infer<typeof ChoiceSchema>;
 const Prompt = Text.max(8_000);
-const Media = { passageId: z.string().uuid().optional(), mediaId: z.string().uuid().optional() };
+/** A picture shown with the question (TOEIC Part 1). Local demo media or an https URL. */
+export const QuestionImageSchema = z.object({ src: z.string().max(500).regex(/^(\/demo-media\/[A-Za-z0-9._/-]+|https:\/\/\S+)$/u, "Image must be a /demo-media/ path or an https URL"), alt: z.string().trim().min(1).max(300) });
+const Media = { passageId: z.string().uuid().optional(), mediaId: z.string().uuid().optional(), image: QuestionImageSchema.optional() };
 
 function uniqueIds(path: string, values: Array<{ id: string }>, context: z.RefinementCtx) {
   if (new Set(values.map((value) => value.id)).size !== values.length) context.addIssue({ code: z.ZodIssueCode.custom, message: `${path} IDs must be unique`, path: [path] });
@@ -45,7 +47,7 @@ export const MatchingContentSchema = z.object({ prompt: Prompt, items: z.array(C
 });
 /** Items are stored in display order; that order must not reveal the answer. */
 export const OrderingContentSchema = z.object({ prompt: Prompt, items: z.array(ChoiceSchema).min(2).max(12), ...Media }).superRefine(({ items }, context) => uniqueIds("items", items, context));
-export const DictationContentSchema = z.object({ prompt: Prompt, playbackText: Text.max(2_000).optional(), mediaId: z.string().uuid().optional(), maxPlays: z.number().int().min(1).max(5).default(3), passageId: z.string().uuid().optional() }).refine((content) => Boolean(content.playbackText || content.mediaId), { message: "Dictation needs an audio asset or playback text", path: ["mediaId"] });
+export const DictationContentSchema = z.object({ prompt: Prompt, playbackText: Text.max(2_000).optional(), mediaId: z.string().uuid().optional(), /** Set by the server when a generated recording exists; playbackText is then withheld. */ audioUrl: z.string().max(500).optional(), maxPlays: z.number().int().min(1).max(5).default(3), passageId: z.string().uuid().optional() }).refine((content) => Boolean(content.playbackText || content.mediaId || content.audioUrl), { message: "Dictation needs an audio asset or playback text", path: ["mediaId"] });
 
 export const McqAnswerSchema = z.object({ correctOptionId: z.string().min(1) });
 export const MultiSelectAnswerSchema = z.object({ correctOptionIds: z.array(z.string().min(1)).min(2).max(6) });

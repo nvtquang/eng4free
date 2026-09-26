@@ -2,6 +2,53 @@
 
 Updated: 2026-09-26
 
+## D2 — Real listening audio and images: PASS
+
+Checked on 2026-09-26.
+
+**Audio generation.** `pnpm content:generate-audio` reads every spoken script in the database: exam part recordings, dictation questions and lesson listening blocks.
+- It synthesises each speaker turn with edge-tts (en-US, en-GB, en-AU and en-CA neural voices) and joins the turns with silent MP3 frames. The join does not use ffmpeg (`modules/media/mp3-frames.ts`).
+- It writes the files to `apps/web/public/demo-media/audio/` together with `manifest.json`. The manifest records the script hash, the voices, the duration, the source row and the generation time.
+- Rerunning the script skips files that are already current. `--check` fails if any script has no audio, `--force` regenerates every file and `--prune` deletes files that are no longer used.
+- Provenance and licence notes are in `public/demo-media/README.md`.
+
+**How the app finds audio.** Files are looked up by a hash of the script (`modules/media/demo-audio.ts`), so content rows need no media ids. The same script resolves to the same committed file on every machine.
+
+**Voice casting.**
+- Speaker labels (`Woman:`, `Man:`, `Receptionist:`) each get a different accent and voice.
+- `metadata.audioVoices` pins a voice to a speaker.
+- TOEIC uses all four accents; IELTS uses British and Australian voices.
+
+**What the learner receives.**
+- While an attempt is running, the learner gets `audioUrl` only. `playbackText` and the dictation script are withheld, which closes the transcript leak noted in D1.
+- The review page after submission adds a replay player and a collapsible transcript.
+- The generation settings (`audioVoices`, `audioVoice`, `audioPauseMs`) are never sent to the client.
+
+**Player.**
+- `components/questions/limited-audio.tsx` enforces the play limit (Practice 2 plays, Mini/Full 1 play) and has no seeking.
+- Browser `speechSynthesis` is used only when a script has no generated file. For example, a question just written in the CMS falls back until the generator is run.
+- Lesson players also fall back to speech when a recording fails to load, including a failure before hydration.
+
+**TOEIC demo content.**
+- Part 1 has a photograph (`public/demo-media/images/toeic-part1-library-shelf.svg`, an original CC0 illustration) and four spoken statements. The answer choices show letters only.
+- Part 2 has a spoken question and three spoken responses.
+- Part 3 is a two-voice conversation.
+- Part 4 is a short talk.
+- The correct answer is no longer always option A.
+- MCQ content accepts an optional `image { src, alt }`.
+
+**Coverage.** `pnpm content:check-audio` reports 13/13 spoken scripts with audio. Every file decodes in Chromium, and the decoded duration matches the manifest.
+
+**Tests.**
+- Unit tests: MP3 frame parsing and joining, script hashing, speaker parsing, manifest lookup, and the public metadata projection.
+- E2E (`e2e/listening-media.spec.ts`):
+  - no script appears in the attempt API for IELTS, dictation or TOEIC
+  - the Part 1 image loads
+  - the limited player plays
+  - the review shows the transcript
+  - lessons fall back to speech when a recording returns 404
+- Full suite: 25/25 E2E passing.
+
 ## D1 — Question Engine question types: PASS
 
 - Seven gradable types share one engine: MCQ, MULTI_SELECT, TRUE_FALSE

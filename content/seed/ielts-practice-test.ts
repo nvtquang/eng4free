@@ -41,7 +41,7 @@ export const ieltsPracticeTest: SeedExam = {
     {
       id: uuid(10), partNumber: 1, title: "Listening Section 1 — Joining a sports centre", skill: "LISTENING",
       instructions: "Listen to a phone call between a receptionist and a caller, then answer Questions 1–10. You can play the recording twice.",
-      metadata: { mediaKind: "BROWSER_TTS", playbackText: listeningTranscript, playbackLimit: 2 },
+      metadata: { mediaKind: "GENERATED_TTS", playbackText: listeningTranscript, playbackLimit: 2, audioVoices: { Receptionist: "en-GB-RyanNeural", Caller: "en-GB-SoniaNeural" } },
       questions: [
         { id: uuid(11), explanation: "The caller spells her surname B-R-E-N-N-A-N; the class runs on Tuesdays and Thursdays at 7.15, and the student fee is £25.", authoring: { type: "FILL_BLANK", wordLimit: 2, prompt: "Complete the form. Write NO MORE THAN TWO WORDS AND/OR A NUMBER for each answer.\n\nSurname: ___\nClass days: Tuesdays and ___\nStart time: ___ p.m.\nStudent fee per month: £___", acceptedAnswers: "Brennan; Thursdays | Thursday; 7.15 | 7:15 | seven fifteen; 25 | twenty-five | twenty five" } },
         { id: uuid(12), explanation: "Members need a towel and a padlock for the lockers. Goggles are optional.", authoring: { type: "MULTI_SELECT", prompt: "Which TWO things must members bring to the class?", options: ["goggles", "a towel", "a padlock", "a water bottle", "a swimming certificate"], correct: "B, C" } },

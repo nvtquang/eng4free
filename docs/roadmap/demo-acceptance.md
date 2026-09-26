@@ -64,7 +64,7 @@ mục tiêu: 8–10 phút.
 | # | Bước | Tiêu chí đạt | Hiện tại | Giai đoạn |
 |---|---|---|---|---|
 | B1 | Mở `/toeic` | Danh mục gọn, chỉ có đề thật, nhãn tiếng Việt, nhóm theo Part/Mini/Full | ⚠️ Đã sạch dữ liệu rác, nhãn đã dịch, tên đề đã đổi; chưa nhóm theo Part/Mini/Full | D7 |
-| B2 | Luyện Part 1 (có ảnh) và Part 3 (hội thoại 2–3 giọng) | Ảnh + audio file thật, phân vai rõ | ❌ Không có ảnh; audio là giọng đọc trình duyệt | D2 |
+| B2 | Luyện Part 1 (có ảnh) và Part 3 (hội thoại 2–3 giọng) | Ảnh + audio file thật, phân vai rõ | ✅ Part 1 có ảnh và 4 câu mô tả được đọc; Part 3 là hội thoại nam/nữ khác giọng (D2) | D2 |
 | B3 | Làm Mini test | Đủ số câu hợp lý (≥20), timer, autosave, reload vẫn tiếp tục được | ⚠️ Luồng kỹ thuật đã ổn (timer, autosave, resume) nhưng chỉ 4 câu | D3 |
 | B4 | Nộp bài, xem kết quả | Điểm quy đổi ước tính theo thang TOEIC, phân tích theo Part | ⚠️ Có điểm quy đổi ước tính theo kỹ năng (Listening/Reading/Tổng); chưa phân tích theo Part | D3 |
 | B5 | Mở một câu sai, hỏi AI Tutor | Giải thích theo ngữ cảnh, bám lời giải chính thức; có fallback | ✅ Đã có (cần Gemini key); ⚠️ chưa hỏi tiếp nhiều lượt | D6 |
@@ -77,7 +77,7 @@ mục tiêu: 8–10 phút.
 |---|---|---|---|---|
 | C1 | Mở `/ielts` | Thấy đủ 4 kỹ năng: Listening, Reading, Writing, Speaking | ✅ | — |
 | C2 | Làm Reading có True/False/Not Given, matching, điền từ | Chấm đúng mọi dạng câu | ✅ Đề `ielts-practice-test-1` có TFNG, nối tiêu đề, điền tóm tắt, chọn 2, MCQ; chấm theo điểm từng ô/mục | — |
-| C3 | Làm Listening có audio thật | File audio, nghe tối đa theo quy định, điền form/note | ⚠️ Có điền form, chọn 2, nối; audio vẫn là giọng trình duyệt | D2 |
+| C3 | Làm Listening có audio thật | File audio, nghe tối đa theo quy định, điền form/note | ✅ File MP3 hai giọng (Receptionist/Caller), giới hạn số lượt nghe; transcript chỉ hiện sau khi nộp (D2) | D2 |
 | C4 | Nộp bài | Band Listening/Reading quy đổi theo bảng | ✅ Trang kết quả hiện band ước tính theo từng kỹ năng (quy đổi tỉ lệ đúng sang 40 câu) | — |
 | C5 | Viết Task 2, lưu nháp, nộp, nhận feedback | Feedback theo 4 tiêu chí, có lịch sử bản sửa, không bịa band | ✅ `/ielts/writing` dùng chung luồng nháp → nộp → feedback → lịch sử (cần Gemini key cho feedback) | — |
 | C6 | Speaking Part 2: xem cue card, chuẩn bị 1 phút, nói 2 phút | Có đồng hồ chuẩn bị/nói, transcript + feedback, lưu lịch sử | ⚠️ `/ielts/speaking` đã dùng push-to-talk + transcript + feedback cho Part 1; chưa có Part 2/3 và đồng hồ | D6 |
@@ -133,7 +133,7 @@ Mức độ: **P0** chặn demo · **P1** làm demo kém thuyết phục · **P2
 | DA-01 | P0 | ~~E2E ghi dữ liệu rác vào DB dev, và `test:e2e` chạy `qa:prepare` nên sẽ **xóa sạch** dữ liệu demo~~ ✅ Đã xử lý | 6 bài `e2e-lesson-*`, 14 đề `e2e-exam-*`/`csv-import-*` đang PUBLISHED; Playwright dùng chung `DATABASE_URL` | Tách DB `english4free_e2e` cho E2E; thêm `pnpm demo:prepare` cho DB demo | D0-fix |
 | DA-02 | P0 | ~~Nút “Làm bài kiểm tra xếp lớp” là link giả~~ ✅ Tạm xử lý: nút đổi thành “Luyện thi TOEIC & IELTS”; placement test làm ở D4 | `app/page.tsx` trỏ `/learn` | Làm placement test; trước đó ẩn nút | D4 |
 | DA-03 | P0 | ~~Question Engine chỉ chấm MCQ~~ ✅ Đã xử lý ở D1 | 96/96 câu là MCQ; content pack bỏ qua các câu `fill_in`/`matching` | Thêm FILL_BLANK, TRUE_FALSE(+NG), MULTI_SELECT, MATCHING, ORDERING, DICTATION | D1 |
-| DA-04 | P0 | Không có file audio/ảnh | Listening và exam dùng `speechSynthesis` | Sinh audio TTS nhiều giọng + ảnh Part 1, lưu `public/demo-media` | D2 |
+| DA-04 | P0 | ~~Không có file audio/ảnh~~ ✅ Đã xử lý ở D2 | Listening và exam dùng `speechSynthesis` | Sinh audio TTS nhiều giọng + ảnh Part 1, lưu `public/demo-media` | D2 |
 | DA-05 | P0 | ~~IELTS Writing/Speaking có 2 luồng song song, bản dành cho IELTS là bản cũ và không có link~~ ✅ Đã xử lý | `/ielts/writing` dùng `IeltsWritingForm`; `/ielts/speaking` dùng `AudioRecorder` | Dùng chung `WritingWorkspace`/`SpeakingPractice` với đề IELTS; thêm lối vào từ `/ielts` | D6, D7 |
 | DA-06 | P1 | Nội dung mỏng | 24 bài (6 bài rác), Listening chỉ C1–C2, Reading chỉ B1, 1 đề Writing, 1 đề Speaking; Mini test 4 câu, Full mock 7 câu | Theo chỉ tiêu mục 5 | D3 |
 | DA-07 | P1 | Không có onboarding, “Hôm nay học gì”, gộp dữ liệu khách → tài khoản | Không có code liên quan | Xây mới | D4 |

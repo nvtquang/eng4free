@@ -23,6 +23,8 @@
     "seed:local-exam-pack": "tsx scripts/seed/local-exam-pack.ts",
     "seed:ielts-practice": "tsx scripts/seed/ielts-practice-test.ts",
     "seed:content-pack-v01": "pnpm content:pack-v01:import",
+    "content:generate-audio": "tsx scripts/content/generate-audio.ts",
+    "content:check-audio": "tsx scripts/content/generate-audio.ts --check",
     "content:pack-v01:check": "tsx scripts/import/content-pack-v0.1.ts --check",
     "content:pack-v01:normalize": "tsx scripts/import/content-pack-v0.1.ts --normalize",
     "content:pack-v01:import": "tsx scripts/import/content-pack-v0.1.ts --import",

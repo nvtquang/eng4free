@@ -32,6 +32,20 @@ Requirements: Node.js 20+, pnpm 9 and PostgreSQL 15+.
 Open `http://localhost:3000`. Google OAuth is optional; guest learning works
 without Google credentials. AI, cloud speech and S3/R2 are not required.
 
+## Listening audio
+
+Listening recordings are pre-generated and committed under
+`apps/web/public/demo-media/audio/`. After changing or adding a listening script, run:
+
+```bash
+pip install edge-tts           # one-time setup
+pnpm content:generate-audio    # generates only missing or changed files
+pnpm content:check-audio       # fails if any listening script has no audio
+```
+
+If a script has no generated file yet, the app uses browser speech for it. Sources
+and licences are listed in `apps/web/public/demo-media/README.md`.
+
 ## Quality commands
 
 ```bash

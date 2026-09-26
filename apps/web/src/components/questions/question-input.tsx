@@ -1,8 +1,10 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment } from "react";
 import { blankTokens, type PublicQuestion, type QuestionResponse } from "@english4free/content-schemas";
 import { Button } from "@/components/ui/button";
+import { LimitedAudio } from "@/components/questions/limited-audio";
+import { QuestionImage } from "@/components/questions/question-image";
 import type { ExamCopy } from "@/lib/exam-copy";
 
 type Copy = ExamCopy["questions"];
@@ -25,7 +27,11 @@ function asText(value: unknown, key: string): string {
 }
 
 /** Learner input for one question of any gradable type; emits a response in that type's shape. */
-export function QuestionInput({ question, value, onChange, disabled = false, copy, label }: Props) {
+export function QuestionInput(props: Props) {
+  return <><QuestionImage question={props.question} /><QuestionControl {...props} /></>;
+}
+
+function QuestionControl({ question, value, onChange, disabled = false, copy, label }: Props) {
   switch (question.type) {
     case "MCQ": {
       const selected = asText(value, "optionId");
@@ -61,21 +67,11 @@ export function QuestionInput({ question, value, onChange, disabled = false, cop
       return <fieldset><legend className="font-bold"><span className="text-brand">{label}</span> {question.content.prompt}</legend><p className="mt-1 text-sm text-muted">{copy.reorderHint}</p><ol className="mt-3 grid gap-2">{order.map((id, index) => <li className="flex items-center gap-3 rounded-ui border border-line p-3" key={id}><span className="w-6 text-sm font-bold text-muted">{index + 1}.</span><span className="flex-1">{byId.get(id)?.text}</span><Button aria-label={`${copy.moveUp}: ${byId.get(id)?.text}`} className="min-h-8 px-3" disabled={disabled || index === 0} variant="secondary" onClick={() => move(index, -1)}>↑</Button><Button aria-label={`${copy.moveDown}: ${byId.get(id)?.text}`} className="min-h-8 px-3" disabled={disabled || index === order.length - 1} variant="secondary" onClick={() => move(index, 1)}>↓</Button></li>)}</ol></fieldset>;
     }
     case "DICTATION":
-      return <div><p className="font-bold"><span className="text-brand">{label}</span> {question.content.prompt}</p><DictationAudio copy={copy} mediaId={question.content.mediaId} playbackText={question.content.playbackText} maxPlays={question.content.maxPlays} /><textarea aria-label={label} className={fieldClass + " mt-3 min-h-24 w-full leading-7"} disabled={disabled} placeholder={copy.dictationPlaceholder} spellCheck={false} value={asText(value, "text")} onChange={(event) => onChange({ text: event.target.value })} /></div>;
+      return <div><p className="font-bold"><span className="text-brand">{label}</span> {question.content.prompt}</p><DictationAudio copy={copy} mediaId={question.content.mediaId} audioUrl={question.content.audioUrl} playbackText={question.content.playbackText} maxPlays={question.content.maxPlays} /><textarea aria-label={label} className={fieldClass + " mt-3 min-h-24 w-full leading-7"} disabled={disabled} placeholder={copy.dictationPlaceholder} spellCheck={false} value={asText(value, "text")} onChange={(event) => onChange({ text: event.target.value })} /></div>;
   }
 }
 
-function DictationAudio({ copy, mediaId, playbackText, maxPlays }: { copy: Copy; mediaId?: string; playbackText?: string; maxPlays: number }) {
-  const [plays, setPlays] = useState(0);
-  const [playing, setPlaying] = useState(false);
-  if (mediaId) return <audio className="mt-3 w-full" controls preload="metadata" src={`/api/content-media/${mediaId}`} />;
-  function play() {
-    if (!playbackText || !("speechSynthesis" in window) || plays >= maxPlays) return;
-    const utterance = new SpeechSynthesisUtterance(playbackText);
-    utterance.lang = "en-GB"; utterance.rate = 0.85;
-    utterance.onend = () => setPlaying(false); utterance.onerror = () => setPlaying(false);
-    setPlaying(true); setPlays((value) => value + 1);
-    window.speechSynthesis.speak(utterance);
-  }
-  return <Button className="mt-3" disabled={playing || plays >= maxPlays} variant="secondary" onClick={play}>{copy.playDictation} ({plays}/{maxPlays})</Button>;
+function DictationAudio({ copy, mediaId, audioUrl, playbackText, maxPlays }: { copy: Copy; mediaId?: string; audioUrl?: string; playbackText?: string; maxPlays: number }) {
+  const url = mediaId ? `/api/content-media/${mediaId}` : audioUrl;
+  return <div className="mt-3"><LimitedAudio url={url} text={playbackText} limit={maxPlays} lang="en-GB" rate={0.85} variant="secondary" labels={{ play: copy.playDictation, playing: copy.playing, unavailable: copy.audioUnavailable }} /></div>;
 }

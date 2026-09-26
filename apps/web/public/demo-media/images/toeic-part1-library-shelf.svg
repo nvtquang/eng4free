@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 420" width="640" height="420" role="img" aria-labelledby="title">
+  <title id="title">TOEIC Part 1 photograph</title>
+  <!-- English 4 Free original illustration, CC0 1.0. Drawn for the TOEIC Part 1 demo question. -->
+  <rect width="640" height="420" fill="#efe7da"/>
+  <rect y="352" width="640" height="68" fill="#cdb591"/>
+  <rect y="352" width="640" height="6" fill="#b89d77"/>
+  <!-- Reading lamp and table on the left -->
+  <rect x="34" y="262" width="120" height="10" rx="3" fill="#8a6242"/>
+  <rect x="44" y="272" width="8" height="82" fill="#7a553a"/>
+  <rect x="136" y="272" width="8" height="82" fill="#7a553a"/>
+  <rect x="62" y="248" width="44" height="14" rx="2" fill="#3f6fa3"/>
+  <rect x="66" y="238" width="38" height="10" rx="2" fill="#c4553f"/>
+  <path d="M122 262 v-44" stroke="#4a4a4a" stroke-width="4"/>
+  <path d="M104 220 h36 l-8 -22 h-20 z" fill="#e2b34b"/>
+  <!-- Bookcase -->
+  <rect x="318" y="36" width="276" height="318" fill="#7b4f31"/>
+  <rect x="330" y="48" width="252" height="296" fill="#5d3a23"/>
+  <g fill="#7b4f31">
+    <rect x="330" y="112" width="252" height="10"/>
+    <rect x="330" y="186" width="252" height="10"/>
+    <rect x="330" y="260" width="252" height="10"/>
+    <rect x="330" y="334" width="252" height="10"/>
+  </g>
+  <!-- Top shelf -->
+  <g>
+    <rect x="336" y="62" width="16" height="50" fill="#2f5d8a"/><rect x="354" y="58" width="14" height="54" fill="#d0643b"/>
+    <rect x="370" y="66" width="18" height="46" fill="#e0b64a"/><rect x="390" y="60" width="12" height="52" fill="#4c8a5b"/>
+    <rect x="404" y="64" width="20" height="48" fill="#8e4d7a"/><rect x="426" y="58" width="14" height="54" fill="#2f5d8a"/>
+    <rect x="442" y="68" width="16" height="44" fill="#c9c2b3"/><rect x="460" y="60" width="18" height="52" fill="#d0643b"/>
+    <rect x="480" y="64" width="14" height="48" fill="#4c8a5b"/><rect x="496" y="58" width="20" height="54" fill="#e0b64a"/>
+    <rect x="518" y="66" width="16" height="46" fill="#3f6fa3"/><rect x="536" y="60" width="14" height="52" fill="#8e4d7a"/>
+    <rect x="552" y="64" width="24" height="48" fill="#c4553f"/>
+  </g>
+  <!-- Second shelf, with the gap the book is going into -->
+  <g>
+    <rect x="336" y="134" width="14" height="52" fill="#4c8a5b"/><rect x="352" y="140" width="18" height="46" fill="#e0b64a"/>
+    <rect x="394" y="136" width="16" height="50" fill="#2f5d8a"/><rect x="412" y="132" width="14" height="54" fill="#c4553f"/>
+    <rect x="428" y="140" width="20" height="46" fill="#8e4d7a"/><rect x="450" y="134" width="16" height="52" fill="#d0643b"/>
+    <rect x="468" y="138" width="14" height="48" fill="#3f6fa3"/><rect x="484" y="132" width="18" height="54" fill="#4c8a5b"/>
+    <rect x="504" y="140" width="16" height="46" fill="#c9c2b3"/><rect x="522" y="134" width="14" height="52" fill="#e0b64a"/>
+    <rect x="538" y="138" width="20" height="48" fill="#2f5d8a"/><rect x="560" y="142" width="16" height="44" fill="#8e4d7a"/>
+  </g>
+  <!-- Third shelf -->
+  <g>
+    <rect x="336" y="212" width="20" height="48" fill="#c4553f"/><rect x="358" y="206" width="14" height="54" fill="#3f6fa3"/>
+    <rect x="374" y="214" width="16" height="46" fill="#e0b64a"/><rect x="392" y="208" width="18" height="52" fill="#4c8a5b"/>
+    <rect x="412" y="212" width="14" height="48" fill="#8e4d7a"/><rect x="428" y="206" width="20" height="54" fill="#d0643b"/>
+    <rect x="450" y="214" width="16" height="46" fill="#2f5d8a"/><rect x="468" y="208" width="14" height="52" fill="#c9c2b3"/>
+    <rect x="484" y="212" width="18" height="48" fill="#4c8a5b"/><rect x="504" y="206" width="16" height="54" fill="#c4553f"/>
+    <rect x="522" y="214" width="14" height="46" fill="#e0b64a"/><rect x="538" y="208" width="20" height="52" fill="#3f6fa3"/>
+    <rect x="560" y="212" width="16" height="48" fill="#8e4d7a"/>
+  </g>
+  <!-- Bottom shelf -->
+  <g>
+    <rect x="336" y="284" width="16" height="50" fill="#e0b64a"/><rect x="354" y="280" width="20" height="54" fill="#2f5d8a"/>
+    <rect x="376" y="288" width="14" height="46" fill="#d0643b"/><rect x="392" y="282" width="18" height="52" fill="#8e4d7a"/>
+    <rect x="412" y="286" width="16" height="48" fill="#4c8a5b"/><rect x="430" y="280" width="14" height="54" fill="#c9c2b3"/>
+    <rect x="446" y="288" width="20" height="46" fill="#3f6fa3"/><rect x="468" y="282" width="16" height="52" fill="#c4553f"/>
+    <rect x="486" y="286" width="18" height="48" fill="#e0b64a"/><rect x="506" y="280" width="14" height="54" fill="#4c8a5b"/>
+    <rect x="522" y="288" width="16" height="46" fill="#2f5d8a"/><rect x="540" y="282" width="20" height="52" fill="#d0643b"/>
+    <rect x="562" y="286" width="14" height="48" fill="#8e4d7a"/>
+  </g>
+  <!-- Woman -->
+  <g>
+    <!-- legs and shoes -->
+    <rect x="232" y="262" width="16" height="84" rx="6" fill="#2f3b52"/>
+    <rect x="254" y="262" width="16" height="84" rx="6" fill="#2f3b52"/>
+    <rect x="226" y="340" width="26" height="10" rx="5" fill="#2a2a2a"/>
+    <rect x="252" y="340" width="28" height="10" rx="5" fill="#2a2a2a"/>
+    <!-- torso -->
+    <path d="M224 170 q27 -14 54 0 l6 100 h-66 z" fill="#2b8a8a"/>
+    <!-- back arm resting -->
+    <path d="M228 178 q-14 40 -8 80" stroke="#2b8a8a" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <circle cx="220" cy="262" r="8" fill="#c98f6a"/>
+    <!-- neck and head -->
+    <rect x="243" y="146" width="16" height="18" rx="6" fill="#c98f6a"/>
+    <circle cx="252" cy="128" r="24" fill="#c98f6a"/>
+    <path d="M228 128 q0 -34 28 -32 q24 2 22 26 q-12 -12 -30 -10 q-8 8 -12 24 q-8 2 -8 -8 z" fill="#3a2418"/>
+    <path d="M230 124 q-14 22 -2 44 q6 -16 4 -40 z" fill="#3a2418"/>
+    <circle cx="266" cy="128" r="2.5" fill="#2a2a2a"/>
+    <path d="M264 140 q5 3 10 0" stroke="#8a4b37" stroke-width="2" fill="none" stroke-linecap="round"/>
+    <!-- reaching arm, holding the book toward the gap on the second shelf -->
+    <path d="M270 180 q44 -6 92 -26" stroke="#2b8a8a" stroke-width="16" stroke-linecap="round" fill="none"/>
+    <g transform="rotate(-6 382 160)">
+      <rect x="372" y="134" width="20" height="52" fill="#d9483b"/>
+      <rect x="372" y="134" width="4" height="52" fill="#b23a2f"/>
+    </g>
+    <circle cx="368" cy="154" r="9" fill="#c98f6a"/>
+  </g>
+</svg>

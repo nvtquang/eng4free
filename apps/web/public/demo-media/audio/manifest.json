@@ -1,0 +1,140 @@
+{
+  "version": 1,
+  "engine": "edge-tts",
+  "notice": "Generated from original English 4 Free scripts with Microsoft Edge neural text-to-speech (edge-tts). Demo use only; see ../README.md.",
+  "files": {
+    "13f99bdb02d9fb607f43": {
+      "file": "toeic-fixture-v01-p4-13f99bdb.mp3",
+      "spec": "f3fc7d0ebdd7efa9",
+      "voices": [
+        "en-CA-LiamNeural"
+      ],
+      "durationMs": 9096,
+      "source": "exam toeic-fixture-v01 · part 4",
+      "generatedAt": "2026-09-26T03:56:59.605Z"
+    },
+    "2bdad4a93b995098ffc9": {
+      "file": "ielts-skills-drill-dictation-order-dictation-2bdad4a9.mp3",
+      "spec": "f87d7f853e7b2240",
+      "voices": [
+        "en-AU-WilliamMultilingualNeural"
+      ],
+      "durationMs": 4536,
+      "source": "dictation ielts-skills-drill-dictation-order · 91000000-0000-4000-8000-00000000006f",
+      "generatedAt": "2026-09-26T03:57:46.397Z"
+    },
+    "3c32bf1a41e061853217": {
+      "file": "toeic-full-demo-p3-3c32bf1a.mp3",
+      "spec": "33ec0c3ac837bfe3",
+      "voices": [
+        "en-AU-NatashaNeural",
+        "en-CA-LiamNeural"
+      ],
+      "durationMs": 28080,
+      "source": "exam toeic-full-demo · part 3",
+      "generatedAt": "2026-09-26T03:57:37.719Z"
+    },
+    "62d42f37022dff50b062": {
+      "file": "ielts-skills-drill-dictation-order-dictation-62d42f37.mp3",
+      "spec": "f6345f758762aea7",
+      "voices": [
+        "en-AU-WilliamMultilingualNeural"
+      ],
+      "durationMs": 4704,
+      "source": "dictation ielts-skills-drill-dictation-order · 91000000-0000-4000-8000-000000000070",
+      "generatedAt": "2026-09-26T03:57:50.382Z"
+    },
+    "71b0fe6df5efadbaff94": {
+      "file": "ielts-listening-demo-p1-71b0fe6d.mp3",
+      "spec": "9d3f5f018caa9daa",
+      "voices": [
+        "en-AU-WilliamMultilingualNeural"
+      ],
+      "durationMs": 7248,
+      "source": "exam ielts-listening-demo · part 1",
+      "generatedAt": "2026-09-26T03:56:08.443Z"
+    },
+    "8c4e91242d26b8db16cc": {
+      "file": "lesson-precision-8c4e9124.mp3",
+      "spec": "11c05f277c5c9c91",
+      "voices": [
+        "en-US-JennyNeural"
+      ],
+      "durationMs": 14976,
+      "source": "lesson precision · A qualified opinion",
+      "generatedAt": "2026-09-26T03:57:56.783Z"
+    },
+    "97791ec2773dac49e357": {
+      "file": "toeic-full-demo-p1-97791ec2.mp3",
+      "spec": "5f1ccf514f3a2c18",
+      "voices": [
+        "en-AU-NatashaNeural"
+      ],
+      "durationMs": 21744,
+      "source": "exam toeic-full-demo · part 1",
+      "generatedAt": "2026-09-26T03:57:13.233Z"
+    },
+    "ad3b69a772c7524bd56f": {
+      "file": "ielts-practice-test-1-p1-ad3b69a7.mp3",
+      "spec": "f500daae00d5e4ab",
+      "voices": [
+        "en-GB-RyanNeural",
+        "en-GB-SoniaNeural"
+      ],
+      "durationMs": 74784,
+      "source": "exam ielts-practice-test-1 · part 1",
+      "generatedAt": "2026-09-26T03:56:54.123Z"
+    },
+    "c63674c5fa89710d14de": {
+      "file": "toeic-full-demo-p2-c63674c5.mp3",
+      "spec": "dc117ca399d6dbf0",
+      "voices": [
+        "en-GB-SoniaNeural",
+        "en-AU-WilliamMultilingualNeural"
+      ],
+      "durationMs": 14328,
+      "source": "exam toeic-full-demo · part 2",
+      "generatedAt": "2026-09-26T03:57:25.800Z"
+    },
+    "d06cca0a1776d35015c5": {
+      "file": "toeic-fixture-v01-p3-d06cca0a.mp3",
+      "spec": "de1372bdf8432aa2",
+      "voices": [
+        "en-AU-NatashaNeural"
+      ],
+      "durationMs": 11520,
+      "source": "exam toeic-fixture-v01 · part 3",
+      "generatedAt": "2026-09-26T03:56:56.979Z"
+    },
+    "e00a2908214e2b9c9b4e": {
+      "file": "lesson-nuance-e00a2908.mp3",
+      "spec": "96de2847d8f0d953",
+      "voices": [
+        "en-US-JennyNeural"
+      ],
+      "durationMs": 12792,
+      "source": "lesson nuance · Team feedback",
+      "generatedAt": "2026-09-26T03:57:53.897Z"
+    },
+    "e70f5f9241091eea7a31": {
+      "file": "toeic-full-demo-p4-e70f5f92.mp3",
+      "spec": "f98ebe089e3e382f",
+      "voices": [
+        "en-AU-NatashaNeural"
+      ],
+      "durationMs": 19872,
+      "source": "exam toeic-full-demo · part 4",
+      "generatedAt": "2026-09-26T03:57:42.907Z"
+    },
+    "eb0db5cc84ef4e1b5f79": {
+      "file": "ielts-fixture-v01-p1-eb0db5cc.mp3",
+      "spec": "842b6235cd4dd4f1",
+      "voices": [
+        "en-GB-SoniaNeural"
+      ],
+      "durationMs": 12096,
+      "source": "exam ielts-fixture-v01 · part 1",
+      "generatedAt": "2026-09-26T03:56:02.817Z"
+    }
+  }
+}
