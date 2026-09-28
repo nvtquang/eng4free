@@ -28,7 +28,14 @@ function asText(value: unknown, key: string): string {
 
 /** Learner input for one question of any gradable type; emits a response in that type's shape. */
 export function QuestionInput(props: Props) {
-  return <><QuestionImage question={props.question} /><QuestionControl {...props} /></>;
+  const { question, copy } = props;
+  const content = question.content as { audioUrl?: string; playbackText?: string; maxPlays?: number; mediaId?: string };
+  const heard = question.type !== "DICTATION" && (content.audioUrl || content.playbackText);
+  return <>
+    <QuestionImage question={question} />
+    {heard && <div className="mb-3"><LimitedAudio url={content.audioUrl} text={content.playbackText} limit={content.maxPlays ?? 1} rate={0.85} variant="secondary" labels={{ play: copy.playDictation, playing: copy.playing, unavailable: copy.audioUnavailable }} /></div>}
+    <QuestionControl {...props} />
+  </>;
 }
 
 function QuestionControl({ question, value, onChange, disabled = false, copy, label }: Props) {

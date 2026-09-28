@@ -1,4 +1,5 @@
 import { SpeakingPractice } from "@/components/speaking-practice";
+import { SkillLessonCards } from "@/components/skill-lesson-list";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getAiSpeakingCopy } from "@/lib/ai-speaking-copy";
 import { getLocale } from "@/lib/i18n";
@@ -20,6 +21,8 @@ export default async function SpeakingPage() {
       <div className="mt-10">
         <SpeakingPractice copy={copy} aiCopy={aiCopy} prompt={prompt} />
       </div>
+      <h2 className="mt-14 font-serif text-3xl font-bold">{copy.lessonsTitle}</h2>
+      <SkillLessonCards locale={locale} skill="SPEAKING" />
     </Section>
   );
 }

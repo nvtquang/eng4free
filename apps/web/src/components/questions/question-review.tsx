@@ -12,10 +12,18 @@ function Row({ label, value, tone }: { label: string; value: string; tone?: stri
   return <div className={`rounded-ui border p-3 text-sm ${tone ?? "border-line"}`}><span className="font-bold">{label}: </span>{value}</div>;
 }
 
+function HeardRecap({ content, copy }: { content: { audioUrl?: string; playbackText?: string }; copy: Copy }) {
+  if (!content.audioUrl && !content.playbackText) return null;
+  return <div className="mt-3 rounded-ui bg-band/40 p-3">
+    {content.audioUrl && <audio className="w-full" controls preload="none" src={content.audioUrl} />}
+    {content.playbackText && <details className={content.audioUrl ? "mt-2" : ""}><summary className="cursor-pointer text-sm font-bold text-brand">{copy.transcript}</summary><p className="mt-2 whitespace-pre-line text-sm leading-6">{content.playbackText}</p></details>}
+  </div>;
+}
+
 /** Shows a submitted answer next to the key, for any gradable type. */
 export function QuestionReview({ question, result, copy, label, correctLabel }: { question: PublicQuestion; result: Result; copy: Copy; label: string; correctLabel: string }) {
   const response = result.response as Record<string, unknown> | null;
-  const header = <><p className="flex flex-wrap items-baseline justify-between gap-2 font-bold"><span><span className="text-brand">{label}</span> {"prompt" in question.content && question.type !== "FILL_BLANK" ? question.content.prompt : ""}</span>{result.availablePoints > 1 && <span className="text-sm text-muted">{result.earnedPoints}/{result.availablePoints} {copy.points}</span>}</p><div className="mt-3"><QuestionImage question={question} /></div></>;
+  const header = <><p className="flex flex-wrap items-baseline justify-between gap-2 font-bold"><span><span className="text-brand">{label}</span> {"prompt" in question.content && question.type !== "FILL_BLANK" ? question.content.prompt : ""}</span>{result.availablePoints > 1 && <span className="text-sm text-muted">{result.earnedPoints}/{result.availablePoints} {copy.points}</span>}</p><div className="mt-3"><QuestionImage question={question} /></div>{question.type !== "DICTATION" && <HeardRecap content={question.content as { audioUrl?: string; playbackText?: string }} copy={copy} />}</>;
   let body: React.ReactNode = null;
   switch (question.type) {
     case "MCQ":

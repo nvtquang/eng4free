@@ -13,7 +13,9 @@ type PublicQuestion = PublicQuestionDefinition & { id: string; passageId: string
 export type ExamAnswerInput = { questionId: string; response: unknown };
 export type StoredExamAnswer = { questionId: string; response: QuestionResponse | null };
 export type QuestionResult = { questionId: string; type: GradableQuestionType; response: QuestionResponse | null; answer: QuestionAnswer; correct: boolean; earnedPoints: number; availablePoints: number; explanation: string | null };
-type PublicPart = { id: string; partNumber: number; title: string; instructions: string | null; skill: string | null; metadata: Record<string, unknown>; passages: Array<{ id: string; title: string | null; content: string }>; questions: PublicQuestion[] };
+/** Listening passages (a TOEIC conversation, an IELTS section) keep their script in `content`; learners get it only after submitting. */
+export type PublicPassage = { id: string; title: string | null; content: string; metadata: Record<string, unknown> };
+type PublicPart = { id: string; partNumber: number; title: string; instructions: string | null; skill: string | null; metadata: Record<string, unknown>; passages: PublicPassage[]; questions: PublicQuestion[] };
 /** totalPoints is the number of marks (a blank or matched item is one mark); attempts store it as totalQuestions. */
 export type PublicExam = { id: string; slug: string; title: string; type: "TOEIC" | "IELTS"; mode: "PRACTICE" | "MINI_TEST" | "FULL_MOCK"; durationSeconds: number; parts: PublicPart[]; totalQuestions: number; totalPoints: number };
 export type ExamAttemptResult = { attempt: { id: string; status: "SUBMITTED" | "EXPIRED"; rawScore: number; totalQuestions: number; submittedAt: Date | null }; results: QuestionResult[] };
@@ -38,11 +40,19 @@ export function publicPartMetadata(metadata: Record<string, unknown>, options: {
   return { ...rest, ...(audioUrl ? { audioUrl } : { playbackText }), ...(options.includeTranscript ? { transcript: playbackText } : {}) };
 }
 
-export function withGeneratedAudio(question: PublicQuestionDefinition): PublicQuestionDefinition {
-  if (question.type !== "DICTATION" || question.content.mediaId || !question.content.playbackText) return question;
-  const audioUrl = demoAudioUrl(question.content.playbackText);
+export function publicPassage(row: { id: string; title: string | null; content: string; metadata: unknown }, options: { includeTranscript?: boolean } = {}): PublicPassage {
+  const metadata = (row.metadata ?? {}) as Record<string, unknown>;
+  if (metadata.kind !== "LISTENING") return { id: row.id, title: row.title, content: row.content, metadata: { image: metadata.image } };
+  return { id: row.id, title: row.title, content: "", metadata: publicPartMetadata({ ...metadata, playbackText: row.content }, options) };
+}
+
+/** Same rule for a question heard on its own (TOEIC Part 1–2) and for dictation: recording, not script. */
+export function withGeneratedAudio(question: PublicQuestionDefinition, options: { includeTranscript?: boolean } = {}): PublicQuestionDefinition {
+  const script = "playbackText" in question.content ? question.content.playbackText : undefined;
+  if (!script || question.content.mediaId) return question;
+  const audioUrl = demoAudioUrl(script);
   if (!audioUrl) return question;
-  return { ...question, content: { ...question.content, playbackText: undefined, audioUrl } };
+  return { ...question, content: { ...question.content, playbackText: options.includeTranscript ? script : undefined, audioUrl } } as PublicQuestionDefinition;
 }
 
 function owner(actor: AttemptActor) {
@@ -80,8 +90,8 @@ export async function getPublicExamBySlug(slug: string, options: { includeTransc
     const questionRows = await db.select({ id: questions.id, type: questions.type, content: questions.content, passageId: questions.passageId }).from(questions).where(and(eq(questions.examPartId, part.id), eq(questions.status, "PUBLISHED"))).orderBy(asc(questions.createdAt));
     return {
       id: part.id, partNumber: part.partNumber, title: part.title, instructions: part.instructions, skill: part.skill, metadata: publicPartMetadata(part.metadata as Record<string, unknown>, { includeTranscript: options.includeTranscripts }),
-      passages: passageRows.map((item) => ({ id: item.id, title: item.title, content: item.content })),
-      questions: questionRows.map((item): PublicQuestion => { const question = withGeneratedAudio(parsePublicQuestion(item)); return { ...question, id: item.id, passageId: item.passageId, points: questionPoints(question) }; })
+      passages: passageRows.map((item) => publicPassage(item, { includeTranscript: options.includeTranscripts })),
+      questions: questionRows.map((item): PublicQuestion => { const question = withGeneratedAudio(parsePublicQuestion(item), { includeTranscript: options.includeTranscripts }); return { ...question, id: item.id, passageId: item.passageId, points: questionPoints(question) }; })
     };
   }));
   const allQuestions = parts.flatMap((part) => part.questions);

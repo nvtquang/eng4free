@@ -8,10 +8,13 @@ import { isResponseAnswered, type PublicQuestion, type QuestionResponse } from "
 import { questionLabels } from "@/components/questions/numbering";
 import { LimitedAudio } from "@/components/questions/limited-audio";
 import { QuestionInput } from "@/components/questions/question-input";
+import { ContentImage, isContentImage } from "@/components/questions/question-image";
+import { groupPartQuestions } from "@/components/questions/part-groups";
 import { examModeLabel, examSkillLabel, type ExamCopy } from "@/lib/exam-copy";
 
 type Question = PublicQuestion & { id: string; passageId: string | null; points: number };
-type Part = { id: string; partNumber: number; title: string; instructions: string | null; skill: string | null; metadata: Record<string, unknown>; passages: Array<{ id: string; title: string | null; content: string }>; questions: Question[] };
+type Part = { id: string; partNumber: number; title: string; instructions: string | null; skill: string | null; metadata: Record<string, unknown>; passages: Passage[]; questions: Question[] };
+type Passage = { id: string; title: string | null; content: string; metadata: Record<string, unknown> };
 type Started = { resumed: boolean; attempt: { id: string; expiresAt: string; answers: Array<{ questionId: string; response: unknown }> }; exam: { title: string; mode: string; parts: Part[]; totalQuestions: number } };
 type SaveAnswer = { questionId: string; response: unknown };
 type SubmitResponse = { attempt: { id: string }; error?: string };
@@ -22,6 +25,12 @@ function ExamAudio({ copy, metadata }: { copy: ExamCopy; metadata: Record<string
   if (!url && !text) return null;
   const limit = typeof metadata.playbackLimit === "number" ? metadata.playbackLimit : 1;
   return <div className="mt-4 rounded-ui bg-band p-4"><LimitedAudio url={url} text={text} limit={limit} rate={0.85} labels={{ play: copy.playAudio, playing: copy.playing, unavailable: copy.questions.audioUnavailable }} /></div>;
+}
+
+function PassageView({ copy, passage }: { copy: ExamCopy; passage: Passage }) {
+  const image = isContentImage(passage.metadata.image) ? passage.metadata.image : null;
+  if (passage.metadata.kind === "LISTENING") return <section className="mt-6 rounded-ui border border-line p-5">{passage.title && <h3 className="font-bold">{passage.title}</h3>}<ExamAudio copy={copy} metadata={passage.metadata} />{image && <div className="mt-4"><ContentImage image={image} /></div>}</section>;
+  return <article className="mt-6 rounded-ui bg-band/40 p-5">{passage.title && <h3 className="font-bold">{passage.title}</h3>}{image && <div className="mt-3"><ContentImage image={image} /></div>}<p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>;
 }
 
 export function ExamRunner({ slug, copy }: { slug: string; copy: ExamCopy }) {
@@ -118,8 +127,11 @@ export function ExamRunner({ slug, copy }: { slug: string; copy: ExamCopy }) {
     <div className="mt-8 space-y-8">{started.exam.parts.map((part) => <Card id={"part-" + part.partNumber} key={part.id}>
       <p className="text-sm font-bold text-brand">{copy.part} {part.partNumber} · {examSkillLabel(copy, part.skill)}</p><h2 className="mt-2 font-serif text-3xl font-bold">{part.title}</h2><p className="mt-3 text-muted">{part.instructions}</p>
       <ExamAudio copy={copy} metadata={part.metadata} />
-      {part.passages.map((passage) => <article className="mt-6 rounded-ui bg-band/40 p-5" key={passage.id}><h3 className="font-bold">{passage.title}</h3><p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>)}
-      <div className="mt-7 space-y-8">{part.questions.map((question) => <QuestionInput key={question.id} question={question} value={answers[question.id]} disabled={pending} copy={copy.questions} label={labels.get(question.id) ?? ""} onChange={(response) => choose(question.id, response)} />)}</div>
+      {(() => {
+        const { loose, groups } = groupPartQuestions(part.passages, part.questions);
+        const inputs = (items: Question[]) => <div className="mt-7 space-y-8">{items.map((question) => <QuestionInput key={question.id} question={question} value={answers[question.id]} disabled={pending} copy={copy.questions} label={labels.get(question.id) ?? ""} onChange={(response) => choose(question.id, response)} />)}</div>;
+        return <>{loose.length > 0 && inputs(loose)}{groups.map(({ passage, questions }) => <div className="mt-8" key={passage.id}><PassageView copy={copy} passage={passage} />{questions.length > 0 && inputs(questions)}</div>)}</>;
+      })()}
     </Card>)}</div>
     {error && <p className="mt-5 text-red-700" role="alert">{error}</p>}
     <Button className="mt-8" disabled={pending} onClick={submit}>{pending ? copy.submitting : copy.submit}</Button>

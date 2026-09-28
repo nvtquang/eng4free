@@ -6,6 +6,8 @@ import { estimateAttempt, tallyBySkill } from "@/modules/scoring/attempt-estimat
 import type { ExamAttemptResult, PublicExam } from "@/modules/exams/exam-engine";
 import { questionLabels } from "@/components/questions/numbering";
 import { QuestionReview } from "@/components/questions/question-review";
+import { ContentImage, isContentImage } from "@/components/questions/question-image";
+import { groupPartQuestions } from "@/components/questions/part-groups";
 
 /** After submitting, learners can replay the recording freely and read the script. */
 function ListeningRecap({ copy, metadata }: { copy: ExamCopy; metadata: Record<string, unknown> }) {
@@ -43,12 +45,20 @@ export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: E
       <p className="text-sm font-bold text-brand">{copy.part} {part.partNumber} · {examSkillLabel(copy, part.skill)}</p>
       <h2 className="mt-2 font-serif text-3xl font-bold">{part.title}</h2>
       <ListeningRecap copy={copy} metadata={part.metadata} />
-      {part.passages.map((passage) => <article className="mt-6 rounded-ui bg-band/40 p-5" key={passage.id}><h3 className="font-bold">{passage.title}</h3><p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>)}
-      <div className="mt-7 space-y-7">{part.questions.map((question) => {
-        const item = review.get(question.id);
-        if (!item) return null;
-        return <QuestionReview key={question.id} question={question} result={item} copy={copy.questions} label={labels.get(question.id) ?? ""} correctLabel={copy.correct} />;
-      })}</div>
+      {(() => {
+        const { loose, groups } = groupPartQuestions(part.passages, part.questions);
+        const reviews = (items: typeof part.questions) => <div className="mt-7 space-y-7">{items.map((question) => {
+          const item = review.get(question.id);
+          if (!item) return null;
+          return <QuestionReview key={question.id} question={question} result={item} copy={copy.questions} label={labels.get(question.id) ?? ""} correctLabel={copy.correct} />;
+        })}</div>;
+        return <>{loose.length > 0 && reviews(loose)}{groups.map(({ passage, questions }) => { const image = isContentImage(passage.metadata.image) ? passage.metadata.image : null; return <div className="mt-8" key={passage.id}>
+          {passage.metadata.kind === "LISTENING"
+            ? <section className="rounded-ui border border-line p-5">{passage.title && <h3 className="font-bold">{passage.title}</h3>}{image && <div className="mt-3"><ContentImage image={image} /></div>}<ListeningRecap copy={copy} metadata={passage.metadata} /></section>
+            : <article className="rounded-ui bg-band/40 p-5">{passage.title && <h3 className="font-bold">{passage.title}</h3>}{image && <div className="mt-3"><ContentImage image={image} /></div>}<p className="mt-3 whitespace-pre-line leading-7">{passage.content}</p></article>}
+          {questions.length > 0 && reviews(questions)}
+        </div>; })}</>;
+      })()}
     </Card>)}</div>
   </div>;
 }

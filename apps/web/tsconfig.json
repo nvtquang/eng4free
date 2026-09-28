@@ -11,7 +11,7 @@
     "module": "esnext",
     "moduleResolution": "bundler",
     "baseUrl": ".",
-    "paths": { "@/*": ["src/*"] },
+    "paths": { "@/*": ["src/*"], "@english4free/content-schemas": ["../../packages/content-schemas/src/index.ts"], "@english4free/scoring-core": ["../../packages/scoring-core/src/index.ts"] },
     "jsx": "preserve",
     "allowJs": false,
     "esModuleInterop": true,
