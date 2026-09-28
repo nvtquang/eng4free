@@ -38,6 +38,9 @@ function run(command: string, args: string[]) {
 ensureDatabase().then(() => {
   console.log(`Running E2E against ${target.hostname}/${database}.`);
   run("pnpm", ["qa:prepare"]);
+  // The E2E database gets content pack D3 published straight away; the demo database keeps it in review.
+  run("pnpm", ["content:d3:import"]);
+  run("pnpm", ["content:d3:publish", "--test-db"]);
   run("pnpm", ["--filter", "@english4free/web", "build"]);
   run("pnpm", ["--filter", "@english4free/web", "exec", "playwright", "test", ...process.argv.slice(2)]);
 }).catch((error: unknown) => { console.error(error instanceof Error ? error.message : error); process.exit(1); });

@@ -21,7 +21,7 @@ test("locale switch renders Vietnamese and English navigation", async ({ page })
 
 test("exam and CMS forms follow Vietnamese and English locale", async ({ page }) => {
   await page.request.post("/api/locale", { data: { locale: "vi" } });
-  await page.goto("/exams/ielts-reading-demo");
+  await page.goto("/exams/ielts-reading-test-1");
   await expect(page.getByRole("button", { name: "Nộp bài" })).toBeVisible();
   await expect(page.getByText("Phần 1", { exact: true }).first()).toBeVisible();
   await page.goto("/admin");
