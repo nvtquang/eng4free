@@ -65,11 +65,11 @@ mục tiêu: 8–10 phút.
 |---|---|---|---|---|
 | B1 | Mở `/toeic` | Danh mục gọn, chỉ có đề thật, nhãn tiếng Việt, nhóm theo Part/Mini/Full | ⚠️ Đã sạch dữ liệu rác, nhãn đã dịch, tên đề đã đổi; chưa nhóm theo Part/Mini/Full | D7 |
 | B2 | Luyện Part 1 (có ảnh) và Part 3 (hội thoại 2–3 giọng) | Ảnh + audio file thật, phân vai rõ | ✅ Part 1 có ảnh và 4 câu mô tả được đọc; Part 3 là hội thoại nam/nữ khác giọng (D2) | D2 |
-| B3 | Làm Mini test | Đủ số câu hợp lý (≥20), timer, autosave, reload vẫn tiếp tục được | ⚠️ Luồng kỹ thuật đã ổn (timer, autosave, resume) nhưng chỉ 4 câu | D3 |
+| B3 | Làm Mini test | Đủ số câu hợp lý (≥20), timer, autosave, reload vẫn tiếp tục được | ✅ TOEIC Mini Test 1: 22 câu, Part 1/2/3/5/7 (D3, chờ duyệt) | D3 |
 | B4 | Nộp bài, xem kết quả | Điểm quy đổi ước tính theo thang TOEIC, phân tích theo Part | ⚠️ Có điểm quy đổi ước tính theo kỹ năng (Listening/Reading/Tổng); chưa phân tích theo Part | D3 |
 | B5 | Mở một câu sai, hỏi AI Tutor | Giải thích theo ngữ cảnh, bám lời giải chính thức; có fallback | ✅ Đã có (cần Gemini key); ⚠️ chưa hỏi tiếp nhiều lượt | D6 |
 | B6 | Xem lịch sử làm đề | Truy cập được từ trang TOEIC và dashboard | ✅ Có nút từ `/toeic` và `/ielts`, mỗi lượt có link xem lại | — |
-| B7 | (Tùy chọn) Full mock | Ít nhất 1 đề đủ 7 Part theo đúng tỉ lệ rút gọn có ghi chú | ⚠️ “Full-format Demo” chỉ có 7 câu | D3 |
+| B7 | (Tùy chọn) Full mock | Ít nhất 1 đề đủ 7 Part theo đúng tỉ lệ rút gọn có ghi chú | ✅ TOEIC Full Mock Test 1: đủ 200 câu, 7 Part, 120 phút (D3, chờ duyệt) | D3 |
 
 ### Kịch bản C — Người luyện IELTS · ~3 phút
 
@@ -135,7 +135,7 @@ Mức độ: **P0** chặn demo · **P1** làm demo kém thuyết phục · **P2
 | DA-03 | P0 | ~~Question Engine chỉ chấm MCQ~~ ✅ Đã xử lý ở D1 | 96/96 câu là MCQ; content pack bỏ qua các câu `fill_in`/`matching` | Thêm FILL_BLANK, TRUE_FALSE(+NG), MULTI_SELECT, MATCHING, ORDERING, DICTATION | D1 |
 | DA-04 | P0 | ~~Không có file audio/ảnh~~ ✅ Đã xử lý ở D2 | Listening và exam dùng `speechSynthesis` | Sinh audio TTS nhiều giọng + ảnh Part 1, lưu `public/demo-media` | D2 |
 | DA-05 | P0 | ~~IELTS Writing/Speaking có 2 luồng song song, bản dành cho IELTS là bản cũ và không có link~~ ✅ Đã xử lý | `/ielts/writing` dùng `IeltsWritingForm`; `/ielts/speaking` dùng `AudioRecorder` | Dùng chung `WritingWorkspace`/`SpeakingPractice` với đề IELTS; thêm lối vào từ `/ielts` | D6, D7 |
-| DA-06 | P1 | Nội dung mỏng | 24 bài (6 bài rác), Listening chỉ C1–C2, Reading chỉ B1, 1 đề Writing, 1 đề Speaking; Mini test 4 câu, Full mock 7 câu | Theo chỉ tiêu mục 5 | D3 |
+| DA-06 | P1 | ~~Nội dung mỏng~~ ✅ D3 đã soạn, đang chờ duyệt ngẫu nhiên rồi publish | 24 bài (6 bài rác), Listening chỉ C1–C2, Reading chỉ B1, 1 đề Writing, 1 đề Speaking; Mini test 4 câu, Full mock 7 câu | Theo chỉ tiêu mục 5 | D3 |
 | DA-07 | P1 | Không có onboarding, “Hôm nay học gì”, gộp dữ liệu khách → tài khoản | Không có code liên quan | Xây mới | D4 |
 | DA-08 | P1 | ~~Trang Ngữ pháp viết cứng 2 chủ đề~~ ✅ Đã xử lý | `grammar/page.tsx` có mảng `topics` cố định | Đọc từ DB, nhóm theo level | D5 |
 | DA-09 | P1 | ~~Câu chữ nội bộ lộ ra cho người học, có chỗ sai sự thật~~ ✅ Đã xử lý | “Dữ liệu được lưu local trong PostgreSQL; chưa sử dụng AI hoặc cloud”, “Luyện viết local”, “Fixture v0.1”, “Speech Service”, “Question Engine, Attempt Engine” | Viết lại toàn bộ microcopy hướng người học | D7 |
@@ -159,20 +159,20 @@ Mức độ: **P0** chặn demo · **P1** làm demo kém thuyết phục · **P2
 
 ## 5. Chỉ tiêu nội dung tối thiểu cho demo
 
-| Loại | Hiện có (bỏ dữ liệu rác) | Mục tiêu |
-|---|---|---|
-| Bài học CEFR | 18 | ≥30, mỗi level ≥5, đủ 4 kỹ năng + ngữ pháp |
-| Chủ đề ngữ pháp | 12 bài | ≥20, mỗi bài ≥8 câu, ≥2 dạng câu |
-| Từ vựng | 138 | ≥600, có từ loại đúng, IPA, ví dụ, nghĩa tiếng Việt |
-| Bài Listening | 2 | ≥6 (A1→C2), có file audio |
-| Bài Reading | 1 | ≥6 (A1→C2) |
-| Đề Writing | 1 + 1 IELTS | ≥6 (2 IELTS Task 1, 2 IELTS Task 2, 2 chung) |
-| Đề Speaking | 1 + 1 IELTS | ≥6 (IELTS Part 1/2/3 + chung) |
-| TOEIC luyện Part | 1 câu/Part | ≥6 câu/Part (Part 3, 4, 6, 7 theo cụm) |
-| TOEIC Mini test | 4 câu | ≥20 câu |
-| TOEIC Full mock rút gọn | 7 câu | ≥50 câu, đủ 7 Part, ghi chú “rút gọn” |
-| IELTS Listening | 1 đề nhỏ | 1 đề ≥20 câu, ≥3 dạng câu |
-| IELTS Reading | 1 đề nhỏ | 1 đề ≥20 câu, có TFNG/matching/điền từ |
+| Loại | Trước D3 (bỏ dữ liệu rác) | Mục tiêu | Sau D3 (content pack `content/packs/d3`) |
+|---|---|---|---|
+| Bài học CEFR (kỹ năng) | 6 | ≥30, mỗi level ≥5, đủ 4 kỹ năng + ngữ pháp | 30: 6 bài cũ + 24 bài D3 (Đọc, Nghe, Nói, Viết × 6 level) |
+| Chủ đề ngữ pháp | 0 (12 bài placeholder) | ≥20, mỗi bài ≥8 câu | 24 chủ đề, 4/level, mỗi chủ đề 8 câu; thay 12 bài placeholder |
+| Từ vựng | 138 (nghĩa không có nguồn) | ≥600, có từ loại đúng, IPA, ví dụ, nghĩa tiếng Việt | 763 từ; nghĩa và IPA từ Wiktionary (CC BY-SA), level từ Words-CEFR / Octanove, ví dụ tự viết |
+| Bài Listening | 2 | ≥6 (A1→C2), có file audio | 8, đều có audio Piper |
+| Bài Reading | 1 | ≥6 (A1→C2) | 7 |
+| Đề Writing | 1 + 1 IELTS | ≥6 | 6 đề IELTS (3 Task 1 có biểu đồ, 3 Task 2) + 1 chung + 8 bài Viết |
+| Đề Speaking | 1 + 1 IELTS | ≥6 | 5 bộ IELTS Part 1/2/3 + 1 chung + 7 bài Nói |
+| TOEIC luyện Part | 1 câu/Part | ≥6 câu/Part | 7 bộ luyện: P1 6 · P2 10 · P3 9 · P4 9 · P5 15 · P6 8 · P7 14 |
+| TOEIC Mini test | 4 câu | ≥20 câu | 22 câu |
+| TOEIC Full mock | 7 câu | ≥50 câu, đủ 7 Part | 200 câu đủ 7 Part (theo yêu cầu đã chốt) |
+| IELTS Listening | 1 đề nhỏ | 1 đề ≥20 câu, ≥3 dạng câu | 1 đề đủ 40 câu, 4 section, 5 dạng câu |
+| IELTS Reading | 1 đề nhỏ | 1 đề ≥20 câu, có TFNG/matching/điền từ | 1 đề đủ 40 câu, 3 bài, 7 dạng câu |
 | Placement test | 0 | 15–20 câu A1→C2 |
 
 ---

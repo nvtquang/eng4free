@@ -2,6 +2,81 @@
 
 Updated: 2026-09-26
 
+## D3 — Content expansion: DRAFTED, IN REVIEW
+
+Drafted on 2026-09-28. The content lives in the pack `content/packs/d3` (typed TypeScript plus JSON). It is imported into the database as DRAFT items in five batches (`lessons`, `grammar`, `vocabulary`, `toeic`, `ielts`), and each batch is set to REVIEW. Nothing reaches learners until a reviewer approves the batch in the CMS and runs `pnpm content:d3:publish`.
+
+**What the pack contains**
+
+| Area | Content |
+| --- | --- |
+| Grammar | 24 topics, four per level from A1 to C2. Each has a form and use explanation with Vietnamese notes, examples, common mistakes of Vietnamese learners, and 8 practice questions. They replace the 12 placeholder grammar lessons from content pack v0.1. |
+| Skill lessons | 24 lessons: Reading, Listening, Speaking and Writing at every level. Listening and speaking lessons include multi-voice recordings. |
+| Vocabulary | 763 words. Levels come from Words-CEFR (A1–B2, MIT) and the Octanove C1/C2 profile (CC BY-SA). Vietnamese meanings and IPA come from English Wiktionary via kaikki.org (CC BY-SA 4.0). Example sentences are original. |
+| TOEIC | Full Mock Test 1 with 200 questions across the 7 parts and 120 minutes. Mini Test 1 with 22 questions. One practice set per part, 71 questions in total. |
+| IELTS | Listening Test 1 (4 sections, 40 marks, 5 question types). Academic Reading Test 1 (3 passages, 40 marks, 7 question types). Six Writing tasks, three of them Task 1 with a figure. Five Speaking sets covering Parts 1–3. |
+| Media | 12 CC0 photographs from Openverse for TOEIC Part 1, with credits. 7 TOEIC graphics and 3 IELTS Task 1 figures drawn from the question data. About 110 audio files. |
+
+**How the quality rules are enforced**
+
+- **Quality gate** (`pnpm content:d3:check`, `scripts/content/d3/quality-gate.ts`). Every import runs it first. It checks for:
+  - placeholder text such as "placeholder", "original-answer", "Example 1 using…", "lorem" or "TODO"
+  - an answer key that is valid for the question type and spread across positions
+  - text of a sensible length
+  - images that exist on disk and carry a licence credit
+  - Speaking sets that have all three parts and Writing Task 1 prompts that have a figure
+  - vocabulary with a sourced meaning, IPA written as /…/, a per-field source and licence, and an example sentence that uses the headword
+- **Vocabulary sources.** `scripts/content/d3/build_vocabulary.py` keeps every Vietnamese translation group that Wiktionary lists.
+  - A reviewer picks the sense a learner needs in `sense-choices.json`, from 254 recorded decisions. The words themselves are always Wiktionary's.
+  - A word is skipped when Wiktionary has no Vietnamese translation for its learner sense (for example *interest*, whose only translation is *lãi*), or when the source has a typo or the entry is vulgar.
+  - Characters that look Latin but are Cyrillic are rejected.
+  - IPA is normalised to dictionary style: /r/, /l/, no tie bars.
+- **Photographs.** Candidates were searched on Openverse with the CC0 filter and chosen by eye. One watermarked photo was rejected. Each Part 1 statement was written from what the photo actually shows.
+- **Blind cross-check** (`pnpm content:d3:crosscheck`). Gemini answers every question from the learner's material without seeing the key. For Part 1 it receives the actual photograph. Its answers are scored by `scoring-core`. Any disagreement is recorded in `content/packs/d3/qa/crosscheck.json` and highlighted in the review sheet.
+- **Review sheet** (`pnpm content:d3:review-sample`). This writes `docs/content/d3-review-sample.md`: a fixed random sample of 15% per batch plus every flagged item, showing exactly what the learner sees, the answer key and the explanation.
+
+**Audio**
+
+- Audio is generated with Piper TTS instead of edge-tts, because the edge-tts terms are unclear.
+  - The voices are VCTK and LibriTTS-R (CC BY 4.0) and cori (public domain).
+  - Each speaker's voice was checked with a pitch probe so that it matches the character's gender.
+  - Speech is paced to learner speed and encoded as 48 kbps mono MP3.
+- New audio features:
+  - Listening passages (TOEIC conversations and talks, IELTS sections) and questions heard on their own (TOEIC Part 1–2) each get their own recording.
+  - The script is withheld from learners until they submit.
+  - The review page offers a replay and the transcript.
+- `pnpm content:qa-audio` measures the speaking rate and compares a Gemini transcription with the script.
+  - It caught answer letters being read wrongly ("(A)" was heard as "PS"). They are now read as "A.".
+  - It caught spelled names being unclear. Letters are now separated by commas.
+  - It caught accented loanwords such as "café" being garbled. Accents are now removed before synthesis.
+
+**Product changes that came with D3**
+
+- Migration `0015`: a `vocabulary.attribution` column and a `practice_prompts` table.
+- `/ielts/writing` and `/ielts/speaking` list the published tasks. Task 1 shows its figure, and Speaking shows Part 1, the cue card and Part 3.
+- `/skills/speaking` and `/skills/writing` list their lessons by level.
+- `/vocabulary` has paging, a link to the source of each word and a licence credit line.
+- `/about` has a "Sources and licences" section that gives the CC BY and CC BY-SA attribution.
+- The exam runner groups each passage or recording with its questions. Listening parts can hold many recordings, and question and passage images carry credits.
+- Lesson options are rotated at import so that answer keys cycle through the positions.
+
+**Publishing**
+
+```
+pnpm content:d3:import                    # quality gate, then DRAFT items and REVIEW batches (idempotent)
+pnpm content:d3:review-sample             # docs/content/d3-review-sample.md
+# CMS /admin → Content batches: REVIEW → APPROVED after the spot check
+pnpm content:d3:publish -- --batch=toeic  # PUBLISHED, and archives the demo content it replaces
+```
+
+Publishing a batch archives what it replaces:
+- **grammar** replaces the v0.1 placeholder grammar lessons and courses;
+- **vocabulary** replaces the unsourced v0.1 and local words;
+- **toeic** replaces the single-question `toeic-part-N-demo` sets, the mini and full demos, and `toeic-fixture-v01`;
+- **ielts** replaces `ielts-fixture-v01` and the one-question demos.
+
+`pnpm test:e2e` imports the pack and publishes it on the E2E database with `--test-db`. That flag is refused on any database whose name is not `*_e2e`, `*_qa` or `*_test`.
+
 ## D2 — Real listening audio and images: PASS
 
 Checked on 2026-09-26.

@@ -31,3 +31,4 @@ fe/node_modules/
 fe/dist/
 fe/
 content/cefr/imports/
+.cache/

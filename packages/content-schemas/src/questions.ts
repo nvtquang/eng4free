@@ -18,8 +18,12 @@ const ChoiceSchema = z.object({ id: z.string().min(1).max(32), text: Text.max(2_
 type Choice = z.infer<typeof ChoiceSchema>;
 const Prompt = Text.max(8_000);
 /** A picture shown with the question (TOEIC Part 1). Local demo media or an https URL. */
-export const QuestionImageSchema = z.object({ src: z.string().max(500).regex(/^(\/demo-media\/[A-Za-z0-9._/-]+|https:\/\/\S+)$/u, "Image must be a /demo-media/ path or an https URL"), alt: z.string().trim().min(1).max(300) });
-const Media = { passageId: z.string().uuid().optional(), mediaId: z.string().uuid().optional(), image: QuestionImageSchema.optional() };
+export const QuestionImageSchema = z.object({ src: z.string().max(500).regex(/^(\/demo-media\/[A-Za-z0-9._/-]+|https:\/\/\S+)$/u, "Image must be a /demo-media/ path or an https URL"), alt: z.string().trim().min(1).max(300), /** Photographer and licence, shown under the picture. */ credit: z.string().trim().max(300).optional() });
+const Media = {
+  passageId: z.string().uuid().optional(), mediaId: z.string().uuid().optional(), image: QuestionImageSchema.optional(),
+  /** Script for a question that is heard on its own (TOEIC Part 1–2). Learners receive `audioUrl` instead once a recording exists. */
+  playbackText: Text.max(4_000).optional(), audioUrl: z.string().max(500).optional(), maxPlays: z.number().int().min(1).max(5).optional()
+};
 
 function uniqueIds(path: string, values: Array<{ id: string }>, context: z.RefinementCtx) {
   if (new Set(values.map((value) => value.id)).size !== values.length) context.addIssue({ code: z.ZodIssueCode.custom, message: `${path} IDs must be unique`, path: [path] });

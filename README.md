@@ -38,13 +38,26 @@ Listening recordings are pre-generated and committed under
 `apps/web/public/demo-media/audio/`. After changing or adding a listening script, run:
 
 ```bash
-pip install edge-tts           # one-time setup
+pip install piper-tts lameenc  # one-time setup (voices download on first run)
 pnpm content:generate-audio    # generates only missing or changed files
 pnpm content:check-audio       # fails if any listening script has no audio
 ```
 
 If a script has no generated file yet, the app uses browser speech for it. Sources
 and licences are listed in `apps/web/public/demo-media/README.md`.
+
+## Content pack D3
+
+The main demo content lives in `content/packs/d3`. It includes CEFR and grammar lessons, 763 sourced vocabulary words, a 200-question TOEIC mock, the TOEIC part practice sets, IELTS tests and IELTS Writing and Speaking tasks.
+
+```bash
+pnpm content:d3:check           # quality gate only
+pnpm content:d3:import          # import as DRAFT; batches go to REVIEW
+pnpm content:d3:review-sample   # write the 15% spot-check sheet
+pnpm content:d3:publish -- --batch=toeic   # after the batch is APPROVED in the CMS
+```
+
+Sources, licences and the review workflow are described in `docs/implementation-status.md` (section D3).
 
 ## Quality commands
 
