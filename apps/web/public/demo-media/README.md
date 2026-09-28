@@ -1,37 +1,47 @@
 # Demo media: sources and licences
 
 Everything in this folder is served as-is from `/demo-media/…` and is committed, so every
-machine plays byte-identical files.
+machine plays and shows byte-identical files.
 
 ## `audio/` — listening recordings
 
-- **Scripts:** original English 4 Free content. They come from the exam, dictation and
-  lesson rows in the database (`exam_parts.metadata.playbackText`,
-  `questions.content.playbackText` and `lesson_blocks.content.playbackText`).
-- **Voices:** Microsoft Edge neural text-to-speech, generated through the open-source
-  [`edge-tts`](https://github.com/rany2/edge-tts) client. The voices are en-US, en-GB,
-  en-AU and en-CA, so TOEIC recordings mix accents the way the real test does.
-- **Speakers:** each speaker turn (`Woman:`, `Man:`, `Receptionist:` …) is synthesised
-  with its own voice. The turns are joined with short silences, with no re-encoding.
-- **Manifest:** `audio/manifest.json` lists, for every file:
-  - the script hash
-  - the voices used
-  - the duration
-  - the content row it was made for
-  - when it was generated
-- **Regenerating:** run `pnpm content:generate-audio`. It skips files that are already
-  current and remakes only scripts that changed. `--check` lists missing audio,
+- **Scripts:** original English 4 Free content: exam parts, listening passages, questions
+  heard on their own (TOEIC Part 1–2), dictation and lesson listening blocks.
+- **Engine:** [Piper](https://github.com/OHF-Voice/piper1-gpl), a local neural TTS.
+  The engine's software licence (GPL-3.0) covers the program, not the audio it produces.
+- **Voices and their licences:**
+
+  | Voice model | Training data | Licence |
+  | --- | --- | --- |
+  | `en_GB-vctk-medium` (speakers p226, p236, p241, p257, p264, p277, p278, p360) | VCTK corpus, University of Edinburgh CSTR | CC BY 4.0 |
+  | `en_US-libritts_r-medium` (speakers 15, 105, 150, 180, 330, 345, 450, 600) | LibriTTS-R | CC BY 4.0 |
+  | `en_GB-cori-high` (narrator) | public-domain LibriVox recordings | public domain |
+
+  Attribution: *Voices trained on the VCTK corpus (Yamagishi et al., University of
+  Edinburgh) and LibriTTS-R (Koizumi et al.), both CC BY 4.0.*
+- **Voice casting:** every speaker turn (`Woman:`, `Man:`, `Receptionist:` …) gets its
+  own voice. Speakers were chosen from a pitch probe of every model speaker, so female and
+  male voices are matched to the script.
+- **Manifest:** `audio/manifest.json` lists, for every file, the script hash, the voices,
+  the duration, the content row it was made for and when it was generated.
+- **QA:** `pnpm content:qa-audio` checks the speaking rate and compares a Gemini
+  transcription of each file with its script. It flags a word error rate above 10%.
+- **Regenerating:** run `pnpm content:generate-audio` (needs `pip install piper-tts
+  lameenc`). It skips files that are already current. `--check` lists missing audio,
   `--force` rebuilds everything and `--prune` deletes unused files.
-- **Licence note:** these files are for the local demo only. Before a public launch,
-  confirm the terms of the TTS service, or regenerate the files with a licensed engine
-  (Azure Speech, Gemini TTS) or with recorded voice actors. Only the manifest and the
-  files would change, because content refers to audio through the script hash.
 
 When no generated file exists for a script (for example, a question just written in
 the CMS), the app falls back to browser `speechSynthesis`.
 
-## `images/` — question pictures
+## `images/` — pictures and figures
 
-| File | Used by | Source / licence |
-| --- | --- | --- |
-| `toeic-part1-library-shelf.svg` | TOEIC Part 1 demo question | Original English 4 Free illustration, released under CC0 1.0 |
+- **`images/toeic/*.jpg`:** CC0 1.0 photographs found through
+  [Openverse](https://openverse.org). The photographer, source page and licence of each
+  photo are recorded in `images/credits.json` and shown under the picture. They were
+  checked by eye and chosen for TOEIC Part 1 statements. One candidate with a watermark
+  was rejected.
+- **`images/toeic/graphics/*.svg`:** English 4 Free original tables and graphics (CC0 1.0).
+  They are drawn from the same data as the questions (`pnpm content:d3:graphics`).
+- **`images/ielts/*.svg`:** English 4 Free original Writing Task 1 figures (CC0 1.0).
+  They use illustrative practice data, not real statistics.
+- **`toeic-part1-library-shelf.svg`:** English 4 Free original illustration (CC0 1.0).

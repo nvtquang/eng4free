@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 278" width="420" height="278" role="img" aria-label="Weekend forecast">
+<rect width="420" height="278" fill="#fcfcfb"/>
+<text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">Weekend forecast</text>
+<rect x="20" y="64" width="380" height="38" fill="#f0efec"/>
+<text x="32" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Day</text>
+<text x="166.11764705882354" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Weather</text>
+<text x="322.5882352941177" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">High</text>
+<line x1="20" x2="400" y1="102" y2="102" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Friday</text>
+<text x="166.11764705882354" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Sunny</text>
+<text x="322.5882352941177" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">27°C</text>
+<line x1="20" x2="400" y1="140" y2="140" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Saturday</text>
+<text x="166.11764705882354" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Heavy rain</text>
+<text x="322.5882352941177" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">22°C</text>
+<line x1="20" x2="400" y1="178" y2="178" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Sunday</text>
+<text x="166.11764705882354" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Cloudy</text>
+<text x="322.5882352941177" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">24°C</text>
+<line x1="20" x2="400" y1="216" y2="216" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Monday</text>
+<text x="166.11764705882354" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Sunny</text>
+<text x="322.5882352941177" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">28°C</text>
+<line x1="20" x2="400" y1="254" y2="254" stroke="#c9c8c3" stroke-width="1"/>
+</svg>

@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 428 278" width="428" height="278" role="img" aria-label="QuickPrint price list (per 100 copies)">
+<rect width="428" height="278" fill="#fcfcfb"/>
+<text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">QuickPrint price list (per 100 copies)</text>
+<rect x="20" y="64" width="388" height="38" fill="#f0efec"/>
+<text x="32" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Service</text>
+<text x="310.875" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Price</text>
+<line x1="20" x2="408" y1="102" y2="102" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Black and white</text>
+<text x="310.875" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">$8</text>
+<line x1="20" x2="408" y1="140" y2="140" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Color, one side</text>
+<text x="310.875" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">$25</text>
+<line x1="20" x2="408" y1="178" y2="178" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Color, double-sided</text>
+<text x="310.875" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">$40</text>
+<line x1="20" x2="408" y1="216" y2="216" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Poster size</text>
+<text x="310.875" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">$60</text>
+<line x1="20" x2="408" y1="254" y2="254" stroke="#c9c8c3" stroke-width="1"/>
+</svg>

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 420 278" width="420" height="278" role="img" aria-label="City walking tour">
+<rect width="420" height="278" fill="#fcfcfb"/>
+<text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">City walking tour</text>
+<rect x="20" y="64" width="380" height="38" fill="#f0efec"/>
+<text x="32" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Stop</text>
+<text x="114.16216216216216" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Place</text>
+<text x="319.5675675675676" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Time</text>
+<line x1="20" x2="400" y1="102" y2="102" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">1</text>
+<text x="114.16216216216216" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Old Town Hall</text>
+<text x="319.5675675675676" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:00</text>
+<line x1="20" x2="400" y1="140" y2="140" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">2</text>
+<text x="114.16216216216216" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Riverside Market</text>
+<text x="319.5675675675676" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:45</text>
+<line x1="20" x2="400" y1="178" y2="178" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">3</text>
+<text x="114.16216216216216" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Cathedral Square</text>
+<text x="319.5675675675676" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">11:30</text>
+<line x1="20" x2="400" y1="216" y2="216" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">4</text>
+<text x="114.16216216216216" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Botanical Garden</text>
+<text x="319.5675675675676" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">12:15</text>
+<line x1="20" x2="400" y1="254" y2="254" stroke="#c9c8c3" stroke-width="1"/>
+</svg>

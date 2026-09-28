@@ -1,140 +1,1225 @@
 {
   "version": 1,
-  "engine": "edge-tts",
-  "notice": "Generated from original English 4 Free scripts with Microsoft Edge neural text-to-speech (edge-tts). Demo use only; see ../README.md.",
+  "engine": "piper",
+  "notice": "Generated from original English 4 Free scripts with Piper TTS. Voices: VCTK and LibriTTS-R (CC BY 4.0), cori (public-domain LibriVox data). See ../README.md.",
   "files": {
+    "09424bb023288e286c86": {
+      "file": "toeic-mini-test-1-p2-q-09424bb0.mp3",
+      "spec": "d56aac5fa9ccceea",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 13536,
+      "source": "question toeic-mini-test-1 · c705802e-f74e-5e8c-987a-2b40cb593d36",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "0d66da2a0bab196a6149": {
+      "file": "toeic-full-mock-1-p1-q-0d66da2a.mp3",
+      "spec": "a7ef744f7bcf951a",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20115,
+      "source": "question toeic-full-mock-1 · cfabe376-7ef1-5847-bc3f-204619f15df6",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "0f8ec873ecaf95f2ab69": {
+      "file": "lesson-speaking-presenting-data-clearly-0f8ec873.mp3",
+      "spec": "5edee218330f367d",
+      "voices": [
+        "en_GB-vctk-medium:p277"
+      ],
+      "durationMs": 56738,
+      "source": "lesson speaking-presenting-data-clearly · Model mini-presentation",
+      "generatedAt": "2026-09-28T02:58:20.354Z"
+    },
+    "11c9ef1085ce9fe97ace": {
+      "file": "toeic-full-mock-1-p3-5-11c9ef10.mp3",
+      "spec": "293bd6d0e923d343",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 36183,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 5",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
     "13f99bdb02d9fb607f43": {
       "file": "toeic-fixture-v01-p4-13f99bdb.mp3",
-      "spec": "f3fc7d0ebdd7efa9",
+      "spec": "281e9e101f1e61f3",
       "voices": [
-        "en-CA-LiamNeural"
+        "en_GB-vctk-medium:p360"
       ],
-      "durationMs": 9096,
+      "durationMs": 9879,
       "source": "exam toeic-fixture-v01 · part 4",
-      "generatedAt": "2026-09-26T03:56:59.605Z"
+      "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "1803273d32a5035a700d": {
+      "file": "toeic-full-mock-1-p3-7-1803273d.mp3",
+      "spec": "7336ffb4a9e0d730",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 30982,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 7",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "197b413808365a865eea": {
+      "file": "toeic-part-2-practice-p2-q-197b4138.mp3",
+      "spec": "3c98e5a903ca5555",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 14093,
+      "source": "question toeic-part-2-practice · 90210270-aca5-5060-8d0e-e62960fa1ee9",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "1ab75e84c78aa4f4424a": {
+      "file": "ielts-listening-test-1-p3-1-1ab75e84.mp3",
+      "spec": "f70955a131935848",
+      "voices": [
+        "en_GB-vctk-medium:p236",
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:105"
+      ],
+      "durationMs": 115245,
+      "source": "exam ielts-listening-test-1 · part 3 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "1b007eb4684e28ea9c96": {
+      "file": "toeic-full-mock-1-p4-2-1b007eb4.mp3",
+      "spec": "c70a346291b82d86",
+      "voices": [
+        "en_US-libritts_r-medium:105"
+      ],
+      "durationMs": 33528,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 2",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "1e2c37bb57f4133f2efc": {
+      "file": "lesson-listening-lecture-urban-heat-1e2c37bb.mp3",
+      "spec": "4924c8d9ddd021a2",
+      "voices": [
+        "en_GB-vctk-medium:p277"
+      ],
+      "durationMs": 84130,
+      "source": "lesson listening-lecture-urban-heat · Lecture: why cities are hotter",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "20e6ba4525036afac29e": {
+      "file": "lesson-listening-radio-interview-gig-work-20e6ba45.mp3",
+      "spec": "9d0e95785aa05f6f",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 93076,
+      "source": "lesson listening-radio-interview-gig-work · Radio interview: the gig economy",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "2234acd1b5faf4aff839": {
+      "file": "toeic-part-1-practice-p1-q-2234acd1.mp3",
+      "spec": "c25ea99994e968a0",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 19743,
+      "source": "question toeic-part-1-practice · 90b5a3a2-4498-5c22-9eac-3d34715fd696",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "2634e6ede777fb672758": {
+      "file": "toeic-part-2-practice-p2-q-2634e6ed.mp3",
+      "spec": "fc9dfba00865c916",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 12700,
+      "source": "question toeic-part-2-practice · cded4f15-d651-5e9a-9d39-3f4ae0d3c8b2",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     },
     "2bdad4a93b995098ffc9": {
       "file": "ielts-skills-drill-dictation-order-dictation-2bdad4a9.mp3",
-      "spec": "f87d7f853e7b2240",
+      "spec": "8a786f432d590db4",
       "voices": [
-        "en-AU-WilliamMultilingualNeural"
+        "en_GB-vctk-medium:p241"
       ],
-      "durationMs": 4536,
+      "durationMs": 4561,
       "source": "dictation ielts-skills-drill-dictation-order · 91000000-0000-4000-8000-00000000006f",
-      "generatedAt": "2026-09-26T03:57:46.397Z"
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "2dc150ecb4364ad14613": {
+      "file": "toeic-full-mock-1-p2-q-2dc150ec.mp3",
+      "spec": "3c1443270c7162a0",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 16008,
+      "source": "question toeic-full-mock-1 · ed0c615d-ce71-523c-a024-ef118fd4eac0",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "2fb085e7ab88919305ce": {
+      "file": "toeic-full-mock-1-p2-q-2fb085e7.mp3",
+      "spec": "36897c6aca810d6f",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 12665,
+      "source": "question toeic-full-mock-1 · f98572ab-f186-59a3-8365-a1b1ed5d7455",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "306035bc38b32a7f2df1": {
+      "file": "toeic-full-mock-1-p2-q-306035bc.mp3",
+      "spec": "de35e2d4a27f6e42",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 14534,
+      "source": "question toeic-full-mock-1 · 2fcbf8d4-ea02-574c-bb1c-f0998c924458",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "3452fbb73501577c3be2": {
+      "file": "toeic-full-mock-1-p3-6-3452fbb7.mp3",
+      "spec": "d6a1c938467c4c24",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 32898,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 6",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "367f9e822f451a817c4d": {
+      "file": "toeic-full-mock-1-p3-4-367f9e82.mp3",
+      "spec": "1e9f3d9d26dff367",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 41544,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 4",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "3bb3583d39ea40c5fadc": {
+      "file": "toeic-full-mock-1-p2-q-3bb3583d.mp3",
+      "spec": "2570d857caa5a865",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 11899,
+      "source": "question toeic-full-mock-1 · 3b68b28c-307b-5717-ae80-bc484ce977f4",
+      "generatedAt": "2026-09-28T03:38:36.551Z"
     },
     "3c32bf1a41e061853217": {
       "file": "toeic-full-demo-p3-3c32bf1a.mp3",
-      "spec": "33ec0c3ac837bfe3",
+      "spec": "4807fb357d0ed30c",
       "voices": [
-        "en-AU-NatashaNeural",
-        "en-CA-LiamNeural"
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
       ],
-      "durationMs": 28080,
+      "durationMs": 23670,
       "source": "exam toeic-full-demo · part 3",
-      "generatedAt": "2026-09-26T03:57:37.719Z"
+      "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "3d5f8a756609fc839fa5": {
+      "file": "toeic-full-mock-1-p2-q-3d5f8a75.mp3",
+      "spec": "aa3d6a158c71482d",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 13745,
+      "source": "question toeic-full-mock-1 · d6fdfaad-4a15-5b10-b1b7-a999fc595ba4",
+      "generatedAt": "2026-09-28T03:38:36.551Z"
+    },
+    "400f1f7c04021ce831f0": {
+      "file": "toeic-full-mock-1-p2-q-400f1f7c.mp3",
+      "spec": "4f30e81d9a546eef",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 14151,
+      "source": "question toeic-full-mock-1 · 20bbb24f-67ba-52f4-bf66-2a951f2f3592",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "40f177183bec279f584a": {
+      "file": "toeic-full-mock-1-p2-q-40f17718.mp3",
+      "spec": "e30d5f1bb9c22353",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 14917,
+      "source": "question toeic-full-mock-1 · b7794623-8056-5997-b3a8-c995d42de66d",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "41d530b6033243ee8dc9": {
+      "file": "toeic-mini-test-1-p1-q-41d530b6.mp3",
+      "spec": "afe1a5df413d0609",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 19418,
+      "source": "question toeic-mini-test-1 · dc9b844b-612e-5514-9438-902d84f96cfd",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "4229602365af210281b4": {
+      "file": "toeic-mini-test-1-p2-q-42296023.mp3",
+      "spec": "5cc8817fb7aac420",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 12758,
+      "source": "question toeic-mini-test-1 · 538113bf-1854-5eac-af7a-fb3a10ddbb11",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "4e3326dd89b3bec57fe7": {
+      "file": "toeic-full-mock-1-p4-4-4e3326dd.mp3",
+      "spec": "fddf183e55b165a4",
+      "voices": [
+        "en_GB-vctk-medium:p241"
+      ],
+      "durationMs": 38625,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 4",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "4e9c362f326f243392f5": {
+      "file": "toeic-part-2-practice-p2-q-4e9c362f.mp3",
+      "spec": "812f70142a724479",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 14255,
+      "source": "question toeic-part-2-practice · f2ef5075-f83c-56b2-9d43-2983fc6e869b",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "5152c77d8436fd544d67": {
+      "file": "toeic-full-mock-1-p3-13-5152c77d.mp3",
+      "spec": "554644858cc13b4f",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 27557,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 13",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "529cf04c7758a0fa481f": {
+      "file": "lesson-speaking-agreeing-and-disagreeing-529cf04c.mp3",
+      "spec": "77aab5d56de238b4",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 36540,
+      "source": "lesson speaking-agreeing-and-disagreeing · Model discussion: should homework be banned?",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "5589bab8e7ea2d52bf85": {
+      "file": "toeic-full-mock-1-p1-q-5589bab8.mp3",
+      "spec": "eda47b43538e7f01",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 18280,
+      "source": "question toeic-full-mock-1 · 4e2c573d-3fe8-5592-bbf2-cf23e1382626",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "55e73392fe07f1e0cdaa": {
+      "file": "toeic-full-mock-1-p4-5-55e73392.mp3",
+      "spec": "a02cdbb841050356",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 36245,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 5",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "56c4713957f59a2d473b": {
+      "file": "toeic-full-mock-1-p3-9-56c47139.mp3",
+      "spec": "9e82211fc134cc4c",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 29585,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 9",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "5baeceb9874b5750b772": {
+      "file": "toeic-full-mock-1-p4-3-5baeceb9.mp3",
+      "spec": "daf8c9a6d9773b60",
+      "voices": [
+        "en_GB-vctk-medium:p257"
+      ],
+      "durationMs": 27259,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 3",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "62b52917d08a5f398ca0": {
+      "file": "toeic-full-mock-1-p2-q-62b52917.mp3",
+      "spec": "0cb387d18093dec9",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 15776,
+      "source": "question toeic-full-mock-1 · cf29cd6a-82f7-5d95-aff6-9b49d69ba762",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
     },
     "62d42f37022dff50b062": {
       "file": "ielts-skills-drill-dictation-order-dictation-62d42f37.mp3",
-      "spec": "f6345f758762aea7",
+      "spec": "7792474cd4698f06",
       "voices": [
-        "en-AU-WilliamMultilingualNeural"
+        "en_GB-vctk-medium:p360"
       ],
-      "durationMs": 4704,
+      "durationMs": 4608,
       "source": "dictation ielts-skills-drill-dictation-order · 91000000-0000-4000-8000-000000000070",
-      "generatedAt": "2026-09-26T03:57:50.382Z"
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "6414245d71f007032b12": {
+      "file": "toeic-part-2-practice-p2-q-6414245d.mp3",
+      "spec": "2d9fb79e4c043411",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 13536,
+      "source": "question toeic-part-2-practice · 6707bee3-6955-543b-a983-1b6d5f010c00",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "67c82498c55430c75cdd": {
+      "file": "toeic-mini-test-1-p3-2-67c82498.mp3",
+      "spec": "0575c1784ac5bf67",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 29902,
+      "source": "exam toeic-mini-test-1 · part 3 · passage 2",
+      "generatedAt": "2026-09-28T03:15:15.151Z"
+    },
+    "6a6adc31c9b4605025e6": {
+      "file": "toeic-full-mock-1-p4-6-6a6adc31.mp3",
+      "spec": "bfa44b7ea070e015",
+      "voices": [
+        "en_GB-vctk-medium:p241"
+      ],
+      "durationMs": 36523,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 6",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "6aa54adeab6bdabf782a": {
+      "file": "toeic-part-2-practice-p2-q-6aa54ade.mp3",
+      "spec": "b5add78ba8903ed4",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 14615,
+      "source": "question toeic-part-2-practice · f9b654db-ad4d-57cd-a208-c3f6a620cdbf",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "6ba795426e4db97ffa53": {
+      "file": "lesson-listening-debate-on-heritage-6ba79542.mp3",
+      "spec": "67b9706476f6fc79",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 83408,
+      "source": "lesson listening-debate-on-heritage · Debate: should old buildings make way for new housing?",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "6bb8ed93e42bf3b0a35c": {
+      "file": "toeic-full-mock-1-p2-q-6bb8ed93.mp3",
+      "spec": "bb53c516a896345d",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 16659,
+      "source": "question toeic-full-mock-1 · 82930491-6a34-548a-b094-0af2d0c95fe4",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "6ed1c78e31f54d32b03d": {
+      "file": "ielts-listening-test-1-p4-1-6ed1c78e.mp3",
+      "spec": "6e6969dd69f77e31",
+      "voices": [
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 133340,
+      "source": "exam ielts-listening-test-1 · part 4 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "6f56c9436e8b9123904c": {
+      "file": "ielts-listening-test-1-p1-1-6f56c943.mp3",
+      "spec": "27841d765b272fd1",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 149840,
+      "source": "exam ielts-listening-test-1 · part 1 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
     },
     "71b0fe6df5efadbaff94": {
       "file": "ielts-listening-demo-p1-71b0fe6d.mp3",
-      "spec": "9d3f5f018caa9daa",
+      "spec": "63feb326974b9ac4",
       "voices": [
-        "en-AU-WilliamMultilingualNeural"
+        "en_GB-vctk-medium:p241"
       ],
-      "durationMs": 7248,
+      "durationMs": 8265,
       "source": "exam ielts-listening-demo · part 1",
-      "generatedAt": "2026-09-26T03:56:08.443Z"
+      "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "71c73f9f0a14288cd3ce": {
+      "file": "toeic-full-mock-1-p4-1-71c73f9f.mp3",
+      "spec": "d83739ef0a866564",
+      "voices": [
+        "en_GB-vctk-medium:p277"
+      ],
+      "durationMs": 43153,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "73f57eb391c655a630b5": {
+      "file": "toeic-part-2-practice-p2-q-73f57eb3.mp3",
+      "spec": "a5470b9826f347d4",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 13779,
+      "source": "question toeic-part-2-practice · 405a87e1-24c2-5d7f-9e4b-07313a1ea650",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "7410ec998b3528275e21": {
+      "file": "lesson-speaking-persuasive-techniques-7410ec99.mp3",
+      "spec": "0d6d53e2430c8bee",
+      "voices": [
+        "en_GB-vctk-medium:p241"
+      ],
+      "durationMs": 45432,
+      "source": "lesson speaking-persuasive-techniques · Model speech (extract)",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "7650e3de68ddd13ef27c": {
+      "file": "toeic-full-mock-1-p2-q-7650e3de.mp3",
+      "spec": "c7a471d7ea2f8398",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 15126,
+      "source": "question toeic-full-mock-1 · a5d44feb-e00c-5322-ba6a-7392bee99992",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "79404d5cc6aa306544aa": {
+      "file": "toeic-full-mock-1-p2-q-79404d5c.mp3",
+      "spec": "c57ad292113ee176",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 14441,
+      "source": "question toeic-full-mock-1 · e0e9259a-7888-5be0-be84-8364f2af9240",
+      "generatedAt": "2026-09-28T03:38:36.555Z"
+    },
+    "7c37368b0a22d3b32b6b": {
+      "file": "toeic-full-mock-1-p1-q-7c37368b.mp3",
+      "spec": "6655047243eea2d2",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20579,
+      "source": "question toeic-full-mock-1 · 572941a1-28e4-5d34-b801-23b67abdae16",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "805f29fdb515c9aaab5c": {
+      "file": "toeic-mini-test-1-p2-q-805f29fd.mp3",
+      "spec": "760f3ebc83d1740b",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 13675,
+      "source": "question toeic-mini-test-1 · d227f1c1-077d-5913-a18e-da2a1ead910e",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "80710ffc65af04aef804": {
+      "file": "lesson-speaking-asking-for-directions-80710ffc.mp3",
+      "spec": "bb9c4e096246785e",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 32751,
+      "source": "lesson speaking-asking-for-directions · Model conversation",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "82c3c0beea00e9bcc830": {
+      "file": "toeic-full-mock-1-p2-q-82c3c0be.mp3",
+      "spec": "16c54cadb7e59251",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 15707,
+      "source": "question toeic-full-mock-1 · 1bed25c9-e3ff-5316-b7b0-3f96202eba40",
+      "generatedAt": "2026-09-28T03:38:36.551Z"
+    },
+    "85a82279c2e3011cce71": {
+      "file": "toeic-full-mock-1-p2-q-85a82279.mp3",
+      "spec": "1c1558f04228854f",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 14302,
+      "source": "question toeic-full-mock-1 · fe475e50-6374-500d-8e9e-4fe7f1c1403f",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "85ef839d5353cc258865": {
+      "file": "toeic-full-mock-1-p4-7-85ef839d.mp3",
+      "spec": "6bc02375ff14d02e",
+      "voices": [
+        "en_GB-vctk-medium:p257"
+      ],
+      "durationMs": 28489,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 7",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "86ae8dc577a00658d5d1": {
+      "file": "toeic-mini-test-1-p3-1-86ae8dc5.mp3",
+      "spec": "afe4a93e88a14717",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 25525,
+      "source": "exam toeic-mini-test-1 · part 3 · passage 1",
+      "generatedAt": "2026-09-28T03:15:15.150Z"
+    },
+    "8b2602a5b8df30d9f32a": {
+      "file": "toeic-part-3-practice-p3-3-8b2602a5.mp3",
+      "spec": "0a545a83651ae1de",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 26988,
+      "source": "exam toeic-part-3-practice · part 3 · passage 3",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
     },
     "8c4e91242d26b8db16cc": {
       "file": "lesson-precision-8c4e9124.mp3",
-      "spec": "11c05f277c5c9c91",
+      "spec": "fe1794fe0dff5107",
       "voices": [
-        "en-US-JennyNeural"
+        "en_US-libritts_r-medium:15"
       ],
-      "durationMs": 14976,
+      "durationMs": 15881,
       "source": "lesson precision · A qualified opinion",
-      "generatedAt": "2026-09-26T03:57:56.783Z"
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "8dc39b70bd40a93d19ec": {
+      "file": "toeic-full-mock-1-p1-q-8dc39b70.mp3",
+      "spec": "cf8dc572e05d44b6",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20683,
+      "source": "question toeic-full-mock-1 · 1c476e53-7c6f-5913-b03c-239a63354e41",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "8fa4bc1db5f4f24afc1d": {
+      "file": "toeic-full-mock-1-p2-q-8fa4bc1d.mp3",
+      "spec": "2a703bda4ce6faaa",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 13071,
+      "source": "question toeic-full-mock-1 · d61b7951-2038-5521-b688-4db2b9b81c05",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "9100c5debf2c2c3d3658": {
+      "file": "toeic-part-2-practice-p2-q-9100c5de.mp3",
+      "spec": "bfdd8f562917e889",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 13663,
+      "source": "question toeic-part-2-practice · 5817621d-bb62-5159-9e8a-5bcf0143a351",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "9191f7e90425ffb5447d": {
+      "file": "toeic-full-mock-1-p2-q-9191f7e9.mp3",
+      "spec": "e1b38587af37a3de",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 14232,
+      "source": "question toeic-full-mock-1 · 7f583ee0-1e6b-5250-b4d1-7fc86a5a8056",
+      "generatedAt": "2026-09-28T03:38:36.555Z"
+    },
+    "92bc303dd04dee4f8db9": {
+      "file": "toeic-full-mock-1-p2-q-92bc303d.mp3",
+      "spec": "464ca2b778dd31dc",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 14569,
+      "source": "question toeic-full-mock-1 · 8e76be48-e5dc-5813-8270-4f8659118e69",
+      "generatedAt": "2026-09-28T03:38:36.555Z"
+    },
+    "942dd27eef11bbfb9f74": {
+      "file": "toeic-mini-test-1-p2-q-942dd27e.mp3",
+      "spec": "18e9dc219845001b",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 14290,
+      "source": "question toeic-mini-test-1 · 0cb2a2c1-f551-5eb2-80b3-ea7f8f9dbad5",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "94545a1984086ab172b5": {
+      "file": "toeic-part-4-practice-p4-3-94545a19.mp3",
+      "spec": "ad2b7c3cb0b2d912",
+      "voices": [
+        "en_GB-vctk-medium:p257"
+      ],
+      "durationMs": 22591,
+      "source": "exam toeic-part-4-practice · part 4 · passage 3",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "94fa1de546107a58ca3d": {
+      "file": "ielts-listening-test-1-p2-1-94fa1de5.mp3",
+      "spec": "3c14e19dc9ca3e62",
+      "voices": [
+        "en_US-libritts_r-medium:330",
+        "en_GB-vctk-medium:p257"
+      ],
+      "durationMs": 107918,
+      "source": "exam ielts-listening-test-1 · part 2 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "96015aa212e51bffeeca": {
+      "file": "toeic-part-2-practice-p2-q-96015aa2.mp3",
+      "spec": "2d1580d7cb7c1825",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 15323,
+      "source": "question toeic-part-2-practice · 42af105f-7161-562f-ae6c-9127041b4157",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     },
     "97791ec2773dac49e357": {
       "file": "toeic-full-demo-p1-97791ec2.mp3",
-      "spec": "5f1ccf514f3a2c18",
+      "spec": "f18d70284d9a4704",
       "voices": [
-        "en-AU-NatashaNeural"
+        "en_GB-cori-high:"
       ],
-      "durationMs": 21744,
+      "durationMs": 24620,
       "source": "exam toeic-full-demo · part 1",
-      "generatedAt": "2026-09-26T03:57:13.233Z"
+      "generatedAt": "2026-09-28T03:38:36.549Z"
+    },
+    "991dc01eb2159dd9af3c": {
+      "file": "toeic-full-mock-1-p3-8-991dc01e.mp3",
+      "spec": "6b7347e9de7c6b1a",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 32166,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 8",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "9969aa9bf069042b1604": {
+      "file": "toeic-mini-test-1-p2-q-9969aa9b.mp3",
+      "spec": "95f68c9a50a4c433",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 14418,
+      "source": "question toeic-mini-test-1 · 08712865-cce2-535b-824d-a45b6ac5be9e",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "9ac88785581e2800099f": {
+      "file": "toeic-full-mock-1-p1-q-9ac88785.mp3",
+      "spec": "3398f056bc2760ed",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20196,
+      "source": "question toeic-full-mock-1 · 1a44e9eb-8f63-5434-9935-c2b8e9308b3e",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "9b9712e59e49dc92ed7a": {
+      "file": "toeic-full-mock-1-p2-q-9b9712e5.mp3",
+      "spec": "b27b6b1d91eab3f8",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 11434,
+      "source": "question toeic-full-mock-1 · f683dde6-5bfc-50a7-a53c-a513a6e699d6",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "9d34f1e23e7cd363d772": {
+      "file": "toeic-full-mock-1-p4-8-9d34f1e2.mp3",
+      "spec": "4930a4fd080c8415",
+      "voices": [
+        "en_US-libritts_r-medium:345"
+      ],
+      "durationMs": 30045,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 8",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "9df0f97bab1a5167f3d3": {
+      "file": "toeic-full-mock-1-p1-q-9df0f97b.mp3",
+      "spec": "2be0c36eef7674d0",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20277,
+      "source": "question toeic-full-mock-1 · 8d0e45f8-6515-53df-a038-26987faf203a",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "a37791fe3d2cba22ba89": {
+      "file": "lesson-speaking-solving-a-problem-together-a37791fe.mp3",
+      "spec": "08f30d45aa617a7a",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 46373,
+      "source": "lesson speaking-solving-a-problem-together · Model discussion: a club with falling membership",
+      "generatedAt": "2026-09-28T02:58:20.354Z"
+    },
+    "a3d077048b505e9bc8dd": {
+      "file": "toeic-full-mock-1-p2-q-a3d07704.mp3",
+      "spec": "7749d27f8e4ea9ba",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 15091,
+      "source": "question toeic-full-mock-1 · 677b7e8e-a838-5658-9a4d-f4615c1b07ce",
+      "generatedAt": "2026-09-28T03:38:36.555Z"
+    },
+    "a7a5c87310c9a1ebb384": {
+      "file": "toeic-part-1-practice-p1-q-a7a5c873.mp3",
+      "spec": "031669a509d85a68",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20753,
+      "source": "question toeic-part-1-practice · f3eaf33d-7c71-54a2-8a07-92928ef0974d",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "aac2ad679d438b7894f6": {
+      "file": "toeic-part-2-practice-p2-q-aac2ad67.mp3",
+      "spec": "2e0f481bca482e8c",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 14731,
+      "source": "question toeic-part-2-practice · 063a98f0-5309-5a7a-9cd4-243132e9b120",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "aca6b80a85c482fb05fa": {
+      "file": "toeic-part-4-practice-p4-2-aca6b80a.mp3",
+      "spec": "440aeaab1a42fa3e",
+      "voices": [
+        "en_US-libritts_r-medium:345"
+      ],
+      "durationMs": 26817,
+      "source": "exam toeic-part-4-practice · part 4 · passage 2",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
     },
     "ad3b69a772c7524bd56f": {
       "file": "ielts-practice-test-1-p1-ad3b69a7.mp3",
-      "spec": "f500daae00d5e4ab",
+      "spec": "8d1acbf8cb40b036",
       "voices": [
-        "en-GB-RyanNeural",
-        "en-GB-SoniaNeural"
+        "en_GB-vctk-medium:p226",
+        "en_GB-vctk-medium:p236"
       ],
-      "durationMs": 74784,
+      "durationMs": 78801,
       "source": "exam ielts-practice-test-1 · part 1",
-      "generatedAt": "2026-09-26T03:56:54.123Z"
+      "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "b0b771033c4ca8f114fb": {
+      "file": "toeic-part-1-practice-p1-q-b0b77103.mp3",
+      "spec": "c14aebda6ad25e78",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 21543,
+      "source": "question toeic-part-1-practice · c237d3fc-7bc9-566a-afc3-02d91682da35",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "b127357c5448cbd235cc": {
+      "file": "toeic-part-1-practice-p1-q-b127357c.mp3",
+      "spec": "4693927fcb7fc828",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 22413,
+      "source": "question toeic-part-1-practice · 532f354b-4ffc-5153-8246-40feee18a54f",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "b4564f56f958529d847c": {
+      "file": "toeic-full-mock-1-p3-10-b4564f56.mp3",
+      "spec": "bd43022e88d262e8",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 35390,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 10",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "b8705a5eced3afa8d026": {
+      "file": "toeic-full-mock-1-p2-q-b8705a5e.mp3",
+      "spec": "b61d63229ac708ab",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 13094,
+      "source": "question toeic-full-mock-1 · 3699a604-a667-5489-9ac5-4ca48818b571",
+      "generatedAt": "2026-09-28T03:38:36.551Z"
+    },
+    "c00c25549f46596b8ea5": {
+      "file": "toeic-full-mock-1-p3-12-c00c2554.mp3",
+      "spec": "d8dffbe469ce8d43",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 27310,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 12",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "c103e225e0adf9302273": {
+      "file": "lesson-listening-ordering-at-a-cafe-c103e225.mp3",
+      "spec": "e497194bae047d02",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 36667,
+      "source": "lesson listening-ordering-at-a-cafe · At the café",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "c3ea636c8a6eccebf191": {
+      "file": "toeic-full-mock-1-p3-2-c3ea636c.mp3",
+      "spec": "52291c9e82b07ff0",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 35739,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 2",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "c4938612284f11323a2d": {
+      "file": "toeic-full-mock-1-p2-q-c4938612.mp3",
+      "spec": "e27e380d1c302db0",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 15033,
+      "source": "question toeic-full-mock-1 · a7b87af4-0dfe-5086-a7eb-d39fd0c0cf29",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "c5250de4096a8725a235": {
+      "file": "toeic-part-1-practice-p1-q-c5250de4.mp3",
+      "spec": "983a1067214d91fa",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20405,
+      "source": "question toeic-part-1-practice · ba630302-1fdd-5598-8547-9ecf7fa95058",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "c534cb75e7136b2895fd": {
+      "file": "toeic-part-1-practice-p1-q-c534cb75.mp3",
+      "spec": "55c53a18bc69f537",
+      "voices": [
+        "en_GB-cori-high:"
+      ],
+      "durationMs": 20625,
+      "source": "question toeic-part-1-practice · f078583e-609c-58e5-8f88-450c2c07141c",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     },
     "c63674c5fa89710d14de": {
       "file": "toeic-full-demo-p2-c63674c5.mp3",
-      "spec": "dc117ca399d6dbf0",
+      "spec": "165aaf40b18fdda5",
       "voices": [
-        "en-GB-SoniaNeural",
-        "en-AU-WilliamMultilingualNeural"
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
       ],
-      "durationMs": 14328,
+      "durationMs": 13435,
       "source": "exam toeic-full-demo · part 2",
-      "generatedAt": "2026-09-26T03:57:25.800Z"
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "c9a07436f0caf402f429": {
+      "file": "toeic-part-3-practice-p3-2-c9a07436.mp3",
+      "spec": "c3f432200765b3e0",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 36571,
+      "source": "exam toeic-part-3-practice · part 3 · passage 2",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "cb4c2d3a9222d3f8f578": {
+      "file": "toeic-full-mock-1-p2-q-cb4c2d3a.mp3",
+      "spec": "c0b5aaccb76fd061",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 15440,
+      "source": "question toeic-full-mock-1 · fd48408d-456b-577b-932f-a4c5b6016b9e",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "d062d84ea8098b09431d": {
+      "file": "lesson-listening-booking-a-table-d062d84e.mp3",
+      "spec": "94bcd7a5a9b3b67f",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 50903,
+      "source": "lesson listening-booking-a-table · Phone call to a restaurant",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "d0672170a6cec1ad00b1": {
+      "file": "toeic-full-mock-1-p2-q-d0672170.mp3",
+      "spec": "2cd2c12b52ca4496",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 13872,
+      "source": "question toeic-full-mock-1 · 8a145405-c70f-5a0e-b448-ee787c29c8de",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     },
     "d06cca0a1776d35015c5": {
       "file": "toeic-fixture-v01-p3-d06cca0a.mp3",
-      "spec": "de1372bdf8432aa2",
+      "spec": "a142387815c63d7a",
       "voices": [
-        "en-AU-NatashaNeural"
+        "en_US-libritts_r-medium:180"
       ],
-      "durationMs": 11520,
+      "durationMs": 9461,
       "source": "exam toeic-fixture-v01 · part 3",
-      "generatedAt": "2026-09-26T03:56:56.979Z"
+      "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "d318d27674cd02b547e6": {
+      "file": "toeic-full-mock-1-p3-11-d318d276.mp3",
+      "spec": "8acec421e9454611",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 31629,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 11",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "d4198c9eca28b588dafd": {
+      "file": "toeic-full-mock-1-p3-1-d4198c9e.mp3",
+      "spec": "f0308b8531177812",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 34268,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "d7ccc0c8ae3557cac495": {
+      "file": "toeic-full-mock-1-p2-q-d7ccc0c8.mp3",
+      "spec": "1d1055babd0c5013",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 13686,
+      "source": "question toeic-full-mock-1 · f25f3070-8263-5758-acd6-903de0086b98",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "d80de36346a1be55d0ff": {
+      "file": "lesson-listening-study-habits-podcast-d80de363.mp3",
+      "spec": "8497719e28eb5e5d",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 68377,
+      "source": "lesson listening-study-habits-podcast · Podcast: Smarter studying",
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "d8d7c16cd6b9c63a8dc3": {
+      "file": "toeic-part-2-practice-p2-q-d8d7c16c.mp3",
+      "spec": "e31c0a86fe3306dd",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 13431,
+      "source": "question toeic-part-2-practice · 6ef8db5b-837a-52d6-9648-8bb4e350b3ff",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     },
     "e00a2908214e2b9c9b4e": {
       "file": "lesson-nuance-e00a2908.mp3",
-      "spec": "96de2847d8f0d953",
+      "spec": "65c36609c5ea8aa6",
       "voices": [
-        "en-US-JennyNeural"
+        "en_US-libritts_r-medium:15"
       ],
-      "durationMs": 12792,
+      "durationMs": 12851,
       "source": "lesson nuance · Team feedback",
-      "generatedAt": "2026-09-26T03:57:53.897Z"
+      "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "e1c99c95c30e2544eead": {
+      "file": "toeic-full-mock-1-p3-3-e1c99c95.mp3",
+      "spec": "f825f0a3585444fb",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 30669,
+      "source": "exam toeic-full-mock-1 · part 3 · passage 3",
+      "generatedAt": "2026-09-28T02:58:20.350Z"
     },
     "e70f5f9241091eea7a31": {
       "file": "toeic-full-demo-p4-e70f5f92.mp3",
-      "spec": "f98ebe089e3e382f",
+      "spec": "a78dff4461bf16bf",
       "voices": [
-        "en-AU-NatashaNeural"
+        "en_US-libritts_r-medium:180"
       ],
-      "durationMs": 19872,
+      "durationMs": 17750,
       "source": "exam toeic-full-demo · part 4",
-      "generatedAt": "2026-09-26T03:57:42.907Z"
+      "generatedAt": "2026-09-28T02:58:20.350Z"
     },
     "eb0db5cc84ef4e1b5f79": {
       "file": "ielts-fixture-v01-p1-eb0db5cc.mp3",
-      "spec": "842b6235cd4dd4f1",
+      "spec": "88a9016c0aae9b52",
       "voices": [
-        "en-GB-SoniaNeural"
+        "en_GB-vctk-medium:p236"
       ],
-      "durationMs": 12096,
+      "durationMs": 12607,
       "source": "exam ielts-fixture-v01 · part 1",
-      "generatedAt": "2026-09-26T03:56:02.817Z"
+      "generatedAt": "2026-09-28T02:58:20.348Z"
+    },
+    "ecca28957ad54c375e1e": {
+      "file": "toeic-part-3-practice-p3-1-ecca2895.mp3",
+      "spec": "322d5abb8d6067ad",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 30773,
+      "source": "exam toeic-part-3-practice · part 3 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "ed3a8f3dc3cff0d4ae0e": {
+      "file": "toeic-full-mock-1-p2-q-ed3a8f3d.mp3",
+      "spec": "a8d18078b5a237c8",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 13617,
+      "source": "question toeic-full-mock-1 · 0e77e844-8640-5f23-85d2-97c62bc77998",
+      "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "f2977d252c97ebc461c1": {
+      "file": "lesson-speaking-talk-about-your-family-f2977d25.mp3",
+      "spec": "53e197e278436ac2",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 27941,
+      "source": "lesson speaking-talk-about-your-family · Model conversation",
+      "generatedAt": "2026-09-28T02:58:20.354Z"
+    },
+    "f663bbcd6cbe9b18f203": {
+      "file": "toeic-part-4-practice-p4-1-f663bbcd.mp3",
+      "spec": "81c376b4a2057c88",
+      "voices": [
+        "en_GB-vctk-medium:p257"
+      ],
+      "durationMs": 28780,
+      "source": "exam toeic-part-4-practice · part 4 · passage 1",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "f82bfb489a8d248f1729": {
+      "file": "toeic-full-mock-1-p4-9-f82bfb48.mp3",
+      "spec": "504055bd1e9d332f",
+      "voices": [
+        "en_US-libritts_r-medium:15"
+      ],
+      "durationMs": 30486,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 9",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "f9f4e71c55a1f48708aa": {
+      "file": "toeic-full-mock-1-p4-10-f9f4e71c.mp3",
+      "spec": "c3530f1fc74f8841",
+      "voices": [
+        "en_US-libritts_r-medium:105"
+      ],
+      "durationMs": 25935,
+      "source": "exam toeic-full-mock-1 · part 4 · passage 10",
+      "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "fb7a10cbad8505169de1": {
+      "file": "toeic-mini-test-1-p2-q-fb7a10cb.mp3",
+      "spec": "9899ae101d455570",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 12258,
+      "source": "question toeic-mini-test-1 · 988b2eb4-dd9e-565b-9660-c193ae954b97",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "fbacc59e94b7b39bee37": {
+      "file": "toeic-full-mock-1-p2-q-fbacc59e.mp3",
+      "spec": "7819a6dc45594597",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 14639,
+      "source": "question toeic-full-mock-1 · 9ee1d75d-58cd-5423-8e99-c1c8216fd0bc",
+      "generatedAt": "2026-09-28T03:38:36.556Z"
     }
   }
 }

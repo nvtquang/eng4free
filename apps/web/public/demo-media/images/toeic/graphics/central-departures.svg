@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 463 278" width="463" height="278" role="img" aria-label="Central Station departures">
+<rect width="463" height="278" fill="#fcfcfb"/>
+<text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">Central Station departures</text>
+<rect x="20" y="64" width="423" height="38" fill="#f0efec"/>
+<text x="32" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Train</text>
+<text x="113" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Destination</text>
+<text x="248" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Departs</text>
+<text x="347" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Platform</text>
+<line x1="20" x2="443" y1="102" y2="102" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">R12</text>
+<text x="113" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Riverside</text>
+<text x="248" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:05</text>
+<text x="347" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">3</text>
+<line x1="20" x2="443" y1="140" y2="140" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">E7</text>
+<text x="113" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Airport</text>
+<text x="248" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:20</text>
+<text x="347" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">5</text>
+<line x1="20" x2="443" y1="178" y2="178" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">R14</text>
+<text x="113" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Riverside</text>
+<text x="248" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:35</text>
+<text x="347" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">3</text>
+<line x1="20" x2="443" y1="216" y2="216" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">E9</text>
+<text x="113" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Airport</text>
+<text x="248" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:50</text>
+<text x="347" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">5</text>
+<line x1="20" x2="443" y1="254" y2="254" stroke="#c9c8c3" stroke-width="1"/>
+</svg>

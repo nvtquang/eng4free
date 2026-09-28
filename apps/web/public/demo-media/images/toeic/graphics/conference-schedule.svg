@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 472 278" width="472" height="278" role="img" aria-label="Retail Innovation Conference — Day 1">
+<rect width="472" height="278" fill="#fcfcfb"/>
+<text x="20" y="38" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">Retail Innovation Conference — Day 1</text>
+<rect x="20" y="64" width="432" height="38" fill="#f0efec"/>
+<text x="32" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Time</text>
+<text x="113" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Session</text>
+<text x="374" y="88" font-family="Arial, Helvetica, sans-serif" font-size="15" font-weight="bold" fill="#0b0b0b">Room</text>
+<line x1="20" x2="452" y1="102" y2="102" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">9:00</text>
+<text x="113" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Opening keynote</text>
+<text x="374" y="126" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Hall A</text>
+<line x1="20" x2="452" y1="140" y2="140" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">10:30</text>
+<text x="113" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Online sales trends</text>
+<text x="374" y="164" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Room 2</text>
+<line x1="20" x2="452" y1="178" y2="178" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">1:00</text>
+<text x="113" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Customer data and privacy</text>
+<text x="374" y="202" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Room 5</text>
+<line x1="20" x2="452" y1="216" y2="216" stroke="#c9c8c3" stroke-width="1"/>
+<text x="32" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">3:00</text>
+<text x="113" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Designing better stores</text>
+<text x="374" y="240" font-family="Arial, Helvetica, sans-serif" font-size="15" fill="#0b0b0b">Room 3</text>
+<line x1="20" x2="452" y1="254" y2="254" stroke="#c9c8c3" stroke-width="1"/>
+</svg>

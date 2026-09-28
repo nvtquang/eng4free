@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 460" width="760" height="460" role="img" aria-label="Average hours per week spent on leisure activities, by age group">
+<rect width="760" height="460" fill="#fcfcfb"/>
+<text x="20" y="34" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="bold" fill="#0b0b0b">Average hours per week spent on leisure activities, by age group</text>
+<rect x="20" y="52" width="14" height="14" rx="3" fill="#2a78d6"/><text x="40" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#0b0b0b">16–24</text>
+<rect x="170" y="52" width="14" height="14" rx="3" fill="#eb6834"/><text x="190" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#0b0b0b">25–44</text>
+<rect x="320" y="52" width="14" height="14" rx="3" fill="#1baf7a"/><text x="340" y="64" font-family="Arial, Helvetica, sans-serif" font-size="14" fill="#0b0b0b">45 and over</text>
+<line x1="60" x2="736" y1="396" y2="396" stroke="#e4e3df" stroke-width="1"/><text x="50" y="401" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">0</text>
+<line x1="60" x2="736" y1="345.3333333333333" y2="345.3333333333333" stroke="#e4e3df" stroke-width="1"/><text x="50" y="350.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">3</text>
+<line x1="60" x2="736" y1="294.6666666666667" y2="294.6666666666667" stroke="#e4e3df" stroke-width="1"/><text x="50" y="299.6666666666667" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">6</text>
+<line x1="60" x2="736" y1="244" y2="244" stroke="#e4e3df" stroke-width="1"/><text x="50" y="249" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">9</text>
+<line x1="60" x2="736" y1="193.33333333333334" y2="193.33333333333334" stroke="#e4e3df" stroke-width="1"/><text x="50" y="198.33333333333334" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">12</text>
+<line x1="60" x2="736" y1="142.66666666666666" y2="142.66666666666666" stroke="#e4e3df" stroke-width="1"/><text x="50" y="147.66666666666666" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">15</text>
+<line x1="60" x2="736" y1="92" y2="92" stroke="#e4e3df" stroke-width="1"/><text x="50" y="97" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="end">18</text>
+<text x="16" y="82" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#52514e">hours</text>
+<path d="M91.5 396 V264.8888888888889 Q91.5 260.8888888888889 95.5 260.8888888888889 H121.5 Q125.5 260.8888888888889 125.5 264.8888888888889 V396 Z" fill="#2a78d6"/>
+<text x="108.5" y="254.8888888888889" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">8</text>
+<path d="M127.5 396 V231.11111111111111 Q127.5 227.11111111111111 131.5 227.11111111111111 H157.5 Q161.5 227.11111111111111 161.5 231.11111111111111 V396 Z" fill="#eb6834"/>
+<text x="144.5" y="221.11111111111111" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">10</text>
+<path d="M163.5 396 V129.77777777777777 Q163.5 125.77777777777777 167.5 125.77777777777777 H193.5 Q197.5 125.77777777777777 197.5 129.77777777777777 V396 Z" fill="#1baf7a"/>
+<text x="180.5" y="119.77777777777777" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">16</text>
+<text x="144.5" y="422" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">Watching TV</text>
+<path d="M260.5 396 V163.55555555555554 Q260.5 159.55555555555554 264.5 159.55555555555554 H290.5 Q294.5 159.55555555555554 294.5 163.55555555555554 V396 Z" fill="#2a78d6"/>
+<text x="277.5" y="153.55555555555554" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">14</text>
+<path d="M296.5 396 V264.8888888888889 Q296.5 260.8888888888889 300.5 260.8888888888889 H326.5 Q330.5 260.8888888888889 330.5 264.8888888888889 V396 Z" fill="#eb6834"/>
+<text x="313.5" y="254.8888888888889" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">8</text>
+<path d="M332.5 396 V349.3333333333333 Q332.5 345.3333333333333 336.5 345.3333333333333 H362.5 Q366.5 345.3333333333333 366.5 349.3333333333333 V396 Z" fill="#1baf7a"/>
+<text x="349.5" y="339.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="313.5" y="422" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">Social media</text>
+<path d="M429.5 396 V315.55555555555554 Q429.5 311.55555555555554 433.5 311.55555555555554 H459.5 Q463.5 311.55555555555554 463.5 315.55555555555554 V396 Z" fill="#2a78d6"/>
+<text x="446.5" y="305.55555555555554" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">5</text>
+<path d="M465.5 396 V332.44444444444446 Q465.5 328.44444444444446 469.5 328.44444444444446 H495.5 Q499.5 328.44444444444446 499.5 332.44444444444446 V396 Z" fill="#eb6834"/>
+<text x="482.5" y="322.44444444444446" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">4</text>
+<path d="M501.5 396 V349.3333333333333 Q501.5 345.3333333333333 505.5 345.3333333333333 H531.5 Q535.5 345.3333333333333 535.5 349.3333333333333 V396 Z" fill="#1baf7a"/>
+<text x="518.5" y="339.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">3</text>
+<text x="482.5" y="422" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">Sport and exercise</text>
+<path d="M598.5 396 V366.22222222222223 Q598.5 362.22222222222223 602.5 362.22222222222223 H628.5 Q632.5 362.22222222222223 632.5 366.22222222222223 V396 Z" fill="#2a78d6"/>
+<text x="615.5" y="356.22222222222223" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">2</text>
+<path d="M634.5 396 V349.3333333333333 Q634.5 345.3333333333333 638.5 345.3333333333333 H664.5 Q668.5 345.3333333333333 668.5 349.3333333333333 V396 Z" fill="#eb6834"/>
+<text x="651.5" y="339.3333333333333" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">3</text>
+<path d="M670.5 396 V298.6666666666667 Q670.5 294.6666666666667 674.5 294.6666666666667 H700.5 Q704.5 294.6666666666667 704.5 298.6666666666667 V396 Z" fill="#1baf7a"/>
+<text x="687.5" y="288.6666666666667" font-family="Arial, Helvetica, sans-serif" font-size="12" fill="#0b0b0b" text-anchor="middle">6</text>
+<text x="651.5" y="422" font-family="Arial, Helvetica, sans-serif" font-size="13" fill="#52514e" text-anchor="middle">Reading</text>
+<line x1="60" x2="736" y1="396" y2="396" stroke="#c9c8c3" stroke-width="1"/>
+</svg>
