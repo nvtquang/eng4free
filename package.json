@@ -26,6 +26,7 @@
     "content:generate-audio": "tsx scripts/content/generate-audio.ts",
     "content:check-audio": "tsx scripts/content/generate-audio.ts --check",
     "content:qa-audio": "tsx scripts/content/check-audio.ts",
+    "ai:eval": "tsx scripts/ai/eval-feedback.ts",
     "content:d3:check": "tsx scripts/content/d3/import.ts --check",
     "content:d3:graphics": "tsx scripts/content/d3/make-graphics.ts",
     "content:d3:import": "tsx scripts/content/d3/import.ts",

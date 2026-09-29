@@ -139,6 +139,9 @@ export const WritingFeedbackSchema = z.object({
 
 export const TutorRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), learnerAnswer: z.string().min(1).max(128) });
 export const TutorFeedbackSchema = z.object({ correct: z.boolean(), explanation: z.string().min(1), nextStep: z.string().min(1), providerUsed: z.boolean() });
+export const TutorChatMessageSchema = z.object({ role: z.enum(["learner", "tutor"]), content: z.string().min(1).max(2_000) });
+export const TutorChatRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), learnerAnswer: z.string().min(1).max(128), messages: z.array(TutorChatMessageSchema).min(1).max(10) });
+export const TutorChatReplySchema = z.object({ reply: z.string().min(1), providerUsed: z.boolean() });
 export const WritingEvaluationRequestSchema = z.object({ submissionId: z.string().uuid() });
 
 export const AdminContentBatchSchema = z.object({ source: z.string().min(3).max(500), license: z.string().min(1).max(255), author: z.string().min(1).max(255).optional(), version: z.string().min(1).max(64) });
@@ -195,6 +198,9 @@ export type SpeakingSessionInput = z.infer<typeof SpeakingSessionInputSchema>;
 export type SpeakingFeedback = z.infer<typeof SpeakingFeedbackSchema>;
 export type TutorRequest = z.infer<typeof TutorRequestSchema>;
 export type TutorFeedback = z.infer<typeof TutorFeedbackSchema>;
+export type TutorChatMessage = z.infer<typeof TutorChatMessageSchema>;
+export type TutorChatRequest = z.infer<typeof TutorChatRequestSchema>;
+export type TutorChatReply = z.infer<typeof TutorChatReplySchema>;
 export type LessonQuestionSetContent = z.infer<typeof LessonQuestionSetContentSchema>;
 export type LessonListeningContent = z.infer<typeof LessonListeningContentSchema>;
 export type AdminLessonBlock = z.infer<typeof AdminLessonBlockSchema>;
