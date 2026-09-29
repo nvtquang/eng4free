@@ -6,6 +6,7 @@ import { createDatabase } from "@/db/client";
 import { attemptAnswers, attempts, examParts, exams, passages, questions } from "@/db/schema";
 import { demoAudioUrl } from "@/modules/media/demo-audio";
 import { appendProgressEvent } from "@/modules/progress/repository";
+import { recordMistakes, resolveMistakes, type MistakeEntry } from "@/modules/mistakes/repository";
 import type { AttemptActor } from "@/modules/attempts/types";
 
 type PublicQuestion = PublicQuestionDefinition & { id: string; passageId: string | null; points: number };
@@ -141,6 +142,25 @@ async function validateAndPersistAnswers(attemptId: string, examId: string, answ
   }
 }
 
+/** Snapshots wrong MCQ answers into the mistake notebook, and resolves ones now answered correctly. */
+async function recordExamMistakes(actor: AttemptActor, examId: string, examTitle: string | null, questionRows: Array<{ id: string; type: string; content: unknown; answer: unknown; explanation: string | null }>, results: QuestionResult[]): Promise<void> {
+  const byId = new Map(questionRows.map((row) => [row.id, row]));
+  const wrong: MistakeEntry[] = [];
+  const correctIds: string[] = [];
+  for (const result of results) {
+    const row = byId.get(result.questionId);
+    if (!row || row.type !== "MCQ") continue;
+    if (result.correct) { correctIds.push(result.questionId); continue; }
+    const content = row.content as { prompt?: unknown; options?: Array<{ id?: unknown; text?: unknown }> };
+    const answer = row.answer as { correctOptionId?: unknown };
+    const options = Array.isArray(content.options) ? content.options.filter((option) => typeof option.id === "string" && typeof option.text === "string").map((option) => ({ id: option.id as string, text: option.text as string })) : [];
+    if (typeof content.prompt !== "string" || typeof answer.correctOptionId !== "string" || options.length === 0) continue;
+    wrong.push({ sourceType: "EXAM", sourceId: examId, sourceTitle: examTitle, questionId: result.questionId, skill: null, prompt: content.prompt, options, correctOptionId: answer.correctOptionId, explanation: row.explanation });
+  }
+  await recordMistakes(actor, wrong);
+  await resolveMistakes(actor, correctIds);
+}
+
 async function completeExamAttempt(attemptId: string, actor: AttemptActor, expired: boolean): Promise<ExamAttemptResult> {
   const db = dbOrThrow();
   const current = await getOwnedAttempt(attemptId, actor);
@@ -152,7 +172,8 @@ async function completeExamAttempt(attemptId: string, actor: AttemptActor, expir
     await db.update(attempts).set({ status: expired ? "EXPIRED" : "SUBMITTED", rawScore: scored.rawScore, submittedAt: completedAt, updatedAt: completedAt }).where(and(eq(attempts.id, attemptId), eq(attempts.status, "IN_PROGRESS")));
   }
   const attempt = await getOwnedAttempt(attemptId, actor);
-  const [exam] = await db.select({ mode: exams.mode }).from(exams).where(eq(exams.id, attempt.examId));
+  const [exam] = await db.select({ mode: exams.mode, title: exams.title }).from(exams).where(eq(exams.id, attempt.examId));
+  await recordExamMistakes(actor, attempt.examId, exam?.title ?? null, questionRows, scored.results);
   await appendProgressEvent({
     userId: actor.userId, guestId: actor.guestId, type: "EXAM_COMPLETED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: attempt.id,
     idempotencyKey: "exam:" + attempt.id + ":completed",

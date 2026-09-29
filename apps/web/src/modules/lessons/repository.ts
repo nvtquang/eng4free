@@ -60,7 +60,7 @@ export async function findPublishedLesson(level: string, slug: string): Promise<
 export async function getLessonQuestionSetForScoring(lessonId: string) {
   const db = createDatabase();
   if (!db) return null;
-  const [lesson] = await db.select({ id: lessons.id, skill: lessons.skill }).from(lessons).where(and(eq(lessons.id, lessonId), eq(lessons.status, "PUBLISHED")));
+  const [lesson] = await db.select({ id: lessons.id, title: lessons.title, skill: lessons.skill }).from(lessons).where(and(eq(lessons.id, lessonId), eq(lessons.status, "PUBLISHED")));
   if (!lesson) return null;
   const rows = await db.select({ content: lessonBlocks.content }).from(lessonBlocks).where(and(eq(lessonBlocks.lessonId, lessonId), eq(lessonBlocks.type, "QUESTION_SET")));
   const questions = rows.flatMap((row) => {

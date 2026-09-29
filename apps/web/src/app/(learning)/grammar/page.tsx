@@ -1,9 +1,24 @@
+import Link from "next/link";
+import { Card } from "@/components/ui/card";
 import { SkillLessonList } from "@/components/skill-lesson-list";
-import { getLocale } from "@/lib/i18n";
+import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
+import { getRequestActor } from "@/modules/auth/request-actor";
+import { countOpenMistakes } from "@/modules/mistakes/repository";
+
+export const dynamic = "force-dynamic";
 
 export default async function GrammarPage() {
   const locale = await getLocale();
   const copy = getSkillsCopy(locale);
-  return <SkillLessonList locale={locale} skill="GRAMMAR" eyebrow={copy.grammarEyebrow} title={copy.grammarTitle} intro={copy.grammarIntro} />;
+  const mistakesCopy = getMessages(locale).mistakes;
+  let wrongCount = 0;
+  try { wrongCount = await countOpenMistakes((await getRequestActor(false)).actor, "GRAMMAR"); } catch { /* No learner cookie yet. */ }
+  const banner = wrongCount > 0
+    ? <Link href="/mistakes?skill=GRAMMAR" className="mx-auto block w-full max-w-7xl px-5 sm:px-8"><Card className="flex flex-wrap items-center justify-between gap-3 border-brand bg-brand-soft transition hover:-translate-y-0.5"><div><p className="font-serif text-xl font-bold">{mistakesCopy.title}</p><p className="mt-1 text-sm text-muted">{mistakesCopy.count.replace("{count}", String(wrongCount))}</p></div><span className="text-sm font-bold text-brand">{mistakesCopy.practice} →</span></Card></Link>
+    : null;
+  return <>
+    {banner}
+    <SkillLessonList locale={locale} skill="GRAMMAR" eyebrow={copy.grammarEyebrow} title={copy.grammarTitle} intro={copy.grammarIntro} />
+  </>;
 }

@@ -4,13 +4,22 @@ import { createDatabase } from "@/db/client";
 import { lessonCompletions } from "@/db/schema";
 import { appendProgressEvent } from "@/modules/progress/repository";
 import type { ProgressEvent } from "@/modules/progress/progress";
+import { recordMistakes, resolveMistakes, type MistakeEntry } from "@/modules/mistakes/repository";
 import { getLessonQuestionSetForScoring } from "./repository";
+
+const notebookSkills = new Set(["LISTENING", "READING", "GRAMMAR", "SPEAKING", "WRITING"]);
 
 export async function completeLesson(input: { lessonId: string; actor: { userId: string | null; guestId: string }; answers: Array<{ questionId: string; selectedOptionId: string }> }) {
   const scoringData = await getLessonQuestionSetForScoring(input.lessonId);
   if (!scoringData) throw new Error("Published lesson not found");
   const answers = new Map(input.answers.map((answer) => [answer.questionId, answer.selectedOptionId]));
   const reviewedQuestions = scoringData.questions.map((question) => ({ questionId: question.id, correct: answers.get(question.id) === question.correctOptionId, correctOptionId: question.correctOptionId, explanation: question.explanation }));
+  const notebookSkill = notebookSkills.has(scoringData.lesson.skill ?? "") ? (scoringData.lesson.skill as MistakeEntry["skill"]) : null;
+  const questionById = new Map(scoringData.questions.map((question) => [question.id, question]));
+  const wrongEntries: MistakeEntry[] = reviewedQuestions.filter((question) => !question.correct && answers.has(question.questionId)).map((question) => { const source = questionById.get(question.questionId)!; return { sourceType: "LESSON", sourceId: input.lessonId, sourceTitle: scoringData.lesson.title, questionId: question.questionId, skill: notebookSkill, prompt: source.prompt, options: source.options, correctOptionId: source.correctOptionId, explanation: source.explanation }; });
+  const correctIds = reviewedQuestions.filter((question) => question.correct).map((question) => question.questionId);
+  await recordMistakes(input.actor, wrongEntries);
+  await resolveMistakes(input.actor, correctIds);
   const rawScore = reviewedQuestions.filter((question) => question.correct).length;
   const totalQuestions = reviewedQuestions.length;
   const db = createDatabase();

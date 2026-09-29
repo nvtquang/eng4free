@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { and, eq, inArray } from "drizzle-orm";
+import { and, count, eq, inArray, lte } from "drizzle-orm";
 import { createVocabularyMemory, scheduleVocabularyReview, type ReviewRating, type VocabularyMemory } from "@english4free/srs";
 import { createDatabase } from "@/db/client";
 import { vocabulary, vocabularyReviews } from "@/db/schema";
@@ -26,6 +26,28 @@ export async function listVocabularyDueDates(actor: Actor, vocabularyIds: string
   if (!db || vocabularyIds.length === 0) return new Map();
   const rows = await db.select({ vocabularyId: vocabularyReviews.vocabularyId, dueAt: vocabularyReviews.dueAt }).from(vocabularyReviews).where(and(eq(vocabularyReviews.ownerKey, vocabularyOwnerKey(actor)), inArray(vocabularyReviews.vocabularyId, vocabularyIds)));
   return new Map(rows.map((row) => [row.vocabularyId, row.dueAt]));
+}
+
+/** How many of the owner's scheduled words are due for review at or before `now`. */
+export async function countDueVocabulary(actor: Actor, now = new Date()): Promise<number> {
+  const db = createDatabase();
+  if (!db) return 0;
+  const [row] = await db.select({ due: count() }).from(vocabularyReviews).where(and(eq(vocabularyReviews.ownerKey, vocabularyOwnerKey(actor)), lte(vocabularyReviews.dueAt, now)));
+  return row?.due ?? 0;
+}
+
+/** Adds a published word to the review deck as due-now, unless it is already scheduled. Used to save words while studying. */
+export async function addToWordbook(actor: Actor, vocabularyId: string, now = new Date()): Promise<{ added: boolean } | null> {
+  const db = createDatabase();
+  if (!db) return null;
+  const [word] = await db.select({ headword: vocabulary.headword }).from(vocabulary).where(and(eq(vocabulary.id, vocabularyId), eq(vocabulary.status, "PUBLISHED"))).limit(1);
+  if (!word) return null;
+  const ownerKey = vocabularyOwnerKey(actor);
+  const [existing] = await db.select({ id: vocabularyReviews.id }).from(vocabularyReviews).where(and(eq(vocabularyReviews.ownerKey, ownerKey), eq(vocabularyReviews.vocabularyId, vocabularyId))).limit(1);
+  if (existing) return { added: false };
+  const memory = createVocabularyMemory(now);
+  await db.insert(vocabularyReviews).values({ id: randomUUID(), ownerKey, userId: actor.userId, guestId: actor.guestId, vocabularyId, ...toColumns(memory), createdAt: now, updatedAt: now }).onConflictDoNothing({ target: [vocabularyReviews.ownerKey, vocabularyReviews.vocabularyId] });
+  return { added: true };
 }
 
 /** Schedules the next review of a published word with FSRS, persists it and records progress events. */
