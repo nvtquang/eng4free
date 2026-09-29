@@ -19,7 +19,7 @@ import { batchId, connect, d3Id, D3_COURSE_ID } from "./shared";
 
 const args = process.argv.slice(2);
 const CHECK = args.includes("--check");
-const only = new Set((args.find((arg) => arg.startsWith("--only="))?.slice(7) ?? "lessons,grammar,vocabulary,toeic,ielts").split(",") as BatchKey[]);
+const only = new Set((args.find((arg) => arg.startsWith("--only="))?.slice(7) ?? "lessons,grammar,vocabulary,toeic,ielts,skills-extra").split(",") as BatchKey[]);
 const LEVELS = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 const slugify = (value: string) => value.toLowerCase().replace(/[^a-z0-9]+/gu, "-").replace(/^-|-$/gu, "");
 
@@ -96,7 +96,7 @@ async function main() {
           await tx.delete(lessonBlocks).where(and(eq(lessonBlocks.lessonId, lessonId), notInArray(lessonBlocks.id, rows.map((row) => row.id))));
         }
         const keep = lessonDefs.map((lesson) => d3Id(`lesson:${lesson.key}`));
-        await tx.update(lessons).set({ status: "ARCHIVED" }).where(and(inArray(lessons.contentBatchId, [...only].filter((key) => key === "lessons" || key === "grammar").map(batchId)), notInArray(lessons.id, keep)));
+        await tx.update(lessons).set({ status: "ARCHIVED" }).where(and(inArray(lessons.contentBatchId, [...only].filter((key) => key === "lessons" || key === "grammar" || key === "skills-extra").map(batchId)), notInArray(lessons.id, keep)));
       }
 
       // Exams: parts, passages (reading texts and listening recordings) and questions.

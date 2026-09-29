@@ -31,7 +31,7 @@ function sample<T extends { id: string }>(items: T[], seed: string): T[] {
 }
 
 type Entry = { id: string; markdown: string };
-const sections: Record<BatchKey, Entry[]> = { lessons: [], grammar: [], vocabulary: [], toeic: [], ielts: [] };
+const sections: Record<BatchKey, Entry[]> = { lessons: [], grammar: [], vocabulary: [], toeic: [], ielts: [], "skills-extra": [] };
 
 for (const lesson of d3Lessons) {
   lesson.blocks.forEach((block, blockIndex) => {

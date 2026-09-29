@@ -5,6 +5,7 @@ import "./globals.css";
 import { SiteFooter } from "@/components/site-footer";
 import { GuestSessionBootstrap } from "@/components/guest-session-bootstrap";
 import { SiteHeader } from "@/components/site-header";
+import { AiAssistantWidget } from "@/components/ai-assistant-widget";
 import { auth } from "@/auth";
 import { getLocale, getMessages } from "@/lib/i18n";
 
@@ -29,6 +30,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
         {!viewer && <GuestSessionBootstrap />}
         <main id="main-content">{children}</main>
         <SiteFooter messages={messages} />
+        <AiAssistantWidget copy={messages.assistant} name={viewer?.name ?? null} />
       </body>
     </html>
   );

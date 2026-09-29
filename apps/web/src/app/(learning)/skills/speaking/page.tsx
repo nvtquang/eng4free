@@ -1,17 +1,15 @@
-import { SpeakingPractice } from "@/components/speaking-practice";
-import { SkillLessonCards } from "@/components/skill-lesson-list";
+import { SpeakingTopics } from "@/components/speaking-topics";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getAiSpeakingCopy } from "@/lib/ai-speaking-copy";
 import { getLocale } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
+import { getSpeakingCategories } from "@/lib/speaking-topics";
 
 export default async function SpeakingPage() {
   const locale = await getLocale();
   const copy = getSkillsCopy(locale);
   const aiCopy = getAiSpeakingCopy(locale);
-  const prompt = locale === "vi"
-    ? "Nói bằng tiếng Anh: hãy kể về một kỹ năng hữu ích bạn đã học và cách bạn học kỹ năng đó."
-    : "Talk about a useful skill you learned and explain how you learned it.";
+  const categories = getSpeakingCategories(locale);
 
   return (
     <Section>
@@ -19,10 +17,8 @@ export default async function SpeakingPage() {
       <h1 className="mt-4 font-serif text-5xl font-bold">{copy.speakingTitle}</h1>
       <p className="mt-4 text-muted">{aiCopy.description}</p>
       <div className="mt-10">
-        <SpeakingPractice copy={copy} aiCopy={aiCopy} prompt={prompt} />
+        <SpeakingTopics categories={categories} copy={copy} aiCopy={aiCopy} />
       </div>
-      <h2 className="mt-14 font-serif text-3xl font-bold">{copy.lessonsTitle}</h2>
-      <SkillLessonCards locale={locale} skill="SPEAKING" />
     </Section>
   );
 }

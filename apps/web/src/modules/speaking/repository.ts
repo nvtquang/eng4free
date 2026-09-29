@@ -32,9 +32,10 @@ export async function saveSpeakingRecording(actor: SpeakingActor, input: { sessi
   return { sessionId: session.id, turnId, mediaId, playbackUrl: `/api/media/${mediaId}` };
 }
 
-export async function listSpeakingHistory(actor: SpeakingActor) {
+export async function listSpeakingHistory(actor: SpeakingActor, promptId?: string) {
   const db = createDatabase(); if (!db) return [];
-  const sessions = await db.select().from(speakingSessions).where(ownerCondition(actor)).orderBy(desc(speakingSessions.createdAt)).limit(30);
+  const where = promptId ? and(ownerCondition(actor), eq(speakingSessions.promptId, promptId)) : ownerCondition(actor);
+  const sessions = await db.select().from(speakingSessions).where(where).orderBy(desc(speakingSessions.createdAt)).limit(30);
   return Promise.all(sessions.map(async (session) => ({
     ...session,
     turns: (await db.select({ id: speakingTurns.id, durationMs: speakingTurns.durationMs, audioMediaId: speakingTurns.audioMediaId, transcript: speakingTurns.transcript, feedback: speakingTurns.feedback, createdAt: speakingTurns.createdAt }).from(speakingTurns).where(eq(speakingTurns.sessionId, session.id))).map((turn) => {

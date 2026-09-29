@@ -21,7 +21,12 @@ const copy = {
     disclaimer: "Chỉ là phản hồi luyện tập dựa trên bản chép lời; không đánh giá phát âm ở cấp độ âm vị.",
     needsWork: "Cần cải thiện",
     developing: "Đang phát triển",
-    secure: "Đạt yêu cầu"
+    secure: "Đạt yêu cầu",
+    topicsTitle: "Chọn chủ đề để luyện nói",
+    suggestionsTitle: "Mẫu câu gợi ý",
+    basicLabel: "Cơ bản",
+    advancedLabel: "Nâng cao",
+    viewFeedback: "Xem bản chép lời & nhận xét"
   },
   en: {
     description: "Record in push-to-talk mode. With Gemini configured, the server creates a transcript and practice feedback; realtime conversation is deferred.",
@@ -43,7 +48,12 @@ const copy = {
     disclaimer: "Practice feedback based on the transcript only; it does not assess phoneme-level pronunciation.",
     needsWork: "Needs work",
     developing: "Developing",
-    secure: "Secure"
+    secure: "Secure",
+    topicsTitle: "Choose a topic to practise",
+    suggestionsTitle: "Suggested sentences",
+    basicLabel: "Basic",
+    advancedLabel: "Advanced",
+    viewFeedback: "View transcript & feedback"
   }
 } as const;
 

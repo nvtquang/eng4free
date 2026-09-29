@@ -1,6 +1,8 @@
 "use client";
 
 import { useEffect, useMemo, useState } from "react";
+import { TutorExplanation } from "@/components/tutor-explanation";
+import type { Messages } from "@/lib/i18n";
 
 const examId = "d049d8e2-0a0d-4303-95fb-d4f97126dc53";
 
@@ -13,7 +15,7 @@ function formatSeconds(seconds: number) {
   return `${Math.floor(seconds / 60).toString().padStart(2, "0")}:${(seconds % 60).toString().padStart(2, "0")}`;
 }
 
-export function ToeicPart5Runner({ copy }: { copy: Copy }) {
+export function ToeicPart5Runner({ copy, tutorCopy }: { copy: Copy; tutorCopy: Messages["aiTutor"] }) {
   const [started, setStarted] = useState<StartedAttempt | null>(null);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [remaining, setRemaining] = useState<number | null>(null);
@@ -70,7 +72,7 @@ export function ToeicPart5Runner({ copy }: { copy: Copy }) {
     {error && <p role="alert" className="error">{error}</p>}
     {started.exam.questions.map((question, index) => {
       const itemResult = result?.results.find((item) => item.questionId === question.id);
-      return <section className="question-card" key={question.id}><h2>{copy.question} {index + 1}</h2><p>{question.content.prompt}</p><div className="options">{question.content.options.map((option) => <label key={option.id}><input type="radio" name={question.id} checked={answers[question.id] === option.id} disabled={Boolean(result)} onChange={() => void selectAnswer(question.id, option.id)} /> {option.text}</label>)}</div>{itemResult && <p className={itemResult.correct ? "correct" : "incorrect"}>{itemResult.correct ? copy.correct : copy.incorrect} {itemResult.explanation}</p>}</section>;
+      return <section className="question-card" key={question.id}><h2>{copy.question} {index + 1}</h2><p>{question.content.prompt}</p><div className="options">{question.content.options.map((option) => <label key={option.id}><input type="radio" name={question.id} checked={answers[question.id] === option.id} disabled={Boolean(result)} onChange={() => void selectAnswer(question.id, option.id)} /> {option.text}</label>)}</div>{itemResult && <p className={itemResult.correct ? "correct" : "incorrect"}>{itemResult.correct ? copy.correct : copy.incorrect} {itemResult.explanation}</p>}{result && <TutorExplanation copy={tutorCopy} attemptId={result.attempt.id} questionId={question.id} learnerAnswer={answers[question.id] ?? null} />}</section>;
     })}
     {result ? <section className="result-card"><h2>{copy.result}: {result.attempt.rawScore}/{result.attempt.totalQuestions}</h2><p>{copy.review}</p></section> : <button type="button" onClick={() => void submit()} disabled={saving}>{copy.submit}</button>}
   </main>;

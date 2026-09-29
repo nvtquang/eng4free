@@ -1,7 +1,7 @@
 # D3 — Bảng duyệt ngẫu nhiên
 
-Tạo lúc 2026-09-28. Mỗi batch lấy ngẫu nhiên khoảng 15% mục (seed cố định), cộng thêm mọi câu AI giải chéo trả lời khác đáp án (⚠️).
-AI giải chéo đã kiểm tra 620 câu, 0 câu lệch.
+Tạo lúc 2026-09-29. Mỗi batch lấy ngẫu nhiên khoảng 15% mục (seed cố định), cộng thêm mọi câu AI giải chéo trả lời khác đáp án (⚠️).
+AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
 
 **Cách duyệt:** đọc từng mục, đánh dấu [x] nếu đúng; ghi lỗi ngay dưới mục nếu sai. Khi một batch ổn, vào CMS `/admin` → Content batches → chuyển batch sang **APPROVED**, rồi chạy `pnpm content:d3:publish -- --batch=<tên>`.
 
@@ -1619,3 +1619,265 @@ AI giải chéo đã kiểm tra 620 câu, 0 câu lệch.
   Describe a place in your town or city that you enjoy visiting.
   
   Cue card: Describe a place in your town or city that you enjoy visiting. — where it is; how often you go there; what you do there; and explain why you enjoy visiting this place.
+
+## Extra Listening and Reading lessons (`skills-extra`) — 26/168 mục
+
+- [ ] **A1 · Listen: buying fruit at the market · câu 2** `A1/listening-buying-fruit-at-the-market/q2`
+  
+  How many kilos of mangoes does Tom buy?
+  
+  - A. Two ✅
+  - B. One
+  - C. Three
+  
+  *Giải thích:* Can I have two kilos, please?
+
+- [ ] **A1 · Listen: buying fruit at the market · câu 3** `A1/listening-buying-fruit-at-the-market/q3`
+  
+  What else does Tom buy?
+  
+  - A. Apples
+  - B. Bananas ✅
+  - C. Oranges
+  
+  *Giải thích:* He asks for bananas and buys one bunch.
+
+- [ ] **A1 · Listen: buying fruit at the market · câu 5** `A1/listening-buying-fruit-at-the-market/q5`
+  
+  Where does the conversation happen?
+  
+  - A. At a fruit stall ✅
+  - B. In a restaurant
+  - C. At a bus stop
+  
+  *Giải thích:* The seller says: Fresh fruit here.
+
+- [ ] **A1 · Listen: what time is the bus? · câu 4** `A1/listening-what-time-is-the-bus/q4`
+  
+  How long is the journey?
+  
+  - A. About two hours
+  - B. About three hours ✅
+  - C. About four hours
+  
+  *Giải thích:* About three hours.
+
+- [ ] **A2 · Listen: announcements at a train station · câu 1** `A2/listening-train-station-announcements/q1`
+  
+  Which platform is the train to Hai Phong at?
+  
+  - A. Platform one
+  - B. Platform three ✅
+  - C. Platform five
+  
+  *Giải thích:* The eight fifteen train to Hai Phong is now at platform three.
+
+- [ ] **A2 · Listen: announcements at a train station · câu 6** `A2/listening-train-station-announcements/q6`
+  
+  How long is the delay to the Lao Cai train?
+  
+  - A. Twenty minutes ✅
+  - B. Forty minutes
+  - C. Ten minutes
+  
+  *Giải thích:* It is delayed by twenty minutes.
+
+- [ ] **A2 · Listen: making a doctor's appointment · câu 1** `A2/listening-making-a-doctors-appointment/q1`
+  
+  What is David's problem?
+  
+  - A. A stomach ache
+  - B. A headache and a fever
+  - C. A cough and a sore throat ✅
+  
+  *Giải thích:* I've had a bad cough for a week, and I have a sore throat.
+
+- [ ] **A2 · Listen: making plans for the weekend · câu 5** `A2/listening-making-plans-for-the-weekend/q5`
+  
+  What will they do after bowling?
+  
+  - A. Go home
+  - B. Have dinner ✅
+  - C. Watch a film
+  
+  *Giải thích:* And let's have dinner after that.
+
+- [ ] **B1 · Listen: a part-time job interview · câu 2** `B1/listening-a-part-time-job-interview/q2`
+  
+  What experience does Khanh have?
+  
+  - A. He worked in a phone accessories shop. ✅
+  - B. He worked in another bookshop.
+  - C. He has no work experience.
+  
+  *Giải thích:* Last summer I worked at a phone accessories shop for three months.
+
+- [ ] **B1 · Listen: a part-time job interview · câu 3** `B1/listening-a-part-time-job-interview/q3`
+  
+  What is the problem with the working hours?
+  
+  - A. He wants to work fewer hours.
+  - B. He has a class on Sunday mornings. ✅
+  - C. He can't work on Saturdays.
+  
+  *Giải thích:* I have a class on Sunday mornings until eleven.
+
+- [ ] **B1 · Listen: a guided museum tour · câu 6** `B1/listening-a-guided-museum-tour/q6`
+  
+  Where should people go if they get lost?
+  
+  - A. The information desk ✅
+  - B. The café
+  - C. The lockers
+  
+  *Giải thích:* If you get lost, the meeting point is the information desk.
+
+- [ ] **B1 · Listen: calling the landlord about a problem · câu 3** `B1/listening-calling-the-landlord/q3`
+  
+  Why can't the technician come on Thursday evening?
+  
+  - A. The landlord is busy.
+  - B. Linh is away.
+  - C. Most technicians finish at five. ✅
+  
+  *Giải thích:* Most technicians finish at five.
+
+- [ ] **B2 · Listen: a news report on new cycle lanes · câu 5** `B2/listening-a-news-report-on-cycle-lanes/q5`
+  
+  What is Mrs Thu's attitude to bicycles?
+  
+  - A. She has never thought about them.
+  - B. She is not opposed to them. ✅
+  - C. She wants them banned.
+  
+  *Giải thích:* I'm not against bicycles. My concern is parking.
+
+- [ ] **B2 · Listen: a podcast about sleep and learning · câu 5** `B2/listening-a-podcast-about-sleep/q5`
+  
+  What does she say about naps?
+  
+  - A. Naps should last at least two hours.
+  - B. A short nap can help if it isn't too late in the day. ✅
+  - C. Naps always make you more tired.
+  
+  *Giải thích:* A short nap of twenty minutes or so… can also help, as long as it isn't too late in the day.
+
+- [ ] **B2 · Listen: a podcast about sleep and learning · câu 6** `B2/listening-a-podcast-about-sleep/q6`
+  
+  What is the expert's view of coffee?
+  
+  - A. It is the best substitute for sleep.
+  - B. It has no effect on alertness.
+  - C. It helps you feel alert but doesn't replace sleep. ✅
+  
+  *Giải thích:* Coffee can make you feel alert, but it doesn't replace sleep.
+
+- [ ] **A1 · Read: a postcard from Hoi An · câu 2** `A1/reading-a-postcard-from-hoi-an/q2`
+  
+  How long are they staying in Hoi An?
+  
+  - A. Five days ✅
+  - B. Three days
+  - C. One week
+  
+  *Giải thích:* I am here… for five days.
+
+- [ ] **A1 · Read: my school timetable · câu 1** `A1/reading-my-school-timetable/q1`
+  
+  What time does school finish in the morning?
+  
+  - A. At 11:30 ✅
+  - B. At 7:00
+  - C. At 4:00
+  
+  *Giải thích:* School… finishes at half past eleven.
+
+- [ ] **A1 · Read: a café menu · câu 4** `A1/reading-a-cafe-menu/q4`
+  
+  What is the most expensive food?
+  
+  - A. Beef noodle soup ✅
+  - B. Chicken sandwich
+  - C. Bread with egg
+  
+  *Giải thích:* Beef noodle soup costs 60,000 dong.
+
+- [ ] **A1 · Read: a notice at the swimming pool · câu 6** `A1/reading-a-notice-at-the-swimming-pool/q6`
+  
+  When are the swimming lessons?
+  
+  - A. Sunday at 9 a.m.
+  - B. Saturday at 9 a.m. ✅
+  - C. Every day at 6 a.m.
+  
+  *Giải thích:* Swimming lessons for children every Saturday at 9 a.m.
+
+- [ ] **A2 · Read: a birthday party invitation · câu 2** `A2/reading-a-birthday-party-invitation/q2`
+  
+  Where is the party?
+  
+  - A. At Minh Anh's house ✅
+  - B. In a park
+  - C. At a restaurant
+  
+  *Giải thích:* At my house, 25 Nguyen Hue Street.
+
+- [ ] **A2 · Read: a hotel review · câu 4** `A2/reading-a-hotel-review/q4`
+  
+  What was the best day of the holiday?
+  
+  - A. The day on the beach
+  - B. The boat trip ✅
+  - C. The day they arrived
+  
+  *Giải thích:* The receptionist booked a boat trip for us and it was the best day of our holiday.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 1** `B1/reading-can-apps-teach-you-a-language/q1`
+  
+  According to the article, how do apps help learners build a habit?
+  
+  - A. By connecting learners with teachers
+  - B. By using games, points and reminders ✅
+  - C. By giving certificates
+  
+  *Giải thích:* Many use games, points and reminders to keep learners coming back, which helps build a daily habit.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 2** `B1/reading-can-apps-teach-you-a-language/q2`
+  
+  What are apps especially good for, according to the writer?
+  
+  - A. Writing long essays
+  - B. Improving pronunciation
+  - C. Vocabulary and basic grammar ✅
+  
+  *Giải thích:* For vocabulary and basic grammar, this regular practice can be very effective.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 3** `B1/reading-can-apps-teach-you-a-language/q3`
+  
+  What is the main limitation of most apps?
+  
+  - A. They rarely ask learners to produce long answers or converse. ✅
+  - B. They are too expensive.
+  - C. They are hard to use on a phone.
+  
+  *Giải thích:* They rarely ask you to produce long answers or hold a real conversation.
+
+- [ ] **B1 · Read: the story of banh mi · câu 4** `B1/reading-the-story-of-banh-mi/q4`
+  
+  Which of these is NOT mentioned as a typical filling?
+  
+  - A. Fresh coriander
+  - B. Pickled carrot
+  - C. Cheese ✅
+  
+  *Giải thích:* The fillings listed are pork, pickled carrot and radish, coriander, chilli and soy sauce — not cheese.
+
+- [ ] **C2 · Read: the paradox of tourism · câu 3** `C2/reading-the-paradox-of-tourism/q3`
+  
+  Why does the writer reject the idea of simply staying at home?
+  
+  - A. Many communities depend on tourism for their livelihood. ✅
+  - B. Travel broadens the mind.
+  - C. Staying at home is too expensive.
+  
+  *Giải thích:* For many communities, tourism is not an intrusion… but a livelihood.

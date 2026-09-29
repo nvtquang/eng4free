@@ -8,11 +8,11 @@ import type { IpaSound, MinimalPair } from "@/modules/pronunciation/content";
 const copy = {
   vi: {
     listen: "Nghe mẫu", stop: "Dừng", pair: "Nghe cặp âm", unavailable: "Trình duyệt này chưa hỗ trợ phát âm mẫu. Hãy dùng Chrome, Edge hoặc Safari bản mới.",
-    vowels: "Nguyên âm và nguyên âm đôi", consonants: "Phụ âm", chartHelp: "Bấm Nghe mẫu để phát từ khóa tiếng Anh bằng giọng đọc của trình duyệt."
+    vowels: "Nguyên âm và nguyên âm đôi", consonants: "Phụ âm", minimalPairs: "Cặp âm dễ nhầm", chartHelp: "Bấm Nghe mẫu để phát từ khóa tiếng Anh bằng giọng đọc của trình duyệt."
   },
   en: {
     listen: "Listen", stop: "Stop", pair: "Listen to the pair", unavailable: "This browser cannot play sample speech. Please use a current version of Chrome, Edge, or Safari.",
-    vowels: "Vowels and diphthongs", consonants: "Consonants", chartHelp: "Select Listen to hear the English keyword through your browser speech voice."
+    vowels: "Vowels and diphthongs", consonants: "Consonants", minimalPairs: "Minimal pairs", chartHelp: "Select Listen to hear the English keyword through your browser speech voice."
   }
 } as const;
 
@@ -60,7 +60,7 @@ export function PronunciationListen({ locale, sounds, pairs }: { locale: "vi" | 
     {speechSupported === false && <p className="mt-4 text-sm text-red-700" role="alert">{text.unavailable}</p>}
     <SoundGrid title={text.vowels} items={vowelSounds} />
     <SoundGrid title={text.consonants} items={consonantSounds} />
-    <section className="mt-10" aria-label="Minimal pairs"><div className="grid gap-4 lg:grid-cols-3">
+    <section className="mt-10" aria-label={text.minimalPairs}><div className="grid gap-4 lg:grid-cols-3">
       {pairs.map((pair) => <Card key={pair.id}>
         <p className="font-serif text-3xl font-bold">{pair.first} <span className="text-muted">/</span> {pair.second}</p>
         <p className="mt-3 text-sm font-bold text-brand">{pair.contrast.join(" ↔ ")}</p>

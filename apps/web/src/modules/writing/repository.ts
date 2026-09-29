@@ -45,9 +45,10 @@ export async function saveWritingFeedback(actor: WritingActor, input: { submissi
   return { submissionId: submission.id, revisionId: submission.revision.id, savedAt: now };
 }
 
-export async function listWritingHistory(actor: WritingActor) {
+export async function listWritingHistory(actor: WritingActor, promptId?: string) {
   const db = createDatabase(); if (!db) return [];
-  const submissions = await db.select().from(writingSubmissions).where(ownerCondition(actor)).orderBy(desc(writingSubmissions.updatedAt)).limit(30);
+  const where = promptId ? and(ownerCondition(actor), eq(writingSubmissions.promptId, promptId)) : ownerCondition(actor);
+  const submissions = await db.select().from(writingSubmissions).where(where).orderBy(desc(writingSubmissions.updatedAt)).limit(30);
   return Promise.all(submissions.map(async (submission) => ({
     ...submission,
     prompt: submission.prompt as { text?: string },

@@ -141,6 +141,16 @@
       "source": "question toeic-part-2-practice · cded4f15-d651-5e9a-9d39-3f4ae0d3c8b2",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "2aa5624610bc2934b594": {
+      "file": "lesson-listening-describing-a-bedroom-2aa56246.mp3",
+      "spec": "8ec418ff992d10cb",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 29999,
+      "source": "lesson listening-describing-a-bedroom · My bedroom",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
     "2bdad4a93b995098ffc9": {
       "file": "ielts-skills-drill-dictation-order-dictation-2bdad4a9.mp3",
       "spec": "8a786f432d590db4",
@@ -229,6 +239,17 @@
       "source": "exam toeic-full-demo · part 3",
       "generatedAt": "2026-09-28T02:58:20.349Z"
     },
+    "3d3b4e9944454db60c74": {
+      "file": "lesson-listening-making-a-doctors-appointment-3d3b4e99.mp3",
+      "spec": "a62b8a34d27fd9da",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 40331,
+      "source": "lesson listening-making-a-doctors-appointment · A phone call to the clinic",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
     "3d5f8a756609fc839fa5": {
       "file": "toeic-full-mock-1-p2-q-3d5f8a75.mp3",
       "spec": "aa3d6a158c71482d",
@@ -282,6 +303,27 @@
       "durationMs": 12758,
       "source": "question toeic-mini-test-1 · 538113bf-1854-5eac-af7a-fb3a10ddbb11",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "439b77fe86c8d61c3b29": {
+      "file": "lesson-listening-train-station-announcements-439b77fe.mp3",
+      "spec": "3ba6a99482001099",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 34085,
+      "source": "lesson listening-train-station-announcements · Station announcements",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
+    "44c337f56074ce5a7784": {
+      "file": "lesson-listening-buying-fruit-at-the-market-44c337f5.mp3",
+      "spec": "354acdb2cf78b51a",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 32456,
+      "source": "lesson listening-buying-fruit-at-the-market · At the fruit stall",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
     },
     "4e3326dd89b3bec57fe7": {
       "file": "toeic-full-mock-1-p4-4-4e3326dd.mp3",
@@ -625,6 +667,28 @@
       "source": "exam toeic-part-3-practice · part 3 · passage 3",
       "generatedAt": "2026-09-28T02:58:20.351Z"
     },
+    "8b279a5efd5c874415db": {
+      "file": "lesson-listening-a-podcast-about-sleep-8b279a5e.mp3",
+      "spec": "4850c85bbfed6725",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 75499,
+      "source": "lesson listening-a-podcast-about-sleep · The Study Room podcast",
+      "generatedAt": "2026-09-29T07:28:34.548Z"
+    },
+    "8b4ac630ec422098e63d": {
+      "file": "lesson-listening-a-part-time-job-interview-8b4ac630.mp3",
+      "spec": "55102ce16e93f7dd",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 77459,
+      "source": "lesson listening-a-part-time-job-interview · Interview at a bookshop",
+      "generatedAt": "2026-09-29T07:28:34.548Z"
+    },
     "8c4e91242d26b8db16cc": {
       "file": "lesson-precision-8c4e9124.mp3",
       "spec": "fe1794fe0dff5107",
@@ -805,6 +869,29 @@
       "source": "question toeic-full-mock-1 · 8d0e45f8-6515-53df-a038-26987faf203a",
       "generatedAt": "2026-09-28T03:38:36.550Z"
     },
+    "a1411866bc420efc67e9": {
+      "file": "lesson-listening-a-news-report-on-cycle-lanes-a1411866.mp3",
+      "spec": "40bfdcd39507691a",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 70601,
+      "source": "lesson listening-a-news-report-on-cycle-lanes · Local news",
+      "generatedAt": "2026-09-29T07:28:34.548Z"
+    },
+    "a33b634cf81528eb374e": {
+      "file": "lesson-listening-making-plans-for-the-weekend-a33b634c.mp3",
+      "spec": "24c41882ed7d5b1e",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 42769,
+      "source": "lesson listening-making-plans-for-the-weekend · Plans for Saturday",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
     "a37791fe3d2cba22ba89": {
       "file": "lesson-speaking-solving-a-problem-together-a37791fe.mp3",
       "spec": "08f30d45aa617a7a",
@@ -826,6 +913,16 @@
       "durationMs": 15091,
       "source": "question toeic-full-mock-1 · 677b7e8e-a838-5658-9a4d-f4615c1b07ce",
       "generatedAt": "2026-09-28T03:38:36.555Z"
+    },
+    "a41f081449750245d69e": {
+      "file": "lesson-listening-a-short-weather-report-a41f0814.mp3",
+      "spec": "87b8303a529d3bea",
+      "voices": [
+        "en_US-libritts_r-medium:15"
+      ],
+      "durationMs": 27955,
+      "source": "lesson listening-a-short-weather-report · Tomorrow's weather",
+      "generatedAt": "2026-09-29T07:28:34.549Z"
     },
     "a7a5c87310c9a1ebb384": {
       "file": "toeic-part-1-practice-p1-q-a7a5c873.mp3",
@@ -911,6 +1008,16 @@
       "source": "question toeic-full-mock-1 · 3699a604-a667-5489-9ac5-4ca48818b571",
       "generatedAt": "2026-09-28T03:38:36.551Z"
     },
+    "bfda8bd77668740fe7b3": {
+      "file": "lesson-listening-a-guided-museum-tour-bfda8bd7.mp3",
+      "spec": "7b307394e1fb04f9",
+      "voices": [
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 58060,
+      "source": "lesson listening-a-guided-museum-tour · Welcome to the city museum",
+      "generatedAt": "2026-09-29T07:28:34.547Z"
+    },
     "c00c25549f46596b8ea5": {
       "file": "toeic-full-mock-1-p3-12-c00c2554.mp3",
       "spec": "d8dffbe469ce8d43",
@@ -986,6 +1093,17 @@
       "source": "exam toeic-full-demo · part 2",
       "generatedAt": "2026-09-28T03:38:36.550Z"
     },
+    "c6730855687539958258": {
+      "file": "lesson-listening-what-time-is-the-bus-c6730855.mp3",
+      "spec": "b9534a565d7335f8",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 34287,
+      "source": "lesson listening-what-time-is-the-bus · At the bus station",
+      "generatedAt": "2026-09-29T07:28:34.551Z"
+    },
     "c9a07436f0caf402f429": {
       "file": "toeic-part-3-practice-p3-2-c9a07436.mp3",
       "spec": "c3f432200765b3e0",
@@ -1007,6 +1125,17 @@
       "durationMs": 15440,
       "source": "question toeic-full-mock-1 · fd48408d-456b-577b-932f-a4c5b6016b9e",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "cfb07cb0c5ea4cf7d043": {
+      "file": "lesson-listening-calling-the-landlord-cfb07cb0.mp3",
+      "spec": "a45c04cd9a4f150f",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 61995,
+      "source": "lesson listening-calling-the-landlord · A problem in the flat",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
     },
     "d062d84ea8098b09431d": {
       "file": "lesson-listening-booking-a-table-d062d84e.mp3",
@@ -1179,6 +1308,17 @@
       "source": "exam toeic-part-4-practice · part 4 · passage 1",
       "generatedAt": "2026-09-28T02:58:20.351Z"
     },
+    "f8033f69f495c7ed594a": {
+      "file": "lesson-listening-meeting-a-new-classmate-f8033f69.mp3",
+      "spec": "48826705938f4c80",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 35680,
+      "source": "lesson listening-meeting-a-new-classmate · The first day of class",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
     "f82bfb489a8d248f1729": {
       "file": "toeic-full-mock-1-p4-9-f82bfb48.mp3",
       "spec": "504055bd1e9d332f",
@@ -1220,6 +1360,17 @@
       "durationMs": 14639,
       "source": "question toeic-full-mock-1 · 9ee1d75d-58cd-5423-8e99-c1c8216fd0bc",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "fc767a29a512db7c12f8": {
+      "file": "lesson-listening-reporting-a-lost-bag-fc767a29.mp3",
+      "spec": "55c9c7a36ff419d1",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 53438,
+      "source": "lesson listening-reporting-a-lost-bag · At the lost property office",
+      "generatedAt": "2026-09-29T07:28:34.550Z"
     }
   }
 }

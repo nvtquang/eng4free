@@ -3,6 +3,7 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { LevelBadge } from "@/components/ui/level-badge";
+import { Pill } from "@/components/ui/pill";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { cefrPath } from "@/modules/courses/cefr-path";
 import { listPublishedLessonCatalog } from "@/modules/lessons/repository";
@@ -13,7 +14,7 @@ export default async function LearnPage() {
   const copy = messages.learning;
   const catalog = await listPublishedLessonCatalog();
   return <Section><Eyebrow>{copy.eyebrow}</Eyebrow><h1 className="mt-4 max-w-3xl font-serif text-5xl font-bold tracking-tight sm:text-6xl">{copy.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{copy.description}</p>
-    <div className="mt-8 flex flex-wrap gap-2">{[["/vocabulary", messages.nav.vocabulary], ["/grammar", messages.nav.grammar], ["/pronunciation", messages.nav.pronunciation], ["/mistakes", messages.nav.mistakes]].map(([href, label]) => <Link key={href} href={href} className="rounded-full bg-band px-4 py-2 text-sm font-bold text-muted transition hover:bg-brand-soft hover:text-brand-deep">{label}</Link>)}</div>
+    <div className="mt-8 flex flex-wrap gap-2">{[["/vocabulary", messages.nav.vocabulary], ["/grammar", messages.nav.grammar], ["/pronunciation", messages.nav.pronunciation], ["/mistakes", messages.nav.mistakes]].map(([href, label]) => <Pill key={href} href={href}>{label}</Pill>)}</div>
     <div className="mt-12 grid gap-5 lg:grid-cols-2">{cefrPath.map((level) => {
     const published = catalog?.filter((lesson) => lesson.level === level.level) ?? [];
     const displayLessons = published.length > 0 ? published.map((lesson) => ({ slug: lesson.slug, title: lesson.title, minutes: lesson.estimatedMinutes })) : level.lessons.map((lesson) => ({ slug: lesson.slug, title: lesson.title[locale], minutes: lesson.minutes }));

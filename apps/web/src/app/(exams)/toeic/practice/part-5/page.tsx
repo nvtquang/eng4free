@@ -5,5 +5,5 @@ export const dynamic = "force-dynamic";
 
 export default async function ToeicPart5Page() {
   const messages = getMessages(await getLocale());
-  return <ToeicPart5Runner copy={messages.toeicPractice} />;
+  return <ToeicPart5Runner copy={messages.toeicPractice} tutorCopy={messages.aiTutor} />;
 }

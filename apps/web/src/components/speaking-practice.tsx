@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import type { SpeakingFeedback } from "@english4free/content-schemas";
 import { SpeakingFeedbackPanel } from "@/components/speaking-feedback-panel";
 import { Button } from "@/components/ui/button";
@@ -23,8 +23,9 @@ export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speak
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
-  async function refresh() { const response = await fetch("/api/speaking/sessions", { cache: "no-store" }); if (response.ok) setHistory((await response.json() as { sessions: History[] }).sessions); }
-  useEffect(() => { void refresh(); return () => { stream.current?.getTracks().forEach((track) => track.stop()); }; }, []);
+  const refresh = useCallback(async () => { const response = await fetch(`/api/speaking/sessions?promptId=${encodeURIComponent(promptId)}`, { cache: "no-store" }); if (response.ok) setHistory((await response.json() as { sessions: History[] }).sessions); }, [promptId]);
+  useEffect(() => { void refresh(); }, [refresh]);
+  useEffect(() => () => { stream.current?.getTracks().forEach((track) => track.stop()); }, []);
   useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
 
   async function start() {
@@ -54,20 +55,20 @@ export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speak
     try {
       const created = await fetch("/api/speaking/sessions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId, prompt, examType }) });
       const session = await created.json() as { id?: string; error?: string };
-      if (!created.ok || !session.id) throw new Error(session.error ?? "Session failed");
+      if (!created.ok || !session.id) throw new Error(session.error ?? copy.saveFailed);
       const form = new FormData(); form.set("recording", new File([blob], "recording.webm", { type: blob.type || "audio/webm" })); form.set("durationMs", String(durationMs));
       const uploaded = await fetch(`/api/speaking/sessions/${session.id}/recordings`, { method: "POST", body: form });
       const uploadedBody = await uploaded.json() as { error?: string };
-      if (!uploaded.ok) throw new Error(uploadedBody.error ?? "Upload failed");
+      if (!uploaded.ok) throw new Error(uploadedBody.error ?? copy.saveFailed);
       setBlob(undefined); if (previewUrl) URL.revokeObjectURL(previewUrl); setPreviewUrl(undefined); setState("idle");
       setMessage(aiCopy.analyzing);
       const feedbackResponse = await fetch(`/api/speaking/sessions/${session.id}/feedback`, { method: "POST" });
       const feedbackResult = await feedbackResponse.json().catch(() => ({})) as { providerConfigured?: boolean; feedback?: SpeakingFeedback | null; error?: string };
       setMessage(feedbackResponse.ok && feedbackResult.feedback ? aiCopy.feedbackReady : aiCopy.providerUnavailable);
       await refresh();
-    } catch (saveError) { setError(saveError instanceof Error ? saveError.message : "Save failed"); }
+    } catch (saveError) { setError(saveError instanceof Error && saveError.message ? saveError.message : copy.saveFailed); }
     finally { setPending(false); }
   }
 
-  return <div className="grid gap-8 lg:grid-cols-[1fr_1fr]"><section className="rounded-ui border border-line bg-surface p-6 shadow-card"><h2 className="font-serif text-3xl font-bold">{prompt}</h2>{state === "stopping" && <p className="mt-3 text-sm text-muted">{copy.stoppingRecording}</p>}<div className="mt-6">{state === "recording" ? <Button onClick={stop}>{copy.stopRecording}</Button> : <Button disabled={state === "stopping"} onClick={start}>{aiCopy.pushToTalk}</Button>}</div>{previewUrl && <><p className="mt-5 text-sm text-brand">{copy.recordingReady}</p><audio className="mt-3 w-full" controls preload="metadata" src={previewUrl} /><Button className="mt-4" disabled={pending} onClick={save}>{pending ? copy.saving : copy.saveRecording}</Button></>}{message && <p className="mt-4 text-sm text-brand" role="status">{message}</p>}{error && <p className="mt-4 text-sm text-red-700" role="alert">{error}</p>}</section><aside><h2 className="font-serif text-2xl font-bold">{copy.history}</h2><div className="mt-4 space-y-3">{history.length === 0 && <p className="text-sm text-muted">{copy.noHistory}</p>}{history.map((session) => <article className="rounded-ui border border-line bg-surface p-4" key={session.id}><p className="font-bold">{session.prompt}</p><p className="mt-1 text-sm text-muted">{new Date(session.createdAt).toLocaleString()}</p>{session.turns.map((turn) => <div key={turn.id}>{turn.audioMediaId && <audio className="mt-3 w-full" controls preload="metadata" src={`/api/media/${turn.audioMediaId}`} />}{turn.transcript && <div className="mt-3 rounded-ui bg-canvas p-3 text-sm"><p className="font-bold">{aiCopy.transcript}</p><p className="mt-1 text-muted">{turn.transcript}</p></div>}{turn.feedback && <SpeakingFeedbackPanel feedback={turn.feedback} copy={aiCopy} />}</div>)}</article>)}</div></aside></div>;
+  return <div className="grid gap-8 lg:grid-cols-[1fr_1fr]"><section className="rounded-ui border border-line bg-surface p-6 shadow-card"><h2 className="font-serif text-3xl font-bold">{prompt}</h2>{state === "stopping" && <p className="mt-3 text-sm text-muted">{copy.stoppingRecording}</p>}<div className="mt-6">{state === "recording" ? <Button onClick={stop}>{copy.stopRecording}</Button> : <Button disabled={state === "stopping"} onClick={start}>{aiCopy.pushToTalk}</Button>}</div>{previewUrl && <><p className="mt-5 text-sm text-brand">{copy.recordingReady}</p><audio className="mt-3 w-full" controls preload="metadata" src={previewUrl} /><Button className="mt-4" disabled={pending} onClick={save}>{pending ? copy.saving : copy.saveRecording}</Button></>}{message && <p className="mt-4 text-sm text-brand" role="status">{message}</p>}{error && <p className="mt-4 text-sm text-red-700" role="alert">{error}</p>}</section><aside><h2 className="font-serif text-2xl font-bold">{copy.history}</h2><div className="mt-4 space-y-3">{history.length === 0 && <p className="text-sm text-muted">{copy.noHistory}</p>}{history.map((session) => { const hasDetail = session.turns.some((turn) => turn.audioMediaId || turn.transcript || turn.feedback); return <article className="rounded-ui border border-line bg-surface p-4" key={session.id}><p className="font-bold">{session.prompt}</p><p className="mt-1 text-sm text-muted">{new Date(session.createdAt).toLocaleString()}</p>{hasDetail && <details className="mt-2 text-sm"><summary className="cursor-pointer font-semibold text-brand hover:text-brand-deep">{aiCopy.viewFeedback}</summary><div className="mt-3">{session.turns.map((turn) => <div key={turn.id}>{turn.audioMediaId && <audio className="w-full" controls preload="metadata" src={`/api/media/${turn.audioMediaId}`} />}{turn.transcript && <div className="mt-3 rounded-ui bg-canvas p-3 text-sm"><p className="font-bold">{aiCopy.transcript}</p><p className="mt-1 text-muted">{turn.transcript}</p></div>}{turn.feedback && <SpeakingFeedbackPanel feedback={turn.feedback} copy={aiCopy} />}</div>)}</div></details>}</article>; })}</div></aside></div>;
 }

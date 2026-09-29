@@ -14,7 +14,7 @@ import { d3Retires } from "../../../content/packs/d3";
 import type { BatchKey } from "../../../content/packs/d3/types";
 import { batchId, connect, D3_COURSE_ID, isTestDatabase } from "./shared";
 
-const ALL: BatchKey[] = ["lessons", "grammar", "vocabulary", "toeic", "ielts"];
+const ALL: BatchKey[] = ["lessons", "grammar", "vocabulary", "toeic", "ielts", "skills-extra"];
 const args = process.argv.slice(2);
 const TEST_DB = args.includes("--test-db");
 const requested = args.find((arg) => arg.startsWith("--batch="))?.slice(8).split(",") as BatchKey[] | undefined;
@@ -37,7 +37,7 @@ async function main() {
         const id = batchId(key);
         await tx.update(contentBatches).set({ status: "PUBLISHED", reviewedBy: TEST_DB ? "automated test publish" : "spot review (see docs/content/d3-review-sample.md)" }).where(eq(contentBatches.id, id));
         await tx.update(lessons).set({ status: "PUBLISHED" }).where(and(eq(lessons.contentBatchId, id), ne(lessons.status, "ARCHIVED")));
-        if (key === "lessons" || key === "grammar") await tx.update(courses).set({ status: "PUBLISHED" }).where(eq(courses.id, D3_COURSE_ID));
+        if (key === "lessons" || key === "grammar" || key === "skills-extra") await tx.update(courses).set({ status: "PUBLISHED" }).where(eq(courses.id, D3_COURSE_ID));
         await tx.update(exams).set({ status: "PUBLISHED" }).where(eq(exams.contentBatchId, id));
         await tx.update(questions).set({ status: "PUBLISHED" }).where(and(eq(questions.contentBatchId, id), ne(questions.status, "ARCHIVED")));
         await tx.update(vocabulary).set({ status: "PUBLISHED" }).where(eq(vocabulary.contentBatchId, id));

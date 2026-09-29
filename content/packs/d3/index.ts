@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 import type { BatchKey, ExamDef, LessonDef, PromptDef, VocabularySelection } from "./types";
 import { grammarLessons } from "./lessons/grammar";
 import { skillLessons } from "./lessons/skills";
+import { extraSkillLessons } from "./lessons/skills-extra";
 import { toeicExams } from "./toeic";
 import { ieltsExams, ieltsPrompts } from "./ielts";
 import { vocabularyExamples } from "./vocabulary/examples";
@@ -16,10 +17,11 @@ export const d3Batches: Record<BatchKey, { key: BatchKey; title: string; source:
   grammar: { key: "grammar", title: "Grammar topics", source: "https://github.com/nvtquang/eng4free/tree/main/content/packs/d3/lessons", license: "English 4 Free original content", generatedBy: "AI-drafted (Claude, Anthropic); human spot review" },
   vocabulary: { key: "vocabulary", title: "CEFR vocabulary", source: "https://github.com/nvtquang/eng4free/tree/main/content/packs/d3/vocabulary", license: "Meanings and IPA: English Wiktionary, CC BY-SA 4.0 · Levels: Words-CEFR (MIT), Octanove C1/C2 (CC BY-SA 4.0) · Examples: English 4 Free original", generatedBy: "Sourced data; example sentences AI-drafted (Claude, Anthropic)" },
   toeic: { key: "toeic", title: "TOEIC full mock and part practice", source: "https://github.com/nvtquang/eng4free/tree/main/content/packs/d3/toeic", license: "English 4 Free original content · photographs CC0 (see credits)", generatedBy: "AI-drafted (Claude, Anthropic); human spot review" },
+  "skills-extra": { key: "skills-extra", title: "Extra Listening and Reading lessons", source: "https://github.com/nvtquang/eng4free/tree/main/content/packs/d3/lessons", license: "English 4 Free original content", generatedBy: "AI-drafted (Claude, Anthropic); human spot review" },
   ielts: { key: "ielts", title: "IELTS Listening, Reading, Writing and Speaking", source: "https://github.com/nvtquang/eng4free/tree/main/content/packs/d3/ielts", license: "English 4 Free original content", generatedBy: "AI-drafted (Claude, Anthropic); human spot review" }
 };
 
-export const d3Lessons: LessonDef[] = [...grammarLessons, ...skillLessons];
+export const d3Lessons: LessonDef[] = [...grammarLessons, ...skillLessons, ...extraSkillLessons];
 export const d3Exams: ExamDef[] = [...toeicExams, ...ieltsExams];
 export const d3Prompts: PromptDef[] = ieltsPrompts;
 
@@ -37,5 +39,6 @@ export const d3Retires: Record<BatchKey, { examSlugs?: string[]; lessonBatchVers
   grammar: { lessonBatchVersions: ["0.1.0"], courseSlugPrefixes: ["content-pack-v01-cefr-"] },
   vocabulary: { vocabularyOutsideBatch: true },
   toeic: { examSlugs: ["toeic-fixture-v01", "toeic-part-1-demo", "toeic-part-2-demo", "toeic-part-3-demo", "toeic-part-4-demo", "toeic-part-5-demo", "toeic-part-6-demo", "toeic-part-7-demo", "toeic-mini-demo", "toeic-full-demo", "toeic-part-5-starter"] },
+  "skills-extra": {},
   ielts: { examSlugs: ["ielts-fixture-v01", "ielts-listening-demo", "ielts-reading-demo"] }
 };

@@ -1,9 +1,13 @@
 import { SkillLessonList } from "@/components/skill-lesson-list";
 import { getLocale } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
+import { defaultSkillLevel } from "@/modules/onboarding/default-level";
 
-export default async function ListeningPage() {
+export const dynamic = "force-dynamic";
+
+export default async function ListeningPage({ searchParams }: { searchParams: Promise<{ level?: string }> }) {
   const locale = await getLocale();
   const copy = getSkillsCopy(locale);
-  return <SkillLessonList locale={locale} skill="LISTENING" eyebrow={copy.listeningEyebrow} title={copy.listeningTitle} intro={copy.listeningIntro} />;
+  const level = (await searchParams).level ?? await defaultSkillLevel();
+  return <SkillLessonList locale={locale} skill="LISTENING" eyebrow={copy.listeningEyebrow} title={copy.listeningTitle} intro={copy.listeningIntro} level={level} basePath="/skills/listening" />;
 }

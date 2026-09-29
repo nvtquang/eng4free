@@ -3,7 +3,7 @@ import { and, eq } from "drizzle-orm";
 import { createDatabase } from "@/db/client";
 import { lessonCompletions } from "@/db/schema";
 import { appendProgressEvent } from "@/modules/progress/repository";
-import type { ProgressEvent } from "@/modules/progress/progress";
+import { xpByEvent, type ProgressEvent } from "@/modules/progress/progress";
 import { recordMistakes, resolveMistakes, type MistakeEntry } from "@/modules/mistakes/repository";
 import { getLessonQuestionSetForScoring } from "./repository";
 
@@ -28,9 +28,11 @@ export async function completeLesson(input: { lessonId: string; actor: { userId:
   const inserted = await db.insert(lessonCompletions).values({ id: randomUUID(), lessonId: input.lessonId, ownerKey, userId: input.actor.userId, guestId: input.actor.guestId, rawScore, totalQuestions, completedAt: new Date(), updatedAt: new Date() }).onConflictDoNothing().returning({ id: lessonCompletions.id });
   if (inserted.length === 0) await db.update(lessonCompletions).set({ rawScore, totalQuestions, updatedAt: new Date() }).where(and(eq(lessonCompletions.lessonId, input.lessonId), eq(lessonCompletions.ownerKey, ownerKey)));
   const skill = ["LISTENING", "SPEAKING", "READING", "WRITING"].includes(scoringData.lesson.skill ?? "") ? scoringData.lesson.skill as ProgressEvent["skill"] : null;
+  let xpEarned = 0;
   if (inserted.length > 0) {
     await appendProgressEvent({ userId: input.actor.userId, guestId: input.actor.guestId, type: "LESSON_COMPLETED", skill, sourceType: "LESSON", sourceId: input.lessonId, idempotencyKey: `lesson:${input.lessonId}:${ownerKey}:completed`, metadata: { lessonId: input.lessonId, rawScore, totalQuestions } });
-    if (skill === "LISTENING" || skill === "READING") await appendProgressEvent({ userId: input.actor.userId, guestId: input.actor.guestId, type: skill === "LISTENING" ? "LISTENING_COMPLETED" : "READING_COMPLETED", skill, sourceType: "LESSON", sourceId: input.lessonId, idempotencyKey: `lesson:${input.lessonId}:${ownerKey}:${skill.toLowerCase()}`, metadata: { lessonId: input.lessonId, rawScore, totalQuestions } });
+    xpEarned += xpByEvent.LESSON_COMPLETED;
+    if (skill === "LISTENING" || skill === "READING") { await appendProgressEvent({ userId: input.actor.userId, guestId: input.actor.guestId, type: skill === "LISTENING" ? "LISTENING_COMPLETED" : "READING_COMPLETED", skill, sourceType: "LESSON", sourceId: input.lessonId, idempotencyKey: `lesson:${input.lessonId}:${ownerKey}:${skill.toLowerCase()}`, metadata: { lessonId: input.lessonId, rawScore, totalQuestions } }); xpEarned += xpByEvent[skill === "LISTENING" ? "LISTENING_COMPLETED" : "READING_COMPLETED"]; }
   }
-  return { rawScore, totalQuestions, alreadyCompleted: inserted.length === 0, questions: reviewedQuestions };
+  return { rawScore, totalQuestions, alreadyCompleted: inserted.length === 0, xpEarned, questions: reviewedQuestions };
 }

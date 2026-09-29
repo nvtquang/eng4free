@@ -9,7 +9,7 @@
 import type { QuestionAuthoring } from "@english4free/content-schemas";
 
 export type Level = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-export type BatchKey = "lessons" | "grammar" | "vocabulary" | "toeic" | "ielts";
+export type BatchKey = "lessons" | "grammar" | "vocabulary" | "toeic" | "ielts" | "skills-extra";
 export type Image = { src: string; alt: string; credit?: string };
 /** Speaker casting for generated audio: a gender, or an exact Piper voice such as "en_GB-vctk-medium:p236". */
 export type Voice = "female" | "male" | `${string}:${string}`;
@@ -24,7 +24,7 @@ export type LessonBlock =
   | { kind: "listening"; heading: string; script: string; voices?: Record<string, Voice> }
   | { kind: "practice"; instruction: string; questions: LessonQuestion[] };
 export type LessonDef = {
-  key: string; batch: "lessons" | "grammar"; level: Level; unit: string; slug: string; title: string;
+  key: string; batch: "lessons" | "grammar" | "skills-extra"; level: Level; unit: string; slug: string; title: string;
   skill: "GRAMMAR" | "READING" | "LISTENING" | "SPEAKING" | "WRITING"; minutes: number; blocks: LessonBlock[];
 };
 
