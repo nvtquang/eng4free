@@ -10,7 +10,8 @@ import { cefrPath } from "@/modules/courses/cefr-path";
 import { buildStreakHeatmap, heatmapDayLabels, type StreakHeatmap } from "@/modules/progress/heatmap";
 import { projectProgress, type ProgressEvent, type ProgressSnapshot } from "@/modules/progress/progress";
 import { listProgressEvents } from "@/modules/progress/repository";
-import { guestCookieName } from "@/modules/auth/request-actor";
+import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { findLearnerProfile } from "@/modules/onboarding/repository";
 
 const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
 const cellTones = ["bg-band border border-line", "bg-emerald-200", "bg-emerald-300", "bg-emerald-500", "bg-emerald-700"];
@@ -21,6 +22,13 @@ export default async function HomePage() {
   let snapshot: ProgressSnapshot | null = null;
   let heatmap: StreakHeatmap | null = null;
   let vocabularyLearned = 0;
+  let hasProfile = false;
+  try {
+    const { actor } = await getRequestActor(false);
+    hasProfile = Boolean(await findLearnerProfile(actor));
+  } catch {
+    // No learner cookie yet, or database unavailable; show the onboarding CTA.
+  }
   if (session?.user?.id) {
     try {
       const guestId = (await cookies()).get(guestCookieName)?.value ?? "";
@@ -32,7 +40,7 @@ export default async function HomePage() {
       // Database is optional in the local demo; skip the progress section.
     }
   }
-  return <><Section className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:py-32"><div><Eyebrow>{home.eyebrow}</Eyebrow><h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.04] tracking-tight text-ink sm:text-6xl">{home.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{home.description}</p><div className="mt-9 flex flex-wrap gap-3"><Link href="/learn"><Button>{common.start}</Button></Link><Link href="/toeic"><Button variant="secondary">{home.secondary}</Button></Link></div></div><div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-brand p-7 text-white shadow-card sm:p-10"><div className="absolute -right-16 -top-14 size-52 rounded-full bg-ochre/90" /><div className="absolute -bottom-16 -left-14 size-48 rounded-full bg-terra/90" /><div className="relative"><p className="text-sm font-bold uppercase tracking-[.16em] text-white/75">{home.level}</p><p className="mt-5 font-serif text-4xl font-bold">A1 → C2</p><p className="mt-3 max-w-sm text-base leading-7 text-white/85">{home.levelsDescription}</p><div className="mt-10 grid grid-cols-3 gap-3">{levels.map((level) => <div className="rounded-ui border border-white/20 bg-white/10 px-3 py-4 text-center text-sm font-bold" key={level}>{level}</div>)}</div></div></div></Section>
+  return <><Section className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:py-32"><div><Eyebrow>{home.eyebrow}</Eyebrow><h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.04] tracking-tight text-ink sm:text-6xl">{home.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{home.description}</p><div className="mt-9 flex flex-wrap gap-3">{hasProfile ? <Link href="/today"><Button>{home.todayPlan}</Button></Link> : <Link href="/onboarding"><Button>{home.startPlan}</Button></Link>}<Link href="/learn"><Button variant="secondary">{common.start}</Button></Link><Link href="/toeic"><Button variant="secondary">{home.secondary}</Button></Link></div></div><div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-brand p-7 text-white shadow-card sm:p-10"><div className="absolute -right-16 -top-14 size-52 rounded-full bg-ochre/90" /><div className="absolute -bottom-16 -left-14 size-48 rounded-full bg-terra/90" /><div className="relative"><p className="text-sm font-bold uppercase tracking-[.16em] text-white/75">{home.level}</p><p className="mt-5 font-serif text-4xl font-bold">A1 → C2</p><p className="mt-3 max-w-sm text-base leading-7 text-white/85">{home.levelsDescription}</p><div className="mt-10 grid grid-cols-3 gap-3">{levels.map((level) => <div className="rounded-ui border border-white/20 bg-white/10 px-3 py-4 text-center text-sm font-bold" key={level}>{level}</div>)}</div></div></div></Section>
     {snapshot && heatmap && <Section className="pb-0 sm:pb-0"><div className="flex flex-wrap items-end justify-between gap-4"><div><Eyebrow>{home.progressEyebrow}</Eyebrow><h2 className="mt-3 font-serif text-3xl font-bold sm:text-4xl">{home.progressTitle}</h2></div><Link className="text-sm font-bold text-brand hover:text-brand-deep" href="/dashboard">{home.viewDetail} →</Link></div>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Metric tone="bg-accent-ochre/15 text-accent-ochre" icon={<ZapIcon />} label={dashboard.xp} value={snapshot.xp} />
