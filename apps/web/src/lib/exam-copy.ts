@@ -53,7 +53,8 @@ const examCopy = {
     review: "Xem lại bài làm",
     timeExpired: "Đã hết giờ — kết quả được chấm từ đáp án đã tự động lưu.",
     tryAgain: "Làm lại",
-    history: "Lịch sử bài thi"
+    history: "Lịch sử bài thi",
+    backToday: "Về Hôm nay"
   },
   en: {
     intro: "Answers save automatically — you can reload the page and continue at any time.",
@@ -107,7 +108,8 @@ const examCopy = {
     review: "Review your attempt",
     timeExpired: "Time expired — saved answers were scored.",
     tryAgain: "Try again",
-    history: "Exam history"
+    history: "Exam history",
+    backToday: "Back to Today"
   }
 } as const;
 

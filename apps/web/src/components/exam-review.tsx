@@ -8,6 +8,8 @@ import { questionLabels } from "@/components/questions/numbering";
 import { QuestionReview } from "@/components/questions/question-review";
 import { ContentImage, isContentImage } from "@/components/questions/question-image";
 import { groupPartQuestions } from "@/components/questions/part-groups";
+import { TutorExplanation } from "@/components/tutor-explanation";
+import type { Messages } from "@/lib/i18n";
 
 /** After submitting, learners can replay the recording freely and read the script. */
 function ListeningRecap({ copy, metadata }: { copy: ExamCopy; metadata: Record<string, unknown> }) {
@@ -20,7 +22,7 @@ function ListeningRecap({ copy, metadata }: { copy: ExamCopy; metadata: Record<s
   </div>;
 }
 
-export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: ExamAttemptResult; copy: ExamCopy }) {
+export function ExamReview({ exam, result, copy, tutorCopy }: { exam: PublicExam; result: ExamAttemptResult; copy: ExamCopy; tutorCopy?: Messages["aiTutor"] }) {
   const review = new Map(result.results.map((item) => [item.questionId, item]));
   const questionSkills = new Map(exam.parts.flatMap((part) => part.questions.map((question) => [question.id, part.skill] as const)));
   const estimate = estimateAttempt(exam.type, tallyBySkill(questionSkills, result.results));
@@ -30,7 +32,7 @@ export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: E
     <Card className="bg-brand-soft">
       <p className="text-sm font-bold text-brand">{result.attempt.status === "EXPIRED" ? copy.timeExpired : copy.review}</p>
       <h2 className="mt-2 font-serif text-3xl font-bold">{copy.result}: {result.attempt.rawScore}/{result.attempt.totalQuestions}</h2>
-      <div className="mt-6 flex flex-wrap gap-3"><Link href={"/exams/" + exam.slug}><Button>{copy.tryAgain}</Button></Link><Link href="/dashboard"><Button variant="secondary">{copy.history}</Button></Link></div>
+      <div className="mt-6 flex flex-wrap gap-3"><Link href={"/exams/" + exam.slug}><Button>{copy.tryAgain}</Button></Link><Link href="/today"><Button variant="secondary">{copy.backToday}</Button></Link><Link href="/toeic/history"><Button variant="quiet">{copy.history}</Button></Link></div>
     </Card>
     {(estimate.listening !== null || estimate.reading !== null) && <Card className="mt-6">
       <h2 className="font-serif text-2xl font-bold">{copy.estimateTitle}</h2>
@@ -50,7 +52,8 @@ export function ExamReview({ exam, result, copy }: { exam: PublicExam; result: E
         const reviews = (items: typeof part.questions) => <div className="mt-7 space-y-7">{items.map((question) => {
           const item = review.get(question.id);
           if (!item) return null;
-          return <QuestionReview key={question.id} question={question} result={item} copy={copy.questions} label={labels.get(question.id) ?? ""} correctLabel={copy.correct} />;
+          const selected = item.type === "MCQ" ? (item.response as { optionId?: string } | null)?.optionId ?? null : null;
+          return <div key={question.id}><QuestionReview question={question} result={item} copy={copy.questions} label={labels.get(question.id) ?? ""} correctLabel={copy.correct} />{tutorCopy && selected && <TutorExplanation attemptId={result.attempt.id} questionId={question.id} learnerAnswer={selected} copy={tutorCopy} />}</div>;
         })}</div>;
         return <>{loose.length > 0 && reviews(loose)}{groups.map(({ passage, questions }) => { const image = isContentImage(passage.metadata.image) ? passage.metadata.image : null; return <div className="mt-8" key={passage.id}>
           {passage.metadata.kind === "LISTENING"

@@ -1,9 +1,6 @@
-import { ToeicPart5Runner } from "@/components/toeic-part-5-runner";
-import { getLocale, getMessages } from "@/lib/i18n";
+import { redirect } from "next/navigation";
 
-export const dynamic = "force-dynamic";
-
-export default async function ToeicPart5Page() {
-  const messages = getMessages(await getLocale());
-  return <ToeicPart5Runner copy={messages.toeicPractice} tutorCopy={messages.aiTutor} />;
+/** The old standalone Part 5 runner now lives on the shared exam engine. */
+export default function ToeicPart5Page() {
+  redirect("/exams/toeic-part-5-practice");
 }

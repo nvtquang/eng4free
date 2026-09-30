@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { and, asc, desc, eq, or } from "drizzle-orm";
+import { and, asc, desc, eq, inArray } from "drizzle-orm";
 import { isResponseAnswered, parseAuthoredQuestion, parseLearnerResponse, parsePublicQuestion, questionPoints, type GradableQuestionType, type PublicQuestion as PublicQuestionDefinition, type QuestionAnswer, type QuestionResponse } from "@english4free/content-schemas";
 import { scoreQuestion } from "@english4free/scoring-core";
 import { createDatabase } from "@/db/client";
@@ -7,7 +7,7 @@ import { attemptAnswers, attempts, examParts, exams, passages, questions } from 
 import { demoAudioUrl } from "@/modules/media/demo-audio";
 import { appendProgressEvent } from "@/modules/progress/repository";
 import { recordMistakes, resolveMistakes, type MistakeEntry } from "@/modules/mistakes/repository";
-import type { AttemptActor } from "@/modules/attempts/types";
+import type { LearnerRef } from "@/modules/learners/types";
 
 type PublicQuestion = PublicQuestionDefinition & { id: string; passageId: string | null; points: number };
 /** A learner response for one question, validated against that question's type before it is stored. */
@@ -56,10 +56,8 @@ export function withGeneratedAudio(question: PublicQuestionDefinition, options: 
   return { ...question, content: { ...question.content, playbackText: options.includeTranscript ? script : undefined, audioUrl } } as PublicQuestionDefinition;
 }
 
-function owner(actor: AttemptActor) {
-  return actor.userId
-    ? or(eq(attempts.userId, actor.userId), eq(attempts.guestId, actor.guestId))
-    : eq(attempts.guestId, actor.guestId);
+function owner(actor: LearnerRef) {
+  return eq(attempts.learnerId, actor.learnerId);
 }
 
 export function isAttemptExpired(expiresAt: Date | null, now = new Date()) {
@@ -81,9 +79,10 @@ function storedResponse(row: { response: unknown; selectedOptionId: string | nul
   return (row.response as QuestionResponse | null) ?? (row.selectedOptionId ? { optionId: row.selectedOptionId } : null);
 }
 
-export async function getPublicExamBySlug(slug: string, options: { includeTranscripts?: boolean } = {}): Promise<PublicExam | null> {
+/** A published exam without answer keys. `includeArchived` also finds retired exams, only for reviewing past attempts. */
+export async function getPublicExamBySlug(slug: string, options: { includeTranscripts?: boolean; includeArchived?: boolean } = {}): Promise<PublicExam | null> {
   const db = dbOrThrow();
-  const [exam] = await db.select().from(exams).where(and(eq(exams.slug, slug), eq(exams.status, "PUBLISHED")));
+  const [exam] = await db.select().from(exams).where(and(eq(exams.slug, slug), options.includeArchived ? inArray(exams.status, ["PUBLISHED", "ARCHIVED"]) : eq(exams.status, "PUBLISHED")));
   if (!exam) return null;
   const partRows = await db.select().from(examParts).where(eq(examParts.examId, exam.id)).orderBy(asc(examParts.sortOrder));
   const parts = await Promise.all(partRows.map(async (part) => {
@@ -107,7 +106,7 @@ export async function listPublicExams(type: "TOEIC" | "IELTS") {
     .orderBy(asc(exams.createdAt));
 }
 
-async function getOwnedAttempt(attemptId: string, actor: AttemptActor) {
+async function getOwnedAttempt(attemptId: string, actor: LearnerRef) {
   const db = dbOrThrow();
   const [attempt] = await db.select().from(attempts).where(and(eq(attempts.id, attemptId), owner(actor)));
   if (!attempt) throw new Error("Attempt not found");
@@ -143,7 +142,7 @@ async function validateAndPersistAnswers(attemptId: string, examId: string, answ
 }
 
 /** Snapshots wrong MCQ answers into the mistake notebook, and resolves ones now answered correctly. */
-async function recordExamMistakes(actor: AttemptActor, examId: string, examTitle: string | null, questionRows: Array<{ id: string; type: string; content: unknown; answer: unknown; explanation: string | null }>, results: QuestionResult[]): Promise<void> {
+async function recordExamMistakes(actor: LearnerRef, examId: string, examTitle: string | null, questionRows: Array<{ id: string; type: string; content: unknown; answer: unknown; explanation: string | null }>, results: QuestionResult[]): Promise<void> {
   const byId = new Map(questionRows.map((row) => [row.id, row]));
   const wrong: MistakeEntry[] = [];
   const correctIds: string[] = [];
@@ -161,7 +160,7 @@ async function recordExamMistakes(actor: AttemptActor, examId: string, examTitle
   await resolveMistakes(actor, correctIds);
 }
 
-async function completeExamAttempt(attemptId: string, actor: AttemptActor, expired: boolean): Promise<ExamAttemptResult> {
+async function completeExamAttempt(attemptId: string, actor: LearnerRef, expired: boolean): Promise<ExamAttemptResult> {
   const db = dbOrThrow();
   const current = await getOwnedAttempt(attemptId, actor);
   const questionRows = await getQuestionRows(current.examId);
@@ -175,14 +174,14 @@ async function completeExamAttempt(attemptId: string, actor: AttemptActor, expir
   const [exam] = await db.select({ mode: exams.mode, title: exams.title }).from(exams).where(eq(exams.id, attempt.examId));
   await recordExamMistakes(actor, attempt.examId, exam?.title ?? null, questionRows, scored.results);
   await appendProgressEvent({
-    userId: actor.userId, guestId: actor.guestId, type: "EXAM_COMPLETED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: attempt.id,
+    learnerId: actor.learnerId, type: "EXAM_COMPLETED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: attempt.id,
     idempotencyKey: "exam:" + attempt.id + ":completed",
     metadata: { examId: attempt.examId, rawScore: attempt.rawScore ?? scored.rawScore, mode: exam?.mode, expired: attempt.status === "EXPIRED" }
   });
   return { attempt: { id: attempt.id, status: attempt.status as "SUBMITTED" | "EXPIRED", rawScore: attempt.rawScore ?? scored.rawScore, totalQuestions: attempt.totalQuestions, submittedAt: attempt.submittedAt }, results: scored.results };
 }
 
-export async function startOrResumeExam(slug: string, actor: AttemptActor) {
+export async function startOrResumeExam(slug: string, actor: LearnerRef) {
   const db = dbOrThrow();
   const exam = await getPublicExamBySlug(slug);
   if (!exam) throw new Error("Exam not found");
@@ -195,16 +194,16 @@ export async function startOrResumeExam(slug: string, actor: AttemptActor) {
   if (active) await completeExamAttempt(active.id, actor, true);
   const id = randomUUID();
   const expiresAt = new Date(now.getTime() + exam.durationSeconds * 1000);
-  await db.insert(attempts).values({ id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS", startedAt: now, expiresAt, totalQuestions: exam.totalPoints });
+  await db.insert(attempts).values({ id, examId: exam.id, learnerId: actor.learnerId, status: "IN_PROGRESS", startedAt: now, expiresAt, totalQuestions: exam.totalPoints });
   await appendProgressEvent({
-    userId: actor.userId, guestId: actor.guestId, type: "EXAM_STARTED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: id,
+    learnerId: actor.learnerId, type: "EXAM_STARTED", skill: null, sourceType: "EXAM_ATTEMPT", sourceId: id,
     idempotencyKey: "exam:" + id + ":started",
     metadata: { examId: exam.id, mode: exam.mode }
   });
-  return { attempt: { id, examId: exam.id, userId: actor.userId, guestId: actor.guestId, status: "IN_PROGRESS" as const, startedAt: now, expiresAt, submittedAt: null, rawScore: null, totalQuestions: exam.totalPoints, answers: [] as StoredExamAnswer[] }, exam, resumed: false };
+  return { attempt: { id, examId: exam.id, learnerId: actor.learnerId, status: "IN_PROGRESS" as const, startedAt: now, expiresAt, submittedAt: null, rawScore: null, totalQuestions: exam.totalPoints, answers: [] as StoredExamAnswer[] }, exam, resumed: false };
 }
 
-export async function saveExamAnswers(attemptId: string, actor: AttemptActor, answers: ExamAnswerInput[]) {
+export async function saveExamAnswers(attemptId: string, actor: LearnerRef, answers: ExamAnswerInput[]) {
   const attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.status !== "IN_PROGRESS") throw new Error("Attempt is not editable");
   if (isAttemptExpired(attempt.expiresAt)) {
@@ -215,14 +214,14 @@ export async function saveExamAnswers(attemptId: string, actor: AttemptActor, an
   return { attemptId, savedAnswers: (await getSavedAnswers(attemptId)).length };
 }
 
-export async function submitExamAttempt(attemptId: string, actor: AttemptActor, submittedAnswers: ExamAnswerInput[]) {
+export async function submitExamAttempt(attemptId: string, actor: LearnerRef, submittedAnswers: ExamAnswerInput[]) {
   const attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.status === "IN_PROGRESS" && !isAttemptExpired(attempt.expiresAt)) await validateAndPersistAnswers(attemptId, attempt.examId, submittedAnswers);
   return completeExamAttempt(attemptId, actor, isAttemptExpired(attempt.expiresAt));
 }
 
-export async function getExamAttemptReview(slug: string, attemptId: string, actor: AttemptActor) {
-  const exam = await getPublicExamBySlug(slug, { includeTranscripts: true });
+export async function getExamAttemptReview(slug: string, attemptId: string, actor: LearnerRef) {
+  const exam = await getPublicExamBySlug(slug, { includeTranscripts: true, includeArchived: true });
   if (!exam) return null;
   let attempt = await getOwnedAttempt(attemptId, actor);
   if (attempt.examId !== exam.id) return null;
