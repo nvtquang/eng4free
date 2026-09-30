@@ -14,6 +14,17 @@
       "source": "question toeic-mini-test-1 · c705802e-f74e-5e8c-987a-2b40cb593d36",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "0a659f1a2c90aa544b3b": {
+      "file": "placement-listening-a2-1-0a659f1a.mp3",
+      "spec": "64faa226db9b0fe3",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 8679,
+      "source": "placement placement-listening-a2-1",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "0d66da2a0bab196a6149": {
       "file": "toeic-full-mock-1-p1-q-0d66da2a.mp3",
       "spec": "a7ef744f7bcf951a",
@@ -33,6 +44,17 @@
       "durationMs": 56738,
       "source": "lesson speaking-presenting-data-clearly · Model mini-presentation",
       "generatedAt": "2026-09-28T02:58:20.354Z"
+    },
+    "113613242890ec4d527f": {
+      "file": "placement-listening-b1-2-11361324.mp3",
+      "spec": "5c2004ddec27ffbc",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 12882,
+      "source": "placement placement-listening-b1-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "11c9ef1085ce9fe97ace": {
       "file": "toeic-full-mock-1-p3-5-11c9ef10.mp3",
@@ -54,6 +76,27 @@
       "durationMs": 9879,
       "source": "exam toeic-fixture-v01 · part 4",
       "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "1484d0e6b5f1c8f9abdc": {
+      "file": "placement-listening-a2-3-1484d0e6.mp3",
+      "spec": "16ff1c61a235a0aa",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 10258,
+      "source": "placement placement-listening-a2-3",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "160f945df31b66e0551b": {
+      "file": "placement-listening-c2-1-160f945d.mp3",
+      "spec": "46f2295bf80e0cf2",
+      "voices": [
+        "en_GB-vctk-medium:p241"
+      ],
+      "durationMs": 16055,
+      "source": "placement placement-listening-c2-1",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "1803273d32a5035a700d": {
       "file": "toeic-full-mock-1-p3-7-1803273d.mp3",
@@ -99,6 +142,17 @@
       "source": "exam toeic-full-mock-1 · part 4 · passage 2",
       "generatedAt": "2026-09-28T02:58:20.350Z"
     },
+    "1c64b76a37f709756f82": {
+      "file": "placement-listening-a1-1-1c64b76a.mp3",
+      "spec": "744478af0865a40b",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 5985,
+      "source": "placement placement-listening-a1-1",
+      "generatedAt": "2026-09-30T02:44:51.486Z"
+    },
     "1e2c37bb57f4133f2efc": {
       "file": "lesson-listening-lecture-urban-heat-1e2c37bb.mp3",
       "spec": "4924c8d9ddd021a2",
@@ -108,6 +162,17 @@
       "durationMs": 84130,
       "source": "lesson listening-lecture-urban-heat · Lecture: why cities are hotter",
       "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "1e8cc00cc4f2a0ef8e53": {
+      "file": "placement-listening-a1-4-1e8cc00c.mp3",
+      "spec": "03b57c2d2c31759a",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 4476,
+      "source": "placement placement-listening-a1-4",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "20e6ba4525036afac29e": {
       "file": "lesson-listening-radio-interview-gig-work-20e6ba45.mp3",
@@ -261,6 +326,17 @@
       "source": "question toeic-full-mock-1 · d6fdfaad-4a15-5b10-b1b7-a999fc595ba4",
       "generatedAt": "2026-09-28T03:38:36.551Z"
     },
+    "4006bb5831b836020c3d": {
+      "file": "placement-listening-b2-1-4006bb58.mp3",
+      "spec": "4c5f6c0ce6db8c90",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 15378,
+      "source": "placement placement-listening-b2-1",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "400f1f7c04021ce831f0": {
       "file": "toeic-full-mock-1-p2-q-400f1f7c.mp3",
       "spec": "4f30e81d9a546eef",
@@ -325,6 +401,27 @@
       "source": "lesson listening-buying-fruit-at-the-market · At the fruit stall",
       "generatedAt": "2026-09-29T07:28:34.550Z"
     },
+    "47dbd31602622d3f239f": {
+      "file": "placement-listening-b2-2-47dbd316.mp3",
+      "spec": "f92d5c3bc609671c",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 18005,
+      "source": "placement placement-listening-b2-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "4a2c0f8a9d6b55f11233": {
+      "file": "placement-listening-b2-3-4a2c0f8a.mp3",
+      "spec": "ab12af703548856d",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 13358,
+      "source": "placement placement-listening-b2-3",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "4e3326dd89b3bec57fe7": {
       "file": "toeic-full-mock-1-p4-4-4e3326dd.mp3",
       "spec": "fddf183e55b165a4",
@@ -356,6 +453,17 @@
       "durationMs": 27557,
       "source": "exam toeic-full-mock-1 · part 3 · passage 13",
       "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "5260c09e8ecceb5380b8": {
+      "file": "placement-listening-b1-4-5260c09e.mp3",
+      "spec": "65e71fa3f3ac2704",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 11268,
+      "source": "placement placement-listening-b1-4",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "529cf04c7758a0fa481f": {
       "file": "lesson-speaking-agreeing-and-disagreeing-529cf04c.mp3",
@@ -453,6 +561,16 @@
       "source": "exam toeic-mini-test-1 · part 3 · passage 2",
       "generatedAt": "2026-09-28T03:15:15.151Z"
     },
+    "67f1078a96ca6e8bb6be": {
+      "file": "placement-listening-a2-4-67f1078a.mp3",
+      "spec": "ad296d7367d97fdb",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 9937,
+      "source": "placement placement-listening-a2-4",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "6a6adc31c9b4605025e6": {
       "file": "toeic-full-mock-1-p4-6-6a6adc31.mp3",
       "spec": "bfa44b7ea070e015",
@@ -496,6 +614,17 @@
       "durationMs": 16659,
       "source": "question toeic-full-mock-1 · 82930491-6a34-548a-b094-0af2d0c95fe4",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "6d78184ea92832fb2eb7": {
+      "file": "placement-listening-c2-4-6d78184e.mp3",
+      "spec": "1fc00591b55666b6",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 14681,
+      "source": "placement placement-listening-c2-4",
+      "generatedAt": "2026-09-30T02:44:51.489Z"
     },
     "6ed1c78e31f54d32b03d": {
       "file": "ielts-listening-test-1-p4-1-6ed1c78e.mp3",
@@ -581,6 +710,28 @@
       "source": "question toeic-full-mock-1 · e0e9259a-7888-5be0-be84-8364f2af9240",
       "generatedAt": "2026-09-28T03:38:36.555Z"
     },
+    "7ad56a09a9bcb9c37a37": {
+      "file": "placement-listening-c1-4-7ad56a09.mp3",
+      "spec": "3feaf5c4ecc87a82",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 12081,
+      "source": "placement placement-listening-c1-4",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "7b3b1f71a12a6084c792": {
+      "file": "placement-listening-a1-3-7b3b1f71.mp3",
+      "spec": "1e48437892ef30e6",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 4662,
+      "source": "placement placement-listening-a1-3",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "7c37368b0a22d3b32b6b": {
       "file": "toeic-full-mock-1-p1-q-7c37368b.mp3",
       "spec": "6655047243eea2d2",
@@ -590,6 +741,17 @@
       "durationMs": 20579,
       "source": "question toeic-full-mock-1 · 572941a1-28e4-5d34-b801-23b67abdae16",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "7c763725a1f262f88599": {
+      "file": "placement-listening-b1-1-7c763725.mp3",
+      "spec": "2b3aa1d2844f26f6",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150"
+      ],
+      "durationMs": 10989,
+      "source": "placement placement-listening-b1-1",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "805f29fdb515c9aaab5c": {
       "file": "toeic-mini-test-1-p2-q-805f29fd.mp3",
@@ -708,6 +870,17 @@
       "durationMs": 20683,
       "source": "question toeic-full-mock-1 · 1c476e53-7c6f-5913-b03c-239a63354e41",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "8eba5907626fdc37b2da": {
+      "file": "placement-listening-c2-2-8eba5907.mp3",
+      "spec": "a502730799de4769",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 13671,
+      "source": "placement placement-listening-c2-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "8fa4bc1db5f4f24afc1d": {
       "file": "toeic-full-mock-1-p2-q-8fa4bc1d.mp3",
@@ -869,6 +1042,17 @@
       "source": "question toeic-full-mock-1 · 8d0e45f8-6515-53df-a038-26987faf203a",
       "generatedAt": "2026-09-28T03:38:36.550Z"
     },
+    "9e8480c46c830f291281": {
+      "file": "placement-listening-b2-4-9e8480c4.mp3",
+      "spec": "79482471f4da5e90",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 13404,
+      "source": "placement placement-listening-b2-4",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "a1411866bc420efc67e9": {
       "file": "lesson-listening-a-news-report-on-cycle-lanes-a1411866.mp3",
       "spec": "40bfdcd39507691a",
@@ -934,6 +1118,16 @@
       "source": "question toeic-part-1-practice · f3eaf33d-7c71-54a2-8a07-92928ef0974d",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "a9fbe0eb9874da3d96d6": {
+      "file": "placement-listening-c2-3-a9fbe0eb.mp3",
+      "spec": "166a266cf93a00f0",
+      "voices": [
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 17158,
+      "source": "placement placement-listening-c2-3",
+      "generatedAt": "2026-09-30T02:44:51.489Z"
+    },
     "aac2ad679d438b7894f6": {
       "file": "toeic-part-2-practice-p2-q-aac2ad67.mp3",
       "spec": "2e0f481bca482e8c",
@@ -944,6 +1138,16 @@
       "durationMs": 14731,
       "source": "question toeic-part-2-practice · 063a98f0-5309-5a7a-9cd4-243132e9b120",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "ac51d3a023b795acae4f": {
+      "file": "placement-listening-c1-1-ac51d3a0.mp3",
+      "spec": "77b1b84f4d343b95",
+      "voices": [
+        "en_US-libritts_r-medium:15"
+      ],
+      "durationMs": 16194,
+      "source": "placement placement-listening-c1-1",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "aca6b80a85c482fb05fa": {
       "file": "toeic-part-4-practice-p4-2-aca6b80a.mp3",
@@ -965,6 +1169,16 @@
       "durationMs": 78801,
       "source": "exam ielts-practice-test-1 · part 1",
       "generatedAt": "2026-09-28T02:58:20.349Z"
+    },
+    "ad50aed90d4bf0ae55e4": {
+      "file": "placement-listening-b1-3-ad50aed9.mp3",
+      "spec": "991757e565750ad3",
+      "voices": [
+        "en_GB-vctk-medium:p241"
+      ],
+      "durationMs": 13663,
+      "source": "placement placement-listening-b1-3",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "b0b771033c4ca8f114fb": {
       "file": "toeic-part-1-practice-p1-q-b0b77103.mp3",
@@ -1126,6 +1340,17 @@
       "source": "question toeic-full-mock-1 · fd48408d-456b-577b-932f-a4c5b6016b9e",
       "generatedAt": "2026-09-28T03:38:36.550Z"
     },
+    "cdf579c39c4f7b7a5530": {
+      "file": "placement-listening-c1-2-cdf579c3.mp3",
+      "spec": "403500ff68792c3c",
+      "voices": [
+        "en_GB-vctk-medium:p360",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 11674,
+      "source": "placement placement-listening-c1-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "cfb07cb0c5ea4cf7d043": {
       "file": "lesson-listening-calling-the-landlord-cfb07cb0.mp3",
       "spec": "a45c04cd9a4f150f",
@@ -1245,6 +1470,16 @@
       "source": "exam toeic-full-mock-1 · part 3 · passage 3",
       "generatedAt": "2026-09-28T02:58:20.350Z"
     },
+    "e21dc494a502dc7f5c0f": {
+      "file": "placement-listening-c1-3-e21dc494.mp3",
+      "spec": "e75d1a3469810805",
+      "voices": [
+        "en_US-libritts_r-medium:15"
+      ],
+      "durationMs": 17355,
+      "source": "placement placement-listening-c1-3",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "e70f5f9241091eea7a31": {
       "file": "toeic-full-demo-p4-e70f5f92.mp3",
       "spec": "a78dff4461bf16bf",
@@ -1287,6 +1522,17 @@
       "source": "question toeic-full-mock-1 · 0e77e844-8640-5f23-85d2-97c62bc77998",
       "generatedAt": "2026-09-28T03:38:36.550Z"
     },
+    "f18a2e9a67ab9c40f3ac": {
+      "file": "placement-listening-a1-2-f18a2e9a.mp3",
+      "spec": "70d7901856ba6407",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 6601,
+      "source": "placement placement-listening-a1-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
     "f2977d252c97ebc461c1": {
       "file": "lesson-speaking-talk-about-your-family-f2977d25.mp3",
       "spec": "53e197e278436ac2",
@@ -1307,6 +1553,17 @@
       "durationMs": 28780,
       "source": "exam toeic-part-4-practice · part 4 · passage 1",
       "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "f708bffa8e6e366157b3": {
+      "file": "placement-listening-a2-2-f708bffa.mp3",
+      "spec": "ea485814a5a4a55c",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 11404,
+      "source": "placement placement-listening-a2-2",
+      "generatedAt": "2026-09-30T02:44:51.488Z"
     },
     "f8033f69f495c7ed594a": {
       "file": "lesson-listening-meeting-a-new-classmate-f8033f69.mp3",
