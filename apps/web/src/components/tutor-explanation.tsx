@@ -34,7 +34,7 @@ export function TutorExplanation({ attemptId, questionId, learnerAnswer, copy }:
   async function ask() {
     setPending(true); setError(undefined);
     try {
-      const response = await fetch("/api/ai/tutor", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ attemptId, questionId, learnerAnswer }) });
+      const response = await fetch("/api/ai/tutor", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ attemptId, questionId }) });
       const body = await response.json().catch(() => ({})) as Feedback & { error?: string };
       if (!response.ok) throw new Error(body.error ?? copy.unavailable);
       setFeedback(body);
@@ -47,7 +47,7 @@ export function TutorExplanation({ attemptId, questionId, learnerAnswer, copy }:
     const nextThread: ChatTurn[] = [...thread, { role: "learner", content: question }];
     setThread(nextThread); setDraft(""); setChatPending(true); setError(undefined);
     try {
-      const response = await fetch("/api/ai/tutor/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ attemptId, questionId, learnerAnswer, messages: nextThread }) });
+      const response = await fetch("/api/ai/tutor/chat", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ attemptId, questionId, messages: nextThread }) });
       const body = await response.json().catch(() => ({})) as { reply?: string; error?: string };
       if (!response.ok || !body.reply) throw new Error(body.error ?? copy.unavailable);
       setThread((current) => [...current, { role: "tutor", content: body.reply! }]);

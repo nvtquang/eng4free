@@ -1,11 +1,122 @@
 # D3 — Bảng duyệt ngẫu nhiên
 
-Tạo lúc 2026-09-29. Mỗi batch lấy ngẫu nhiên khoảng 15% mục (seed cố định), cộng thêm mọi câu AI giải chéo trả lời khác đáp án (⚠️).
+Tạo lúc 2026-09-30. Mỗi batch lấy ngẫu nhiên khoảng 15% mục (seed cố định), cộng thêm mọi câu AI giải chéo trả lời khác đáp án (⚠️).
 AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
 
 **Cách duyệt:** đọc từng mục, đánh dấu [x] nếu đúng; ghi lỗi ngay dưới mục nếu sai. Khi một batch ổn, vào CMS `/admin` → Content batches → chuyển batch sang **APPROVED**, rồi chạy `pnpm content:d3:publish -- --batch=<tên>`.
 
-## CEFR skill lessons (`lessons`) — 22/143 mục
+## Mới hoặc đã sửa từ lần công bố trước — 108 mục (duyệt toàn bộ)
+
+- [ ] `placement:grammar:a1-1`
+- [ ] `placement:grammar:a1-2`
+- [ ] `placement:grammar:a1-3`
+- [ ] `placement:grammar:a1-4`
+- [ ] `placement:grammar:a2-1`
+- [ ] `placement:grammar:a2-2`
+- [ ] `placement:grammar:a2-3`
+- [ ] `placement:grammar:a2-4`
+- [ ] `placement:grammar:b1-1`
+- [ ] `placement:grammar:b1-2`
+- [ ] `placement:grammar:b1-3`
+- [ ] `placement:grammar:b1-4`
+- [ ] `placement:grammar:b2-1`
+- [ ] `placement:grammar:b2-2`
+- [ ] `placement:grammar:b2-3`
+- [ ] `placement:grammar:b2-4`
+- [ ] `placement:grammar:c1-1`
+- [ ] `placement:grammar:c1-2`
+- [ ] `placement:grammar:c1-3`
+- [ ] `placement:grammar:c1-4`
+- [ ] `placement:grammar:c2-1`
+- [ ] `placement:grammar:c2-2`
+- [ ] `placement:grammar:c2-3`
+- [ ] `placement:grammar:c2-4`
+- [ ] `placement:listening:a1-1`
+- [ ] `placement:listening:a1-2`
+- [ ] `placement:listening:a1-3`
+- [ ] `placement:listening:a1-4`
+- [ ] `placement:listening:a2-1`
+- [ ] `placement:listening:a2-2`
+- [ ] `placement:listening:a2-3`
+- [ ] `placement:listening:a2-4`
+- [ ] `placement:listening:b1-1`
+- [ ] `placement:listening:b1-2`
+- [ ] `placement:listening:b1-3`
+- [ ] `placement:listening:b1-4`
+- [ ] `placement:listening:b2-1`
+- [ ] `placement:listening:b2-2`
+- [ ] `placement:listening:b2-3`
+- [ ] `placement:listening:b2-4`
+- [ ] `placement:listening:c1-1`
+- [ ] `placement:listening:c1-2`
+- [ ] `placement:listening:c1-3`
+- [ ] `placement:listening:c1-4`
+- [ ] `placement:listening:c2-1`
+- [ ] `placement:listening:c2-2`
+- [ ] `placement:listening:c2-3`
+- [ ] `placement:listening:c2-4`
+- [ ] `placement:reading:a1-1`
+- [ ] `placement:reading:a1-2`
+- [ ] `placement:reading:a1-3`
+- [ ] `placement:reading:a1-4`
+- [ ] `placement:reading:a2-1`
+- [ ] `placement:reading:a2-2`
+- [ ] `placement:reading:a2-3`
+- [ ] `placement:reading:a2-4`
+- [ ] `placement:reading:b1-1`
+- [ ] `placement:reading:b1-2`
+- [ ] `placement:reading:b1-3`
+- [ ] `placement:reading:b1-4`
+- [ ] `placement:reading:b2-1`
+- [ ] `placement:reading:b2-2`
+- [ ] `placement:reading:b2-3`
+- [ ] `placement:reading:b2-4`
+- [ ] `placement:reading:c1-1`
+- [ ] `placement:reading:c1-2`
+- [ ] `placement:reading:c1-3`
+- [ ] `placement:reading:c1-4`
+- [ ] `placement:reading:c2-1`
+- [ ] `placement:reading:c2-2`
+- [ ] `placement:reading:c2-3`
+- [ ] `placement:reading:c2-4`
+- [ ] `placement:self:speaking:a1`
+- [ ] `placement:self:speaking:a2`
+- [ ] `placement:self:speaking:b1`
+- [ ] `placement:self:speaking:b2`
+- [ ] `placement:self:speaking:c1`
+- [ ] `placement:self:speaking:c2`
+- [ ] `placement:self:writing:a1`
+- [ ] `placement:self:writing:a2`
+- [ ] `placement:self:writing:b1`
+- [ ] `placement:self:writing:b2`
+- [ ] `placement:self:writing:c1`
+- [ ] `placement:self:writing:c2`
+- [ ] `placement:vocabulary:a1-1`
+- [ ] `placement:vocabulary:a1-2`
+- [ ] `placement:vocabulary:a1-3`
+- [ ] `placement:vocabulary:a1-4`
+- [ ] `placement:vocabulary:a2-1`
+- [ ] `placement:vocabulary:a2-2`
+- [ ] `placement:vocabulary:a2-3`
+- [ ] `placement:vocabulary:a2-4`
+- [ ] `placement:vocabulary:b1-1`
+- [ ] `placement:vocabulary:b1-2`
+- [ ] `placement:vocabulary:b1-3`
+- [ ] `placement:vocabulary:b1-4`
+- [ ] `placement:vocabulary:b2-1`
+- [ ] `placement:vocabulary:b2-2`
+- [ ] `placement:vocabulary:b2-3`
+- [ ] `placement:vocabulary:b2-4`
+- [ ] `placement:vocabulary:c1-1`
+- [ ] `placement:vocabulary:c1-2`
+- [ ] `placement:vocabulary:c1-3`
+- [ ] `placement:vocabulary:c1-4`
+- [ ] `placement:vocabulary:c2-1`
+- [ ] `placement:vocabulary:c2-2`
+- [ ] `placement:vocabulary:c2-3`
+- [ ] `placement:vocabulary:c2-4`
+
+## CEFR skill lessons (`lessons`) — 47/311 mục
 
 - [ ] **A1 · Read: my new neighbourhood · câu 2** `A1/reading-my-new-neighbourhood/q2`
   
@@ -36,16 +147,6 @@ AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
   - C. see you on saturday.
   
   *Giải thích:* Sentences and days of the week start with a capital letter.
-
-- [ ] **A2 · Listen: booking a table by phone · câu 2** `A2/listening-booking-a-table/q2`
-  
-  How many people will come?
-  
-  - A. Six ✅
-  - B. Seven
-  - C. Eight
-  
-  *Giải thích:* For six people.
 
 - [ ] **A2 · Listen: booking a table by phone · câu 3** `A2/listening-booking-a-table/q3`
   
@@ -226,6 +327,266 @@ AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
   - C. A conclusion
   
   *Giải thích:* It admits a weakness before countering it.
+
+- [ ] **A1 · Listen: meeting a new classmate · câu 2** `A1/listening-meeting-a-new-classmate/q2`
+  
+  Where is Emma from?
+  
+  - A. Hanoi, Vietnam
+  - B. Sydney, Australia ✅
+  - C. London, England
+  
+  *Giải thích:* I'm from Australia, from Sydney.
+
+- [ ] **A1 · Listen: meeting a new classmate · câu 5** `A1/listening-meeting-a-new-classmate/q5`
+  
+  What does Nam suggest at the end?
+  
+  - A. Going home
+  - B. Sitting together ✅
+  - C. Playing football
+  
+  *Giải thích:* Let's sit together.
+
+- [ ] **A1 · Listen: what time is the bus? · câu 5** `A1/listening-what-time-is-the-bus/q5`
+  
+  Where does the bus leave from?
+  
+  - A. Gate two
+  - B. Gate one
+  - C. Gate four ✅
+  
+  *Giải thích:* The bus leaves from gate four.
+
+- [ ] **A1 · Listen: a short weather report · câu 1** `A1/listening-a-short-weather-report/q1`
+  
+  What will the weather be like in Hanoi in the morning?
+  
+  - A. Cloudy and cool ✅
+  - B. Windy and cold
+  - C. Sunny and hot
+  
+  *Giải thích:* In Hanoi, it will be cloudy and cool in the morning.
+
+- [ ] **A1 · Listen: describing a bedroom · câu 5** `A1/listening-describing-a-bedroom/q5`
+  
+  What is Mai's favourite thing?
+  
+  - A. A picture of the sea ✅
+  - B. Her wardrobe
+  - C. Her lamp
+  
+  *Giải thích:* My favourite thing is a picture of the sea on the wall.
+
+- [ ] **B1 · Listen: a part-time job interview · câu 1** `B1/listening-a-part-time-job-interview/q1`
+  
+  What does Khanh study at university?
+  
+  - A. Business law
+  - B. Literature
+  - C. Marketing ✅
+  
+  *Giải thích:* I'm studying marketing.
+
+- [ ] **B1 · Listen: calling the landlord about a problem · câu 4** `B1/listening-calling-the-landlord/q4`
+  
+  When will the technician come?
+  
+  - A. Saturday morning ✅
+  - B. Monday evening
+  - C. Thursday morning
+  
+  *Giải thích:* How about Saturday morning? — Saturday is fine.
+
+- [ ] **B2 · Listen: a news report on new cycle lanes · câu 6** `B2/listening-a-news-report-on-cycle-lanes/q6`
+  
+  How does the council respond to the concerns?
+  
+  - A. It will cancel the plan.
+  - B. It will pay shop owners.
+  - C. It will open new car parks and review the scheme. ✅
+  
+  *Giải thích:* It will open two new car parks… and review the scheme after the first year.
+
+- [ ] **B2 · Listen: a podcast about sleep and learning · câu 4** `B2/listening-a-podcast-about-sleep/q4`
+  
+  What does the expert recommend?
+  
+  - A. Spreading revision over several days and sleeping after the evening review ✅
+  - B. Never taking naps
+  - C. Studying only in the morning
+  
+  *Giải thích:* Spread your revision over several days… review the hardest material in the evening, then sleep.
+
+- [ ] **A1 · Read: my school timetable · câu 5** `A1/reading-my-school-timetable/q5`
+  
+  How many times a week does Bao have English?
+  
+  - A. Once
+  - B. Twice ✅
+  - C. Three times
+  
+  *Giải thích:* He has English on Monday and on Thursday.
+
+- [ ] **A1 · Read: my best friend · câu 1** `A1/reading-my-best-friend/q1`
+  
+  How old is Trang?
+  
+  - A. Fifteen
+  - B. Thirteen
+  - C. Fourteen ✅
+  
+  *Giải thích:* Trang is fourteen, like me.
+
+- [ ] **A1 · Read: my best friend · câu 2** `A1/reading-my-best-friend/q2`
+  
+  What does Trang look like?
+  
+  - A. Tall with long black hair and glasses ✅
+  - B. Short with short hair
+  - C. Tall with blond hair
+  
+  *Giải thích:* She is tall and has long black hair and glasses.
+
+- [ ] **A1 · Read: a notice at the swimming pool · câu 1** `A1/reading-a-notice-at-the-swimming-pool/q1`
+  
+  What time does the pool close on Sunday?
+  
+  - A. 7 p.m.
+  - B. 8 p.m.
+  - C. 6 p.m. ✅
+  
+  *Giải thích:* Saturday and Sunday: 7 a.m. – 6 p.m.
+
+- [ ] **A1 · Read: a notice at the swimming pool · câu 2** `A1/reading-a-notice-at-the-swimming-pool/q2`
+  
+  When is the pool closed for cleaning?
+  
+  - A. The first Monday of every month ✅
+  - B. Every Monday
+  - C. The first Sunday of the month
+  
+  *Giải thích:* Closed on the first Monday of every month for cleaning.
+
+- [ ] **A2 · Read: a birthday party invitation · câu 2** `A2/reading-a-birthday-party-invitation/q2`
+  
+  Where is the party?
+  
+  - A. At Minh Anh's house ✅
+  - B. In a park
+  - C. At a restaurant
+  
+  *Giải thích:* At my house, 25 Nguyen Hue Street.
+
+- [ ] **A2 · Read: a birthday party invitation · câu 6** `A2/reading-a-birthday-party-invitation/q6`
+  
+  What will Kim bring?
+  
+  - A. Some food
+  - B. Lemonade ✅
+  - C. A present
+  
+  *Giải thích:* I'll bring some lemonade.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 2** `B1/reading-can-apps-teach-you-a-language/q2`
+  
+  What are apps especially good for, according to the writer?
+  
+  - A. Writing long essays
+  - B. Improving pronunciation
+  - C. Vocabulary and basic grammar ✅
+  
+  *Giải thích:* For vocabulary and basic grammar, this regular practice can be very effective.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 4** `B1/reading-can-apps-teach-you-a-language/q4`
+  
+  Why can speaking to a real person feel harder?
+  
+  - A. People correct every mistake.
+  - B. People interrupt, ask questions and speak quickly. ✅
+  - C. People use more difficult vocabulary than apps.
+  
+  *Giải thích:* Speaking to a screen is very different from speaking to a person who interrupts, asks questions and talks quickly.
+
+- [ ] **B1 · Read: can apps teach you a language? · câu 5** `B1/reading-can-apps-teach-you-a-language/q5`
+  
+  What does the writer recommend?
+  
+  - A. Only use apps for ten minutes a day
+  - B. Stop using apps completely
+  - C. Use apps as one part of a wider plan ✅
+  
+  *Giải thích:* Apps work best as one part of a wider plan.
+
+- [ ] **B1 · Read: the story of banh mi · câu 3** `B1/reading-the-story-of-banh-mi/q3`
+  
+  Why did local bakers make the bread lighter?
+  
+  - A. To sell it abroad
+  - B. It suited the hot, humid climate ✅
+  - C. To use less wheat
+  
+  *Giải thích:* It became lighter… which suited the hot, humid climate.
+
+- [ ] **B2 · Read: farms on city rooftops · câu 2** `B2/reading-farms-on-city-rooftops/q2`
+  
+  Why does rooftop food reach the table fresher?
+  
+  - A. It travels only a short distance. ✅
+  - B. It is grown without soil.
+  - C. It is picked earlier.
+  
+  *Giải thích:* Food grown on a roof travels a few metres rather than hundreds of kilometres.
+
+- [ ] **B2 · Read: farms on city rooftops · câu 3** `B2/reading-farms-on-city-rooftops/q3`
+  
+  How can rooftop plants affect the building?
+  
+  - A. They make the building noisier.
+  - B. They can make the floors below cooler. ✅
+  - C. They can damage the roof.
+  
+  *Giải thích:* Plants also absorb heat, which can make the floors below noticeably cooler.
+
+- [ ] **B2 · Read: farms on city rooftops · câu 6** `B2/reading-farms-on-city-rooftops/q6`
+  
+  What is the writer's overall conclusion?
+  
+  - A. Rooftop farms are too expensive to be worthwhile.
+  - B. Rooftop farms matter more for reconnecting people with food than for replacing agriculture. ✅
+  - C. Rooftop farms will soon feed whole cities.
+  
+  *Giải thích:* Rooftop farms are less about replacing traditional agriculture than about reconnecting city dwellers with the food they eat.
+
+- [ ] **B2 · Read: does a digital detox work? · câu 3** `B2/reading-does-a-digital-detox-work/q3`
+  
+  Why does the old routine return after a detox?
+  
+  - A. Friends pressure people to come back.
+  - B. Phones become cheaper.
+  - C. The triggers behind the habit have not changed. ✅
+  
+  *Giải thích:* Removing the phone for a week does nothing to change those triggers.
+
+- [ ] **C1 · Read: why habits are hard to break · câu 2** `C1/reading-why-habits-are-hard-to-break/q2`
+  
+  According to the model, what sets a routine in motion once a habit is established?
+  
+  - A. A large reward
+  - B. The cue alone ✅
+  - C. A conscious decision
+  
+  *Giải thích:* The cue alone is sufficient to set the routine in motion.
+
+- [ ] **C2 · Read: the paradox of tourism · câu 6** `C2/reading-the-paradox-of-tourism/q6`
+  
+  What does the final sentence imply?
+  
+  - A. Travel that ignores residents' lives diminishes the places visited. ✅
+  - B. Travel is always harmful.
+  - C. Tourists should spend more money.
+  
+  *Giải thích:* Travel that forgets this is… a kind of consumption that leaves the consumed diminished.
 
 ## Grammar topics (`grammar`) — 29/192 mục
 
@@ -1537,6 +1898,412 @@ AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
   
   *Giải thích:* The shop closes at 7 P.M., but her ferry arrives at 7:30 P.M.
 
+## Speaking and writing topics (`topics`) — 23/149 mục
+
+- [ ] **Bản thân & gia đình · Người bạn thân** (Your best friend) `speak-best-friend`
+  
+  Kể về người bạn thân nhất của bạn. / Talk about your best friend.
+  
+  Cơ bản: My best friend is ___; we met ___. · What I like most about them is ___. · We often ___ together. · We have been friends for ___.
+  
+  Nâng cao: What I value most is that we can ___ without ___. · Having known each other since ___, we've been through ___ together.
+
+- [ ] **Sở thích & giải trí · Sở thích & thời gian rảnh** (Hobbies & free time) `speak-hobbies`
+  
+  Bạn thường làm gì trong thời gian rảnh? / What do you usually do in your free time?
+  
+  Cơ bản: In my free time I love ___. · I got into it because ___. · I usually do it ___. · It helps me relax because ___.
+  
+  Nâng cao: What started as ___ has gradually turned into ___. · It gives me a sense of ___ that I rarely get from ___.
+
+- [ ] **Thể thao & sức khoẻ · Thể thao & vận động** (Sport & exercise) `speak-sport`
+  
+  Bạn có chơi thể thao hay tập luyện không? / Do you play any sport or exercise regularly?
+  
+  Cơ bản: I play/do ___ about ___ a week. · I started because ___. · It keeps me ___. · The hardest part is ___.
+  
+  Nâng cao: Beyond the physical benefits, it has taught me ___. · Had I started earlier, I might have ___.
+
+- [ ] **Học tập · Việc học tiếng Anh** (Learning English) `speak-learning-english`
+  
+  Vì sao bạn học tiếng Anh và bạn học như thế nào? / Why are you learning English, and how do you study?
+  
+  Cơ bản: I'm learning English because ___. · I usually practise by ___. · The hardest part for me is ___. · My goal is to ___.
+  
+  Nâng cao: The biggest breakthrough came when I stopped ___ and started ___. · Even though I can ___, I still struggle to ___.
+
+- [ ] **Công việc & sự nghiệp · Làm việc tại nhà** (Working from home) `speak-work-from-home`
+  
+  Bạn thấy làm việc tại nhà thế nào? / What do you think about working from home?
+  
+  Cơ bản: Working from home is great for ___. · However, it's hard to ___. · I stay focused by ___. · Ideally, I'd work ___.
+  
+  Nâng cao: The flexibility is a huge plus, but it blurs the line between ___ and ___. · In the long run, I think a hybrid model ___.
+
+- [ ] **Văn hoá & lễ hội · Lễ hội / ngày Tết** (A festival you celebrate) `speak-festival`
+  
+  Mô tả một lễ hội bạn thường đón, ví dụ Tết. / Describe a festival you celebrate, such as Lunar New Year.
+  
+  Cơ bản: The festival I love most is ___. · Before it, people usually ___. · On the day, my family ___. · It's important to me because ___.
+  
+  Nâng cao: It's a time when ___, regardless of ___. · Although some customs have faded, ___ remains at the heart of it.
+
+- [ ] **Công nghệ · Điện thoại & thời gian dùng** (Phones & screen time) `speak-smartphones`
+  
+  Bạn dùng điện thoại bao nhiêu mỗi ngày? Có quá nhiều không? / How much do you use your phone? Is it too much?
+  
+  Cơ bản: I spend about ___ on my phone. · Mostly I ___. · I'd like to cut down on ___. · A day without my phone would be ___.
+  
+  Nâng cao: I've started to notice that it's affecting my ___. · Setting limits such as ___ has helped me ___.
+
+- [ ] **Công nghệ · Trí tuệ nhân tạo** (Artificial intelligence) `speak-artificial-intelligence`
+  
+  AI đang thay đổi cuộc sống của bạn thế nào? / How is AI changing your life?
+  
+  Cơ bản: I've used AI to ___. · It's really helpful for ___. · What worries me is ___. · In the future, AI might ___.
+  
+  Nâng cao: It's remarkably good at ___, but it still can't ___. · The key question, I think, is how we ___.
+
+- [ ] **Xã hội & con người · Khác biệt thế hệ** (Different generations) `speak-generations`
+  
+  Thế hệ của bạn khác thế hệ ông bà thế nào? / How is your generation different from your grandparents'?
+  
+  Cơ bản: My grandparents grew up ___. · Today, young people ___. · One thing that hasn't changed is ___. · We could learn from them about ___.
+  
+  Nâng cao: Each generation tends to see the next as ___, but ___. · I think we have a lot to gain from ___.
+
+- [ ] **Tin nhắn & email thân mật · Xin lỗi bạn** (Say sorry to a friend) `write-apologise-friend`
+  
+  Viết tin nhắn xin lỗi vì đã lỡ hẹn với bạn. / Write a message apologising for missing a meeting with a friend.
+  
+  Cơ bản: I'm really sorry I didn't ___. · The reason was that ___. · I should have ___. · Can we meet ___ instead?
+  
+  Nâng cao: I completely understand if you were annoyed — I would have been too. · Let me make it up to you: ___ is on me.
+
+- [ ] **Email & thư trang trọng · Email khiếu nại** (A complaint email) `write-complaint-email`
+  
+  Viết email khiếu nại về một sản phẩm hoặc dịch vụ không như mong đợi. / Write an email complaining about a product or service.
+  
+  Cơ bản: I am writing to complain about ___. · On ___, I bought/ordered ___. · Unfortunately, ___. · I would like you to ___.
+  
+  Nâng cao: I trust you will look into this matter and respond within ___ days. · Should the problem not be resolved, I will have no choice but to ___.
+
+- [ ] **Email & thư trang trọng · Thư gửi báo địa phương** (Letter to a local newspaper) `write-letter-to-editor`
+  
+  Viết thư gửi báo địa phương về một vấn đề ở khu bạn sống. / Write a letter to a local newspaper about a problem in your area.
+  
+  Cơ bản: I am writing to draw attention to ___. · This has caused ___. · Many residents feel ___. · I suggest that ___.
+  
+  Nâng cao: It is high time the authorities took action on ___. · While I appreciate that ___, this cannot justify ___.
+
+- [ ] **Email & thư trang trọng · Đổi lịch đặt chỗ** (Change a booking) `write-change-booking`
+  
+  Viết email đề nghị đổi ngày đặt phòng khách sạn. / Write an email asking to change a hotel booking.
+  
+  Cơ bản: I have a booking for ___ from ___ to ___. · Due to ___, I need to change the dates. · Would it be possible to ___? · Please let me know if there is any extra charge.
+  
+  Nâng cao: I apologise for any inconvenience this may cause. · If the new dates are unavailable, I would appreciate it if you could suggest ___.
+
+- [ ] **Miêu tả · Một đồ vật ý nghĩa** (A meaningful object) `write-describe-object`
+  
+  Miêu tả một đồ vật có ý nghĩa với bạn. / Describe an object that means a lot to you.
+  
+  Cơ bản: The object I treasure most is ___. · It is made of ___ and ___. · I got it ___. · It is special because ___.
+  
+  Nâng cao: It may look ordinary, but it carries memories of ___. · I would be heartbroken if I ever lost it.
+
+- [ ] **Nêu ý kiến · Đồng phục học sinh** (School uniforms) `write-school-uniforms`
+  
+  Học sinh có nên mặc đồng phục không? / Should students wear school uniforms?
+  
+  Cơ bản: I believe that students should/shouldn't ___. · One reason is that ___. · Another reason is ___. · Therefore, ___.
+  
+  Nâng cao: Advocates claim uniforms promote equality, yet they may also ___. · On balance, I am convinced that ___.
+
+- [ ] **Lợi ích & bất lợi · Du học** (Studying abroad) `write-studying-abroad`
+  
+  Nêu lợi ích và bất lợi của việc du học. / Discuss the pros and cons of studying abroad.
+  
+  Cơ bản: Studying abroad can help students ___. · Another benefit is ___. · However, students may face ___. · In conclusion, ___.
+  
+  Nâng cao: Beyond academic benefits, living abroad forces students to ___. · The financial and emotional costs should not be underestimated.
+
+- [ ] **Vấn đề & giải pháp · Rác thải nhựa** (Plastic waste) `write-plastic-waste`
+  
+  Làm sao giảm rác thải nhựa? Nêu vấn đề và giải pháp. / How can we reduce plastic waste? Describe the problem and solutions.
+  
+  Cơ bản: Plastic waste harms ___. · This happens because ___. · Individuals can ___. · Governments should ___.
+  
+  Nâng cao: Unless producers are held accountable, ___. · Small everyday changes, multiplied across millions of people, can ___.
+
+- [ ] **Vấn đề & giải pháp · Thời gian dùng màn hình** (Too much screen time) `write-screen-time`
+  
+  Trẻ em dùng màn hình quá nhiều: vấn đề và giải pháp. / Children spend too much time on screens. Discuss the problem and solutions.
+  
+  Cơ bản: Children today spend ___ on screens. · This can affect ___. · Parents can ___. · Schools can also ___.
+  
+  Nâng cao: The challenge is not screens themselves but ___. · Setting an example is arguably more effective than ___.
+
+- [ ] **Vấn đề & giải pháp · Người già cô đơn** (Loneliness among older people) `write-lonely-elderly`
+  
+  Nhiều người già sống cô đơn. Chúng ta có thể làm gì? / Many older people live alone and feel lonely. What can be done?
+  
+  Cơ bản: Many older people feel lonely because ___. · This affects their ___. · Communities could ___. · Young people can help by ___.
+  
+  Nâng cao: Loneliness is often described as a hidden epidemic, since ___. · Intergenerational projects have shown that ___.
+
+- [ ] **Báo cáo & tóm tắt · Tóm tắt một bài báo** (Summarise an article) `write-summarise-article`
+  
+  Tóm tắt một bài báo bạn đọc gần đây và nêu nhận xét ngắn. / Summarise an article you read recently and add a short comment.
+  
+  Cơ bản: The article is about ___. · The writer argues that ___. · He/She gives examples such as ___. · In my opinion, ___.
+  
+  Nâng cao: The central claim rests on ___, which is ___. · While the argument is persuasive, it overlooks ___.
+
+- [ ] **Sáng tạo · Bưu thiếp từ không gian** (A postcard from space) `write-postcard-from-space`
+  
+  Viết bưu thiếp gửi gia đình từ một chuyến du lịch vũ trụ. / Write a postcard to your family from a trip to space.
+  
+  Cơ bản: Greetings from ___! · From here, the Earth looks ___. · Every day we ___. · I can't wait to ___.
+  
+  Nâng cao: Nothing prepared me for the silence of ___. · Seeing Earth from above makes you realise how ___.
+
+- [ ] **Nghị luận học thuật · Tiền công cho nghệ thuật hay thể thao** (Public money: arts or sport?) `write-arts-vs-sport`
+  
+  Chính phủ nên ưu tiên chi tiền cho nghệ thuật hay thể thao? / Should governments spend more on the arts or on sport?
+  
+  Cơ bản: Governments have limited budgets, so ___. · Supporters of the arts argue ___. · Sport, on the other hand, ___. · On balance, ___.
+  
+  Nâng cao: Framing the issue as a choice between the two may be misleading, since ___. · Both contribute to public well-being, albeit in different ways.
+
+- [ ] **Nghị luận học thuật · Dân số già** (An ageing population) `write-ageing-population`
+  
+  Dân số già hoá mang lại thách thức gì và xã hội nên ứng phó ra sao? / What challenges does an ageing population bring, and how should societies respond?
+  
+  Cơ bản: In many countries, people are living longer. · This puts pressure on ___. · One solution is to ___. · In conclusion, ___.
+  
+  Nâng cao: Rather than viewing older people as a burden, societies could ___. · Policies such as ___ could ease the strain on ___.
+
+## Pronunciation: IPA chart, minimal pairs, shadowing (`pronunciation`) — 8/48 mục
+
+- [ ] **SOUND** `sound-75-2d0` /uː/ — blue (room, school)
+
+- [ ] **SOUND** `sound-25c-2d0` /ɜː/ — bird (learn, word)
+
+- [ ] **SOUND** `sound-254-26a` /ɔɪ/ — boy (choice, enjoy)
+
+- [ ] **SOUND** `sound-26a-259` /ɪə/ — near (hear, career)
+
+- [ ] **SOUND** `sound-f0` /ð/ — this (they, weather)
+
+- [ ] **SOUND** `sound-14b` /ŋ/ — sing (English, long)
+
+- [ ] **SOUND** `sound-77` /w/ — we (welcome, away)
+
+- [ ] **SHADOW** `shadow-daily-introduction` I enjoy learning English a little every day. — /ɪ/ /dʒ/ /iː/
+
+## Adaptive placement test (`placement`) — 17/108 mục
+
+- [ ] **GRAMMAR · B1** `placement:grammar:b1-3`
+  
+  The letter ___ yesterday, so it should arrive soon.
+  
+  - A. sent
+  - B. has sent
+  - C. was sent ✅
+  - D. is sending
+  
+  *Giải thích:* The letter receives the action: past simple passive.
+
+- [ ] **GRAMMAR · B1** `placement:grammar:b1-4`
+  
+  She asked me where ___.
+  
+  - A. did I live
+  - B. do I live
+  - C. I do live
+  - D. I lived ✅
+  
+  *Giải thích:* Reported questions use statement word order and backshift.
+
+- [ ] **GRAMMAR · C1** `placement:grammar:c1-1`
+  
+  Not only ___ late, but he also forgot the documents.
+  
+  - A. did he be
+  - B. was he ✅
+  - C. he was
+  - D. he did
+  
+  *Giải thích:* 'Not only' at the start triggers inversion: 'was he'.
+
+- [ ] **VOCABULARY · B1** `placement:vocabulary:b1-4`
+  
+  The company is looking for someone with at least two years of ___.
+  
+  - A. experience ✅
+  - B. experiment
+  - C. expense
+  - D. expression
+  
+  *Giải thích:* Work experience is measured in years; the other words look similar.
+
+- [ ] **VOCABULARY · B2** `placement:vocabulary:b2-2`
+  
+  The results were ___ with what the scientists had predicted.
+  
+  - A. considerate
+  - B. continuous
+  - C. constant
+  - D. consistent ✅
+  
+  *Giải thích:* 'Consistent with' means matching or in agreement with.
+
+- [ ] **READING · B2** `placement:reading:b2-3`
+  
+  > It is tempting to see recycling as the solution to plastic waste. Yet only a small share of the plastic produced is ever recycled, and much of it can be recycled only once or twice. Reducing how much we use in the first place is therefore far more effective.
+  
+  What is the writer's main point?
+  
+  - A. Using less plastic matters more than recycling it. ✅
+  - B. Recycling is the best solution to plastic waste.
+  - C. Recycling plastic is impossible.
+  - D. Plastic should be recycled more times.
+  
+  *Giải thích:* "Reducing how much we use … is therefore far more effective."
+
+- [ ] **READING · C1** `placement:reading:c1-1`
+  
+  > Few would dispute that social media has made it easier to stay in touch. What is less often acknowledged is how it has changed the nature of those contacts: frequent but brief exchanges may, some researchers suggest, gradually replace the deeper conversations on which close friendships depend.
+  
+  What concern does the passage raise?
+  
+  - A. Social media makes contact harder.
+  - B. Researchers disagree about friendship.
+  - C. Short, frequent contact may replace deeper conversation. ✅
+  - D. People now have fewer friends online.
+  
+  *Giải thích:* Brief exchanges may replace the deeper conversations friendships depend on.
+
+- [ ] **READING · C2** `placement:reading:c2-1`
+  
+  > The novelist's later work has been dismissed as self-indulgent, yet such criticism arguably misreads her intentions. The apparent digressions, far from being lapses of discipline, gradually assemble into a portrait of memory itself: fragmentary, recursive and stubbornly resistant to chronology.
+  
+  How does the writer view the digressions in the later novels?
+  
+  - A. As evidence of a lack of discipline
+  - B. As a sign of self-indulgence
+  - C. As a return to chronological storytelling
+  - D. As a deliberate way of representing memory ✅
+  
+  *Giải thích:* The digressions "assemble into a portrait of memory itself".
+
+- [ ] **READING · C2** `placement:reading:c2-2`
+  
+  > That the policy reduced emissions is beyond dispute; whether it did so at an acceptable cost is another matter entirely. Its architects have been curiously reticent about the burden placed on low-income households, a silence that critics are quick to interpret as tacit admission.
+  
+  What do critics infer from the policy makers' silence?
+  
+  - A. That the critics had misunderstood the policy
+  - B. That emissions were not reduced
+  - C. That they accept the policy was costly for poorer households ✅
+  - D. That the policy was cheap to run
+  
+  *Giải thích:* The silence is read as a "tacit admission" about the burden on low-income households.
+
+- [ ] **LISTENING · A1** `placement:listening:a1-1`
+  
+  🎧 Woman: Hello. What's your name? / Man: My name is David. D-A-V-I-D.
+  
+  What is the man's name?
+  
+  - A. Daniel
+  - B. Dennis
+  - C. Davis
+  - D. David ✅
+  
+  *Giải thích:* He spells it: D-A-V-I-D.
+
+- [ ] **LISTENING · A2** `placement:listening:a2-2`
+  
+  🎧 Man: Good morning. I'd like to change my appointment from Tuesday to Thursday, please. / Woman: Thursday at three o'clock is free. Is that OK? / Man: Perfect, thanks.
+  
+  When is the new appointment?
+  
+  - A. Thursday at two o'clock
+  - B. Tuesday at one o'clock
+  - C. Tuesday at three o'clock
+  - D. Thursday at three o'clock ✅
+  
+  *Giải thích:* He moves it from Tuesday to Thursday; three o'clock is free.
+
+- [ ] **LISTENING · A2** `placement:listening:a2-3`
+  
+  🎧 Woman: Excuse me, how do I get to the train station? / Man: Go straight on, then turn left at the bank. The station is opposite the park.
+  
+  Where is the train station?
+  
+  - A. Opposite the park ✅
+  - B. On the right after the bank
+  - C. Next to the bank
+  - D. Behind the park
+  
+  *Giải thích:* "The station is opposite the park."
+
+- [ ] **LISTENING · A2** `placement:listening:a2-4`
+  
+  🎧 Attention, please. The eleven fifteen train to Hanoi will leave from platform four, not platform two. We are sorry for the change.
+  
+  What has changed?
+  
+  - A. The price
+  - B. The platform ✅
+  - C. The time
+  - D. The destination
+  
+  *Giải thích:* The train leaves from platform four, not two.
+
+- [ ] **LISTENING · C1** `placement:listening:c1-2`
+  
+  🎧 Man: So, are you backing Linh's proposal? / Woman: In principle, yes. I just can't see how we'd fund it without cutting the training budget, and that's a price I'm not sure I'm willing to pay.
+  
+  What is the woman's attitude to the proposal?
+  
+  - A. She supports the idea but doubts how it would be funded. ✅
+  - B. She wants to cut the training budget.
+  - C. She thinks it is too cheap.
+  - D. She rejects it completely.
+  
+  *Giải thích:* "In principle, yes", but she can't see how to fund it.
+
+- [ ] **LISTENING · C1** `placement:listening:c1-3`
+  
+  🎧 The bridge was completed on time and under budget, which is remarkable in itself. But what's really caught engineers' attention is the sensors built into its structure, which report stress levels in real time and could change the way bridges are maintained.
+  
+  What does the speaker find most significant?
+  
+  - A. The shape of the bridge
+  - B. The low cost
+  - C. The fast construction
+  - D. The sensors that monitor the structure ✅
+  
+  *Giải thích:* "What's really caught engineers' attention is the sensors."
+
+- [ ] **LISTENING · C1** `placement:listening:c1-4`
+  
+  🎧 Woman: Did the new scheduling software save any time? / Man: On paper, yes: planning takes half as long. But people spend so long fixing its mistakes that I doubt we're any better off overall.
+  
+  What does the man imply about the software?
+  
+  - A. Planning now takes longer.
+  - B. Nobody uses it.
+  - C. The time it saves is lost fixing its mistakes. ✅
+  - D. It is excellent.
+  
+  *Giải thích:* People spend so long fixing its mistakes that there is no overall gain.
+
+- [ ] **Tự đánh giá WRITING · A2** — Tôi viết được tin nhắn ngắn và ghi chú đơn giản về việc hằng ngày. / I can write short messages and simple notes about everyday things.
+
 ## IELTS Listening, Reading, Writing and Speaking (`ielts`) — 8/53 mục
 
 - [ ] **IELTS Listening Test 1 · Part 2 · Questions 11–20 · câu 1** `ielts-listening-test-1/p2/g1/q1`
@@ -1619,265 +2386,3 @@ AI giải chéo đã kiểm tra 191 câu, 0 câu lệch.
   Describe a place in your town or city that you enjoy visiting.
   
   Cue card: Describe a place in your town or city that you enjoy visiting. — where it is; how often you go there; what you do there; and explain why you enjoy visiting this place.
-
-## Extra Listening and Reading lessons (`skills-extra`) — 26/168 mục
-
-- [ ] **A1 · Listen: buying fruit at the market · câu 2** `A1/listening-buying-fruit-at-the-market/q2`
-  
-  How many kilos of mangoes does Tom buy?
-  
-  - A. Two ✅
-  - B. One
-  - C. Three
-  
-  *Giải thích:* Can I have two kilos, please?
-
-- [ ] **A1 · Listen: buying fruit at the market · câu 3** `A1/listening-buying-fruit-at-the-market/q3`
-  
-  What else does Tom buy?
-  
-  - A. Apples
-  - B. Bananas ✅
-  - C. Oranges
-  
-  *Giải thích:* He asks for bananas and buys one bunch.
-
-- [ ] **A1 · Listen: buying fruit at the market · câu 5** `A1/listening-buying-fruit-at-the-market/q5`
-  
-  Where does the conversation happen?
-  
-  - A. At a fruit stall ✅
-  - B. In a restaurant
-  - C. At a bus stop
-  
-  *Giải thích:* The seller says: Fresh fruit here.
-
-- [ ] **A1 · Listen: what time is the bus? · câu 4** `A1/listening-what-time-is-the-bus/q4`
-  
-  How long is the journey?
-  
-  - A. About two hours
-  - B. About three hours ✅
-  - C. About four hours
-  
-  *Giải thích:* About three hours.
-
-- [ ] **A2 · Listen: announcements at a train station · câu 1** `A2/listening-train-station-announcements/q1`
-  
-  Which platform is the train to Hai Phong at?
-  
-  - A. Platform one
-  - B. Platform three ✅
-  - C. Platform five
-  
-  *Giải thích:* The eight fifteen train to Hai Phong is now at platform three.
-
-- [ ] **A2 · Listen: announcements at a train station · câu 6** `A2/listening-train-station-announcements/q6`
-  
-  How long is the delay to the Lao Cai train?
-  
-  - A. Twenty minutes ✅
-  - B. Forty minutes
-  - C. Ten minutes
-  
-  *Giải thích:* It is delayed by twenty minutes.
-
-- [ ] **A2 · Listen: making a doctor's appointment · câu 1** `A2/listening-making-a-doctors-appointment/q1`
-  
-  What is David's problem?
-  
-  - A. A stomach ache
-  - B. A headache and a fever
-  - C. A cough and a sore throat ✅
-  
-  *Giải thích:* I've had a bad cough for a week, and I have a sore throat.
-
-- [ ] **A2 · Listen: making plans for the weekend · câu 5** `A2/listening-making-plans-for-the-weekend/q5`
-  
-  What will they do after bowling?
-  
-  - A. Go home
-  - B. Have dinner ✅
-  - C. Watch a film
-  
-  *Giải thích:* And let's have dinner after that.
-
-- [ ] **B1 · Listen: a part-time job interview · câu 2** `B1/listening-a-part-time-job-interview/q2`
-  
-  What experience does Khanh have?
-  
-  - A. He worked in a phone accessories shop. ✅
-  - B. He worked in another bookshop.
-  - C. He has no work experience.
-  
-  *Giải thích:* Last summer I worked at a phone accessories shop for three months.
-
-- [ ] **B1 · Listen: a part-time job interview · câu 3** `B1/listening-a-part-time-job-interview/q3`
-  
-  What is the problem with the working hours?
-  
-  - A. He wants to work fewer hours.
-  - B. He has a class on Sunday mornings. ✅
-  - C. He can't work on Saturdays.
-  
-  *Giải thích:* I have a class on Sunday mornings until eleven.
-
-- [ ] **B1 · Listen: a guided museum tour · câu 6** `B1/listening-a-guided-museum-tour/q6`
-  
-  Where should people go if they get lost?
-  
-  - A. The information desk ✅
-  - B. The café
-  - C. The lockers
-  
-  *Giải thích:* If you get lost, the meeting point is the information desk.
-
-- [ ] **B1 · Listen: calling the landlord about a problem · câu 3** `B1/listening-calling-the-landlord/q3`
-  
-  Why can't the technician come on Thursday evening?
-  
-  - A. The landlord is busy.
-  - B. Linh is away.
-  - C. Most technicians finish at five. ✅
-  
-  *Giải thích:* Most technicians finish at five.
-
-- [ ] **B2 · Listen: a news report on new cycle lanes · câu 5** `B2/listening-a-news-report-on-cycle-lanes/q5`
-  
-  What is Mrs Thu's attitude to bicycles?
-  
-  - A. She has never thought about them.
-  - B. She is not opposed to them. ✅
-  - C. She wants them banned.
-  
-  *Giải thích:* I'm not against bicycles. My concern is parking.
-
-- [ ] **B2 · Listen: a podcast about sleep and learning · câu 5** `B2/listening-a-podcast-about-sleep/q5`
-  
-  What does she say about naps?
-  
-  - A. Naps should last at least two hours.
-  - B. A short nap can help if it isn't too late in the day. ✅
-  - C. Naps always make you more tired.
-  
-  *Giải thích:* A short nap of twenty minutes or so… can also help, as long as it isn't too late in the day.
-
-- [ ] **B2 · Listen: a podcast about sleep and learning · câu 6** `B2/listening-a-podcast-about-sleep/q6`
-  
-  What is the expert's view of coffee?
-  
-  - A. It is the best substitute for sleep.
-  - B. It has no effect on alertness.
-  - C. It helps you feel alert but doesn't replace sleep. ✅
-  
-  *Giải thích:* Coffee can make you feel alert, but it doesn't replace sleep.
-
-- [ ] **A1 · Read: a postcard from Hoi An · câu 2** `A1/reading-a-postcard-from-hoi-an/q2`
-  
-  How long are they staying in Hoi An?
-  
-  - A. Five days ✅
-  - B. Three days
-  - C. One week
-  
-  *Giải thích:* I am here… for five days.
-
-- [ ] **A1 · Read: my school timetable · câu 1** `A1/reading-my-school-timetable/q1`
-  
-  What time does school finish in the morning?
-  
-  - A. At 11:30 ✅
-  - B. At 7:00
-  - C. At 4:00
-  
-  *Giải thích:* School… finishes at half past eleven.
-
-- [ ] **A1 · Read: a café menu · câu 4** `A1/reading-a-cafe-menu/q4`
-  
-  What is the most expensive food?
-  
-  - A. Beef noodle soup ✅
-  - B. Chicken sandwich
-  - C. Bread with egg
-  
-  *Giải thích:* Beef noodle soup costs 60,000 dong.
-
-- [ ] **A1 · Read: a notice at the swimming pool · câu 6** `A1/reading-a-notice-at-the-swimming-pool/q6`
-  
-  When are the swimming lessons?
-  
-  - A. Sunday at 9 a.m.
-  - B. Saturday at 9 a.m. ✅
-  - C. Every day at 6 a.m.
-  
-  *Giải thích:* Swimming lessons for children every Saturday at 9 a.m.
-
-- [ ] **A2 · Read: a birthday party invitation · câu 2** `A2/reading-a-birthday-party-invitation/q2`
-  
-  Where is the party?
-  
-  - A. At Minh Anh's house ✅
-  - B. In a park
-  - C. At a restaurant
-  
-  *Giải thích:* At my house, 25 Nguyen Hue Street.
-
-- [ ] **A2 · Read: a hotel review · câu 4** `A2/reading-a-hotel-review/q4`
-  
-  What was the best day of the holiday?
-  
-  - A. The day on the beach
-  - B. The boat trip ✅
-  - C. The day they arrived
-  
-  *Giải thích:* The receptionist booked a boat trip for us and it was the best day of our holiday.
-
-- [ ] **B1 · Read: can apps teach you a language? · câu 1** `B1/reading-can-apps-teach-you-a-language/q1`
-  
-  According to the article, how do apps help learners build a habit?
-  
-  - A. By connecting learners with teachers
-  - B. By using games, points and reminders ✅
-  - C. By giving certificates
-  
-  *Giải thích:* Many use games, points and reminders to keep learners coming back, which helps build a daily habit.
-
-- [ ] **B1 · Read: can apps teach you a language? · câu 2** `B1/reading-can-apps-teach-you-a-language/q2`
-  
-  What are apps especially good for, according to the writer?
-  
-  - A. Writing long essays
-  - B. Improving pronunciation
-  - C. Vocabulary and basic grammar ✅
-  
-  *Giải thích:* For vocabulary and basic grammar, this regular practice can be very effective.
-
-- [ ] **B1 · Read: can apps teach you a language? · câu 3** `B1/reading-can-apps-teach-you-a-language/q3`
-  
-  What is the main limitation of most apps?
-  
-  - A. They rarely ask learners to produce long answers or converse. ✅
-  - B. They are too expensive.
-  - C. They are hard to use on a phone.
-  
-  *Giải thích:* They rarely ask you to produce long answers or hold a real conversation.
-
-- [ ] **B1 · Read: the story of banh mi · câu 4** `B1/reading-the-story-of-banh-mi/q4`
-  
-  Which of these is NOT mentioned as a typical filling?
-  
-  - A. Fresh coriander
-  - B. Pickled carrot
-  - C. Cheese ✅
-  
-  *Giải thích:* The fillings listed are pork, pickled carrot and radish, coriander, chilli and soy sauce — not cheese.
-
-- [ ] **C2 · Read: the paradox of tourism · câu 3** `C2/reading-the-paradox-of-tourism/q3`
-  
-  Why does the writer reject the idea of simply staying at home?
-  
-  - A. Many communities depend on tourism for their livelihood. ✅
-  - B. Travel broadens the mind.
-  - C. Staying at home is too expensive.
-  
-  *Giải thích:* For many communities, tourism is not an intrusion… but a livelihood.

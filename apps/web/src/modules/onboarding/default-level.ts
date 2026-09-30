@@ -1,11 +1,14 @@
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { findLearnerProfile } from "./repository";
 
-/** The learner's CEFR level from onboarding, used to preselect level tabs; A1 when unknown. */
-export async function defaultSkillLevel(): Promise<string> {
+/**
+ * The learner's level for preselecting level tabs: the placement level of that skill when
+ * there is one, otherwise the overall onboarding level, and A1 when unknown.
+ */
+export async function defaultSkillLevel(skill?: string): Promise<string> {
   try {
-    const profile = await findLearnerProfile((await getRequestActor(false)).actor);
-    return profile?.cefrLevel ?? "A1";
+    const profile = await findLearnerProfile((await getRequestLearner(false)).learner);
+    return (skill && profile?.skillLevels?.[skill]) || profile?.cefrLevel || "A1";
   } catch {
     return "A1";
   }

@@ -48,14 +48,16 @@ and licences are listed in `apps/web/public/demo-media/README.md`.
 
 ## Content pack D3
 
-The main demo content lives in `content/packs/d3`. It includes CEFR and grammar lessons, 763 sourced vocabulary words, a 200-question TOEIC mock, the TOEIC part practice sets, IELTS tests and IELTS Writing and Speaking tasks.
+All learning content lives in `content/packs/d3`, not in application code: CEFR and grammar lessons, 763 sourced vocabulary words, a 200-question TOEIC mock and part practice sets, IELTS tests and Writing/Speaking tasks, free speaking and writing topics, the pronunciation chart, and the adaptive placement test (96 auto-scored questions across Grammar, Vocabulary, Reading and Listening, A1–C2, plus Speaking/Writing can-do statements).
 
 ```bash
 pnpm content:d3:check           # quality gate only
-pnpm content:d3:import          # import as DRAFT; batches go to REVIEW
-pnpm content:d3:review-sample   # write the 15% spot-check sheet
-pnpm content:d3:publish -- --batch=toeic   # after the batch is APPROVED in the CMS
+pnpm content:d3:import          # new items are DRAFT; batches with unpublished changes go to REVIEW
+pnpm content:d3:review-sample   # spot-check sheet; starts with every new or edited item
+pnpm content:d3:publish -- --batch=topics  # after the batch is APPROVED in the CMS
 ```
+
+Every batch follows the same rule: a new item is always a draft, even in a batch that is already published, and a batch with any new or edited item goes back to review. Edits to already-published items apply in place and are listed at the top of the review sheet.
 
 Sources, licences and the review workflow are described in `docs/implementation-status.md` (section D3).
 

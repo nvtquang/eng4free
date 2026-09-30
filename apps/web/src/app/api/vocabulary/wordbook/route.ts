@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { getRequestLearner, guestCookieName } from "@/modules/auth/request-actor";
 import { addToWordbook } from "@/modules/vocabulary/review-schedule";
 
 const Schema = z.object({ vocabularyId: z.string().uuid() });
@@ -8,7 +8,7 @@ const Schema = z.object({ vocabularyId: z.string().uuid() });
 export async function POST(request: Request) {
   const parsed = Schema.safeParse(await request.json().catch(() => null));
   if (!parsed.success) return NextResponse.json({ error: "Invalid wordbook request" }, { status: 400 });
-  const { actor, createdGuestId } = await getRequestActor(true);
+  const { learner: actor, createdGuestId } = await getRequestLearner(true);
   const result = await addToWordbook(actor, parsed.data.vocabularyId);
   if (!result) return NextResponse.json({ error: "Vocabulary not found" }, { status: 404 });
   const response = NextResponse.json({ saved: true, added: result.added });

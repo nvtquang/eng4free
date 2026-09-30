@@ -1,19 +1,19 @@
 import Link from "next/link";
-import { cookies } from "next/headers";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { LevelBadge } from "@/components/ui/level-badge";
 import { auth } from "@/auth";
 import { getLocale, getMessages } from "@/lib/i18n";
-import { cefrPath } from "@/modules/courses/cefr-path";
+import { listPublishedLessonCatalog } from "@/modules/lessons/repository";
 import { buildStreakHeatmap, heatmapDayLabels, type StreakHeatmap } from "@/modules/progress/heatmap";
 import { projectProgress, type ProgressEvent, type ProgressSnapshot } from "@/modules/progress/progress";
 import { listProgressEvents } from "@/modules/progress/repository";
-import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
+import type { LearnerRef } from "@/modules/learners/types";
 import { findLearnerProfile } from "@/modules/onboarding/repository";
 
-const levels = ["A1", "A2", "B1", "B2", "C1", "C2"];
+const levels = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
 const cellTones = ["bg-band border border-line", "bg-emerald-200", "bg-emerald-300", "bg-emerald-500", "bg-emerald-700"];
 
 export default async function HomePage() {
@@ -22,17 +22,19 @@ export default async function HomePage() {
   let snapshot: ProgressSnapshot | null = null;
   let heatmap: StreakHeatmap | null = null;
   let vocabularyLearned = 0;
+  const catalog = (await listPublishedLessonCatalog().catch(() => null)) ?? [];
+  const firstLessons = levels.flatMap((level) => { const lesson = catalog.find((item) => item.level === level); return lesson ? [lesson] : []; });
   let hasProfile = false;
+  let learner: LearnerRef | null = null;
   try {
-    const { actor } = await getRequestActor(false);
-    hasProfile = Boolean(await findLearnerProfile(actor));
+    learner = (await getRequestLearner(false)).learner;
+    hasProfile = Boolean(await findLearnerProfile(learner));
   } catch {
-    // No learner cookie yet, or database unavailable; show the onboarding CTA.
+    // No learner yet, or database unavailable; show the onboarding CTA.
   }
-  if (session?.user?.id) {
+  if (session?.user?.id && learner) {
     try {
-      const guestId = (await cookies()).get(guestCookieName)?.value ?? "";
-      const events: ProgressEvent[] = await listProgressEvents({ userId: session.user.id, guestId });
+      const events: ProgressEvent[] = await listProgressEvents(learner);
       snapshot = projectProgress(events);
       heatmap = buildStreakHeatmap(events, new Date(), "Asia/Ho_Chi_Minh", locale);
       vocabularyLearned = new Set(events.filter((event) => event.type === "VOCAB_LEARNED").map((event) => event.sourceId).filter(Boolean)).size;
@@ -40,7 +42,7 @@ export default async function HomePage() {
       // Database is optional in the local demo; skip the progress section.
     }
   }
-  return <><Section className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:py-32"><div><Eyebrow>{home.eyebrow}</Eyebrow><h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.04] tracking-tight text-ink sm:text-6xl">{home.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{home.description}</p><div className="mt-9 flex flex-wrap gap-3">{hasProfile ? <Link href="/today"><Button>{home.todayPlan}</Button></Link> : <Link href="/onboarding"><Button>{home.startPlan}</Button></Link>}<Link href="/learn"><Button variant="secondary">{common.start}</Button></Link><Link href="/toeic"><Button variant="secondary">{home.secondary}</Button></Link></div></div><div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-brand p-7 text-white shadow-card sm:p-10"><div className="absolute -right-16 -top-14 size-52 rounded-full bg-ochre/90" /><div className="absolute -bottom-16 -left-14 size-48 rounded-full bg-terra/90" /><div className="relative"><p className="text-sm font-bold uppercase tracking-[.16em] text-white/75">{home.level}</p><p className="mt-5 font-serif text-4xl font-bold">A1 → C2</p><p className="mt-3 max-w-sm text-base leading-7 text-white/85">{home.levelsDescription}</p><div className="mt-10 grid grid-cols-3 gap-3">{levels.map((level) => <div className="rounded-ui border border-white/20 bg-white/10 px-3 py-4 text-center text-sm font-bold" key={level}>{level}</div>)}</div></div></div></Section>
+  return <><Section className="grid gap-12 py-16 sm:py-24 lg:grid-cols-[1.15fr_.85fr] lg:items-center lg:py-32"><div><Eyebrow>{home.eyebrow}</Eyebrow><h1 className="mt-5 max-w-3xl font-serif text-5xl font-bold leading-[1.04] tracking-tight text-ink sm:text-6xl">{home.title}</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-muted">{home.description}</p><div className="mt-9">{hasProfile ? <Link href="/today"><Button className="min-h-12 px-8 text-base">{home.todayPlan}</Button></Link> : <Link href="/onboarding"><Button className="min-h-12 px-8 text-base">{home.startPlan}</Button></Link>}</div></div><div className="relative overflow-hidden rounded-[1.25rem] border border-line bg-brand p-7 text-white shadow-card sm:p-10"><div className="absolute -right-16 -top-14 size-52 rounded-full bg-ochre/90" /><div className="absolute -bottom-16 -left-14 size-48 rounded-full bg-terra/90" /><div className="relative"><p className="text-sm font-bold uppercase tracking-[.16em] text-white/75">{home.level}</p><p className="mt-5 font-serif text-4xl font-bold">A1 → C2</p><p className="mt-3 max-w-sm text-base leading-7 text-white/85">{home.levelsDescription}</p><div className="mt-10 grid grid-cols-3 gap-3">{levels.map((level) => <div className="rounded-ui border border-white/20 bg-white/10 px-3 py-4 text-center text-sm font-bold" key={level}>{level}</div>)}</div></div></div></Section>
     {snapshot && heatmap && <Section className="pb-0 sm:pb-0"><div className="flex flex-wrap items-end justify-between gap-4"><div><Eyebrow>{home.progressEyebrow}</Eyebrow><h2 className="mt-3 font-serif text-3xl font-bold sm:text-4xl">{home.progressTitle}</h2></div><Link className="text-sm font-bold text-brand hover:text-brand-deep" href="/dashboard">{home.viewDetail} →</Link></div>
       <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         <Metric tone="bg-accent-ochre/15 text-accent-ochre" icon={<ZapIcon />} label={dashboard.xp} value={snapshot.xp} />
@@ -63,9 +65,9 @@ export default async function HomePage() {
         <Card className="flex flex-col items-center justify-center py-10 text-center"><span className="grid size-14 place-items-center rounded-full bg-accent-terra/10 text-accent-terra"><FlameIcon size={28} /></span><p className="mt-4 font-serif text-6xl font-bold leading-none text-ink">{snapshot.streakDays}</p><p className="mt-3 text-sm font-bold text-muted">{home.dayStreak}</p><p className="mt-4 max-w-60 text-xs italic leading-5 text-muted">{home.streakNote}</p></Card>
       </div>
     </Section>}
-    <div className="border-y border-line bg-band"><Section><div className="max-w-2xl"><Eyebrow>{home.current}</Eyebrow><h2 className="mt-4 font-serif text-3xl font-bold sm:text-4xl">{home.levelsTitle}</h2><p className="mt-4 text-lg leading-8 text-muted">{home.levelsDescription}</p></div><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{cefrPath.map((level) => { const lesson = level.lessons[0]; return <Link key={level.level} href={`/learn/${level.level.toLowerCase()}/${lesson.slug}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"><Card className="min-h-40 transition hover:-translate-y-1 hover:border-brand"><LevelBadge>{level.level}</LevelBadge><h3 className="mt-6 font-serif text-2xl font-bold">{lesson.title[locale]}</h3><p className="mt-2 text-sm leading-6 text-muted">{home.free} · {lesson.minutes} {messages.learning.minutes}</p><p className="mt-5 text-sm font-bold text-brand">{common.start} →</p></Card></Link>; })}</div></Section></div>
-    <Section><div className="grid gap-5 lg:grid-cols-3"><Feature title={home.skillsTitle} text={home.skillsDescription} accent="bg-accent-navy" action={common.explore} href="/skills" /><Feature title={home.examTitle} text={home.examDescription} accent="bg-accent-terra" action={home.examAction} href="/toeic" /><Feature title={messages.nav.vocabulary} text={home.vocabularyDescription} accent="bg-accent-ochre" action={common.explore} href="/vocabulary" /></div></Section>
-    <Section className="pt-0"><div className="rounded-[1.25rem] bg-ink px-7 py-12 text-center text-white sm:px-12"><Eyebrow className="text-ochre">{home.free}</Eyebrow><h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl font-bold sm:text-4xl">{home.title}</h2><Link className="mt-8 inline-flex" href="/learn"><Button className="bg-ochre text-ink hover:bg-[#dbb55f]">{common.start}</Button></Link></div></Section></>;
+    <div className="border-y border-line bg-band"><Section><div className="max-w-2xl"><Eyebrow>{home.current}</Eyebrow><h2 className="mt-4 font-serif text-3xl font-bold sm:text-4xl">{home.levelsTitle}</h2><p className="mt-4 text-lg leading-8 text-muted">{home.levelsDescription}</p></div><div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">{firstLessons.map((lesson) => { return <Link key={lesson.level} href={`/learn?level=${lesson.level}`} className="block focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-brand"><Card className="min-h-40 transition hover:-translate-y-1 hover:border-brand"><LevelBadge>{lesson.level}</LevelBadge><h3 className="mt-6 font-serif text-2xl font-bold">{lesson.title}</h3><p className="mt-2 text-sm leading-6 text-muted">{home.free} · {lesson.estimatedMinutes} {messages.learning.minutes}</p><p className="mt-5 text-sm font-bold text-brand">{common.start} →</p></Card></Link>; })}</div></Section></div>
+    <Section><div className="grid gap-5 lg:grid-cols-3"><Feature title={home.skillsTitle} text={home.skillsDescription} accent="bg-accent-navy" action={common.explore} href="/skills" /><Feature title={home.examTitle} text={home.examDescription} accent="bg-accent-terra" action={home.examAction} href="/exam-prep" /><Feature title={messages.nav.vocabulary} text={home.vocabularyDescription} accent="bg-accent-ochre" action={common.explore} href="/vocabulary" /></div></Section>
+    <Section className="pt-0"><div className="rounded-[1.25rem] bg-ink px-7 py-12 text-center text-white sm:px-12"><Eyebrow className="text-ochre">{home.free}</Eyebrow><h2 className="mx-auto mt-4 max-w-2xl font-serif text-3xl font-bold sm:text-4xl">{home.title}</h2><Link className="mt-8 inline-flex" href={hasProfile ? "/today" : "/onboarding"}><Button className="bg-ochre text-ink hover:bg-[#dbb55f]">{hasProfile ? home.todayPlan : home.startPlan}</Button></Link></div></Section></>;
 }
 function Feature({ title, text, accent, action, href }: { title: string; text: string; accent: string; action: string; href: string }) { return <Card className="flex min-h-72 flex-col"><span className={`size-3 rounded-full ${accent}`} /><h2 className="mt-8 font-serif text-3xl font-bold">{title}</h2><p className="mt-4 flex-1 leading-7 text-muted">{text}</p><Link className="mt-7 text-sm font-bold text-brand hover:text-brand-deep" href={href}>{action} →</Link></Card>; }
 function Metric({ tone, icon, label, value }: { tone: string; icon: React.ReactNode; label: string; value: string | number }) { return <Card className="flex items-center gap-4"><span className={`grid size-11 shrink-0 place-items-center rounded-full ${tone}`}>{icon}</span><div className="min-w-0"><p className="font-serif text-3xl font-bold leading-none text-ink">{value}</p><p className="mt-2 truncate text-sm font-bold text-muted">{label}</p></div></Card>; }

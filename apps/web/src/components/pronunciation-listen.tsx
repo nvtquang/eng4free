@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import type { IpaSound, MinimalPair } from "@/modules/pronunciation/content";
+import type { IpaSound, MinimalPair } from "@english4free/content-schemas";
 
 const copy = {
   vi: {

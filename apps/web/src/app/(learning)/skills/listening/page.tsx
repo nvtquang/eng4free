@@ -8,6 +8,6 @@ export const dynamic = "force-dynamic";
 export default async function ListeningPage({ searchParams }: { searchParams: Promise<{ level?: string }> }) {
   const locale = await getLocale();
   const copy = getSkillsCopy(locale);
-  const level = (await searchParams).level ?? await defaultSkillLevel();
+  const level = (await searchParams).level ?? await defaultSkillLevel("LISTENING");
   return <SkillLessonList locale={locale} skill="LISTENING" eyebrow={copy.listeningEyebrow} title={copy.listeningTitle} intro={copy.listeningIntro} level={level} basePath="/skills/listening" />;
 }

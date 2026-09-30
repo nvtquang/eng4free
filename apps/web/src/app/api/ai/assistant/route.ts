@@ -1,7 +1,7 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getLocale } from "@/lib/i18n";
-import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { getRequestLearner, guestCookieName } from "@/modules/auth/request-actor";
 import { AiRateLimitError } from "@/modules/ai-foundation/contracts";
 import { isGeminiConfigured } from "@/modules/ai-foundation/gemini-provider";
 import { chatWithAssistant } from "@/modules/ai-assistant/assistant-service";
@@ -13,7 +13,7 @@ export async function POST(request: Request) {
   if (!parsed.success) return NextResponse.json({ error: "Invalid assistant request" }, { status: 400 });
   if (!isGeminiConfigured()) return NextResponse.json({ error: "unavailable" }, { status: 503 });
   try {
-    const { actor, createdGuestId } = await getRequestActor(true);
+    const { learner: actor, createdGuestId } = await getRequestLearner(true);
     const reply = await chatWithAssistant(actor, parsed.data.messages, await getLocale());
     const response = NextResponse.json({ reply });
     if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });

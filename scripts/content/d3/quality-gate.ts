@@ -11,7 +11,7 @@
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { buildQuestionFromAuthoring } from "@english4free/content-schemas";
-import { arrangeLessonOptions, type ExamDef, type Image, type LessonDef, type PromptDef, type VocabularySelection } from "../../../content/packs/d3/types";
+import { arrangeLessonOptions, type ExamDef, type Image, type LessonDef, type PlacementItemDef, type PromptDef, type PronunciationDef, type SelfAssessmentDef, type TopicCategoryDef, type VocabularySelection } from "../../../content/packs/d3/types";
 
 export type GateIssue = { item: string; problem: string };
 const PLACEHOLDER = /(placeholder|original[- ]answer|example \d+ using|original example|lorem ipsum|\btodo\b|\btbd\b|xxx|kiểm tra renderer|sample text|\[insert|to be written)/iu;
@@ -156,6 +156,103 @@ export function checkVocabulary(entries: Array<VocabularySelection & { example?:
       text(issues, item, entry.example, "example", 4, 220);
       if (!mentions(entry.example, entry.headword)) issues.push({ item, problem: `example does not use "${entry.headword}": ${entry.example}` });
     }
+  }
+  return issues;
+}
+
+/** Speaking/writing topics: unique keys and slugs, both languages filled, 5+ sentence frames with basic and advanced ones. */
+export function checkTopics(categories: TopicCategoryDef[]): GateIssue[] {
+  const issues: GateIssue[] = [];
+  const keys = new Set<string>();
+  const slugs = { category: new Set<string>(), topic: new Set<string>() };
+  const unique = (item: string, key: string, slug: string, table: keyof typeof slugs) => {
+    if (keys.has(key)) issues.push({ item, problem: "duplicate key" });
+    if (slugs[table].has(slug)) issues.push({ item, problem: "duplicate slug" });
+    if (!/^[a-z0-9-]+$/u.test(slug)) issues.push({ item, problem: "slug must be kebab-case" });
+    keys.add(key); slugs[table].add(slug);
+  };
+  for (const category of categories) {
+    const item = `topic category ${category.slug}`;
+    unique(item, category.key, category.slug, "category");
+    text(issues, item, category.title.vi, "Vietnamese title"); text(issues, item, category.title.en, "English title");
+    if (category.kind === "FREE_WRITING" && !category.note) issues.push({ item, problem: "writing categories need a suggested length note" });
+    if (category.topics.length < 3) issues.push({ item, problem: `only ${category.topics.length} topics (expected ≥ 3)` });
+    for (const topic of category.topics) {
+      const at = `topic ${topic.slug}`;
+      unique(at, topic.key, topic.slug, "topic");
+      text(issues, at, topic.title.vi, "Vietnamese title"); text(issues, at, topic.title.en, "English title");
+      text(issues, at, topic.prompt.vi, "Vietnamese prompt", 2); text(issues, at, topic.prompt.en, "English prompt", 2);
+      if (topic.suggestions.length < 3) issues.push({ item: at, problem: "needs at least 3 basic sentence frames" });
+      if (topic.advanced.length < 1) issues.push({ item: at, problem: "needs at least 1 advanced sentence frame" });
+      if (topic.suggestions.length + topic.advanced.length < 5) issues.push({ item: at, problem: "needs at least 5 sentence frames in total" });
+      for (const frame of [...topic.suggestions, ...topic.advanced]) text(issues, at, frame, "sentence frame", 2);
+    }
+  }
+  return issues;
+}
+
+/** Pronunciation items: unique keys/slugs and the fields each kind needs. */
+export function checkPronunciation(items: PronunciationDef[]): GateIssue[] {
+  const issues: GateIssue[] = [];
+  const keys = new Set<string>();
+  const slugs = new Set<string>();
+  for (const entry of items) {
+    const item = `pronunciation ${entry.slug}`;
+    if (keys.has(entry.key)) issues.push({ item, problem: "duplicate key" });
+    if (slugs.has(entry.slug)) issues.push({ item, problem: "duplicate slug" });
+    if (!/^[a-z0-9-]+$/u.test(entry.slug)) issues.push({ item, problem: "slug must be kebab-case" });
+    keys.add(entry.key); slugs.add(entry.slug);
+    if (entry.kind === "SOUND") { text(issues, item, entry.content.keyword, "keyword"); if (entry.content.examples.length < 2) issues.push({ item, problem: "needs two example words" }); }
+    if (entry.kind === "PAIR") { if (entry.content.contrast.length !== 2) issues.push({ item, problem: "a minimal pair contrasts two sounds" }); text(issues, item, entry.content.tip.vi, "Vietnamese tip", 4); text(issues, item, entry.content.tip.en, "English tip", 4); }
+    if (entry.kind === "SHADOW") { text(issues, item, entry.content.targetText, "target sentence", 3); if (!entry.content.focusSounds.length) issues.push({ item, problem: "needs focus sounds" }); }
+  }
+  return issues;
+}
+
+/** Chart-level checks the old app fixture test covered: both vowels and consonants, distinct pair contrasts. */
+export function checkPronunciationSet(items: PronunciationDef[]): GateIssue[] {
+  const issues: GateIssue[] = [];
+  const kinds = new Set(items.flatMap((item) => (item.kind === "SOUND" ? [item.content.kind] : [])));
+  if (!kinds.has("vowel") || !kinds.has("consonant")) issues.push({ item: "pronunciation chart", problem: "needs both vowels and consonants" });
+  for (const item of items) if (item.kind === "PAIR" && item.content.contrast[0] === item.content.contrast[1]) issues.push({ item: `pronunciation ${item.slug}`, problem: "the two contrasted sounds must differ" });
+  return issues;
+}
+
+const LEVEL_ORDER = ["A1", "A2", "B1", "B2", "C1", "C2"] as const;
+
+export function checkPlacement(items: PlacementItemDef[], statements: SelfAssessmentDef[]): GateIssue[] {
+  const issues: GateIssue[] = [];
+  const keys = new Set<string>();
+  const prompts = new Set<string>();
+  const cells = new Map<string, number>();
+  for (const item of items) {
+    const at = item.key;
+    if (keys.has(item.key)) issues.push({ item: at, problem: "duplicate key" });
+    keys.add(item.key);
+    cells.set(`${item.skill}:${item.level}`, (cells.get(`${item.skill}:${item.level}`) ?? 0) + 1);
+    text(issues, at, item.q, "question", 2, 300);
+    text(issues, at, item.why, "explanation", 2, 400);
+    if (item.options.length < 3 || item.options.length > 4) issues.push({ item: at, problem: "needs 3 or 4 options" });
+    if (new Set(item.options.map((option) => option.trim().toLowerCase())).size !== item.options.length) issues.push({ item: at, problem: "duplicate options" });
+    if (!Number.isInteger(item.answer) || item.answer < 0 || item.answer >= item.options.length) issues.push({ item: at, problem: "answer index out of range" });
+    for (const option of item.options) text(issues, at, option, "option");
+    if (item.skill === "GRAMMAR" || item.skill === "VOCABULARY") {
+      if (!item.q.includes("___")) issues.push({ item: at, problem: "gap-fill question needs a ___ gap" });
+      if (item.passage || item.script) issues.push({ item: at, problem: "gap-fill items take no passage or script" });
+      if (prompts.has(item.q)) issues.push({ item: at, problem: "duplicate question" });
+      prompts.add(item.q);
+    }
+    if (item.skill === "READING") { text(issues, at, item.passage, "passage", 15, 1_200); if (item.script) issues.push({ item: at, problem: "reading items take no script" }); }
+    if (item.skill === "LISTENING") { text(issues, at, item.script, "script", 8, 1_200); if (item.passage) issues.push({ item: at, problem: "listening items take no passage" }); }
+  }
+  for (const skill of ["GRAMMAR", "VOCABULARY", "READING", "LISTENING"]) for (const level of LEVEL_ORDER) {
+    if ((cells.get(`${skill}:${level}`) ?? 0) < 3) issues.push({ item: `placement ${skill} ${level}`, problem: "needs at least 3 items" });
+  }
+  spread(issues, "placement bank", items.map((item) => String(arrangeLessonOptions(item.key, { q: item.q, options: item.options, answer: item.answer, why: item.why }, 0).answer)));
+  for (const skill of ["SPEAKING", "WRITING"] as const) for (const level of LEVEL_ORDER) {
+    const matches = statements.filter((statement) => statement.skill === skill && statement.level === level);
+    if (matches.length !== 1) issues.push({ item: `self-assessment ${skill} ${level}`, problem: `needs exactly one can-do statement (found ${matches.length})` });
+    for (const statement of matches) { text(issues, `self-assessment ${skill} ${level}`, statement.canDo.en, "English statement", 6, 300); text(issues, `self-assessment ${skill} ${level}`, statement.canDo.vi, "Vietnamese statement", 6, 300); }
   }
   return issues;
 }

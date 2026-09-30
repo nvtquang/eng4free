@@ -13,7 +13,7 @@ const before = (body: string) => ({ kind: "text" as const, heading: "Before you 
 export const extraReading: LessonDef[] = [
   // ---------- A1 ----------
   {
-    key: "extra:a1:reading-postcard", batch: "skills-extra", level: "A1", unit: A1, slug: "reading-a-postcard-from-hoi-an", title: "Read: a postcard from Hoi An", skill: "READING", minutes: 10,
+    key: "extra:a1:reading-postcard", batch: "lessons", level: "A1", unit: A1, slug: "reading-a-postcard-from-hoi-an", title: "Read: a postcard from Hoi An", skill: "READING", minutes: 10,
     blocks: [
       before("You will read a postcard from Lucy to her grandmother. First, find who she is with and where she is staying. Then read again and answer the questions."),
       { kind: "text", heading: "Lucy's postcard", body: "Dear Grandma,\n\nHello from Hoi An! I am here with Mum and Dad for five days. We are staying in a small hotel near the river. Our room has a balcony, and every evening we watch the lanterns on the water. They are red, yellow and green. They are beautiful!\n\nThe weather is hot and sunny. Yesterday we rode bicycles to the beach. Today we are visiting the old town. I want to buy a lantern for you.\n\nThe food here is great. My favourite is cao lau — a noodle dish with pork and vegetables.\n\nSee you soon!\nLove,\nLucy" },
@@ -28,7 +28,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a1:reading-timetable", batch: "skills-extra", level: "A1", unit: A1, slug: "reading-my-school-timetable", title: "Read: my school timetable", skill: "READING", minutes: 11,
+    key: "extra:a1:reading-timetable", batch: "lessons", level: "A1", unit: A1, slug: "reading-my-school-timetable", title: "Read: my school timetable", skill: "READING", minutes: 11,
     blocks: [
       before("You will read a student's description of his school week. Look for the days, the times and the subjects. Days of the week start with a capital letter."),
       { kind: "text", heading: "My school week", body: "My name is Bao, and I am in grade seven. School starts at seven o'clock every morning and finishes at half past eleven.\n\nOn Monday, I have maths, English and history. Monday is my favourite day because I love history. On Tuesday, I have science and art. On Wednesday, we have sports in the afternoon, so I stay at school until four o'clock. On Thursday, I have English again and music. On Friday, I have maths and geography, and then we clean our classroom together.\n\nI don't go to school on Saturday or Sunday. On Saturday morning, I have a guitar lesson, and on Sunday I visit my grandparents." },
@@ -43,7 +43,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a1:reading-menu", batch: "skills-extra", level: "A1", unit: A1, slug: "reading-a-cafe-menu", title: "Read: a café menu", skill: "READING", minutes: 10,
+    key: "extra:a1:reading-menu", batch: "lessons", level: "A1", unit: A1, slug: "reading-a-cafe-menu", title: "Read: a café menu", skill: "READING", minutes: 10,
     blocks: [
       before("You will read a menu from a small café. Menus give names of food and drinks and their prices. Read quickly to find the cheapest and the most expensive items."),
       { kind: "text", heading: "Green Leaf Café — menu", body: "DRINKS\nHot tea — 15,000 dong\nIced coffee with milk — 25,000 dong\nFresh orange juice — 35,000 dong\nMango smoothie — 40,000 dong\n\nFOOD\nBread with egg — 30,000 dong\nChicken sandwich — 45,000 dong\nVegetable fried rice — 50,000 dong\nBeef noodle soup — 60,000 dong\n\nCAKES\nBanana cake — 20,000 dong\nChocolate cake — 30,000 dong\n\nOpen every day from 7 a.m. to 9 p.m.\nFree water with every meal. We do not take credit cards." },
@@ -58,7 +58,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a1:reading-best-friend", batch: "skills-extra", level: "A1", unit: A1, slug: "reading-my-best-friend", title: "Read: my best friend", skill: "READING", minutes: 11,
+    key: "extra:a1:reading-best-friend", batch: "lessons", level: "A1", unit: A1, slug: "reading-my-best-friend", title: "Read: my best friend", skill: "READING", minutes: 11,
     blocks: [
       before("You will read a short text about a best friend. Look for words that describe people: tall, short, funny, kind. Then answer the questions."),
       { kind: "text", heading: "My best friend, Trang", body: "My best friend is Trang. We are in the same class, and we live on the same street. Trang is fourteen, like me. She is tall and has long black hair and glasses.\n\nTrang is very funny and kind. When I am sad, she always makes me laugh. She is good at maths, and she often helps me with my homework. I am good at drawing, so I help her with art.\n\nAfter school, we usually walk home together. At the weekend, we sometimes go to the library or ride our bikes in the park. Trang has a little dog called Bong. He is white and very friendly.\n\nI am happy to have a friend like Trang." },
@@ -73,7 +73,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a1:reading-pool-notice", batch: "skills-extra", level: "A1", unit: A1, slug: "reading-a-notice-at-the-swimming-pool", title: "Read: a notice at the swimming pool", skill: "READING", minutes: 10,
+    key: "extra:a1:reading-pool-notice", batch: "lessons", level: "A1", unit: A1, slug: "reading-a-notice-at-the-swimming-pool", title: "Read: a notice at the swimming pool", skill: "READING", minutes: 10,
     blocks: [
       before("Notices give rules and information. Words like must, must not and please tell you what to do. Read the notice and find three rules."),
       { kind: "text", heading: "Blue Wave Swimming Pool", body: "OPENING TIMES\nMonday to Friday: 6 a.m. – 8 p.m.\nSaturday and Sunday: 7 a.m. – 6 p.m.\nThe pool is closed on the first Monday of every month for cleaning.\n\nTICKETS\nAdults: 40,000 dong\nChildren under 12: 20,000 dong\nChildren under 5: free\n\nRULES\nYou must wear a swimming cap.\nYou must take a shower before you swim.\nDo not eat or drink near the pool.\nDo not run.\nChildren under 10 must swim with an adult.\n\nSwimming lessons for children every Saturday at 9 a.m. Ask at reception." },
@@ -90,7 +90,7 @@ export const extraReading: LessonDef[] = [
 
   // ---------- A2 ----------
   {
-    key: "extra:a2:reading-recipe", batch: "skills-extra", level: "A2", unit: A2, slug: "reading-a-simple-recipe", title: "Read: a simple recipe", skill: "READING", minutes: 13,
+    key: "extra:a2:reading-recipe", batch: "lessons", level: "A2", unit: A2, slug: "reading-a-simple-recipe", title: "Read: a simple recipe", skill: "READING", minutes: 13,
     blocks: [
       before("Recipes have two parts: a list of ingredients and the steps. The steps use imperatives (Cut…, Add…, Stir…) and sequence words. Read in order."),
       { kind: "text", heading: "Tomato and egg stir-fry (for 2 people)", body: "Ingredients\n• 3 eggs\n• 2 large tomatoes\n• 1 spring onion\n• 1 tablespoon of oil\n• a little salt, sugar and fish sauce\n\nMethod\n1. Cut the tomatoes into small pieces and chop the spring onion.\n2. Break the eggs into a bowl, add a little salt and beat them with a fork.\n3. Heat the oil in a pan. Cook the eggs for about one minute, then take them out of the pan.\n4. Put the tomatoes in the same pan. Cook them for three or four minutes until they are soft.\n5. Add a little sugar and fish sauce. Then put the eggs back in the pan and stir gently.\n6. Add the spring onion at the end and serve with hot rice.\n\nTip: If the tomatoes are not very sweet, add a bit more sugar." },
@@ -105,7 +105,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a2:reading-invitation", batch: "skills-extra", level: "A2", unit: A2, slug: "reading-a-birthday-party-invitation", title: "Read: a birthday party invitation", skill: "READING", minutes: 12,
+    key: "extra:a2:reading-invitation", batch: "lessons", level: "A2", unit: A2, slug: "reading-a-birthday-party-invitation", title: "Read: a birthday party invitation", skill: "READING", minutes: 12,
     blocks: [
       before("Invitations tell you what the event is, when and where it is, and what to do. Read the invitation and the reply, and find what is different in the reply."),
       { kind: "text", heading: "An invitation and a reply", body: "Hi everyone!\n\nI'm turning sixteen next week, and I'm having a party to celebrate! It's on Saturday the 14th, from 6 p.m. to 10 p.m., at my house, 25 Nguyen Hue Street. We'll have a barbecue in the garden, and my brother is going to play music.\n\nPlease don't bring presents — just bring yourself and something to drink if you can. The party theme is \"summer\", so wear something bright!\n\nPlease tell me by Wednesday if you can come, so I know how much food to buy.\n\nMinh Anh\n\n---\n\nHi Minh Anh,\n\nThanks for the invitation! I'd love to come, but I have a piano exam on Saturday afternoon, so I'll be a bit late — probably around 7:30. Is that OK? I'll bring some lemonade.\n\nSee you then,\nKim" },
@@ -120,7 +120,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a2:reading-hotel-review", batch: "skills-extra", level: "A2", unit: A2, slug: "reading-a-hotel-review", title: "Read: a hotel review", skill: "READING", minutes: 13,
+    key: "extra:a2:reading-hotel-review", batch: "lessons", level: "A2", unit: A2, slug: "reading-a-hotel-review", title: "Read: a hotel review", skill: "READING", minutes: 13,
     blocks: [
       before("Online reviews mix good points and bad points. Look for words like but, however and although — they often show a change from positive to negative."),
       { kind: "text", heading: "Review: Sea Breeze Hotel, Nha Trang ★★★☆☆", body: "We stayed at the Sea Breeze Hotel for three nights in July. The location is excellent — the beach is only two minutes' walk away, and there are lots of restaurants nearby.\n\nOur room was clean and the bed was comfortable, but it was quite small, and the window looked at a wall, not the sea. If you want a sea view, pay a little more for a room on a higher floor.\n\nThe staff were very friendly and helpful. The receptionist booked a boat trip for us and it was the best day of our holiday. However, the breakfast was disappointing: the same food every day and not much fruit.\n\nThe Wi-Fi was fast in the lobby but slow in our room.\n\nOverall, it's a good hotel for the price, especially if you spend most of the day outside." },
@@ -135,7 +135,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:a2:reading-city-bikes", batch: "skills-extra", level: "A2", unit: A2, slug: "reading-how-to-use-the-city-bikes", title: "Read: how to use the city bikes", skill: "READING", minutes: 13,
+    key: "extra:a2:reading-city-bikes", batch: "lessons", level: "A2", unit: A2, slug: "reading-how-to-use-the-city-bikes", title: "Read: how to use the city bikes", skill: "READING", minutes: 13,
     blocks: [
       before("Instructions explain how to do something step by step. Look for numbers, prices and conditions (if…). Then answer the questions."),
       { kind: "text", heading: "City Bike — quick guide", body: "City Bike has 80 stations around the city. You can rent a bike at one station and return it at any other station.\n\nHow to rent a bike\n1. Download the City Bike app and create an account.\n2. Add money to your account. The minimum is 50,000 dong.\n3. At a station, scan the QR code on the bike with your phone. The lock will open.\n4. When you finish, put the bike back into an empty space at any station and close the lock. Check that the light turns green.\n\nPrices\nThe first 30 minutes cost 5,000 dong. After that, each extra 30 minutes costs 5,000 dong. A day pass costs 50,000 dong.\n\nImportant\nIf you do not return the bike within 24 hours, you will pay a fine of 500,000 dong. Children under 14 cannot rent a bike. Helmets are not included, so please bring your own." },
@@ -152,7 +152,7 @@ export const extraReading: LessonDef[] = [
 
   // ---------- B1 ----------
   {
-    key: "extra:b1:reading-language-apps", batch: "skills-extra", level: "B1", unit: B1, slug: "reading-can-apps-teach-you-a-language", title: "Read: can apps teach you a language?", skill: "READING", minutes: 16,
+    key: "extra:b1:reading-language-apps", batch: "lessons", level: "B1", unit: B1, slug: "reading-can-apps-teach-you-a-language", title: "Read: can apps teach you a language?", skill: "READING", minutes: 16,
     blocks: [
       before("This article gives both sides of an argument. As you read, note which paragraph gives advantages, which gives limitations, and what the writer finally recommends."),
       { kind: "text", heading: "Can apps teach you a language?", body: "Millions of people now try to learn a language on their phones, often for just ten minutes a day. But can an app really make you fluent?\n\nThere are clear advantages. Apps are cheap or free, and you can use them anywhere — on the bus, in a queue or before bed. Many use games, points and reminders to keep learners coming back, which helps build a daily habit. For vocabulary and basic grammar, this regular practice can be very effective.\n\nHowever, most apps have limits. They are good at recognition — choosing the right word from a list — but they rarely ask you to produce long answers or hold a real conversation. Speaking to a screen is also very different from speaking to a person who interrupts, asks questions and talks quickly. As a result, some learners reach a point where they can read well but still feel nervous when they have to speak.\n\nSo what should learners do? Most teachers agree that apps work best as one part of a wider plan. Use them to build vocabulary every day, but also find chances to speak — with a teacher, a language partner or even by recording yourself. Reading and listening to real material, such as articles, podcasts or films, will fill the gaps that apps leave." },
@@ -167,7 +167,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:b1:reading-banh-mi", batch: "skills-extra", level: "B1", unit: B1, slug: "reading-the-story-of-banh-mi", title: "Read: the story of banh mi", skill: "READING", minutes: 15,
+    key: "extra:b1:reading-banh-mi", batch: "lessons", level: "B1", unit: B1, slug: "reading-the-story-of-banh-mi", title: "Read: the story of banh mi", skill: "READING", minutes: 15,
     blocks: [
       before("This text explains how a famous sandwich developed over time. Follow the order of events and notice how the writer explains causes and changes."),
       { kind: "text", heading: "The story of banh mi", body: "Today banh mi is sold on street corners all over Vietnam and in cities around the world, but its story is fairly recent. The French brought wheat bread to Vietnam in the nineteenth century. At first, bread was expensive and was eaten mainly by French residents and wealthy families, often with butter or pâté.\n\nOver time, local bakers changed the recipe. The baguettes they made became lighter, with a thin, crispy crust and a soft inside, which suited the hot, humid climate. By the middle of the twentieth century, street sellers — especially in Saigon — had started filling the bread with local ingredients: grilled pork, pickled carrot and radish, fresh coriander, chilli and a little soy sauce.\n\nThis mix of French and Vietnamese flavours is what makes banh mi special. It is also practical: it is cheap, quick to prepare and easy to eat on the go, which explains why it became a favourite breakfast for workers and students.\n\nIn recent decades, Vietnamese communities abroad have made banh mi known internationally, and the word itself now appears in some English dictionaries. Yet many people still say that the best banh mi is the one you buy from a small stall near your home." },
@@ -184,7 +184,7 @@ export const extraReading: LessonDef[] = [
 
   // ---------- B2 ----------
   {
-    key: "extra:b2:reading-rooftop-farms", batch: "skills-extra", level: "B2", unit: B2, slug: "reading-farms-on-city-rooftops", title: "Read: farms on city rooftops", skill: "READING", minutes: 17,
+    key: "extra:b2:reading-rooftop-farms", batch: "lessons", level: "B2", unit: B2, slug: "reading-farms-on-city-rooftops", title: "Read: farms on city rooftops", skill: "READING", minutes: 17,
     blocks: [
       before("This feature article describes a trend and weighs its benefits against its limits. Pay attention to how the writer qualifies claims — words like partly, rarely and on its own."),
       { kind: "text", heading: "Farms on city rooftops", body: "Look up in some of the world's busiest cities and you may notice something unexpected: vegetables. On flat roofs that once held nothing but water tanks and air-conditioning units, residents and small companies are growing lettuce, herbs, tomatoes and even fruit trees.\n\nSupporters point to several benefits. Food grown on a roof travels a few metres rather than hundreds of kilometres, so it reaches the table fresher. Plants also absorb heat, which can make the floors below noticeably cooler in summer and reduce the need for air conditioning. For many participants, however, the main attraction is social: shared rooftop gardens give neighbours who rarely spoke a reason to meet, and children learn where food actually comes from.\n\nThe limits are just as real. Soil and water are heavy, so not every building can safely support a garden without costly structural work. Rooftops are often windy and exposed to strong sun, which restricts what can be grown. And even the most productive urban farms supply only a small share of a city's food; on its own, rooftop farming will not feed millions.\n\nPerhaps that is the wrong way to judge it. Advocates argue that rooftop farms are less about replacing traditional agriculture than about reconnecting city dwellers with the food they eat — and making dense, hot cities slightly greener in the process." },
@@ -199,7 +199,7 @@ export const extraReading: LessonDef[] = [
     ]
   },
   {
-    key: "extra:b2:reading-digital-detox", batch: "skills-extra", level: "B2", unit: B2, slug: "reading-does-a-digital-detox-work", title: "Read: does a digital detox work?", skill: "READING", minutes: 17,
+    key: "extra:b2:reading-digital-detox", batch: "lessons", level: "B2", unit: B2, slug: "reading-does-a-digital-detox-work", title: "Read: does a digital detox work?", skill: "READING", minutes: 17,
     blocks: [
       before("This opinion piece questions a popular idea. Identify the writer's position, the evidence used, and the alternative the writer proposes."),
       { kind: "text", heading: "Does a digital detox work?", body: "Every few months, someone I know announces a \"digital detox\": a week, or even a month, without social media. They delete the apps, post a farewell message and disappear. A few weeks later, most of them are back, often scrolling more than before.\n\nThe idea behind a detox is appealing. If our phones distract us, why not simply remove them for a while and reset? The trouble is that a detox treats the phone as the problem, when the real issue is usually the habits we have built around it. We reach for our phones when we are bored, anxious or avoiding a difficult task. Removing the phone for a week does nothing to change those triggers, so when the detox ends, the old routine returns almost immediately.\n\nThere is some evidence that short breaks can improve mood and sleep, which is not nothing. But the benefits tend to fade once people go back to their normal lives. A more lasting approach may be less dramatic: turning off non-essential notifications, keeping the phone out of the bedroom, or setting specific times to check messages.\n\nThese changes are less exciting to announce than a month offline. Yet they are easier to maintain, and they target the behaviour rather than the device. In the end, the goal should not be to escape technology for a few weeks, but to use it on our own terms every day." },
@@ -216,7 +216,7 @@ export const extraReading: LessonDef[] = [
 
   // ---------- C1 ----------
   {
-    key: "extra:c1:reading-habits", batch: "skills-extra", level: "C1", unit: C1, slug: "reading-why-habits-are-hard-to-break", title: "Read: why habits are hard to break", skill: "READING", minutes: 19,
+    key: "extra:c1:reading-habits", batch: "lessons", level: "C1", unit: C1, slug: "reading-why-habits-are-hard-to-break", title: "Read: why habits are hard to break", skill: "READING", minutes: 19,
     blocks: [
       before("This essay draws on a widely used model of habit formation. Track the argument carefully: the writer describes the mechanism, then challenges a common misconception, and finally draws a practical implication."),
       { kind: "text", heading: "Why habits are hard to break", body: "Anyone who has resolved to stop checking their phone first thing in the morning, only to find it in their hand before they are fully awake, will recognise how little habits seem to care about our intentions. That is precisely the point: a habit, by definition, is behaviour that no longer depends on a conscious decision.\n\nA model that has become popular in recent years describes habits as a loop with three parts. A cue — a time, a place, a feeling — triggers a routine, which is followed by some kind of reward. Repeated often enough, the sequence becomes so automatic that the cue alone is sufficient to set the routine in motion. The reward need not be large; the mild relief of seeing a new message may be enough to reinforce the pattern.\n\nIt follows that willpower, the tool we instinctively reach for, is poorly suited to the task. Willpower operates at the level of deliberate choice, whereas an established habit bypasses that level altogether. Relying on resolve alone is rather like trying to steer a car by shouting at it: the effort is real, but it is applied in the wrong place.\n\nThis is also why simply stopping a habit so often fails. The cue remains, and so does the craving for the reward; remove the routine and a vacuum is left that the old behaviour readily fills. A more promising strategy is substitution: keep the cue and, where possible, the reward, but attach them to a different routine. Someone who snacks out of boredom in the afternoon, for instance, might take a short walk at the same time instead. Changing the environment so that the cue appears less often — leaving the phone charging in another room overnight — can be more effective still.\n\nNone of this makes change effortless. But it does suggest that the most successful attempts are designed rather than merely willed." },
@@ -233,7 +233,7 @@ export const extraReading: LessonDef[] = [
 
   // ---------- C2 ----------
   {
-    key: "extra:c2:reading-tourism-paradox", batch: "skills-extra", level: "C2", unit: C2, slug: "reading-the-paradox-of-tourism", title: "Read: the paradox of tourism", skill: "READING", minutes: 20,
+    key: "extra:c2:reading-tourism-paradox", batch: "lessons", level: "C2", unit: C2, slug: "reading-the-paradox-of-tourism", title: "Read: the paradox of tourism", skill: "READING", minutes: 20,
     blocks: [
       before("This essay develops a nuanced argument about tourism. Expect irony, concession and implied meaning. Focus on what the writer implies as well as what is stated, and on how each paragraph shifts the argument."),
       { kind: "text", heading: "The paradox of tourism", body: "There is a particular melancholy in arriving at a place celebrated for its tranquillity and finding it thronged with others who have come in search of the same thing. Tourism, in this sense, contains the seeds of its own undoing: the qualities that draw visitors — quiet streets, unhurried rhythms, a sense of the untouched — are precisely those that mass visitation erodes.\n\nIt would be easy, and somewhat self-flattering, to cast the problem as one of other people: the coach parties, the selfie sticks, the travellers who, unlike ourselves, fail to appreciate what they see. Yet every visitor, however discerning, adds to the crowd. The distinction between the tourist and the traveller, so often invoked, tends to dissolve under scrutiny; it is less a difference of kind than a way of excusing our own presence.\n\nNor is the answer simply to stay at home. For many communities, tourism is not an intrusion to be tolerated but a livelihood, and a sudden collapse in visitors, as several destinations discovered during recent periods of closed borders, can be as devastating as an excess of them. The question, then, is not whether people should travel but how the benefits and burdens are distributed — who profits from the hotel built on the waterfront, and who bears the cost when rents rise and residents are gradually priced out of their own neighbourhoods.\n\nSome cities have begun to experiment with limits: capping the number of daily visitors, levying charges on day-trippers, or restricting short-term rentals. Such measures are inevitably imperfect and frequently resented. But they reflect a growing recognition that a place is not merely a backdrop for visitors' experiences; it is, first and foremost, somewhere people live. Travel that forgets this is, in the end, a kind of consumption that leaves the consumed diminished." },

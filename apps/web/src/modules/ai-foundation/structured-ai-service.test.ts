@@ -25,7 +25,7 @@ describe("executeStructuredAi", () => {
       name: "gemini", model: "test-model",
       async generateJson() { calls += 1; return { value: { explanation: "Validated feedback" }, usage: { promptTokens: 3, responseTokens: 2 } }; }
     };
-    const request = { actor: { userId: null, guestId: "guest-test" }, operation: "TUTOR_EXPLANATION" as const, cacheInput: { answer: "A" }, prompt: "Prompt", systemInstruction: "Instruction", responseSchema: jsonSchema, validator: responseSchema, provider };
+    const request = { actor: { learnerId: "guest-test" }, operation: "TUTOR_EXPLANATION" as const, cacheInput: { answer: "A" }, prompt: "Prompt", systemInstruction: "Instruction", responseSchema: jsonSchema, validator: responseSchema, provider };
 
     await expect(executeStructuredAi(request)).resolves.toEqual({ explanation: "Validated feedback" });
     await expect(executeStructuredAi(request)).resolves.toEqual({ explanation: "Validated feedback" });
@@ -35,6 +35,6 @@ describe("executeStructuredAi", () => {
   it("rejects a structurally invalid provider response", async () => {
     process.env.E4F_USE_IN_MEMORY = "true";
     const provider: StructuredAiProvider = { name: "gemini", model: "test-model", async generateJson() { return { value: { explanation: "" }, usage: { promptTokens: null, responseTokens: null } }; } };
-    await expect(executeStructuredAi({ actor: { userId: null, guestId: "guest-invalid" }, operation: "TUTOR_EXPLANATION", cacheInput: { answer: "B" }, prompt: "Prompt", systemInstruction: "Instruction", responseSchema: jsonSchema, validator: responseSchema, provider })).rejects.toBeInstanceOf(AiInvalidResponseError);
+    await expect(executeStructuredAi({ actor: { learnerId: "guest-invalid" }, operation: "TUTOR_EXPLANATION", cacheInput: { answer: "B" }, prompt: "Prompt", systemInstruction: "Instruction", responseSchema: jsonSchema, validator: responseSchema, provider })).rejects.toBeInstanceOf(AiInvalidResponseError);
   });
 });

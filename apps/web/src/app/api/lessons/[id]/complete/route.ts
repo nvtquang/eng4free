@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { z } from "zod";
-import { guestCookieName, getRequestActor } from "@/modules/auth/request-actor";
+import { guestCookieName, getRequestLearner } from "@/modules/auth/request-actor";
 import { completeLesson } from "@/modules/lessons/completion";
 
 const CompletionSchema = z.object({ answers: z.array(z.object({ questionId: z.string().uuid(), selectedOptionId: z.string().min(1).max(64) })).max(100) });
@@ -11,7 +11,7 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   const body = CompletionSchema.safeParse(await request.json().catch(() => null));
   if (!lessonId.success || !body.success) return NextResponse.json({ error: "Invalid lesson completion payload" }, { status: 400 });
   try {
-    const { actor, createdGuestId } = await getRequestActor(true);
+    const { learner: actor, createdGuestId } = await getRequestLearner(true);
     const result = await completeLesson({ lessonId: lessonId.data, actor, answers: body.data.answers });
     const response = NextResponse.json(result);
     if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });

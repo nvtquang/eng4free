@@ -65,7 +65,7 @@ export async function recordAiUsage(input: UsageLogInput): Promise<void> {
   if (!db) return;
   try {
     await db.insert(aiUsageLogs).values({
-      id: randomUUID(), userId: input.actor.userId, guestId: input.actor.guestId,
+      id: randomUUID(), learnerId: input.actor.learnerId,
       operation: input.operation, provider: input.provider, model: input.model,
       inputHash: input.inputHash, cacheHit: input.cacheHit, status: input.status,
       latencyMs: input.latencyMs ?? null, promptTokens: input.promptTokens ?? null,

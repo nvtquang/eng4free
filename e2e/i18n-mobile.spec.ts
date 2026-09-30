@@ -14,7 +14,7 @@ test("locale switch renders Vietnamese and English navigation", async ({ page })
   await page.goto("/");
   await page.getByRole("button", { name: "EN", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "en");
-  await expect(page.getByRole("link", { name: "Learn", exact: true })).toBeVisible();
+  await expect(page.getByRole("navigation", { name: "Primary navigation" }).getByRole("link", { name: "Path", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "VI", exact: true }).click();
   await expect(page.locator("html")).toHaveAttribute("lang", "vi");
 });

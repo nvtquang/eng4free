@@ -103,8 +103,10 @@ export const WritingSubmissionSchema = z.object({
   language: z.literal("en"),
   expectedMinimumWords: z.number().int().positive().max(1_000).optional()
 });
-export const WritingPersistenceSchema = z.object({ submissionId: z.string().uuid().optional(), promptId: z.string().min(1).max(128), taskType: z.enum(["IELTS_TASK_1", "IELTS_TASK_2", "GENERAL"]), promptText: z.string().min(1).max(8_000), text: z.string().max(12_000), action: z.enum(["SAVE_DRAFT", "SUBMIT"]), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() }).superRefine(({ text, action }, context) => { if (action === "SUBMIT" && !text.trim()) context.addIssue({ code: z.ZodIssueCode.custom, path: ["text"], message: "Submitted writing cannot be empty" }); });
-export const SpeakingSessionInputSchema = z.object({ promptId: z.string().min(1).max(128), prompt: z.string().min(1).max(8_000), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() });
+export const WritingPersistenceSchema = z.object({ submissionId: z.string().uuid().optional(), topicId: z.string().uuid(), taskType: z.enum(["IELTS_TASK_1", "IELTS_TASK_2", "GENERAL"]), promptText: z.string().min(1).max(8_000), text: z.string().max(12_000), action: z.enum(["SAVE_DRAFT", "SUBMIT"]), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() }).superRefine(({ text, action }, context) => { if (action === "SUBMIT" && !text.trim()) context.addIssue({ code: z.ZodIssueCode.custom, path: ["text"], message: "Submitted writing cannot be empty" }); });
+/** part is the IELTS part within a topic: "part2", or "part3:<question index>". */
+export const SpeakingPartSchema = z.string().regex(/^part(1|2|3(:\d{1,2})?)$/u);
+export const SpeakingSessionInputSchema = z.object({ topicId: z.string().uuid(), part: SpeakingPartSchema.optional(), prompt: z.string().min(1).max(8_000), examType: z.enum(["TOEIC", "IELTS"]).nullable().optional() });
 export const SpeakingRubricLevelSchema = z.enum(["NEEDS_WORK", "DEVELOPING", "SECURE"]);
 export const SpeakingRubricCriterionSchema = z.object({ level: SpeakingRubricLevelSchema, feedback: z.string().min(1).max(2_000) });
 export const SpeakingFeedbackSchema = z.object({
@@ -137,10 +139,10 @@ export const WritingFeedbackSchema = z.object({
   rubricDisclaimer: z.string().min(1).max(500)
 });
 
-export const TutorRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), learnerAnswer: z.string().min(1).max(128) });
+export const TutorRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid() });
 export const TutorFeedbackSchema = z.object({ correct: z.boolean(), explanation: z.string().min(1), nextStep: z.string().min(1), providerUsed: z.boolean() });
 export const TutorChatMessageSchema = z.object({ role: z.enum(["learner", "tutor"]), content: z.string().min(1).max(2_000) });
-export const TutorChatRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), learnerAnswer: z.string().min(1).max(128), messages: z.array(TutorChatMessageSchema).min(1).max(10) });
+export const TutorChatRequestSchema = z.object({ attemptId: z.string().uuid(), questionId: z.string().uuid(), messages: z.array(TutorChatMessageSchema).min(1).max(10) });
 export const TutorChatReplySchema = z.object({ reply: z.string().min(1), providerUsed: z.boolean() });
 export const WritingEvaluationRequestSchema = z.object({ submissionId: z.string().uuid() });
 

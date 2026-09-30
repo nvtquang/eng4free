@@ -27,7 +27,7 @@ describe("AI speaking service", () => {
         return { transcript: "I learned public speaking.", usage: { promptTokens: 4, responseTokens: 5 } };
       }
     };
-    const actor = { userId: null, guestId: "speaking-test" };
+    const actor = { learnerId: "speaking-test" };
     const input = { bytes: new Uint8Array([10, 20, 30]), mimeType: "audio/webm" };
 
     await expect(transcribeSpeakingAudio(actor, input, provider)).resolves.toBe("I learned public speaking.");
@@ -60,7 +60,7 @@ describe("AI speaking service", () => {
     };
 
     const feedback = await createSpeakingFeedback(
-      { userId: null, guestId: "feedback-test" },
+      { learnerId: "feedback-test" },
       { prompt: "Describe a useful skill.", transcript: "I learn cooking last year and it was useful.", feedbackLanguage: "en" },
       provider
     );

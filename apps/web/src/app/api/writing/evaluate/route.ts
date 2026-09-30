@@ -1,7 +1,7 @@
 import { WritingEvaluationRequestSchema } from "@english4free/content-schemas";
 import { HttpWritingService } from "@/modules/ai-writing/writing-service";
 import { AiRateLimitError } from "@/modules/ai-foundation/contracts";
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { findOwnedWritingSubmission, saveWritingFeedback } from "@/modules/writing/repository";
 import { NextResponse } from "next/server";
 
@@ -10,11 +10,11 @@ export async function POST(request: Request) {
   const parsed = WritingEvaluationRequestSchema.safeParse(body);
   if (!parsed.success) return NextResponse.json({ error: "Invalid writing evaluation request", details: parsed.error.flatten() }, { status: 400 });
   try {
-    const { actor } = await getRequestActor(false);
+    const { learner: actor } = await getRequestLearner(false);
     const submission = await findOwnedWritingSubmission(actor, parsed.data.submissionId);
     if (!submission || !submission.submittedAt) return NextResponse.json({ error: "Submitted writing was not found" }, { status: 404 });
     const taskType = submission.taskType === "IELTS_TASK_1" || submission.taskType === "IELTS_TASK_2" ? submission.taskType : "GENERAL";
-    const evaluation = await new HttpWritingService(actor).evaluate({ promptId: submission.promptId, taskType, text: submission.text, language: "en", expectedMinimumWords: taskType === "IELTS_TASK_2" ? 250 : taskType === "IELTS_TASK_1" ? 150 : undefined });
+    const evaluation = await new HttpWritingService(actor).evaluate({ promptId: submission.topicId ?? submission.legacyPromptId ?? "general-writing", taskType, text: submission.text, language: "en", expectedMinimumWords: taskType === "IELTS_TASK_2" ? 250 : taskType === "IELTS_TASK_1" ? 150 : undefined });
     const saved = evaluation.feedback ? await saveWritingFeedback(actor, { submissionId: submission.id, feedback: evaluation.feedback, provider: "gemini", model: process.env.GEMINI_MODEL?.trim() || null }) : null;
     return NextResponse.json({ submissionId: submission.id, ...evaluation, savedAt: saved?.savedAt ?? null });
   } catch (error) {

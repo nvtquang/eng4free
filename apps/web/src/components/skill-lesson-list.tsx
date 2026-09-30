@@ -6,7 +6,7 @@ import { Pill } from "@/components/ui/pill";
 import { Eyebrow, Section } from "@/components/ui/section";
 import type { Locale } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listLessonCompletionHistory, listPublishedLessonCatalog, type PublishedLessonCatalogItem } from "@/modules/lessons/repository";
 
 type LessonSkill = "LISTENING" | "READING" | "GRAMMAR" | "SPEAKING" | "WRITING";
@@ -37,7 +37,7 @@ export async function SkillLessonCards({ locale, skill, completed = new Set<stri
 export async function SkillLessonList({ locale, skill, eyebrow, title, intro, level, basePath }: { locale: Locale; skill: LessonSkill; eyebrow: string; title: string; intro: string; level?: string; basePath?: string }) {
   const copy = getSkillsCopy(locale);
   let history: Awaited<ReturnType<typeof listLessonCompletionHistory>> = [];
-  try { history = await listLessonCompletionHistory((await getRequestActor(false)).actor, skill); } catch { /* No learner cookie yet. */ }
+  try { history = await listLessonCompletionHistory((await getRequestLearner(false)).learner, skill); } catch { /* No learner cookie yet. */ }
   const completed = new Set(history.map((item) => item.title));
   const lessons = ((await listPublishedLessonCatalog().catch(() => null)) ?? []).filter((lesson) => lesson.skill === skill);
   const selected = level && basePath ? (levels.find((item) => item === level.toUpperCase()) ?? "A1") : null;

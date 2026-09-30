@@ -3,7 +3,7 @@ import { Pill } from "@/components/ui/pill";
 import { EmptyState } from "@/components/ui/empty-state";
 import { MistakePractice, type PracticeMistake } from "@/components/mistake-practice";
 import { getLocale, getMessages } from "@/lib/i18n";
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listOpenMistakes } from "@/modules/mistakes/repository";
 
 export const dynamic = "force-dynamic";
@@ -18,7 +18,7 @@ export default async function MistakesPage({ searchParams }: { searchParams: Pro
 
   let mistakes: Awaited<ReturnType<typeof listOpenMistakes>> = [];
   try {
-    const { actor } = await getRequestActor(false);
+    const { learner: actor } = await getRequestLearner(false);
     mistakes = await listOpenMistakes(actor, activeSkill);
   } catch {
     // No learner cookie yet; show the empty state.

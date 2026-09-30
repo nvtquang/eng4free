@@ -21,7 +21,7 @@ export async function executeStructuredAi<TSchema extends z.ZodType>(request: St
   if (!provider) throw new AiProviderUnavailableError("Gemini is not configured");
 
   const inputHash = sha256(request.cacheInput);
-  const actorKey = request.actor.userId ?? request.actor.guestId;
+  const actorKey = request.actor.learnerId;
   const limitKey = `${request.operation}:${actorKey}`;
   if (!allowAiRequest(limitKey)) {
     await recordAiUsage({ actor: request.actor, operation: request.operation, provider: provider.name, model: provider.model, inputHash, cacheHit: false, status: "RATE_LIMITED" });

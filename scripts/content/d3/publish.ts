@@ -2,19 +2,20 @@
  * Publishes reviewed D3 batches (`pnpm content:d3:publish -- --batch=toeic`).
  *
  * A batch is published only after a reviewer moved it to APPROVED in the CMS
- * (/admin → content batches). Publishing sets the batch and all of its items to
- * PUBLISHED and archives the older demo content that the batch replaces.
+ * (/admin → content batches). Publishing releases the batch's DRAFT items (archived items
+ * stay archived), records the published hash of every item so later edits show up in the
+ * review sheet, and archives the older demo content that the batch replaces.
  *
  *   --batch=a,b   batches to publish (default: every APPROVED D3 batch)
  *   --test-db     skip the approval check; only allowed on *_e2e / *_qa / *_test databases
  */
-import { and, eq, inArray, like, ne, or } from "drizzle-orm";
-import { contentBatches, courses, exams, lessons, practicePrompts, questions, vocabulary } from "../../../apps/web/src/db/schema";
-import { d3Retires } from "../../../content/packs/d3";
+import { and, eq, inArray, like, ne, or, sql } from "drizzle-orm";
+import { contentBatches, contentItemHashes, courses, exams, lessons, placementItems, pronunciationItems, questions, topicCategories, topics, vocabulary } from "../../../apps/web/src/db/schema";
+import { d3Batches, d3Retires } from "../../../content/packs/d3";
 import type { BatchKey } from "../../../content/packs/d3/types";
 import { batchId, connect, D3_COURSE_ID, isTestDatabase } from "./shared";
 
-const ALL: BatchKey[] = ["lessons", "grammar", "vocabulary", "toeic", "ielts", "skills-extra"];
+const ALL = Object.keys(d3Batches) as BatchKey[];
 const args = process.argv.slice(2);
 const TEST_DB = args.includes("--test-db");
 const requested = args.find((arg) => arg.startsWith("--batch="))?.slice(8).split(",") as BatchKey[] | undefined;
@@ -37,11 +38,15 @@ async function main() {
         const id = batchId(key);
         await tx.update(contentBatches).set({ status: "PUBLISHED", reviewedBy: TEST_DB ? "automated test publish" : "spot review (see docs/content/d3-review-sample.md)" }).where(eq(contentBatches.id, id));
         await tx.update(lessons).set({ status: "PUBLISHED" }).where(and(eq(lessons.contentBatchId, id), ne(lessons.status, "ARCHIVED")));
-        if (key === "lessons" || key === "grammar" || key === "skills-extra") await tx.update(courses).set({ status: "PUBLISHED" }).where(eq(courses.id, D3_COURSE_ID));
-        await tx.update(exams).set({ status: "PUBLISHED" }).where(eq(exams.contentBatchId, id));
+        if (key === "lessons" || key === "grammar") await tx.update(courses).set({ status: "PUBLISHED" }).where(eq(courses.id, D3_COURSE_ID));
+        await tx.update(exams).set({ status: "PUBLISHED" }).where(and(eq(exams.contentBatchId, id), ne(exams.status, "ARCHIVED")));
         await tx.update(questions).set({ status: "PUBLISHED" }).where(and(eq(questions.contentBatchId, id), ne(questions.status, "ARCHIVED")));
-        await tx.update(vocabulary).set({ status: "PUBLISHED" }).where(eq(vocabulary.contentBatchId, id));
-        await tx.update(practicePrompts).set({ status: "PUBLISHED" }).where(eq(practicePrompts.contentBatchId, id));
+        await tx.update(vocabulary).set({ status: "PUBLISHED" }).where(and(eq(vocabulary.contentBatchId, id), ne(vocabulary.status, "ARCHIVED")));
+        await tx.update(topics).set({ status: "PUBLISHED" }).where(and(eq(topics.contentBatchId, id), ne(topics.status, "ARCHIVED")));
+        await tx.update(topicCategories).set({ status: "PUBLISHED" }).where(and(eq(topicCategories.contentBatchId, id), ne(topicCategories.status, "ARCHIVED")));
+        await tx.update(pronunciationItems).set({ status: "PUBLISHED" }).where(and(eq(pronunciationItems.contentBatchId, id), ne(pronunciationItems.status, "ARCHIVED")));
+        await tx.update(placementItems).set({ status: "PUBLISHED" }).where(and(eq(placementItems.contentBatchId, id), ne(placementItems.status, "ARCHIVED")));
+        await tx.update(contentItemHashes).set({ publishedHash: sql`${contentItemHashes.hash}` }).where(eq(contentItemHashes.batchId, id));
 
         const retire = d3Retires[key];
         if (retire.examSlugs?.length) await tx.update(exams).set({ status: "ARCHIVED" }).where(inArray(exams.slug, retire.examSlugs));

@@ -1,7 +1,7 @@
 export const progressEventTypes = ["LESSON_STARTED", "LESSON_COMPLETED", "QUESTION_ANSWERED", "VOCAB_REVIEWED", "VOCAB_LEARNED", "LISTENING_COMPLETED", "READING_COMPLETED", "WRITING_SUBMITTED", "SPEAKING_COMPLETED", "EXAM_STARTED", "EXAM_COMPLETED"] as const;
 export type ProgressEventType = (typeof progressEventTypes)[number];
 export type LearningSkill = "LISTENING" | "SPEAKING" | "READING" | "WRITING";
-export type ProgressEvent = { id: string; userId: string | null; guestId: string | null; type: ProgressEventType; skill: LearningSkill | null; sourceType?: string | null; sourceId?: string | null; idempotencyKey?: string | null; occurredAt: Date; metadata: Record<string, unknown> };
+export type ProgressEvent = { id: string; learnerId: string; type: ProgressEventType; skill: LearningSkill | null; sourceType?: string | null; sourceId?: string | null; idempotencyKey?: string | null; occurredAt: Date; metadata: Record<string, unknown> };
 export type ProgressSnapshot = { xp: number; streakDays: number; eventsCount: number; skillEvents: Record<string, number> };
 export const xpByEvent: Record<ProgressEventType, number> = { LESSON_STARTED: 0, LESSON_COMPLETED: 20, QUESTION_ANSWERED: 2, VOCAB_REVIEWED: 1, VOCAB_LEARNED: 5, LISTENING_COMPLETED: 20, READING_COMPLETED: 20, WRITING_SUBMITTED: 20, SPEAKING_COMPLETED: 25, EXAM_STARTED: 0, EXAM_COMPLETED: 30 };
 function dateKey(date: Date, timeZone: string) { return new Intl.DateTimeFormat("en-CA", { timeZone, year: "numeric", month: "2-digit", day: "2-digit" }).format(date); }

@@ -12,10 +12,9 @@ type Submission = {
   feedback: Array<{ id: string; content: WritingFeedbackView; createdAt: string }>;
 };
 type Evaluation = { feedback: WritingFeedbackView | null; providerConfigured: boolean; error?: string };
-export type WritingTask = { promptId: string; taskType: "IELTS_TASK_1" | "IELTS_TASK_2" | "GENERAL"; examType: "TOEIC" | "IELTS" | null };
-const generalTask: WritingTask = { promptId: "local-general-opinion", taskType: "GENERAL", examType: null };
+export type WritingTask = { topicId: string; taskType: "IELTS_TASK_1" | "IELTS_TASK_2" | "GENERAL"; examType: "TOEIC" | "IELTS" | null };
 
-export function WritingWorkspace({ copy, feedbackCopy, prompt, task = generalTask }: { copy: Copy; feedbackCopy: FeedbackCopy; prompt: string; task?: WritingTask }) {
+export function WritingWorkspace({ copy, feedbackCopy, prompt, task }: { copy: Copy; feedbackCopy: FeedbackCopy; prompt: string; task: WritingTask }) {
   const [submissionId, setSubmissionId] = useState<string>();
   const [text, setText] = useState("");
   const [history, setHistory] = useState<Submission[]>([]);
@@ -25,9 +24,9 @@ export function WritingWorkspace({ copy, feedbackCopy, prompt, task = generalTas
   const wordCount = text.trim() ? text.trim().split(/\s+/u).length : 0;
 
   const refresh = useCallback(async () => {
-    const response = await fetch(`/api/writing/submissions?promptId=${encodeURIComponent(task.promptId)}`, { cache: "no-store" });
+    const response = await fetch(`/api/writing/submissions?topicId=${encodeURIComponent(task.topicId)}`, { cache: "no-store" });
     if (response.ok) setHistory((await response.json() as { submissions: Submission[] }).submissions);
-  }, [task.promptId]);
+  }, [task.topicId]);
 
   useEffect(() => { void refresh(); }, [refresh]);
 
@@ -43,7 +42,7 @@ export function WritingWorkspace({ copy, feedbackCopy, prompt, task = generalTas
     setPending(true);
     setMessage(action === "SUBMIT" ? feedbackCopy.evaluating : undefined);
     try {
-      const response = await fetch("/api/writing/submissions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ submissionId, promptId: task.promptId, taskType: task.taskType, promptText: prompt, text, action, examType: task.examType }) });
+      const response = await fetch("/api/writing/submissions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ submissionId, topicId: task.topicId, taskType: task.taskType, promptText: prompt, text, action, examType: task.examType }) });
       const body = await response.json() as { id?: string; error?: string };
       if (!response.ok || !body.id) throw new Error(body.error ?? copy.saveFailed);
       setSubmissionId(body.id);

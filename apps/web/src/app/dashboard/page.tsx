@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getDashboardDetailsCopy } from "@/lib/dashboard-copy";
 import { getLocale, getMessages } from "@/lib/i18n";
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listAttemptHistory } from "@/modules/attempts/history";
 import { projectProgress, type ProgressEvent } from "@/modules/progress/progress";
 import { listProgressEvents } from "@/modules/progress/repository";
@@ -22,7 +22,7 @@ export default async function DashboardPage() {
   let speaking: Awaited<ReturnType<typeof listSpeakingHistory>> = [];
 
   try {
-    const { actor } = await getRequestActor(false);
+    const { learner: actor } = await getRequestLearner(false);
     [events, exams, writings, speaking] = await Promise.all([
       listProgressEvents(actor),
       listAttemptHistory(actor),

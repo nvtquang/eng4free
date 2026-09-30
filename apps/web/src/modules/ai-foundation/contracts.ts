@@ -1,9 +1,10 @@
 import { createHash } from "node:crypto";
+import type { LearnerRef } from "@/modules/learners/types";
 import type { z } from "zod";
 
 export const AI_OPERATIONS = ["TUTOR_EXPLANATION", "WRITING_FEEDBACK", "SPEECH_TRANSCRIPTION", "SPEAKING_FEEDBACK", "ASSISTANT_CHAT"] as const;
 export type AiOperation = (typeof AI_OPERATIONS)[number];
-export type AiActor = { userId: string | null; guestId: string };
+export type AiActor = LearnerRef;
 export type AiUsageStatus = "SUCCESS" | "CACHE_HIT" | "RATE_LIMITED" | "PROVIDER_UNAVAILABLE" | "INVALID_RESPONSE";
 export type JsonSchema = Record<string, unknown>;
 

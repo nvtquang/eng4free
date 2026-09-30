@@ -5,7 +5,7 @@ import { Eyebrow, Section } from "@/components/ui/section";
 import { getAiFeedbackCopy } from "@/lib/ai-feedback-copy";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
-import { listPublishedPrompts } from "@/modules/practice-prompts/repository";
+import { listIeltsTopics } from "@/modules/topics/repository";
 
 const promptCopy = {
   vi: { choose: "Chọn đề", task1: "Task 1", task2: "Task 2", minutes: "phút", words: "từ tối thiểu" },
@@ -16,7 +16,7 @@ export default async function IeltsWritingPage({ searchParams }: { searchParams:
   const locale = await getLocale();
   const copy = getMessages(locale).ielts;
   const text = promptCopy[locale];
-  const prompts = await listPublishedPrompts(["IELTS_WRITING_TASK_1", "IELTS_WRITING_TASK_2"]);
+  const prompts = await listIeltsTopics(["IELTS_WRITING_TASK_1", "IELTS_WRITING_TASK_2"]);
   const { prompt: requested } = await searchParams;
   const selected = prompts.find((item) => item.slug === requested) ?? prompts.find((item) => item.kind === "IELTS_WRITING_TASK_2") ?? prompts[0];
   return <Section>
@@ -32,8 +32,8 @@ export default async function IeltsWritingPage({ searchParams }: { searchParams:
       <p className="mt-2 leading-7 text-muted">{selected.content.instructions}</p>
       {selected.content.image && <div className="mt-4"><ContentImage image={selected.content.image} /></div>}
     </div>}
-    <div className="mt-8">
-      <WritingWorkspace key={selected?.slug ?? "default"} copy={getSkillsCopy(locale)} feedbackCopy={getAiFeedbackCopy(locale)} prompt={selected?.content.prompt ?? copy.writingPrompt} task={{ promptId: selected?.slug ?? "technology-social-task-2", taskType: selected?.kind === "IELTS_WRITING_TASK_1" ? "IELTS_TASK_1" : "IELTS_TASK_2", examType: "IELTS" }} />
-    </div>
+    {selected && <div className="mt-8">
+      <WritingWorkspace key={selected.id} copy={getSkillsCopy(locale)} feedbackCopy={getAiFeedbackCopy(locale)} prompt={selected.content.prompt} task={{ topicId: selected.id, taskType: selected.kind === "IELTS_WRITING_TASK_1" ? "IELTS_TASK_1" : "IELTS_TASK_2", examType: "IELTS" }} />
+    </div>}
   </Section>;
 }

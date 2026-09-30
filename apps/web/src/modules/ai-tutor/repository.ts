@@ -3,9 +3,9 @@ import { and, asc, eq } from "drizzle-orm";
 import { TutorFeedbackSchema, type TutorFeedback } from "@english4free/content-schemas";
 import { createDatabase } from "@/db/client";
 import { tutorFeedback } from "@/db/schema";
-import type { AttemptActor } from "@/modules/attempts/types";
+import type { LearnerRef } from "@/modules/learners/types";
 
-export async function saveTutorFeedback(actor: AttemptActor, input: { attemptId: string; questionId: string; learnerAnswer: string; feedback: TutorFeedback }) {
+export async function saveTutorFeedback(actor: LearnerRef, input: { attemptId: string; questionId: string; learnerAnswer: string; feedback: TutorFeedback }) {
   const db = createDatabase();
   if (!db) return null;
   const provider = input.feedback.providerUsed ? "gemini" : "official-explanation";
@@ -19,7 +19,7 @@ export async function saveTutorFeedback(actor: AttemptActor, input: { attemptId:
   return id;
 }
 
-export async function listTutorFeedback(actor: AttemptActor, attemptId: string) {
+export async function listTutorFeedback(actor: LearnerRef, attemptId: string) {
   const db = createDatabase();
   if (!db) return [];
   const rows = await db.select().from(tutorFeedback).where(eq(tutorFeedback.attemptId, attemptId)).orderBy(asc(tutorFeedback.createdAt));

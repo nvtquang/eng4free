@@ -15,5 +15,5 @@ export default async function LessonPreviewPage({ params }: { params: Promise<{ 
   const note = locale === "vi"
     ? "Xem trước trong CMS · chỉ có thể nộp câu luyện tập sau khi xuất bản."
     : "CMS preview · practice submission is available only after publishing.";
-  return <Section className="max-w-4xl"><p className="rounded-ui bg-amber-100 p-3 text-sm font-bold text-amber-950">{note}</p><h1 className="mt-6 font-serif text-5xl font-bold">{lesson.title}</h1><LessonRunner lessonId={lesson.id} blocks={lesson.blocks} locale={locale} /></Section>;
+  return <Section className="max-w-4xl"><p className="rounded-ui bg-amber-100 p-3 text-sm font-bold text-amber-950">{note}</p><h1 className="mt-6 font-serif text-5xl font-bold">{lesson.title}</h1><LessonRunner lessonId={lesson.id} blocks={lesson.blocks} locale={locale} nextLesson={null} /></Section>;
 }

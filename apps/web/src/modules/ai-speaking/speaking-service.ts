@@ -24,7 +24,7 @@ export async function transcribeSpeakingAudio(actor: AiActor, input: { bytes: Ui
   const provider = injectedProvider ?? getGeminiTranscriptionProvider();
   if (!provider) throw new AiProviderUnavailableError("Gemini speech transcription is not configured");
   const audioHash = sha256Bytes(input.bytes);
-  if (!allowAiRequest(`SPEECH_TRANSCRIPTION:${actor.userId ?? actor.guestId}`)) {
+  if (!allowAiRequest(`SPEECH_TRANSCRIPTION:${actor.learnerId}`)) {
     await recordAiUsage({ actor, operation: "SPEECH_TRANSCRIPTION", provider: provider.name, model: provider.model, inputHash: audioHash, cacheHit: false, status: "RATE_LIMITED" });
     throw new AiRateLimitError();
   }

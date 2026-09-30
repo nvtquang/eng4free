@@ -9,7 +9,8 @@ import type { AiSpeakingCopy } from "@/lib/ai-speaking-copy";
 type Copy = ReturnType<typeof import("@/lib/skills-copy").getSkillsCopy>;
 type History = { id: string; prompt: string; status: string; createdAt: string; turns: Array<{ id: string; durationMs: number | null; audioMediaId: string | null; transcript: string | null; feedback: SpeakingFeedback | null }> };
 
-export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speaking-skill", examType = null }: { copy: Copy; aiCopy: AiSpeakingCopy; prompt: string; promptId?: string; examType?: "TOEIC" | "IELTS" | null }) {
+/** Records and reviews answers for one topic (and IELTS part); history is scoped to that topic. */
+export function SpeakingPractice({ copy, aiCopy, prompt, topicId, part, examType = null }: { copy: Copy; aiCopy: AiSpeakingCopy; prompt: string; topicId: string; part?: string; examType?: "TOEIC" | "IELTS" | null }) {
   const recorder = useRef<MediaRecorder | null>(null);
   const stream = useRef<MediaStream | null>(null);
   const chunks = useRef<Blob[]>([]);
@@ -23,7 +24,8 @@ export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speak
   const [message, setMessage] = useState<string>();
   const [pending, setPending] = useState(false);
 
-  const refresh = useCallback(async () => { const response = await fetch(`/api/speaking/sessions?promptId=${encodeURIComponent(promptId)}`, { cache: "no-store" }); if (response.ok) setHistory((await response.json() as { sessions: History[] }).sessions); }, [promptId]);
+  const refresh = useCallback(async () => { const query = new URLSearchParams({ topicId, ...(part ? { part } : {}) });
+    const response = await fetch(`/api/speaking/sessions?${query}`, { cache: "no-store" }); if (response.ok) setHistory((await response.json() as { sessions: History[] }).sessions); }, [topicId, part]);
   useEffect(() => { void refresh(); }, [refresh]);
   useEffect(() => () => { stream.current?.getTracks().forEach((track) => track.stop()); }, []);
   useEffect(() => () => { if (previewUrl) URL.revokeObjectURL(previewUrl); }, [previewUrl]);
@@ -53,7 +55,7 @@ export function SpeakingPractice({ copy, aiCopy, prompt, promptId = "local-speak
     if (!blob) return;
     setPending(true); setError(undefined); setMessage(undefined);
     try {
-      const created = await fetch("/api/speaking/sessions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ promptId, prompt, examType }) });
+      const created = await fetch("/api/speaking/sessions", { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify({ topicId, part, prompt, examType }) });
       const session = await created.json() as { id?: string; error?: string };
       if (!created.ok || !session.id) throw new Error(session.error ?? copy.saveFailed);
       const form = new FormData(); form.set("recording", new File([blob], "recording.webm", { type: blob.type || "audio/webm" })); form.set("durationMs", String(durationMs));

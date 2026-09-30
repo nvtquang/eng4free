@@ -1,8 +1,8 @@
 /**
  * Pre-generates listening audio for every spoken script in the database:
  * exam part recordings, listening passages (TOEIC conversations and talks, IELTS
- * sections), questions heard on their own (TOEIC Part 1–2), dictation questions and
- * lesson listening blocks.
+ * sections), questions heard on their own (TOEIC Part 1–2), dictation questions,
+ * lesson listening blocks and placement-test listening items.
  *
  *   pnpm content:generate-audio            generate missing or changed files
  *   pnpm content:generate-audio --check    list missing files, exit 1 if any (no synthesis)
@@ -152,6 +152,11 @@ async function collectJobs(): Promise<Job[]> {
       const content = record(block.content);
       if (typeof content.playbackText !== "string" || !content.playbackText.trim()) continue;
       jobs.push({ text: content.playbackText, source: `lesson ${block.slug} · ${String(content.heading ?? "listening")}`, name: `lesson-${block.slug}`, accents: ACCENTS.LESSON, voiceOverrides: overridesFrom(content), lengthScale: RATE.lesson, pauseMs: 700 });
+    }
+    const placement = await sql<Array<{ slug: string; content: unknown }>>`select slug, content from placement_items where content ? 'playbackText' and status <> 'ARCHIVED' order by sort_order`;
+    for (const item of placement) {
+      const content = record(item.content);
+      jobs.push({ text: String(content.playbackText), source: `placement ${item.slug}`, name: item.slug, accents: ACCENTS.LESSON, voiceOverrides: overridesFrom(content), lengthScale: RATE.lesson, pauseMs: 600 });
     }
     return jobs;
   } finally {

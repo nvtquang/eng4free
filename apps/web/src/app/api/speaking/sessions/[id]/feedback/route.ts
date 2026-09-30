@@ -2,7 +2,7 @@ import { NextResponse } from "next/server";
 import { z } from "zod";
 import { SpeakingFeedbackSchema } from "@english4free/content-schemas";
 import { getLocale } from "@/lib/i18n";
-import { getRequestActor } from "@/modules/auth/request-actor";
+import { getRequestLearner } from "@/modules/auth/request-actor";
 import { AiRateLimitError } from "@/modules/ai-foundation/contracts";
 import { isGeminiConfigured } from "@/modules/ai-foundation/gemini-provider";
 import { createSpeakingFeedback, transcribeSpeakingAudio } from "@/modules/ai-speaking/speaking-service";
@@ -12,7 +12,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ id: strin
   const { id } = await params;
   if (!z.string().uuid().safeParse(id).success) return NextResponse.json({ error: "Invalid speaking session" }, { status: 400 });
   try {
-    const { actor } = await getRequestActor(false);
+    const { learner: actor } = await getRequestLearner(false);
     const turn = await loadSpeakingTurnAudio(actor, id);
     if (!turn) return NextResponse.json({ error: "Speaking recording not found" }, { status: 404 });
     const existingFeedback = SpeakingFeedbackSchema.safeParse(turn.feedback);

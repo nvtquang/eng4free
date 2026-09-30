@@ -5,11 +5,16 @@
  * the sheet is stable between runs) and adds every question the blind cross-check disagreed
  * with. The result is docs/content/d3-review-sample.md: each item shows exactly what the
  * learner sees, the answer key and the explanation, with a checkbox for the reviewer.
+ * When the database is reachable, the sheet starts with every item that is new or edited
+ * since its batch was last published (from content_item_hashes), so nothing slips past review.
  */
 import { existsSync, mkdirSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { buildQuestionFromAuthoring } from "@english4free/content-schemas";
-import { d3Batches, d3Exams, d3Lessons, d3Prompts, d3Vocabulary } from "../../../content/packs/d3";
+import { isNull, ne, or } from "drizzle-orm";
+import { contentItemHashes } from "../../../apps/web/src/db/schema";
+import { d3Batches, d3Exams, d3Lessons, d3Placement, d3Prompts, d3Pronunciation, d3SelfAssessment, d3TopicCategories, d3Vocabulary } from "../../../content/packs/d3";
+import { connect } from "./shared";
 import { arrangeLessonOptions, type BatchKey } from "../../../content/packs/d3/types";
 
 const RATE = Number(process.env.REVIEW_RATE ?? 0.15);
@@ -31,7 +36,7 @@ function sample<T extends { id: string }>(items: T[], seed: string): T[] {
 }
 
 type Entry = { id: string; markdown: string };
-const sections: Record<BatchKey, Entry[]> = { lessons: [], grammar: [], vocabulary: [], toeic: [], ielts: [], "skills-extra": [] };
+const sections = Object.fromEntries(Object.keys(d3Batches).map((key) => [key, [] as Entry[]])) as Record<BatchKey, Entry[]>;
 
 for (const lesson of d3Lessons) {
   lesson.blocks.forEach((block, blockIndex) => {
@@ -67,6 +72,21 @@ for (const exam of d3Exams) {
 
 for (const prompt of d3Prompts) sections.ielts.push({ id: `prompt/${prompt.slug}`, markdown: `**${prompt.title}** \`prompt/${prompt.slug}\`\n\n${prompt.content.prompt}${prompt.content.cueCard ? `\n\nCue card: ${prompt.content.cueCard.topic} — ${prompt.content.cueCard.points.join("; ")}; ${prompt.content.cueCard.closing}` : ""}` });
 
+for (const category of d3TopicCategories) for (const topic of category.topics) {
+  sections.topics.push({ id: topic.slug, markdown: `**${category.title.vi} · ${topic.title.vi}** (${topic.title.en}) \`${topic.slug}\`\n\n${topic.prompt.vi} / ${topic.prompt.en}\n\nCơ bản: ${topic.suggestions.join(" · ")}\n\nNâng cao: ${topic.advanced.join(" · ")}` });
+}
+for (const item of d3Pronunciation) {
+  const detail = item.kind === "SOUND" ? `${item.content.symbol} — ${item.content.keyword} (${item.content.examples.join(", ")})` : item.kind === "PAIR" ? `${item.content.first} / ${item.content.second} (${item.content.contrast.join(" ↔ ")}) — ${item.content.tip.vi}` : `${item.content.targetText} — ${item.content.focusSounds.join(" ")}`;
+  sections.pronunciation.push({ id: item.slug, markdown: `**${item.kind}** \`${item.slug}\` ${detail}` });
+}
+
+for (const item of d3Placement) {
+  const arranged = arrangeLessonOptions(item.key, { q: item.q, options: item.options, answer: item.answer, why: item.why }, 0);
+  const context = item.passage ? `\n\n> ${item.passage.replace(/\n/gu, "\n> ")}` : item.script ? `\n\n🎧 ${item.script.replace(/\n/gu, " / ")}` : "";
+  sections.placement.push({ id: item.key, markdown: `**${item.skill} · ${item.level}** \`${item.key}\`${context}\n\n${item.q}\n\n${arranged.options.map((option, index) => `- ${LETTERS[index]}. ${option}${index === arranged.answer ? " ✅" : ""}`).join("\n")}\n\n*Giải thích:* ${item.why}` });
+}
+for (const statement of d3SelfAssessment) sections.placement.push({ id: `self/${statement.skill}/${statement.level}`, markdown: `**Tự đánh giá ${statement.skill} · ${statement.level}** — ${statement.canDo.vi} / ${statement.canDo.en}` });
+
 for (const entry of d3Vocabulary()) {
   const id = `vocab/${entry.headword}/${entry.pos}/${entry.level}`;
   sections.vocabulary.push({ id, markdown: `**${entry.headword}** (${entry.pos}, ${entry.level}) ${entry.ipa} — *${entry.meaningVi}* — nghĩa Wiktionary: "${entry.sense}"\n\nVí dụ: ${entry.example ?? "(chưa có)"} · [nguồn](${entry.sources.meaning.url})` });
@@ -81,11 +101,32 @@ const lines = [
   "**Cách duyệt:** đọc từng mục, đánh dấu [x] nếu đúng; ghi lỗi ngay dưới mục nếu sai. Khi một batch ổn, vào CMS `/admin` → Content batches → chuyển batch sang **APPROVED**, rồi chạy `pnpm content:d3:publish -- --batch=<tên>`.",
   ""
 ];
-for (const [key, entries] of Object.entries(sections) as Array<[BatchKey, Entry[]]>) {
-  const picked = sample(entries, `d3-review:${key}`);
-  lines.push(`## ${d3Batches[key].title} (\`${key}\`) — ${picked.length}/${entries.length} mục`, "");
-  for (const entry of picked) lines.push(`- [ ] ${entry.markdown.replace(/\n/gu, "\n  ")}`, "");
+async function main() {
+  const unpublished = await readUnpublished();
+  if (unpublished.length) {
+    lines.push(`## Mới hoặc đã sửa từ lần công bố trước — ${unpublished.length} mục (duyệt toàn bộ)`, "");
+    for (const itemKey of unpublished) lines.push(`- [ ] \`${itemKey}\``);
+    lines.push("");
+  }
+  for (const [key, entries] of Object.entries(sections) as Array<[BatchKey, Entry[]]>) {
+    const picked = sample(entries, `d3-review:${key}`);
+    lines.push(`## ${d3Batches[key].title} (\`${key}\`) — ${picked.length}/${entries.length} mục`, "");
+    for (const entry of picked) lines.push(`- [ ] ${entry.markdown.replace(/\n/gu, "\n  ")}`, "");
+  }
+  mkdirSync(resolve(process.cwd(), "docs/content"), { recursive: true });
+  writeFileSync(resolve(process.cwd(), "docs/content/d3-review-sample.md"), lines.join("\n"));
+  console.log(`Wrote docs/content/d3-review-sample.md (${Object.values(sections).reduce((sum, entries) => sum + entries.length, 0)} items in the pack).`);
 }
-mkdirSync(resolve(process.cwd(), "docs/content"), { recursive: true });
-writeFileSync(resolve(process.cwd(), "docs/content/d3-review-sample.md"), lines.join("\n"));
-console.log(`Wrote docs/content/d3-review-sample.md (${Object.values(sections).reduce((sum, entries) => sum + entries.length, 0)} items in the pack).`);
+
+void main();
+
+/** Pack item keys whose current hash was never published (new) or differs from the published one (edited). */
+async function readUnpublished(): Promise<string[]> {
+  try {
+    const { client, db } = connect();
+    try {
+      const rows = await db.select({ itemKey: contentItemHashes.itemKey }).from(contentItemHashes).where(or(isNull(contentItemHashes.publishedHash), ne(contentItemHashes.hash, contentItemHashes.publishedHash)));
+      return rows.map((row) => row.itemKey).sort();
+    } finally { await client.end(); }
+  } catch { return []; }
+}

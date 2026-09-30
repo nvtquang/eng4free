@@ -9,7 +9,7 @@
 import type { QuestionAuthoring } from "@english4free/content-schemas";
 
 export type Level = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-export type BatchKey = "lessons" | "grammar" | "vocabulary" | "toeic" | "ielts" | "skills-extra";
+export type BatchKey = "lessons" | "grammar" | "vocabulary" | "toeic" | "ielts" | "topics" | "pronunciation" | "placement";
 export type Image = { src: string; alt: string; credit?: string };
 /** Speaker casting for generated audio: a gender, or an exact Piper voice such as "en_GB-vctk-medium:p236". */
 export type Voice = "female" | "male" | `${string}:${string}`;
@@ -24,7 +24,7 @@ export type LessonBlock =
   | { kind: "listening"; heading: string; script: string; voices?: Record<string, Voice> }
   | { kind: "practice"; instruction: string; questions: LessonQuestion[] };
 export type LessonDef = {
-  key: string; batch: "lessons" | "grammar" | "skills-extra"; level: Level; unit: string; slug: string; title: string;
+  key: string; batch: "lessons" | "grammar"; level: Level; unit: string; slug: string; title: string;
   skill: "GRAMMAR" | "READING" | "LISTENING" | "SPEAKING" | "WRITING"; minutes: number; blocks: LessonBlock[];
 };
 
@@ -53,6 +53,25 @@ export type PromptDef = {
     part1?: string[]; cueCard?: { topic: string; points: string[]; closing: string }; part3?: string[];
   };
 };
+
+/** Bilingual text shown in the interface language. */
+export type Localized = { vi: string; en: string };
+/** A free speaking/writing topic: prompt plus basic and advanced (B2–C1) English sentence frames. */
+export type TopicDef = { key: string; slug: string; title: Localized; prompt: Localized; suggestions: string[]; advanced: string[] };
+export type TopicCategoryDef = { key: string; kind: "FREE_SPEAKING" | "FREE_WRITING"; slug: string; title: Localized; note?: Localized; sortOrder: number; topics: TopicDef[] };
+export type PlacementSkill = "GRAMMAR" | "VOCABULARY" | "READING" | "LISTENING";
+/**
+ * One adaptive placement question: the correct option is `options[answer]` (options are
+ * rotated on import like lesson questions). Reading items carry a short `passage`; listening
+ * items carry a `script` that is turned into audio and never shown before answering.
+ */
+export type PlacementItemDef = { key: string; skill: PlacementSkill; level: Level; q: string; options: string[]; answer: number; why: string; passage?: string; script?: string };
+/** A can-do statement the learner picks to self-assess Speaking or Writing. */
+export type SelfAssessmentDef = { skill: "SPEAKING" | "WRITING"; level: Level; canDo: Localized };
+export type PronunciationDef =
+  | { key: string; kind: "SOUND"; slug: string; content: { symbol: string; keyword: string; examples: string[]; kind: "vowel" | "consonant" } }
+  | { key: string; kind: "PAIR"; slug: string; content: { first: string; second: string; contrast: string[]; tip: Localized } }
+  | { key: string; kind: "SHADOW"; slug: string; content: { transcript: Localized; targetText: string; durationSeconds: number; focusSounds: string[] } };
 
 export type VocabularySelection = {
   headword: string; pos: string; level: Level; ipa: string; ipaUs: string | null; meaningVi: string; sense: string;
