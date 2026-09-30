@@ -1,7 +1,4 @@
-import type { Locale } from "./i18n";
-
-export type SpeakingTopic = { id: string; title: string; prompt: string; suggestions: string[]; advanced: string[] };
-export type SpeakingCategory = { id: string; title: string; topics: SpeakingTopic[] };
+import type { TopicCategoryDef } from "../types";
 
 type Text = { vi: string; en: string };
 type TopicSource = { id: string; title: Text; prompt: Text; suggestions: string[] };
@@ -11,8 +8,8 @@ const t = (id: string, vi: string, en: string, promptVi: string, promptEn: strin
 
 /**
  * Free-talk speaking topics grouped by theme. There is no level per topic: any learner
- * can answer at their own level. Topic ids are stored as the session promptId
- * (`free-talk:<id>`), so keep them stable — renaming one detaches its saved history.
+ * can answer at their own level. Each topic id is derived from its key (`topic:speak:<id>`)
+ * and history points at it, so keep ids stable — renaming one detaches its saved history.
  * Suggestions are English starter sentences, shared by both interface languages.
  */
 const categories: CategorySource[] = [
@@ -133,7 +130,7 @@ const categories: CategorySource[] = [
 ];
 
 /** Upper-intermediate/advanced frames (B2–C1: inversion, conditionals, cleft and concessive structures) per topic id. */
-export const advancedSuggestions: Record<string, string[]> = {
+const advancedSuggestions: Record<string, string[]> = {
   "introduce-yourself": ["What really drives me is ___, which is why I ___.", "If I had to sum myself up in three words, I'd say ___."],
   "family": ["Growing up in a ___ family taught me the value of ___.", "Although we don't always see eye to eye on ___, we ___."],
   "daily-routine": ["Unless something unexpected comes up, I tend to ___.", "Over the past year my routine has shifted towards ___, mainly because ___."],
@@ -218,10 +215,8 @@ export const advancedSuggestions: Record<string, string[]> = {
   "if-you-were-rich": ["I'd like to think I'd ___ rather than ___.", "Having that much money would probably change ___."]
 };
 
-export function getSpeakingCategories(locale: Locale): SpeakingCategory[] {
-  return categories.map((category) => ({
-    id: category.id,
-    title: category.title[locale],
-    topics: category.topics.map((topic) => ({ id: topic.id, title: topic.title[locale], prompt: topic.prompt[locale], suggestions: topic.suggestions, advanced: advancedSuggestions[topic.id] ?? [] }))
-  }));
-}
+/** Free-talk speaking topics (batch "topics"); session history links to the topic id derived from its key. */
+export const speakingCategories: TopicCategoryDef[] = categories.map((category, index) => ({
+  key: `topic-category:speak:${category.id}`, kind: "FREE_SPEAKING", slug: `speak-${category.id}`, title: category.title, sortOrder: index + 1,
+  topics: category.topics.map((topic) => ({ key: `topic:speak:${topic.id}`, slug: `speak-${topic.id}`, title: topic.title, prompt: topic.prompt, suggestions: topic.suggestions, advanced: advancedSuggestions[topic.id] ?? [] }))
+}));

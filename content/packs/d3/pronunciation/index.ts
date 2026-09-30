@@ -1,10 +1,11 @@
-import { IpaSoundSchema, MinimalPairSchema, ShadowingItemSchema, type IpaSound, type MinimalPair, type ShadowingItem } from "@english4free/content-schemas";
+import type { PronunciationDef } from "../types";
 
-export type { IpaSound, MinimalPair, ShadowingItem };
-
-// Local educational fixture: a complete practical English phonemic chart.
-// It is application content, not a copy of a proprietary teaching resource.
-export const ipaSounds = IpaSoundSchema.array().parse([
+/**
+ * Pronunciation practice content (batch "pronunciation"): a practical English phonemic chart,
+ * minimal pairs and shadowing sentences. Original English 4 Free material, not copied from a
+ * proprietary teaching resource.
+ */
+const sounds: Array<{ symbol: string; keyword: string; examples: string[]; kind: "vowel" | "consonant" }> = [
   { symbol: "/iː/", keyword: "see", examples: ["green", "teacher"], kind: "vowel" }, { symbol: "/ɪ/", keyword: "sit", examples: ["live", "ticket"], kind: "vowel" },
   { symbol: "/e/", keyword: "bed", examples: ["lesson", "ten"], kind: "vowel" }, { symbol: "/æ/", keyword: "cat", examples: ["map", "travel"], kind: "vowel" },
   { symbol: "/ʌ/", keyword: "cup", examples: ["love", "study"], kind: "vowel" }, { symbol: "/ɑː/", keyword: "father", examples: ["start", "calm"], kind: "vowel" },
@@ -27,14 +28,22 @@ export const ipaSounds = IpaSoundSchema.array().parse([
   { symbol: "/n/", keyword: "now", examples: ["lesson", "train"], kind: "consonant" }, { symbol: "/ŋ/", keyword: "sing", examples: ["English", "long"], kind: "consonant" },
   { symbol: "/l/", keyword: "light", examples: ["lesson", "feel"], kind: "consonant" }, { symbol: "/r/", keyword: "red", examples: ["practice", "career"], kind: "consonant" },
   { symbol: "/j/", keyword: "yes", examples: ["music", "use"], kind: "consonant" }, { symbol: "/w/", keyword: "we", examples: ["welcome", "away"], kind: "consonant" }
-]) satisfies IpaSound[];
+];
 
-export const minimalPairs = MinimalPairSchema.array().parse([
+const pairs: Array<{ id: string; first: string; second: string; contrast: string[]; tip: { vi: string; en: string } }> = [
   { id: "ship-sheep", first: "ship", second: "sheep", contrast: ["/ɪ/", "/iː/"], tip: { vi: "Âm /iː/ dài hơn; giữ khóe môi căng thêm một nhịp.", en: "Make /iː/ longer; keep the corners of your mouth tense for one extra beat." } },
   { id: "bat-but", first: "bat", second: "but", contrast: ["/æ/", "/ʌ/"], tip: { vi: "Với /æ/, mở miệng rộng hơn và kéo lưỡi ra trước.", en: "For /æ/, open your mouth wider and bring your tongue forward." } },
   { id: "thin-tin", first: "thin", second: "tin", contrast: ["/θ/", "/t/"], tip: { vi: "Đặt đầu lưỡi nhẹ giữa hai răng để tạo /θ/.", en: "Place the tip of your tongue gently between your teeth for /θ/." } }
-]) satisfies MinimalPair[];
+];
 
-export const shadowingItems = ShadowingItemSchema.array().parse([
+const shadows: Array<{ id: string; transcript: { vi: string; en: string }; targetText: string; durationSeconds: number; focusSounds: string[] }> = [
   { id: "daily-introduction", transcript: { vi: "Nghe câu mẫu, lặp lại cùng nhịp và sau đó nghe lại bản ghi của bạn.", en: "Listen to the target, repeat with its rhythm, then listen to your own recording." }, targetText: "I enjoy learning English a little every day.", durationSeconds: 4, focusSounds: ["/ɪ/", "/dʒ/", "/iː/"] }
-]) satisfies ShadowingItem[];
+];
+
+const slugOf = (symbol: string) => "sound-" + [...symbol.replace(/\//gu, "")].map((char) => char.codePointAt(0)!.toString(16)).join("-");
+
+export const pronunciationItems: PronunciationDef[] = [
+  ...sounds.map((sound): PronunciationDef => ({ key: `pronunciation:sound:${sound.symbol}`, kind: "SOUND", slug: slugOf(sound.symbol), content: sound })),
+  ...pairs.map(({ id, ...content }): PronunciationDef => ({ key: `pronunciation:pair:${id}`, kind: "PAIR", slug: `pair-${id}`, content })),
+  ...shadows.map(({ id, ...content }): PronunciationDef => ({ key: `pronunciation:shadow:${id}`, kind: "SHADOW", slug: `shadow-${id}`, content }))
+];

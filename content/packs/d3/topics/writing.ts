@@ -1,7 +1,4 @@
-import type { Locale } from "./i18n";
-
-export type WritingTopic = { id: string; title: string; prompt: string; suggestions: string[]; advanced: string[] };
-export type WritingCategory = { id: string; title: string; note: string; topics: WritingTopic[] };
+import type { TopicCategoryDef } from "../types";
 
 type Text = { vi: string; en: string };
 type TopicSource = { id: string; title: Text; prompt: Text; suggestions: string[]; advanced: string[] };
@@ -11,7 +8,7 @@ const t = (id: string, vi: string, en: string, promptVi: string, promptEn: strin
 
 /**
  * Free-writing topics grouped by text type, each group with a suggested length. Topic
- * ids are stored as the submission promptId (`free-write:<id>`), so keep them stable —
+ * id is derived from its key (`topic:write:<id>`) and drafts point at it, so keep ids stable —
  * renaming one detaches its saved drafts. Sentence frames are English and shared by
  * both interface languages: four basic ones and two more advanced (B2–C1) ones.
  */
@@ -68,7 +65,8 @@ const categories: CategorySource[] = [
     t("plastic-waste", "Rác thải nhựa", "Plastic waste", "Làm sao giảm rác thải nhựa? Nêu vấn đề và giải pháp.", "How can we reduce plastic waste? Describe the problem and solutions.", ["Plastic waste harms ___.", "This happens because ___.", "Individuals can ___.", "Governments should ___."], ["Unless producers are held accountable, ___.", "Small everyday changes, multiplied across millions of people, can ___."]),
     t("student-stress", "Áp lực học tập", "Student stress", "Nêu nguyên nhân áp lực học tập của học sinh và cách giảm bớt.", "Why are students stressed, and what can be done about it?", ["Many students feel stressed because ___.", "This can lead to ___.", "Schools could ___.", "Students themselves can ___."], ["The pressure to ___ has intensified in recent years.", "Tackling the root causes means rethinking ___."]),
     t("screen-time", "Thời gian dùng màn hình", "Too much screen time", "Trẻ em dùng màn hình quá nhiều: vấn đề và giải pháp.", "Children spend too much time on screens. Discuss the problem and solutions.", ["Children today spend ___ on screens.", "This can affect ___.", "Parents can ___.", "Schools can also ___."], ["The challenge is not screens themselves but ___.", "Setting an example is arguably more effective than ___."]),
-    t("lonely-elderly", "Người già cô đơn", "Loneliness among older people", "Nhiều người già sống cô đơn. Chúng ta có thể làm gì?", "Many older people live alone and feel lonely. What can be done?", ["Many older people feel lonely because ___.", "This affects their ___.", "Communities could ___.", "Young people can help by ___."], ["Loneliness is often described as a hidden epidemic, since ___.", "Intergenerational projects have shown that ___."])
+    t("lonely-elderly", "Người già cô đơn", "Loneliness among older people", "Nhiều người già sống cô đơn. Chúng ta có thể làm gì?", "Many older people live alone and feel lonely. What can be done?", ["Many older people feel lonely because ___.", "This affects their ___.", "Communities could ___.", "Young people can help by ___."], ["Loneliness is often described as a hidden epidemic, since ___.", "Intergenerational projects have shown that ___."]),
+    t("improve-neighbourhood", "Cải thiện khu phố", "Improve your neighbourhood", "Mô tả một thay đổi giúp khu phố của bạn tốt hơn.", "Describe one change that would improve your neighbourhood.", ["One thing my neighbourhood really needs is ___.", "At the moment, ___.", "If we had ___, people could ___.", "The easiest way to start would be to ___."], ["Such a change would not only ___ but also ___.", "Some residents might object that ___, yet ___."])
   ] },
   { id: "reviews", title: { vi: "Đánh giá & review", en: "Reviews" }, words: "100–180", topics: [
     t("review-film", "Review phim", "A film review", "Viết bài review một bộ phim bạn đã xem gần đây.", "Write a review of a film you have seen recently.", ["___ is a ___ film directed by ___.", "The story is about ___.", "The best thing about it is ___.", "I would recommend it to ___."], ["The film succeeds in ___, although it occasionally ___.", "It lingers in the mind long after ___."]),
@@ -108,11 +106,9 @@ const categories: CategorySource[] = [
   ] }
 ];
 
-export function getWritingCategories(locale: Locale): WritingCategory[] {
-  return categories.map((category) => ({
-    id: category.id,
-    title: category.title[locale],
-    note: locale === "vi" ? `Độ dài gợi ý: ${category.words} từ` : `Suggested length: ${category.words} words`,
-    topics: category.topics.map((topic) => ({ id: topic.id, title: topic.title[locale], prompt: topic.prompt[locale], suggestions: topic.suggestions, advanced: topic.advanced }))
-  }));
-}
+/** Free-writing topics grouped by text type (batch "topics"), each group with a suggested length. */
+export const writingCategories: TopicCategoryDef[] = categories.map((category, index) => ({
+  key: `topic-category:write:${category.id}`, kind: "FREE_WRITING", slug: `write-${category.id}`, title: category.title, sortOrder: index + 1,
+  note: { vi: `Độ dài gợi ý: ${category.words} từ`, en: `Suggested length: ${category.words} words` },
+  topics: category.topics.map((topic) => ({ key: `topic:write:${topic.id}`, slug: `write-${topic.id}`, title: topic.title, prompt: topic.prompt, suggestions: topic.suggestions, advanced: topic.advanced }))
+}));
