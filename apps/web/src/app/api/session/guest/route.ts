@@ -1,8 +1,8 @@
 import { NextResponse } from "next/server";
-import { getRequestActor, guestCookieName } from "@/modules/auth/request-actor";
+import { getRequestLearner, guestCookieName } from "@/modules/auth/request-actor";
 
 export async function POST() {
-  const { createdGuestId } = await getRequestActor(true);
+  const { createdGuestId } = await getRequestLearner(true);
   const response = NextResponse.json({ ready: true });
   if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, {
     httpOnly: true,
