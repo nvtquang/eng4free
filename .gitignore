@@ -30,6 +30,5 @@ __pycache__/
 fe/node_modules/
 fe/dist/
 fe/
-content/cefr/imports/*
-!content/cefr/imports/words-cefr.v1.json
+content/cefr/imports/
 .cache/
