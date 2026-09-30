@@ -7,8 +7,9 @@ const config: Config = {
       colors: {
         canvas: "var(--canvas)", surface: "var(--surface)", band: "var(--band)",
         ink: "var(--ink)", muted: "var(--muted)", line: "var(--line)",
-        brand: { DEFAULT: "var(--brand)", deep: "var(--brand-deep)", soft: "var(--brand-soft)" },
-        accent: { terra: "var(--terra)", ochre: "var(--ochre)", navy: "var(--navy)" }
+        // RGB channels so opacity modifiers such as bg-accent-terra/10 work.
+        brand: { DEFAULT: "rgb(var(--brand-rgb) / <alpha-value>)", deep: "var(--brand-deep)", soft: "var(--brand-soft)" },
+        accent: { terra: "rgb(var(--terra-rgb) / <alpha-value>)", ochre: "rgb(var(--ochre-rgb) / <alpha-value>)", navy: "rgb(var(--navy-rgb) / <alpha-value>)" }
       },
       fontFamily: { sans: ["var(--font-inter)", "sans-serif"], serif: ["var(--font-source-serif)", "serif"] },
       borderRadius: { ui: "0.625rem" },
