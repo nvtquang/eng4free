@@ -41,3 +41,27 @@ export function estimateAttempt(exam: "TOEIC" | "IELTS", tallies: AttemptSkillTa
   const scaled = estimateToeicScaledScore(listening ?? 0, reading ?? 0);
   return { exam, listening: listening === null ? null : scaled.listening, reading: reading === null ? null : scaled.reading, total: listening === null || reading === null ? null : scaled.total };
 }
+
+export type PartTally = SkillTally & { partId: string; weakest: boolean };
+
+/**
+ * Marks per exam part, in part order. The part with the lowest accuracy is flagged as the one to
+ * practise next, but only when the attempt has several parts and that part is below 80%.
+ */
+export function tallyByPart(parts: ReadonlyArray<{ id: string; questions: ReadonlyArray<{ id: string }> }>, results: ReadonlyArray<{ questionId: string; earnedPoints: number; availablePoints: number }>): PartTally[] {
+  const byQuestion = new Map(results.map((result) => [result.questionId, result]));
+  const tallies = parts.map((part) => {
+    const tally = { partId: part.id, correct: 0, total: 0, weakest: false };
+    for (const question of part.questions) {
+      const result = byQuestion.get(question.id);
+      if (!result) continue;
+      tally.correct += result.earnedPoints;
+      tally.total += result.availablePoints;
+    }
+    return tally;
+  }).filter((tally) => tally.total > 0);
+  const ratio = (tally: SkillTally) => tally.correct / tally.total;
+  const weakest = tallies.reduce<PartTally | null>((lowest, tally) => !lowest || ratio(tally) < ratio(lowest) ? tally : lowest, null);
+  if (weakest && tallies.length > 1 && ratio(weakest) < 0.8) weakest.weakest = true;
+  return tallies;
+}

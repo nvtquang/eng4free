@@ -41,6 +41,8 @@ ensureDatabase().then(() => {
   // The E2E database gets content pack D3 published straight away; the demo database keeps it in review.
   run("pnpm", ["content:d3:import"]);
   run("pnpm", ["content:d3:publish", "--test-db"]);
+  // The demo scenarios sign in to the seeded demo account.
+  run("pnpm", ["seed:demo-account"]);
   run("pnpm", ["--filter", "@english4free/web", "build"]);
   run("pnpm", ["--filter", "@english4free/web", "exec", "playwright", "test", ...process.argv.slice(2)]);
 }).catch((error: unknown) => { console.error(error instanceof Error ? error.message : error); process.exit(1); });

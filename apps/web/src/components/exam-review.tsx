@@ -2,7 +2,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { examSkillLabel, type ExamCopy } from "@/lib/exam-copy";
-import { estimateAttempt, tallyBySkill } from "@/modules/scoring/attempt-estimate";
+import { estimateAttempt, tallyByPart, tallyBySkill } from "@/modules/scoring/attempt-estimate";
 import type { ExamAttemptResult, PublicExam } from "@/modules/exams/exam-engine";
 import { questionLabels } from "@/components/questions/numbering";
 import { QuestionReview } from "@/components/questions/question-review";
@@ -26,6 +26,8 @@ export function ExamReview({ exam, result, copy, tutorCopy }: { exam: PublicExam
   const review = new Map(result.results.map((item) => [item.questionId, item]));
   const questionSkills = new Map(exam.parts.flatMap((part) => part.questions.map((question) => [question.id, part.skill] as const)));
   const estimate = estimateAttempt(exam.type, tallyBySkill(questionSkills, result.results));
+  const byPart = exam.parts.length > 1 ? tallyByPart(exam.parts, result.results) : [];
+  const partById = new Map(exam.parts.map((part) => [part.id, part]));
   const labels = questionLabels(exam.parts, copy.questions.question);
   const format = (value: number | null) => value === null ? copy.notCovered : exam.type === "IELTS" ? value.toFixed(1) : String(value);
   return <div className="mt-8">
@@ -42,6 +44,14 @@ export function ExamReview({ exam, result, copy, tutorCopy }: { exam: PublicExam
         {estimate.exam === "TOEIC" && estimate.total !== null && <div><dt className="text-sm font-bold text-muted">{copy.estimateTotal}</dt><dd className="mt-1 font-serif text-3xl font-bold text-ink">{estimate.total}</dd></div>}
       </dl>
       <p className="mt-4 text-sm leading-6 text-muted">{copy.estimateNote}</p>
+    </Card>}
+    {byPart.length > 1 && <Card className="mt-6">
+      <h2 className="font-serif text-2xl font-bold">{copy.byPartTitle}</h2>
+      <ul className="mt-4 space-y-3">{byPart.map((tally) => { const part = partById.get(tally.partId)!; const percent = Math.round((tally.correct / tally.total) * 100); return <li key={tally.partId}>
+        <div className="flex flex-wrap items-baseline justify-between gap-2 text-sm"><p><span className="font-bold">{copy.part} {part.partNumber}</span> · {part.title}{tally.weakest && <span className="ml-2 rounded-full bg-accent-terra/10 px-2 py-0.5 text-xs font-bold text-accent-terra">{copy.practiseNext}</span>}</p><p className="font-bold">{tally.correct}/{tally.total} · {percent}%</p></div>
+        <div className="mt-1.5 h-2 overflow-hidden rounded-full bg-band" role="img" aria-label={`${copy.part} ${part.partNumber}: ${percent}%`}><div className={`h-full rounded-full ${tally.weakest ? "bg-accent-terra" : "bg-brand"}`} style={{ width: `${percent}%` }} /></div>
+      </li>; })}</ul>
+      <p className="mt-4 text-sm leading-6 text-muted">{copy.byPartNote}</p>
     </Card>}
     <div className="mt-8 space-y-8">{exam.parts.map((part) => <Card key={part.id}>
       <p className="text-sm font-bold text-brand">{copy.part} {part.partNumber} · {examSkillLabel(copy, part.skill)}</p>

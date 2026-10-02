@@ -10,6 +10,8 @@ type CueCard = { topic: string; points: string[]; closing: string };
 export type SpeakingPartsText = { part2: string; part3: string; youShouldSay: string; prepare: string; preparing: string; ready: string; prepNote: string; chooseQuestion: string; record: string };
 
 const PREP_SECONDS = 60;
+/** IELTS Part 2: speak for one to two minutes; the recording stops at two. */
+const PART2_SECONDS = 120;
 
 /** Interactive IELTS Part 2 (1-minute preparation, then a long-turn recording) and Part 3 (record answers to discussion questions). Part 1 stays as a reference list on the page. */
 export function IeltsSpeakingParts({ topicId, cueCard, part3, text, skillsCopy, aiCopy }: { topicId: string; cueCard: CueCard | undefined; part3: string[]; text: SpeakingPartsText; skillsCopy: SkillsCopy; aiCopy: AiSpeakingCopy }) {
@@ -39,7 +41,7 @@ export function IeltsSpeakingParts({ topicId, cueCard, part3, text, skillsCopy, 
 
       {prep === "idle" && <div className="mt-4 flex flex-wrap items-center gap-3"><Button onClick={() => { setRemaining(PREP_SECONDS); setPrep("running"); }}>{text.prepare}</Button><p className="text-sm text-muted">{text.prepNote}</p></div>}
       {prep === "running" && <div className="mt-4 flex flex-wrap items-center gap-4" role="timer" aria-live="polite"><span className="font-serif text-4xl font-bold tabular-nums text-brand">{mm}:{ss}</span><Button variant="secondary" onClick={() => setPrep("done")}>{text.ready}</Button><p className="text-sm text-muted">{text.preparing}</p></div>}
-      {prep === "done" && <div className="mt-6"><p className="mb-4 text-sm text-muted">{text.record}</p><SpeakingPractice copy={skillsCopy} aiCopy={aiCopy} prompt={cueCard.topic} topicId={topicId} part="part2" examType="IELTS" /></div>}
+      {prep === "done" && <div className="mt-6"><p className="mb-4 text-sm text-muted">{text.record}</p><SpeakingPractice copy={skillsCopy} aiCopy={aiCopy} prompt={cueCard.topic} topicId={topicId} part="part2" examType="IELTS" maxSeconds={PART2_SECONDS} /></div>}
     </section>}
 
     {part3.length > 0 && <section>

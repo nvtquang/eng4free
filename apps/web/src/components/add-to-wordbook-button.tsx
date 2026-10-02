@@ -5,8 +5,8 @@ import { useState } from "react";
 type Copy = { add: string; added: string; adding: string; already: string };
 
 /** Saves a published vocabulary word to the FSRS review deck while the learner is studying. */
-export function AddToWordbookButton({ vocabularyId, copy }: { vocabularyId: string; copy: Copy }) {
-  const [state, setState] = useState<"idle" | "saving" | "added" | "already">("idle");
+export function AddToWordbookButton({ vocabularyId, copy, saved = false }: { vocabularyId: string; copy: Copy; saved?: boolean }) {
+  const [state, setState] = useState<"idle" | "saving" | "added" | "already">(saved ? "already" : "idle");
 
   async function add() {
     if (state === "saving" || state === "added" || state === "already") return;

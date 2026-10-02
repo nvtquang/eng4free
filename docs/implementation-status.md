@@ -1,6 +1,43 @@
 # Implementation status
 
-Updated: 2026-09-26
+Updated: 2026-10-01
+
+Stages D4–D7 (onboarding and placement, review loops, AI, UI and the learner journey) are
+described in their commits; the demo acceptance tables in
+[docs/roadmap/demo-acceptance.md](roadmap/demo-acceptance.md) track every scenario step.
+
+## D8 — Demo preparation and QA: PASS (A5 partial)
+
+Checked on 2026-10-01. Details and the list of fixes are in section 8 of
+[demo-acceptance.md](roadmap/demo-acceptance.md).
+
+- **`pnpm demo:prepare`** (`scripts/demo-prepare.ts`) rebuilds the local demo database in one
+  command, in about 2 minutes:
+  - it takes a `pg_dump` backup into `.cache/demo-backups/`, then resets, migrates and seeds;
+  - it imports pack D3 and republishes only the batches whose item hashes match the approval
+    record `content/packs/d3/qa/approved.json`, which `content:d3:publish` now writes;
+  - it checks the audio, seeds the demo account and makes the production build.
+- **`pnpm demo:start`** serves the build with `E4F_DEMO_SIGN_IN=true`, which offers a one-click
+  demo account on `/login`. The sign-in works only with that flag and a local `english4free*`
+  database. It opens a normal Auth.js database session and merges the guest's progress, as a
+  Google sign-in does.
+- **`pnpm seed:demo-account`** (`scripts/seed/demo-account/`) builds a B1 IELTS learner with
+  three weeks of history. The history is replayed through the app's own modules under a
+  shifted clock: placement, lessons, exams, FSRS reviews, mistakes, writing and speaking. It
+  ends yesterday, so rerun the seed on the morning of a demo. Writing and speaking feedback is
+  real output of the app's AI pipeline, captured once with `--capture-feedback`.
+- **E2E**: `e2e/demo-scenario-a|b|c.spec.ts` walk the three demo scenarios in Vietnamese without
+  an AI key. `pnpm test:all` passes: 105 unit tests and 38/38 Playwright tests.
+- **Product fixes found while walking the scenarios**:
+  - a due-word review deck (`/vocabulary?deck=due`) and *New words in this lesson*;
+  - *Results by part* on exam results;
+  - a speaking clock with a two-minute limit for IELTS Part 2;
+  - evaluated essays are no longer labelled as drafts;
+  - history dates follow the page language;
+  - learner-facing AI copy no longer mentions API keys;
+  - the streak survives the current day until a whole day is missed.
+- **Open**: lessons still use multiple choice only (scenario step A5), and the real-microphone
+  check stays manual ([pre-demo checklist](demo/pre-demo-checklist.md)).
 
 ## D3 — Content expansion: DRAFTED, IN REVIEW
 

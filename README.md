@@ -32,6 +32,17 @@ Requirements: Node.js 20+, pnpm 9 and PostgreSQL 15+.
 Open `http://localhost:3000`. Google OAuth is optional; guest learning works
 without Google credentials. AI, cloud speech and S3/R2 are not required.
 
+## Demo
+
+```bash
+pnpm demo:prepare        # back up, rebuild the demo DB, republish approved content, seed the demo account, build
+pnpm demo:start          # serve the build; /login offers the one-click demo account
+pnpm seed:demo-account   # refresh the demo account's history (run on the morning of a demo)
+```
+
+See the [demo script](docs/demo/demo-script.md) and the
+[pre-demo checklist](docs/demo/pre-demo-checklist.md).
+
 ## Listening audio
 
 Listening recordings are pre-generated and committed under

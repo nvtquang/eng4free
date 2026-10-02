@@ -1,0 +1,278 @@
+{
+  "note": "Feedback produced by the app's own AI pipeline on scripts/seed/demo-account/learner-work.ts, captured with `pnpm seed:demo-account -- --capture-feedback`.",
+  "items": {
+    "task2-transport:0": {
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "capturedAt": "2026-10-01T09:08:09.687Z",
+      "feedback": {
+        "summary": "You have presented a clear personal position with relevant supporting arguments regarding government funding for public transport versus road infrastructure. To improve your writing further, focus on subject-verb agreement, noun pluralization, count/non-count quantifier choices, and expanding your range of advanced vocabulary.",
+        "rubric": {
+          "taskResponse": {
+            "level": "DEVELOPING",
+            "feedback": "You clearly address the prompt and state a clear position throughout the essay. The main ideas (capacity/congestion, environmental impact, and rural exceptions) are relevant and illustrated with a personal example. Expanding on how public transport investment specifically resolves urban traffic issues would make your main points even stronger."
+          },
+          "coherenceAndCohesion": {
+            "level": "SECURE",
+            "feedback": "Paragraphing is logical and effective, with clear main points for each paragraph. Transitions such as 'Firstly', 'Secondly', 'However', and 'In conclusion' guide the reader smoothly through your argument."
+          },
+          "lexicalResource": {
+            "level": "DEVELOPING",
+            "feedback": "Your vocabulary is generally accurate and easy to understand. However, rely less on simple phrasing (e.g., 'big problem', 'a lot of', 'take a lot of space') and incorporate topic-specific terms like 'traffic congestion', 'carbon emissions', or 'urban infrastructure'."
+          },
+          "grammaticalRangeAndAccuracy": {
+            "level": "DEVELOPING",
+            "feedback": "You produce clear, readable sentences using a mix of simple and complex structures. However, frequent basic errors occur in subject-verb agreement (e.g., 'city have', 'roads is', 'air become', 'it help'), prepositions, and article usage."
+          }
+        },
+        "grammarIssues": [
+          {
+            "message": "Use plural or an article with singular countable noun 'traffic jam'. Alternatively, use the uncountable noun 'traffic congestion'.",
+            "start": 10,
+            "end": 21,
+            "suggestion": "traffic jams"
+          },
+          {
+            "message": "Add a definite article before 'government'.",
+            "start": 55,
+            "end": 65,
+            "suggestion": "the government"
+          },
+          {
+            "message": "Subject-verb disagreement: 'the city' is singular and requires 'has'.",
+            "start": 341,
+            "end": 357,
+            "suggestion": "If the city has"
+          },
+          {
+            "message": "Use 'fewer' instead of 'less' when modifying countable plural nouns like 'people'.",
+            "start": 379,
+            "end": 390,
+            "suggestion": "fewer people"
+          },
+          {
+            "message": "Subject-verb disagreement: 'roads' is plural, so use 'are'.",
+            "start": 512,
+            "end": 520,
+            "suggestion": "roads are"
+          },
+          {
+            "message": "Subject-verb disagreement: 'the air' is uncountable/singular and requires 'becomes'.",
+            "start": 686,
+            "end": 702,
+            "suggestion": "the air becomes"
+          },
+          {
+            "message": "Use 'situations' (plural) after 'some' when referring to countable circumstances.",
+            "start": 782,
+            "end": 796,
+            "suggestion": "some situations"
+          },
+          {
+            "message": "Subject-verb disagreement: 'it' requires 'helps'.",
+            "start": 986,
+            "end": 993,
+            "suggestion": "it helps"
+          }
+        ],
+        "vocabularyIssues": [
+          {
+            "message": "The phrase 'spend money for' is non-standard in this context. Use 'spend money on'.",
+            "start": 73,
+            "end": 88,
+            "suggestion": "spend money on"
+          },
+          {
+            "message": "'more quiet' can be replaced with the standard comparative form 'quieter'.",
+            "start": 720,
+            "end": 730,
+            "suggestion": "quieter"
+          }
+        ],
+        "coherenceIssues": [
+          "Consider adding a brief concluding thought that summarizes the balance between long-term urban transport planning and necessary rural infrastructure."
+        ],
+        "revisionSuggestions": [
+          "Review subject-verb agreement rules, especially in conditional clauses ('if the city has') and third-person singular presents ('it helps', 'air becomes').",
+          "Practice using precise collocations such as 'spend money on', 'traffic congestion', and 'urban transit systems'.",
+          "Remember to use 'fewer' for countable nouns (fewer cars/people) and 'less' for uncountable nouns (less traffic/pollution)."
+        ],
+        "rubricDisclaimer": "Practice feedback only — not an official IELTS band score."
+      }
+    },
+    "task2-transport:1": {
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "capturedAt": "2026-10-01T09:08:43.995Z",
+      "feedback": {
+        "summary": "This essay presents a clear, well-structured response to the prompt. The argument is balanced, addressing both the benefits of investing in public transport and the continued need for new roads in specific contexts.",
+        "rubric": {
+          "taskResponse": {
+            "level": "DEVELOPING",
+            "feedback": "You present a clear position throughout the essay and support your main points with relevant examples. However, at around 243 words, the response is slightly under the recommended minimum length of 250 words. Expanding your arguments slightly would ensure fuller task fulfillment."
+          },
+          "coherenceAndCohesion": {
+            "level": "SECURE",
+            "feedback": "The essay is logically organized into distinct paragraphs, each focusing on a single supporting point. Transition words (e.g., 'Firstly', 'Secondly', 'On the other hand', 'In conclusion') are used smoothly to guide the reader."
+          },
+          "lexicalResource": {
+            "level": "SECURE",
+            "feedback": "You use a good range of topic-specific vocabulary (e.g., 'traffic congestion', 'metro line', 'private vehicles', 'transport budget') with natural phrasing and correct spelling."
+          },
+          "grammaticalRangeAndAccuracy": {
+            "level": "SECURE",
+            "feedback": "Grammar is highly accurate throughout, featuring a good variety of sentence structures, including conditionals, relative clauses, and complex sentences."
+          }
+        },
+        "grammarIssues": [],
+        "vocabularyIssues": [],
+        "coherenceIssues": [],
+        "revisionSuggestions": [
+          "To comfortably meet the recommended length (250+ words), expand slightly on how improved public transport economic benefits cities beyond just traffic flow and pollution.",
+          "Consider introducing a comma after introductory prepositional phrases, such as in 'In rural areas, there are many villages...' for enhanced readability."
+        ],
+        "rubricDisclaimer": "Practice feedback only — not an official IELTS band score."
+      }
+    },
+    "task1-leisure:0": {
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "capturedAt": "2026-10-01T09:08:50.343Z",
+      "feedback": {
+        "summary": "The response provides a clear, accurate, and well-structured summary of the bar chart, highlighting key trends and comparing the data across all three age groups effectively.",
+        "rubric": {
+          "taskResponse": {
+            "level": "SECURE",
+            "feedback": "All key features of the data are covered clearly. Main trends (such as younger people favoring social media and older people favoring TV/reading) are highlighted in an overview and supported by accurate figures in the body paragraphs."
+          },
+          "coherenceAndCohesion": {
+            "level": "SECURE",
+            "feedback": "The report is logically organized into an introduction, an overview, and two detail paragraphs categorized by age group. Transition phrases like 'In contrast' and 'followed by' create a smooth flow between ideas."
+          },
+          "lexicalResource": {
+            "level": "SECURE",
+            "feedback": "Good variety of vocabulary used to describe data and comparisons ('highest figure', 'in contrast', 'double the youngest group', 'preferred'). Vocabulary is natural and precise."
+          },
+          "grammaticalRangeAndAccuracy": {
+            "level": "SECURE",
+            "feedback": "Grammar is highly accurate with a variety of structure types, including relative clauses ('which is the highest figure...') and comparative structures ('double the youngest group', 'more than the other groups')."
+          }
+        },
+        "grammarIssues": [],
+        "vocabularyIssues": [],
+        "coherenceIssues": [],
+        "revisionSuggestions": [
+          "To enhance lexical variation further, try using synonyms for 'group' (e.g., 'category', 'demographic', or 'cohort').",
+          "Consider grouping data by activity instead of by age group as an alternative way to practice organizing complex comparisons."
+        ],
+        "rubricDisclaimer": "Practice feedback only — not an official IELTS band score."
+      }
+    },
+    "part2-favourite-place": {
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "capturedAt": "2026-10-01T09:09:16.395Z",
+      "feedback": {
+        "transcript": "I would like to talk about My Khe beach in Da Nang, it is near my house, only about ten minutes by motorbike. I go there maybe two or three times a week, usually in the early morning before I go to work, because in the afternoon it is very hot and there is a lot of tourists. When I go there I often walk along the beach with my friend and sometimes we swim if the sea is calm. After that we sit in a small cafe and drink coffee and talk about our plan for the day. I enjoy this place because it make me feel relax. The air is fresh and I can see the sun rise over the sea, it is really beautiful. Also, it is a good way to start the day before I go to the office and sit in front of the computer for many hours. I think every city should have a place like this where people can go to relax for free.",
+        "summary": "Bài nói của bạn rất rõ ràng, mạch lạc và trả lời hoàn toàn đúng yêu cầu của chủ đề. Bạn đã mô tả chi tiết về bãi biển Mỹ Khê, các hoạt động thường làm và lý do tại sao bạn thích đến đây.",
+        "rubric": {
+          "taskResponse": {
+            "level": "SECURE",
+            "feedback": "Bạn trả lời đầy đủ và trực tiếp vào câu hỏi, cung cấp nhiều chi tiết thú vị như thời gian, tần suất, các hoạt động cụ thể và cảm xúc của bản thân."
+          },
+          "fluency": {
+            "level": "SECURE",
+            "feedback": "Bài nói được tổ chức rất tốt, ý tưởng nối tiếp nhau tự nhiên. Không có sự lặp từ đáng kể hay khởi đầu sai (false starts)."
+          },
+          "grammar": {
+            "level": "DEVELOPING",
+            "feedback": "Bạn cấu trúc câu tốt và dùng đúng các thì cơ bản. Tuy nhiên, còn một số lỗi nhỏ về chia động từ số nhiều/số ít (\"there is\" thành \"there are\") và dạng từ (\"relax\" thành \"relaxed\")."
+          },
+          "vocabulary": {
+            "level": "SECURE",
+            "feedback": "Sử dụng từ vựng phong phú, tự nhiên và đúng ngữ cảnh liên quan đến chủ đề bãi biển và thư giãn (vd: \"calm\", \"fresh air\", \"sun rise\")."
+          }
+        },
+        "corrections": [
+          {
+            "original": "there is a lot of tourists",
+            "correction": "there are a lot of tourists",
+            "explanation": "Danh từ \"tourists\" ở dạng số nhiều nên cần dùng cấu trúc \"there are\" thay vì \"there is\"."
+          },
+          {
+            "original": "it make me feel relax",
+            "correction": "it makes me feel relaxed",
+            "explanation": "Chủ ngữ \"it\" đi với động từ thêm 's' ở thì hiện tại đơn (\"makes\"). Sau \"feel\", chúng ta dùng tính từ chỉ cảm xúc dạng -ed (\"relaxed\")."
+          },
+          {
+            "original": "talk about our plan for the day",
+            "correction": "talk about our plans for the day",
+            "explanation": "Dùng dạng số nhiều \"plans\" tự nhiên hơn khi nói về nhiều kế hoạch của nhiều người trong một ngày."
+          }
+        ],
+        "strengths": [
+          "Bố cục bài nói mạch lạc, có mở đầu, diễn biến và kết luận hợp lý.",
+          "Từ vựng phù hợp, diễn đạt tự nhiên về trải nghiệm cá nhân."
+        ],
+        "nextSteps": [
+          "Chú ý hòa hợp giữa chủ ngữ số nhiều/số ít và động từ (there is/there are, make/makes).",
+          "Luyện tập phân biệt các dạng từ như động từ (relax) và tính từ miêu tả cảm xúc (relaxed)."
+        ],
+        "disclaimer": "Transcript-based practice feedback only. It is not an official speaking score and does not assess phoneme-level pronunciation."
+      }
+    },
+    "part3-public-places": {
+      "provider": "gemini",
+      "model": "gemini-3.6-flash",
+      "capturedAt": "2026-10-01T09:09:25.629Z",
+      "feedback": {
+        "transcript": "I think some public places become popular because they are easy to go and they have many things to do. For example, a park in the city center with trees, a playground and some food stall will attract many families at the weekend. On the other hand, some places are rarely used because they are too far or there is no shade, so in summer nobody want to stay there. I also think social media is important now, if a place looks nice in photos, young people will come to visit it and take pictures.",
+        "summary": "Bài nói trả lời trực tiếp câu hỏi, có cấu trúc rõ ràng và các ví dụ minh họa rất thực tế. Bạn cần chú ý thêm một số lỗi ngữ pháp nhỏ về hòa hợp chủ ngữ - động từ và danh từ số nhiều.",
+        "rubric": {
+          "taskResponse": {
+            "level": "SECURE",
+            "feedback": "Bạn đã giải thích đầy đủ hai khía cạnh của đề bài: lý do một số nơi công cộng thu hút đông người và lý do những nơi khác ít được sử dụng, kèm theo các ví dụ cụ thể."
+          },
+          "fluency": {
+            "level": "SECURE",
+            "feedback": "Bài nói có tính liên kết tốt nhờ sử dụng hiệu quả các từ nối như \"For example\", \"On the other hand\", và \"I also think\". Không có sự lặp từ hay ngập ngừng rõ rệt trong văn bản."
+          },
+          "grammar": {
+            "level": "DEVELOPING",
+            "feedback": "Bạn cấu trúc được các câu phức tốt, nhưng vẫn mắc một vài lỗi ngữ pháp cơ bản về chia động từ ngôi thứ ba số ít và dạng số nhiều của danh từ."
+          },
+          "vocabulary": {
+            "level": "DEVELOPING",
+            "feedback": "Từ vựng được sử dụng đúng ngữ cảnh (như \"city center\", \"shade\", \"social media\"), nhưng một số cụm từ còn khá đơn giản như \"easy to go\" hoặc \"things to do\"."
+          }
+        },
+        "corrections": [
+          {
+            "original": "easy to go",
+            "correction": "easy to get to",
+            "explanation": "Khi nói về một địa điểm dễ di chuyển tới, diễn đạt tự nhiên trong tiếng Anh là \"easy to get to\" hoặc \"easy to access\"."
+          },
+          {
+            "original": "some food stall",
+            "correction": "some food stalls",
+            "explanation": "Sau từ chỉ số lượng \"some\", danh từ đếm được \"stall\" cần ở dạng số nhiều (\"stalls\")."
+          },
+          {
+            "original": "nobody want",
+            "correction": "nobody wants",
+            "explanation": "\"Nobody\" là đại từ bất định đi với động từ số ít, do đó \"want\" phải chia thành \"wants\"."
+          }
+        ],
+        "strengths": [
+          "Trình bày ý kiến logic, biết so sánh hai khía cạnh đối lập rõ ràng.",
+          "Bổ sung ý kiến sáng tạo về ảnh hưởng của mạng xã hội (social media) đến mức độ phổ biến của một địa điểm."
+        ],
+        "nextSteps": [
+          "Luyện tập chia động từ đúng với các đại từ bất định như \"nobody\", \"everyone\", \"someone\".",
+          "Nâng cấp các cụm từ diễn đạt sự thuận tiện, ví dụ thay \"easy to go\" bằng \"easily accessible\"."
+        ],
+        "disclaimer": "Transcript-based practice feedback only. It is not an official speaking score and does not assess phoneme-level pronunciation."
+      }
+    }
+  }
+}

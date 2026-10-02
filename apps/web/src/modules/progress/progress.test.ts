@@ -4,4 +4,5 @@ const at = (day: string, type: ProgressEvent["type"]): ProgressEvent => ({ id: d
 describe("progress projection", () => {
   it("derives XP and consecutive-day streak in an explicit timezone", () => { const snapshot = projectProgress([at("2026-09-20", "EXAM_COMPLETED"), at("2026-09-21", "VOCAB_REVIEWED")], new Date("2026-09-21T20:00:00Z"), "UTC"); expect(snapshot.xp).toBe(31); expect(snapshot.streakDays).toBe(2); expect(snapshot.skillEvents.READING).toBe(2); });
   it("does not multiply XP when the event collection is deduplicated", () => { const event = at("2026-09-21", "WRITING_SUBMITTED"); expect(projectProgress([event], new Date("2026-09-21T13:00:00Z"), "UTC").xp).toBe(20); });
+  it("keeps the streak through today until the learner has missed a whole day", () => { const events = [at("2026-09-19", "VOCAB_REVIEWED"), at("2026-09-20", "VOCAB_REVIEWED")]; expect(projectProgress(events, new Date("2026-09-21T08:00:00Z"), "UTC").streakDays).toBe(2); expect(projectProgress(events, new Date("2026-09-22T08:00:00Z"), "UTC").streakDays).toBe(0); });
 });

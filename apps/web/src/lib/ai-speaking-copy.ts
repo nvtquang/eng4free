@@ -2,11 +2,11 @@ import type { Locale } from "./i18n";
 
 const copy = {
   vi: {
-    description: "Ghi âm theo kiểu nhấn để nói. Khi đã cấu hình Gemini, máy chủ sẽ tạo bản chép lời và phản hồi luyện nói; hội thoại thời gian thực sẽ được phát triển sau.",
+    description: "Nhấn để nói, trả lời theo đề, rồi lưu bản ghi. AI sẽ chép lại lời bạn nói và nhận xét theo bốn tiêu chí; bạn có thể nghe lại mọi bản ghi trong lịch sử.",
     pushToTalk: "Nhấn để nói",
     analyzing: "Đang chuyển giọng nói thành văn bản và tạo phản hồi…",
     feedbackReady: "Đã lưu bản chép lời và phản hồi.",
-    providerUnavailable: "Bản ghi đã được lưu. Thêm GEMINI_API_KEY để bật STT và phản hồi AI.",
+    providerUnavailable: "Bản ghi đã được lưu. Nhận xét AI tạm thời chưa có; bạn vẫn có thể nghe lại bản ghi trong lịch sử.",
     transcript: "Bản chép lời",
     feedback: "Phản hồi luyện nói",
     rubric: "Tiêu chí đánh giá",
@@ -29,11 +29,11 @@ const copy = {
     viewFeedback: "Xem bản chép lời & nhận xét"
   },
   en: {
-    description: "Record in push-to-talk mode. With Gemini configured, the server creates a transcript and practice feedback; realtime conversation is deferred.",
+    description: "Press to talk, answer the prompt, then save your recording. AI transcribes what you said and gives feedback on four criteria; every recording stays in your history.",
     pushToTalk: "Push to talk",
     analyzing: "Transcribing and generating feedback…",
     feedbackReady: "Transcript and feedback saved.",
-    providerUnavailable: "Recording saved. Add GEMINI_API_KEY to enable STT and AI feedback.",
+    providerUnavailable: "Recording saved. AI feedback is not available right now; you can still play the recording back from your history.",
     transcript: "Transcript",
     feedback: "Speaking feedback",
     rubric: "Rubric",

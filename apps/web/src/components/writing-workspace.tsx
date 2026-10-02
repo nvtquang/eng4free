@@ -2,6 +2,7 @@
 
 import { useCallback, useEffect, useState } from "react";
 import { WritingFeedbackPanel, type WritingFeedbackView } from "@/components/writing-feedback-panel";
+import { formatDateTime } from "@/lib/format-date";
 import { Button } from "@/components/ui/button";
 
 type Copy = ReturnType<typeof import("@/lib/skills-copy").getSkillsCopy>;
@@ -74,6 +75,6 @@ export function WritingWorkspace({ copy, feedbackCopy, prompt, task }: { copy: C
       {message && <p className="mt-4 text-sm text-brand" role="status">{message}</p>}
       {feedback && <WritingFeedbackPanel feedback={feedback} copy={feedbackCopy} />}
     </section>
-    <aside><h2 className="font-serif text-2xl font-bold">{copy.history}</h2><div className="mt-4 space-y-3">{history.length === 0 && <p className="text-sm text-muted">{copy.noHistory}</p>}{history.map((item) => <article className="rounded-ui border border-line bg-surface p-4" key={item.id}><div className="flex items-center justify-between gap-3"><div className="min-w-0"><p className="font-bold">{item.status === "SUBMITTED" ? copy.statusSubmitted : copy.statusDraft}{item.feedback.length > 0 && <span className="ml-2 text-xs font-semibold text-brand">· {feedbackCopy.aiFeedback}</span>}</p><p className="text-sm text-muted">{item.wordCount} {copy.words} · {new Date(item.updatedAt).toLocaleString()}</p></div><Button variant="secondary" className="min-h-8 shrink-0 px-3 text-xs" onClick={() => load(item)}>{copy.load}</Button></div>{item.revisions.length > 1 && <details className="mt-2 text-sm"><summary className="cursor-pointer font-semibold text-brand hover:text-brand-deep">{copy.revisions}: {item.revisions.length}</summary><ol className="mt-2 space-y-1 text-muted">{item.revisions.map((revision) => <li key={revision.id}>{revision.wordCount} {copy.words} · {new Date(revision.createdAt).toLocaleString()}</li>)}</ol></details>}</article>)}</div></aside>
+    <aside><h2 className="font-serif text-2xl font-bold">{copy.history}</h2><div className="mt-4 space-y-3">{history.length === 0 && <p className="text-sm text-muted">{copy.noHistory}</p>}{history.map((item) => <article className="rounded-ui border border-line bg-surface p-4" key={item.id}><div className="flex items-center justify-between gap-3"><div className="min-w-0"><p className="font-bold">{item.status === "DRAFT" ? copy.statusDraft : copy.statusSubmitted}{item.feedback.length > 0 && <span className="ml-2 text-xs font-semibold text-brand">· {feedbackCopy.aiFeedback}</span>}</p><p className="text-sm text-muted">{item.wordCount} {copy.words} · {formatDateTime(item.updatedAt)}</p></div><Button variant="secondary" className="min-h-8 shrink-0 px-3 text-xs" onClick={() => load(item)}>{copy.load}</Button></div>{item.revisions.length > 1 && <details className="mt-2 text-sm"><summary className="cursor-pointer font-semibold text-brand hover:text-brand-deep">{copy.revisions}: {item.revisions.length}</summary><ol className="mt-2 space-y-1 text-muted">{item.revisions.map((revision) => <li key={revision.id}>{revision.wordCount} {copy.words} · {formatDateTime(revision.createdAt)}</li>)}</ol></details>}</article>)}</div></aside>
   </div>;
 }
