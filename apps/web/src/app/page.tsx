@@ -15,6 +15,11 @@ import { getRequestLearner } from "@/modules/auth/request-actor";
 import type { LearnerRef } from "@/modules/learners/types";
 import { findLearnerProfile } from "@/modules/onboarding/repository";
 import { listPathLessons } from "@/modules/path/repository";
+import { pageMetadata, siteText } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata(siteText, "/", { absoluteTitle: true });
+}
 
 export const dynamic = "force-dynamic";
 

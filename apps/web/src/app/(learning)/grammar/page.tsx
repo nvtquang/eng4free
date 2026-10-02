@@ -5,6 +5,11 @@ import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { countOpenMistakes } from "@/modules/mistakes/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Ngữ pháp tiếng Anh theo trình độ", description: "Các chủ đề ngữ pháp từ A1 đến C2, giải thích bằng tiếng Việt, có ví dụ, lỗi người Việt hay gặp và bài tập có lời giải." }, en: { title: "English grammar by level", description: "Grammar topics from A1 to C2 with explanations, examples, common mistakes and practice questions with answers." } }, "/grammar");
+}
 
 export const dynamic = "force-dynamic";
 

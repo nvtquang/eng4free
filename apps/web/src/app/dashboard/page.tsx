@@ -9,6 +9,11 @@ import { projectProgress, type ProgressEvent } from "@/modules/progress/progress
 import { listProgressEvents } from "@/modules/progress/repository";
 import { listSpeakingHistory } from "@/modules/speaking/repository";
 import { listWritingHistory } from "@/modules/writing/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Tiến độ học", description: "Tiến độ học của bạn." }, en: { title: "Progress", description: "Your learning progress." } }, "/dashboard", { index: false });
+}
 
 export const dynamic = "force-dynamic";
 
@@ -48,7 +53,7 @@ export default async function DashboardPage() {
     <div className="mt-8 grid gap-6 lg:grid-cols-2">
       <HistoryCard title={details.activityHistory} empty={details.noData} scrollable>{events.map((event) => <HistoryRow key={event.id} title={details.events[event.type]} meta={event.occurredAt.toLocaleString(locale === "vi" ? "vi-VN" : "en-US")} />)}</HistoryCard>
       <HistoryCard title={details.examHistory} empty={details.noData} scrollable>{exams.map((item) => <Link className="block rounded-ui focus-visible:outline focus-visible:outline-2 focus-visible:outline-brand" href={"/exams/" + item.examSlug + "/results/" + item.id} key={item.id}><HistoryRow title={item.examTitle} meta={`${details.score}: ${item.rawScore ?? 0}/${item.totalQuestions}`} /></Link>)}</HistoryCard>
-      <HistoryCard title={details.writingHistory} empty={details.noData}>{writings.map((item) => <HistoryRow key={item.id} title={item.prompt.text ?? item.taskType} meta={`${item.wordCount} ${locale === "vi" ? "từ" : "words"} · ${item.status === "SUBMITTED" ? details.submitted : locale === "vi" ? "Bản nháp" : "Draft"}`} />)}</HistoryCard>
+      <HistoryCard title={details.writingHistory} empty={details.noData}>{writings.map((item) => <HistoryRow key={item.id} title={item.prompt.text ?? item.taskType} meta={`${item.wordCount} ${locale === "vi" ? "từ" : "words"} · ${item.status === "DRAFT" ? (locale === "vi" ? "Bản nháp" : "Draft") : details.submitted}`} />)}</HistoryCard>
       <HistoryCard title={details.speakingHistory} empty={details.noData}>{speaking.map((item) => <HistoryRow key={item.id} title={item.prompt} meta={`${details.recording}: ${item.turns.length}`} />)}</HistoryCard>
     </div>
   </Section>;

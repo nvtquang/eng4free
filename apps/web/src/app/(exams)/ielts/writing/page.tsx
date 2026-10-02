@@ -6,6 +6,11 @@ import { getAiFeedbackCopy } from "@/lib/ai-feedback-copy";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
 import { listIeltsTopics } from "@/modules/topics/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "IELTS Writing Task 1 và Task 2", description: "Đề Task 1 có biểu đồ và đề Task 2, viết và nhận nhận xét theo bốn tiêu chí chấm, không phải band chính thức." }, en: { title: "IELTS Writing Task 1 and Task 2", description: "Task 1 prompts with charts and Task 2 essays, with practice feedback on the four marking criteria." } }, "/ielts/writing");
+}
 
 const promptCopy = {
   vi: { choose: "Chọn đề", task1: "Task 1", task2: "Task 2", minutes: "phút", words: "từ tối thiểu" },

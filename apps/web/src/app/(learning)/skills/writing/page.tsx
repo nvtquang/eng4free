@@ -5,6 +5,11 @@ import { EmptyState } from "@/components/ui/empty-state";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
 import { listTopicCategories } from "@/modules/topics/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện viết tiếng Anh có nhận xét AI", description: "Viết theo chủ đề, lưu nháp, nộp bài và nhận nhận xét theo bốn tiêu chí, giữ lại mọi phiên bản." }, en: { title: "English writing practice with AI feedback", description: "Write on a topic, save drafts and submit for feedback on four criteria, with every revision kept." } }, "/skills/writing");
+}
 
 export default async function WritingPage() {
   const locale = await getLocale();

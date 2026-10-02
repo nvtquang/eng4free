@@ -6,6 +6,11 @@ import { getLocale } from "@/lib/i18n";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listAttemptHistory } from "@/modules/attempts/history";
 import type { AttemptHistoryItem } from "@/modules/attempts/history";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Lịch sử làm đề", description: "Các lượt làm đề của bạn." }, en: { title: "Test history", description: "Your test attempts." } }, "/toeic/history", { index: false });
+}
 
 export const dynamic = "force-dynamic";
 

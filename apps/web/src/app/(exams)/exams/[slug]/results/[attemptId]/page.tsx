@@ -7,6 +7,7 @@ import { getRequestLearner } from "@/modules/auth/request-actor";
 import { getExamAttemptReview } from "@/modules/exams/exam-engine";
 
 export const dynamic = "force-dynamic";
+export const metadata = { title: "Kết quả · Results", robots: { index: false } };
 
 export default async function ExamResultPage({ params }: { params: Promise<{ slug: string; attemptId: string }> }) {
   const { slug, attemptId } = await params;

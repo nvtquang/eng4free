@@ -8,14 +8,17 @@ import { SiteHeader } from "@/components/site-header";
 import { AiAssistantWidget } from "@/components/ai-assistant-widget";
 import { auth } from "@/auth";
 import { getLocale, getMessages } from "@/lib/i18n";
+import { shareImage, siteName, siteText, siteUrl } from "@/lib/metadata";
 
 const inter = Inter({ subsets: ["latin", "vietnamese"], variable: "--font-inter", display: "swap" });
 const sourceSerif = Source_Serif_4({ subsets: ["latin", "vietnamese"], variable: "--font-source-serif", display: "swap" });
 
-export const metadata: Metadata = {
-  title: "English 4 Free",
-  description: "Free English learning for CEFR, TOEIC and IELTS."
-};
+/** Site-wide defaults; every public page sets its own title, canonical URL and hreflang. */
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  const text = siteText[locale];
+  return { metadataBase: siteUrl(), applicationName: siteName, title: { default: text.title, template: "%s · English 4 Free" }, description: text.description, openGraph: { siteName, type: "website", locale: locale === "vi" ? "vi_VN" : "en_US", images: [shareImage] }, twitter: { card: "summary_large_image", images: [shareImage.url] } };
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: ReactNode }>) {
   const locale = await getLocale();

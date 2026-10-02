@@ -3,6 +3,11 @@ import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getLocale, getMessages } from "@/lib/i18n";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Giới thiệu English 4 Free", description: "English 4 Free là gì, nội dung đến từ đâu và các nguồn, giấy phép được sử dụng." }, en: { title: "About English 4 Free", description: "What English 4 Free is, where its content comes from and the sources and licences it uses." } }, "/about");
+}
 
 /** Attribution required by the CC BY / CC BY-SA sources used in the content. */
 const credits = [

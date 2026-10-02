@@ -1,11 +1,18 @@
 import Link from "next/link";
 import { ProfilePlanForm } from "@/components/profile-plan-form";
+import { AccountData } from "@/components/account-data";
+import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { findLearnerProfile, type LearnerProfile } from "@/modules/onboarding/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Hồ sơ học tập", description: "Hồ sơ học tập và dữ liệu của bạn." }, en: { title: "Learning profile", description: "Your learning profile and data." } }, "/profile", { index: false });
+}
 
 export const dynamic = "force-dynamic";
 
@@ -16,13 +23,17 @@ export default async function ProfilePage() {
   const messages = getMessages(locale);
   const copy = messages.profilePage;
   let profile: LearnerProfile | null = null;
-  try { profile = await findLearnerProfile((await getRequestLearner(false)).learner); } catch { /* No learner yet. */ }
+  let hasLearner = false;
+  try { const { learner } = await getRequestLearner(false); hasLearner = true; profile = await findLearnerProfile(learner); } catch { /* No learner yet. */ }
+  const signedIn = Boolean((await auth().catch(() => null))?.user?.id);
+  const data = hasLearner || signedIn ? <AccountData locale={locale} signedIn={signedIn} /> : null;
 
   if (!profile) return <Section className="max-w-2xl">
     <Eyebrow>{copy.eyebrow}</Eyebrow>
     <h1 className="mt-4 font-serif text-4xl font-bold">{copy.emptyTitle}</h1>
     <p className="mt-4 leading-7 text-muted">{copy.emptyText}</p>
     <Link className="mt-8 inline-flex" href="/onboarding"><Button>{copy.setup}</Button></Link>
+    {data}
   </Section>;
 
   const source = profile.levelSource === "PLACEMENT" && profile.placementTotal
@@ -48,5 +59,6 @@ export default async function ProfilePage() {
       <h2 className="font-serif text-2xl font-bold">{copy.planTitle}</h2>
       <div className="mt-5"><ProfilePlanForm goal={profile.goal} minutesPerDay={profile.minutesPerDay} messages={messages} /></div>
     </Card>
+    {data}
   </Section>;
 }

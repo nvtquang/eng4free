@@ -7,6 +7,11 @@ import { getLocale, getMessages } from "@/lib/i18n";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listPublicExams } from "@/modules/exams/exam-engine";
 import { findLearnerProfile } from "@/modules/onboarding/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện thi TOEIC và IELTS miễn phí", description: "Đề luyện từng phần, mini test, đề thi thử TOEIC 200 câu và đề IELTS đủ bốn kỹ năng, có điểm ước tính." }, en: { title: "Free TOEIC and IELTS practice", description: "Part practice, mini tests, a 200-question TOEIC mock and IELTS tests for all four skills, with estimated scores." } }, "/exam-prep");
+}
 
 export const dynamic = "force-dynamic";
 

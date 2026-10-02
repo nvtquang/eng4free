@@ -5,6 +5,11 @@ import { getLocale, getMessages } from "@/lib/i18n";
 import { practiceHref, weakestSkill } from "@/lib/practice-links";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { findLearnerProfile, type LearnerProfile } from "@/modules/onboarding/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện bốn kỹ năng Nghe, Nói, Đọc, Viết", description: "Bài nghe có ghi âm, bài đọc theo trình độ, luyện nói có ghi âm và luyện viết theo chủ đề với nhận xét AI." }, en: { title: "Practise listening, speaking, reading and writing", description: "Recorded listening, graded reading, speaking with recordings and topic-based writing with AI feedback." } }, "/skills");
+}
 
 export const dynamic = "force-dynamic";
 

@@ -2,6 +2,11 @@ import { SkillLessonList } from "@/components/skill-lesson-list";
 import { getLocale } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
 import { defaultSkillLevel } from "@/modules/onboarding/default-level";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện đọc tiếng Anh theo trình độ", description: "Bài đọc A1–C2 theo chủ đề quen thuộc, có câu hỏi đọc hiểu và lời giải." }, en: { title: "English reading practice by level", description: "A1–C2 reading passages on everyday topics with comprehension questions and explanations." } }, "/skills/reading");
+}
 
 export const dynamic = "force-dynamic";
 

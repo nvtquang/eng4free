@@ -4,6 +4,11 @@ import { Card } from "@/components/ui/card";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { listPronunciationContent } from "@/modules/pronunciation/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Phát âm tiếng Anh và bảng IPA", description: "Bảng 44 âm IPA có ví dụ nghe, các cặp âm dễ nhầm và bài luyện nói theo (shadowing)." }, en: { title: "English pronunciation and the IPA chart", description: "The 44 IPA sounds with audio examples, minimal pairs and shadowing practice." } }, "/pronunciation");
+}
 
 export const dynamic = "force-dynamic";
 

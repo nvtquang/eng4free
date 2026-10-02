@@ -2,7 +2,7 @@ import { randomUUID } from "crypto";
 import { cookies } from "next/headers";
 import { auth } from "@/auth";
 import { createDatabase } from "@/db/client";
-import { createLinkedLearner, findLinkedLearner, linkAccountOnSignIn } from "@/modules/learners/repository";
+import { createLinkedLearner, findLinkedLearner, linkAccountOnSignIn, touchLearner } from "@/modules/learners/repository";
 import type { LearnerRef } from "@/modules/learners/types";
 
 export const guestCookieName = "e4f_guest_id";
@@ -29,10 +29,11 @@ export async function getRequestLearner(create = false): Promise<{ learner: Lear
 
   if (userId) {
     const learnerId = await findLinkedLearner(db, "USER", userId) ?? await linkAccountOnSignIn(userId, existingGuestId);
+    if (learnerId) await touchLearner(db, learnerId).catch(() => undefined);
     return { learner: { learnerId: learnerId! }, createdGuestId };
   }
   const learnerId = await findLinkedLearner(db, "GUEST", guestId!);
-  if (learnerId) return { learner: { learnerId }, createdGuestId };
+  if (learnerId) { await touchLearner(db, learnerId).catch(() => undefined); return { learner: { learnerId }, createdGuestId }; }
   if (!create) throw new LearnerNotFoundError();
   return { learner: { learnerId: await createLinkedLearner(db, "GUEST", guestId!) }, createdGuestId };
 }

@@ -4,6 +4,11 @@ import { Button } from "@/components/ui/button";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getLocale } from "@/lib/i18n";
 import { listPublicExams } from "@/modules/exams/exam-engine";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện thi TOEIC Listening & Reading", description: "Luyện Part 1–7 có ghi âm và ảnh, mini test 22 câu và đề thi thử 200 câu, có điểm quy đổi ước tính và kết quả theo Part." }, en: { title: "TOEIC Listening & Reading practice", description: "Practise Parts 1–7 with recordings and photographs, a 22-question mini test and a 200-question mock with estimated scores by part." } }, "/toeic");
+}
 
 export const dynamic = "force-dynamic";
 

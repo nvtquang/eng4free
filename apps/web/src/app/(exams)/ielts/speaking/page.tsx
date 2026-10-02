@@ -5,6 +5,11 @@ import { getAiSpeakingCopy } from "@/lib/ai-speaking-copy";
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getSkillsCopy } from "@/lib/skills-copy";
 import { listIeltsTopics } from "@/modules/topics/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "IELTS Speaking Part 1, 2 và 3", description: "Câu hỏi Part 1, thẻ đề Part 2 có 1 phút chuẩn bị và câu hỏi thảo luận Part 3, ghi âm và nhận nhận xét AI." }, en: { title: "IELTS Speaking Parts 1, 2 and 3", description: "Part 1 questions, Part 2 cue cards with one minute to prepare and Part 3 discussion, recorded with AI feedback." } }, "/ielts/speaking");
+}
 
 const setCopy = {
   vi: { choose: "Chọn bộ đề", part1: "Part 1 · Câu hỏi làm quen", part2: "Part 2 · Cue card", youShouldSay: "Bạn nên nói:", part3: "Part 3 · Thảo luận", prepare: "Chuẩn bị (1:00)", preparing: "Ghi chú nhanh rồi bấm khi sẵn sàng.", ready: "Tôi đã sẵn sàng", prepNote: "Bạn có 1 phút chuẩn bị, sau đó nói tối đa 2 phút.", chooseQuestion: "Chọn một câu để trả lời và ghi âm.", record: "Ghi âm câu trả lời Part 2 của bạn bên dưới." },

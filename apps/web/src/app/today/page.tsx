@@ -9,6 +9,11 @@ import { getSkillLabel } from "@/lib/skills-copy";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { lessonHref } from "@/modules/path/repository";
 import { buildTodayPlan, type TodayPlan } from "@/modules/today/recommendations";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Hôm nay", description: "Việc nên học hôm nay." }, en: { title: "Today", description: "What to study today." } }, "/today", { index: false });
+}
 
 export const dynamic = "force-dynamic";
 
@@ -75,7 +80,7 @@ export default async function TodayPage() {
       <Card className="flex flex-col">
         <h2 className="font-serif text-xl font-bold">{copy.vocabularyTitle}</h2>
         {plan.vocabularyDue > 0
-          ? <><p className="mt-4 flex-1 text-sm text-muted"><span className="block font-serif text-4xl font-bold text-brand">{plan.vocabularyDue}</span>{copy.vocabularyDue.replace("{count}", String(plan.vocabularyDue))}</p><Link className="mt-5" href="/vocabulary"><Button>{copy.reviewNow}</Button></Link></>
+          ? <><p className="mt-4 flex-1 text-sm text-muted"><span className="block font-serif text-4xl font-bold text-brand">{plan.vocabularyDue}</span>{copy.vocabularyDue.replace("{count}", String(plan.vocabularyDue))}</p><Link className="mt-5" href="/vocabulary?deck=due"><Button>{copy.reviewNow}</Button></Link></>
           : <><p className="mt-4 flex-1 text-sm leading-6 text-muted">{copy.vocabularyNone}</p><Link className="mt-5" href={`/vocabulary?level=${plan.profile.cefrLevel}`}><Button variant="secondary">{copy.learnVocabulary}</Button></Link></>}
       </Card>
 

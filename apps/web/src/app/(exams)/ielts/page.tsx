@@ -5,6 +5,11 @@ import { Card } from "@/components/ui/card";
 import { Eyebrow, Section } from "@/components/ui/section";
 import { getLocale } from "@/lib/i18n";
 import { listPublicExams } from "@/modules/exams/exam-engine";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Luyện thi IELTS Academic", description: "Đề IELTS Listening và Reading 40 câu có band ước tính, Writing Task 1/2 và Speaking Part 1–3 có nhận xét AI." }, en: { title: "IELTS Academic practice", description: "40-question IELTS Listening and Reading tests with band estimates, plus Writing Task 1/2 and Speaking Parts 1–3 with AI feedback." } }, "/ielts");
+}
 
 export const dynamic = "force-dynamic";
 

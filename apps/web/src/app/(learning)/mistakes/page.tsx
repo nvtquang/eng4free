@@ -5,6 +5,11 @@ import { MistakePractice, type PracticeMistake } from "@/components/mistake-prac
 import { getLocale, getMessages } from "@/lib/i18n";
 import { getRequestLearner } from "@/modules/auth/request-actor";
 import { listOpenMistakes } from "@/modules/mistakes/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Sổ lỗi sai", description: "Luyện lại các câu đã làm sai." }, en: { title: "Mistake notebook", description: "Practise the questions you got wrong." } }, "/mistakes", { index: false });
+}
 
 export const dynamic = "force-dynamic";
 

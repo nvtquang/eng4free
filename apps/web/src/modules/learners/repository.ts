@@ -1,5 +1,5 @@
 import { randomUUID } from "node:crypto";
-import { and, eq } from "drizzle-orm";
+import { and, eq, lt, sql } from "drizzle-orm";
 import { createDatabase, type Database } from "@/db/client";
 import { learnerLinks, learners } from "@/db/schema";
 import { mergeLearners } from "./merge";
@@ -19,6 +19,11 @@ export async function createLinkedLearner(db: Database, kind: LinkKind, external
   if (inserted.length) return learnerId;
   await db.delete(learners).where(eq(learners.id, learnerId));
   return (await findLinkedLearner(db, kind, externalId))!;
+}
+
+/** Records that the learner is active, at most once an hour; retention removes guests who stop coming back. */
+export async function touchLearner(db: Database, learnerId: string): Promise<void> {
+  await db.update(learners).set({ lastSeenAt: new Date() }).where(and(eq(learners.id, learnerId), lt(learners.lastSeenAt, sql`now() - interval '1 hour'`)));
 }
 
 export async function addLink(db: Database, kind: LinkKind, externalId: string, learnerId: string): Promise<void> {

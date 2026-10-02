@@ -1,2 +1,9 @@
 import type { MetadataRoute } from "next";
-export default function robots(): MetadataRoute.Robots { const baseUrl = process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"; return { rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api/"] }, sitemap: new URL("/sitemap.xml", baseUrl).toString() }; }
+import { siteUrl } from "@/lib/metadata";
+
+// Rendered per request so the sitemap URL follows APP_URL at run time.
+export const dynamic = "force-dynamic";
+
+export default function robots(): MetadataRoute.Robots {
+  return { rules: { userAgent: "*", allow: "/", disallow: ["/admin", "/api/", "/dashboard", "/profile", "/today", "/onboarding", "/mistakes", "/toeic/history", "/login"] }, sitemap: new URL("/sitemap.xml", siteUrl()).toString() };
+}

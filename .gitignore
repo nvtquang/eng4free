@@ -8,9 +8,12 @@ playwright-report/
 .turbo/
 .env
 .env.local
+.env.production
+.env.*.local
 *.log
 .local-media/
 .local-imports/
+.local-mail/
 __pycache__/
 .pytest_cache/
 *.py[cod]

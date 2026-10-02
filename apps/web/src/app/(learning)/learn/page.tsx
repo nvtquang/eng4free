@@ -11,6 +11,11 @@ import type { LearnerRef } from "@/modules/learners/types";
 import { findLearnerProfile } from "@/modules/onboarding/repository";
 import { PATH_LEVELS, buildLevelPath, type LessonStatus } from "@/modules/path/path-order";
 import { lessonHref, listCompletedLessonIds, listPathLessons } from "@/modules/path/repository";
+import { pageMetadata } from "@/lib/metadata";
+
+export function generateMetadata() {
+  return pageMetadata({ vi: { title: "Lộ trình học tiếng Anh A1–C2", description: "Lộ trình theo chủ đề cho từng trình độ CEFR: Ngữ pháp, Nghe, Đọc, Nói và Viết, luôn có gợi ý bài học tiếp theo." }, en: { title: "English learning path, A1–C2", description: "A topic-based path for every CEFR level with Grammar, Listening, Reading, Speaking and Writing lessons, always suggesting the next lesson." } }, "/learn");
+}
 
 export const dynamic = "force-dynamic";
 
