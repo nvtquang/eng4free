@@ -14,7 +14,7 @@ export async function POST(request: Request) {
     if (!context) return NextResponse.json({ error: "Question not found in this submitted attempt" }, { status: 404 });
     return NextResponse.json(await new HttpTutorService(learner).chat(context, parsed.data.messages));
   } catch (error) {
-    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message }, { status: 429 });
+    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message, reason: error.reason }, { status: 429 });
     return NextResponse.json({ error: "Tutor service unavailable" }, { status: 503 });
   }
 }

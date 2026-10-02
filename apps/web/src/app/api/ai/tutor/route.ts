@@ -31,7 +31,7 @@ export async function POST(request: Request) {
     const feedbackId = await saveTutorFeedback(learner, { attemptId: context.attemptId, questionId: context.questionId, learnerAnswer: context.learnerAnswer, feedback });
     return NextResponse.json({ ...feedback, feedbackId });
   } catch (error) {
-    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message }, { status: 429 });
+    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message, reason: error.reason }, { status: 429 });
     return NextResponse.json({ error: "Tutor service unavailable" }, { status: 503 });
   }
 }

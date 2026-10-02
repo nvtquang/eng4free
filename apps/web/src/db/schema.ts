@@ -223,3 +223,21 @@ export const aiUsageLogs = pgTable("ai_usage_logs", {
   metadata: jsonb("metadata").notNull().default({}),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
 }, (table) => [index("ai_usage_logs_learner_created_idx").on(table.learnerId, table.createdAt), index("ai_usage_logs_operation_created_idx").on(table.operation, table.createdAt)]);
+
+export const rateLimitCounters = pgTable("rate_limit_counters", {
+  key: varchar("key", { length: 255 }).notNull(),
+  windowStart: timestamp("window_start", { withTimezone: true }).notNull(),
+  count: integer("count").notNull().default(0),
+  expiresAt: timestamp("expires_at", { withTimezone: true }).notNull()
+}, (table) => [primaryKey({ columns: [table.key, table.windowStart] }), index("rate_limit_counters_expires_idx").on(table.expiresAt)]);
+
+export const telemetryEvents = pgTable("telemetry_events", {
+  id: uuid("id").primaryKey(),
+  /** "event" for product events, "error" for server and browser errors. */
+  kind: varchar("kind", { length: 8 }).notNull(),
+  name: varchar("name", { length: 128 }).notNull(),
+  message: text("message"),
+  path: varchar("path", { length: 512 }),
+  properties: jsonb("properties").notNull().default({}),
+  createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
+}, (table) => [index("telemetry_events_kind_created_idx").on(table.kind, table.createdAt), index("telemetry_events_name_created_idx").on(table.name, table.createdAt)]);

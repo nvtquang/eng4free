@@ -1,3 +1,4 @@
+import { captureEvent } from "@/lib/observability";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestLearner, guestCookieName } from "@/modules/auth/request-actor";
@@ -29,6 +30,7 @@ export async function POST(request: Request) {
   }
 
   const profile = await upsertLearnerProfile(learner, { goal, minutesPerDay, ...fields });
+  await captureEvent({ name: "onboarding_completed", properties: { goal, minutesPerDay, level: fields.cefrLevel, levelSource: fields.levelSource } });
   const response = NextResponse.json({ saved: true, profile: { goal: profile.goal, cefrLevel: profile.cefrLevel, levelSource: profile.levelSource, minutesPerDay: profile.minutesPerDay, placementScore: profile.placementScore, placementTotal: profile.placementTotal, skillLevels: profile.skillLevels } });
   if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });
   return response;

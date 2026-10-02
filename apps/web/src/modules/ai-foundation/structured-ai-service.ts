@@ -2,9 +2,10 @@ import "server-only";
 import type { z } from "zod";
 import { AiInvalidResponseError, AiProviderUnavailableError, AiRateLimitError, type StructuredAiRequest } from "./contracts";
 import { getGeminiProvider } from "./gemini-provider";
-import { allowAiRequest } from "./rate-limit";
+import { checkAiRequest, consumeAiBudget } from "./rate-limit";
 import { getCachedAiResponse, putCachedAiResponse, recordAiUsage } from "./repository";
 import { sha256 } from "./contracts";
+import { captureEvent } from "@/lib/observability";
 
 function cacheTtlSeconds(value: number | undefined): number {
   if (value) return value;
@@ -21,11 +22,11 @@ export async function executeStructuredAi<TSchema extends z.ZodType>(request: St
   if (!provider) throw new AiProviderUnavailableError("Gemini is not configured");
 
   const inputHash = sha256(request.cacheInput);
-  const actorKey = request.actor.learnerId;
-  const limitKey = `${request.operation}:${actorKey}`;
-  if (!allowAiRequest(limitKey)) {
+  const refused = await checkAiRequest({ operation: request.operation, learnerId: request.actor.learnerId });
+  if (refused) {
     await recordAiUsage({ actor: request.actor, operation: request.operation, provider: provider.name, model: provider.model, inputHash, cacheHit: false, status: "RATE_LIMITED" });
-    throw new AiRateLimitError();
+    await captureEvent({ name: "ai_limited", properties: { operation: request.operation, reason: refused } });
+    throw new AiRateLimitError(refused);
   }
 
   const cacheKey = sha256({ operation: request.operation, provider: provider.name, model: provider.model, input: request.cacheInput });
@@ -36,6 +37,12 @@ export async function executeStructuredAi<TSchema extends z.ZodType>(request: St
       await recordAiUsage({ actor: request.actor, operation: request.operation, provider: provider.name, model: provider.model, inputHash, cacheHit: true, status: "CACHE_HIT" });
       return parsed.data;
     }
+  }
+
+  if (!await consumeAiBudget("TEXT")) {
+    await recordAiUsage({ actor: request.actor, operation: request.operation, provider: provider.name, model: provider.model, inputHash, cacheHit: false, status: "BUDGET_EXHAUSTED" });
+    await captureEvent({ name: "ai_limited", properties: { operation: request.operation, reason: "DAILY_BUDGET" } });
+    throw new AiRateLimitError("DAILY_BUDGET");
   }
 
   const startedAt = Date.now();

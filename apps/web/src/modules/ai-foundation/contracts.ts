@@ -5,7 +5,7 @@ import type { z } from "zod";
 export const AI_OPERATIONS = ["TUTOR_EXPLANATION", "WRITING_FEEDBACK", "SPEECH_TRANSCRIPTION", "SPEAKING_FEEDBACK", "ASSISTANT_CHAT"] as const;
 export type AiOperation = (typeof AI_OPERATIONS)[number];
 export type AiActor = LearnerRef;
-export type AiUsageStatus = "SUCCESS" | "CACHE_HIT" | "RATE_LIMITED" | "PROVIDER_UNAVAILABLE" | "INVALID_RESPONSE";
+export type AiUsageStatus = "SUCCESS" | "CACHE_HIT" | "RATE_LIMITED" | "BUDGET_EXHAUSTED" | "PROVIDER_UNAVAILABLE" | "INVALID_RESPONSE";
 export type JsonSchema = Record<string, unknown>;
 
 export type GeminiUsage = {
@@ -52,9 +52,10 @@ export function sha256Bytes(value: Uint8Array): string {
   return createHash("sha256").update(value).digest("hex");
 }
 
+/** LEARNER and IP limits reset within the hour; DAILY_BUDGET is the whole site's allowance for today. */
 export class AiRateLimitError extends Error {
-  constructor() {
-    super("AI request limit reached. Please try again later.");
+  constructor(readonly reason: "LEARNER" | "IP" | "DAILY_BUDGET" = "LEARNER") {
+    super(reason === "DAILY_BUDGET" ? "AI feedback has reached today's limit for the whole site. Please try again tomorrow." : "AI request limit reached. Please try again later.");
     this.name = "AiRateLimitError";
   }
 }

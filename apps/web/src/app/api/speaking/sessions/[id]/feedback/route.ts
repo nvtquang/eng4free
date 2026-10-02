@@ -25,7 +25,7 @@ export async function POST(_: Request, { params }: { params: Promise<{ id: strin
     await saveSpeakingAnalysis(actor, { sessionId: id, turnId: turn.id, transcript, feedback });
     return NextResponse.json({ providerConfigured: true, transcript, feedback, cached: false });
   } catch (error) {
-    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message }, { status: 429 });
+    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message, reason: error.reason }, { status: 429 });
     return NextResponse.json({ error: "Speaking transcription or feedback is temporarily unavailable" }, { status: 503 });
   }
 }

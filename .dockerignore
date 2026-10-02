@@ -1,0 +1,21 @@
+# Allow-list: only what the app, its packages, scripts and content pack need.
+*
+!package.json
+!pnpm-lock.yaml
+!pnpm-workspace.yaml
+!apps/web
+!packages
+!scripts
+!content
+**/node_modules
+**/.env
+**/.env.local
+**/.env.*.local
+apps/web/.next
+apps/web/.next-dev
+apps/web/.local-media
+apps/web/.local-imports
+apps/web/.local-mail
+apps/web/test-results
+apps/web/tsconfig.tsbuildinfo
+content/cefr/imports

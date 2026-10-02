@@ -3,9 +3,10 @@ import { z } from "zod";
 import { SpeakingFeedbackSchema, type SpeakingFeedback } from "@english4free/content-schemas";
 import { AiProviderUnavailableError, AiRateLimitError, sha256, sha256Bytes, type AiActor, type StructuredAiProvider } from "@/modules/ai-foundation/contracts";
 import { executeStructuredAi } from "@/modules/ai-foundation/structured-ai-service";
-import { allowAiRequest } from "@/modules/ai-foundation/rate-limit";
+import { checkAiRequest, consumeAiBudget } from "@/modules/ai-foundation/rate-limit";
 import { getCachedAiResponse, putCachedAiResponse, recordAiUsage } from "@/modules/ai-foundation/repository";
 import { offlineSpeakingFeedback } from "@/modules/ai-foundation/demo-fallback";
+import { captureEvent } from "@/lib/observability";
 import { getGeminiTranscriptionProvider, type SpeechToTextProvider } from "./gemini-transcription-provider";
 
 const TranscriptSchema = z.object({ transcript: z.string().min(1).max(20_000) });
@@ -24,15 +25,22 @@ export async function transcribeSpeakingAudio(actor: AiActor, input: { bytes: Ui
   const provider = injectedProvider ?? getGeminiTranscriptionProvider();
   if (!provider) throw new AiProviderUnavailableError("Gemini speech transcription is not configured");
   const audioHash = sha256Bytes(input.bytes);
-  if (!allowAiRequest(`SPEECH_TRANSCRIPTION:${actor.learnerId}`)) {
+  const refused = await checkAiRequest({ operation: "SPEECH_TRANSCRIPTION", learnerId: actor.learnerId });
+  if (refused) {
     await recordAiUsage({ actor, operation: "SPEECH_TRANSCRIPTION", provider: provider.name, model: provider.model, inputHash: audioHash, cacheHit: false, status: "RATE_LIMITED" });
-    throw new AiRateLimitError();
+    await captureEvent({ name: "ai_limited", properties: { operation: "SPEECH_TRANSCRIPTION", reason: refused } });
+    throw new AiRateLimitError(refused);
   }
   const cacheKey = sha256({ operation: "SPEECH_TRANSCRIPTION", provider: provider.name, model: provider.model, audioHash, mimeType: input.mimeType });
   const cached = TranscriptSchema.safeParse(await getCachedAiResponse(cacheKey));
   if (cached.success) {
     await recordAiUsage({ actor, operation: "SPEECH_TRANSCRIPTION", provider: provider.name, model: provider.model, inputHash: audioHash, cacheHit: true, status: "CACHE_HIT" });
     return cached.data.transcript;
+  }
+  if (!await consumeAiBudget("TRANSCRIPTION")) {
+    await recordAiUsage({ actor, operation: "SPEECH_TRANSCRIPTION", provider: provider.name, model: provider.model, inputHash: audioHash, cacheHit: false, status: "BUDGET_EXHAUSTED" });
+    await captureEvent({ name: "ai_limited", properties: { operation: "SPEECH_TRANSCRIPTION", reason: "DAILY_BUDGET" } });
+    throw new AiRateLimitError("DAILY_BUDGET");
   }
   const startedAt = Date.now();
   try {

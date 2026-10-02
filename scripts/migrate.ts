@@ -12,12 +12,22 @@ if (!connectionString) {
   throw new Error("DATABASE_URL is missing. Create apps/web/.env.local from apps/web/.env.example and set DATABASE_URL.");
 }
 
-const client = postgres(connectionString, { prepare: false });
+// One connection: the advisory lock belongs to the session that took it.
+const client = postgres(connectionString, { prepare: false, max: 1 });
+
+/** Any number for pg_advisory_lock that is unique to this migrator. */
+const MIGRATION_LOCK = 4_401_172_026;
 
 async function migrate() {
+  // Several app instances may start at once during a deploy; only one migrates at a time.
+  await client`SELECT pg_advisory_lock(${MIGRATION_LOCK})`;
+  try { await applyMigrations(); } finally { await client`SELECT pg_advisory_unlock(${MIGRATION_LOCK})`; }
+}
+
+async function applyMigrations() {
   await client.unsafe("CREATE TABLE IF NOT EXISTS _e4f_migrations (id varchar(128) PRIMARY KEY, applied_at timestamptz NOT NULL DEFAULT now())");
   const migrationDirectory = resolve(process.cwd(), "apps/web/src/db/migrations");
-  const migrationFiles = ["0000_phase1_toeic.sql", "0001_phase2_learning_core.sql", "0002_phase1b_auth.sql", "0003_phase4_ielts_ai.sql", "0004_phase6_progress.sql", "0005_phase8_media_jobs.sql", "0006_p1_lesson_completion.sql", "0007_p3_p5_foundation.sql", "0008_vocabulary_level_identity.sql", "0009_content_importer.sql", "0010_ai_foundation.sql", "0011_ai_feedback_history.sql", "0012_drop_legacy_writing_feedback_unique.sql", "0013_vocabulary_review_owner.sql", "0014_structured_answers.sql", "0015_d3_content.sql", "0016_learner_profiles.sql", "0017_d5_loops.sql", "0018_learners.sql", "0019_topics_and_content_hashes.sql", "0020_adaptive_placement.sql"];
+  const migrationFiles = ["0000_phase1_toeic.sql", "0001_phase2_learning_core.sql", "0002_phase1b_auth.sql", "0003_phase4_ielts_ai.sql", "0004_phase6_progress.sql", "0005_phase8_media_jobs.sql", "0006_p1_lesson_completion.sql", "0007_p3_p5_foundation.sql", "0008_vocabulary_level_identity.sql", "0009_content_importer.sql", "0010_ai_foundation.sql", "0011_ai_feedback_history.sql", "0012_drop_legacy_writing_feedback_unique.sql", "0013_vocabulary_review_owner.sql", "0014_structured_answers.sql", "0015_d3_content.sql", "0016_learner_profiles.sql", "0017_d5_loops.sql", "0018_learners.sql", "0019_topics_and_content_hashes.sql", "0020_adaptive_placement.sql", "0021_operations.sql"];
   for (const filename of migrationFiles) {
     const id = filename.replace(/\.sql$/, "");
     const applied = await client<{ id: string }[]>`SELECT id FROM _e4f_migrations WHERE id = ${id}`;

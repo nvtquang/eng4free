@@ -3,7 +3,7 @@ import { and, desc, eq, isNull } from "drizzle-orm";
 import { SpeakingFeedbackSchema, type SpeakingFeedback, type SpeakingSessionInput } from "@english4free/content-schemas";
 import { createDatabase } from "@/db/client";
 import { media, speakingSessions, speakingTurns } from "@/db/schema";
-import { readLocalRecording, saveLocalRecording } from "@/modules/media/local-media-service";
+import { readRecording, saveRecording } from "@/modules/media/recording-storage";
 import { appendProgressEvent } from "@/modules/progress/repository";
 import type { LearnerRef } from "@/modules/learners/types";
 
@@ -22,7 +22,7 @@ export async function saveSpeakingRecording(actor: SpeakingActor, input: { sessi
   const [session] = await db.select().from(speakingSessions).where(and(eq(speakingSessions.id, input.sessionId), ownerCondition(actor)));
   if (!session) throw new Error("Speaking session not found");
   if (session.status !== "IN_PROGRESS") throw new Error("Speaking session is already completed");
-  const stored = await saveLocalRecording({ bytes: input.bytes, contentType: input.contentType });
+  const stored = await saveRecording({ bytes: input.bytes, contentType: input.contentType });
   const mediaId = randomUUID(); const turnId = randomUUID(); const completedAt = new Date();
   await db.transaction(async (tx) => {
     await tx.insert(media).values({ id: mediaId, learnerId: actor.learnerId, kind: "RECORDING", storageKey: stored.storageKey, contentType: input.contentType, byteSize: stored.byteSize, status: "READY" });
@@ -60,7 +60,7 @@ export async function loadSpeakingTurnAudio(actor: SpeakingActor, sessionId: str
   if (!session) return null;
   const [turn] = await db.select({ id: speakingTurns.id, prompt: speakingTurns.prompt, audioMediaId: speakingTurns.audioMediaId, transcript: speakingTurns.transcript, feedback: speakingTurns.feedback, storageKey: media.storageKey, contentType: media.contentType }).from(speakingTurns).innerJoin(media, eq(speakingTurns.audioMediaId, media.id)).where(eq(speakingTurns.sessionId, session.id)).orderBy(desc(speakingTurns.createdAt)).limit(1);
   if (!turn || !turn.storageKey.startsWith("local-recordings/")) return null;
-  return { ...turn, prompt: turn.prompt ?? session.prompt, bytes: new Uint8Array(await readLocalRecording(turn.storageKey)) };
+  return { ...turn, prompt: turn.prompt ?? session.prompt, bytes: await readRecording(turn.storageKey) };
 }
 
 export async function saveSpeakingAnalysis(actor: SpeakingActor, input: { sessionId: string; turnId: string; transcript: string; feedback: SpeakingFeedback | null }) {

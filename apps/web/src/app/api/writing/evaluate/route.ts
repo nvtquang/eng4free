@@ -18,7 +18,7 @@ export async function POST(request: Request) {
     const saved = evaluation.feedback ? await saveWritingFeedback(actor, { submissionId: submission.id, feedback: evaluation.feedback, provider: "gemini", model: process.env.GEMINI_MODEL?.trim() || null }) : null;
     return NextResponse.json({ submissionId: submission.id, ...evaluation, savedAt: saved?.savedAt ?? null });
   } catch (error) {
-    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message }, { status: 429 });
+    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message, reason: error.reason }, { status: 429 });
     return NextResponse.json({ error: "Writing service unavailable" }, { status: 503 });
   }
 }

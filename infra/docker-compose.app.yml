@@ -1,0 +1,47 @@
+# Single-server deployment: PostgreSQL, a one-off migration, then the web app.
+#   cp apps/web/.env.example .env.production   # fill in real values (see docs/operations/deploy.md)
+#   docker compose -f infra/docker-compose.app.yml --env-file .env.production up -d --build
+# Put a TLS reverse proxy (Caddy, Nginx, the platform's load balancer) in front of port 3000.
+name: english4free
+
+services:
+  db:
+    image: postgres:16-alpine
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-english4free}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?set POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DB:-english4free}
+    volumes: [db-data:/var/lib/postgresql/data]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U $${POSTGRES_USER} -d $${POSTGRES_DB}"]
+      interval: 5s
+      retries: 20
+
+  migrate:
+    build: { context: .., target: tools }
+    image: english4free-tools:local
+    env_file: ../.env.production
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-english4free}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-english4free}
+    command: ["pnpm", "db:migrate"]
+    depends_on: { db: { condition: service_healthy } }
+    restart: "no"
+
+  web:
+    build: { context: .., target: runner }
+    image: english4free-web:local
+    restart: unless-stopped
+    env_file: ../.env.production
+    environment:
+      DATABASE_URL: postgresql://${POSTGRES_USER:-english4free}:${POSTGRES_PASSWORD}@db:5432/${POSTGRES_DB:-english4free}
+      # One proxy (the TLS terminator) sits in front, so its X-Forwarded-For entry is trusted.
+      TRUSTED_PROXY_HOPS: "1"
+    ports: ["3000:3000"]
+    # Recordings stay on this disk only when S3/R2 is not configured.
+    volumes: [media:/app/apps/web/.local-media]
+    depends_on: { migrate: { condition: service_completed_successfully } }
+
+volumes:
+  db-data:
+  media:

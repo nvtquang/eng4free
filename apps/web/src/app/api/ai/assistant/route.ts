@@ -19,7 +19,7 @@ export async function POST(request: Request) {
     if (createdGuestId) response.cookies.set(guestCookieName, createdGuestId, { httpOnly: true, sameSite: "lax", path: "/", maxAge: 60 * 60 * 24 * 365 });
     return response;
   } catch (error) {
-    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message }, { status: 429 });
+    if (error instanceof AiRateLimitError) return NextResponse.json({ error: error.message, reason: error.reason }, { status: 429 });
     return NextResponse.json({ error: "unavailable" }, { status: 503 });
   }
 }

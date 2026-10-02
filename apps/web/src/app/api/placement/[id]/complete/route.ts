@@ -1,3 +1,4 @@
+import { captureEvent } from "@/lib/observability";
 import { NextResponse } from "next/server";
 import { z } from "zod";
 import { getRequestLearner } from "@/modules/auth/request-actor";
@@ -13,7 +14,9 @@ export async function POST(request: Request, { params }: { params: Promise<{ id:
   try {
     const { id } = await params;
     const { learner } = await getRequestLearner(false);
-    return NextResponse.json(await completePlacement(learner, id, { SPEAKING: parsed.data.speaking, WRITING: parsed.data.writing }));
+    const result = await completePlacement(learner, id, { SPEAKING: parsed.data.speaking, WRITING: parsed.data.writing });
+    await captureEvent({ name: "placement_completed", properties: { level: result.overall, correct: result.correct, total: result.total } });
+    return NextResponse.json(result);
   } catch (error) {
     if (error instanceof PlacementConflictError) return NextResponse.json({ error: error.message }, { status: 409 });
     return NextResponse.json({ error: "Placement attempt not found" }, { status: 404 });

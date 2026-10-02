@@ -1,4 +1,4 @@
-import { GetObjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
+import { DeleteObjectCommand, GetObjectCommand, HeadObjectCommand, PutObjectCommand, S3Client } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 import { eq } from "drizzle-orm";
 import { createDatabase } from "@/db/client";
@@ -111,4 +111,37 @@ export class S3MediaService implements MediaService {
 
 export function getConfiguredMediaService(): MediaService {
   return new S3MediaService();
+}
+
+let sharedClient: { client: S3Client; config: StorageConfig } | null = null;
+function storage() {
+  if (!sharedClient) {
+    const config = getStorageConfig();
+    sharedClient = { config, client: new S3Client({ endpoint: config.endpoint, region: config.region, forcePathStyle: config.forcePathStyle, credentials: { accessKeyId: config.accessKeyId, secretAccessKey: config.secretAccessKey } }) };
+  }
+  return sharedClient;
+}
+
+/** Stores an object the server already holds (learner recordings are uploaded through the app). */
+export async function putStorageObject(key: string, bytes: Uint8Array, contentType: string): Promise<void> {
+  const { client, config } = storage();
+  await client.send(new PutObjectCommand({ Bucket: config.bucket, Key: key, Body: bytes, ContentType: contentType }));
+}
+
+export async function getStorageObject(key: string): Promise<Uint8Array> {
+  const { client, config } = storage();
+  const object = await client.send(new GetObjectCommand({ Bucket: config.bucket, Key: key }));
+  if (!object.Body) throw new Error("Stored object has no body");
+  return object.Body.transformToByteArray();
+}
+
+export async function deleteStorageObject(key: string): Promise<void> {
+  const { client, config } = storage();
+  await client.send(new DeleteObjectCommand({ Bucket: config.bucket, Key: key }));
+}
+
+/** A short-lived link to a public content object (lesson audio and images uploaded in the CMS). */
+export async function signedStorageUrl(key: string): Promise<string> {
+  const { client, config } = storage();
+  return getSignedUrl(client, new GetObjectCommand({ Bucket: config.bucket, Key: key }), { expiresIn: config.signedUrlTtlSeconds });
 }

@@ -1,0 +1,50 @@
+name: Release
+
+# After CI passes on main: build both images, push them to GitHub Container Registry, run the
+# database migrations, then ask the host to deploy the new web image.
+on:
+  workflow_run:
+    workflows: [CI]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  packages: write
+
+concurrency: { group: release, cancel-in-progress: false }
+
+jobs:
+  release:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    environment: production
+    env:
+      IMAGE: ghcr.io/${{ github.repository_owner }}/english4free
+      SHA: ${{ github.event.workflow_run.head_sha || github.sha }}
+    steps:
+      - uses: actions/checkout@v4
+        with: { ref: "${{ env.SHA }}" }
+      - uses: docker/setup-buildx-action@v3
+      - uses: docker/login-action@v3
+        with: { registry: ghcr.io, username: "${{ github.actor }}", password: "${{ secrets.GITHUB_TOKEN }}" }
+      - name: Build and push the tools image
+        uses: docker/build-push-action@v6
+        with: { context: ., target: tools, push: true, tags: "${{ env.IMAGE }}-tools:${{ env.SHA }},${{ env.IMAGE }}-tools:latest", cache-from: type=gha, cache-to: "type=gha,mode=max" }
+      - name: Build and push the web image
+        uses: docker/build-push-action@v6
+        with: { context: ., target: runner, push: true, tags: "${{ env.IMAGE }}-web:${{ env.SHA }},${{ env.IMAGE }}-web:latest", cache-from: type=gha }
+      - name: Run database migrations
+        # Migrations must stay compatible with the web version still running until the deploy finishes.
+        env: { DATABASE_URL: "${{ secrets.PRODUCTION_DATABASE_URL }}" }
+        run: |
+          if [ -z "$DATABASE_URL" ]; then echo "PRODUCTION_DATABASE_URL is not set; skipping migrations."; exit 0; fi
+          docker run --rm -e DATABASE_URL "$IMAGE-tools:$SHA" pnpm db:migrate
+      - name: Deploy
+        # Render, Railway, Coolify, Dokploy and similar hosts give a deploy hook URL; Fly and plain
+        # servers can replace this step with their own command (see docs/operations/deploy.md).
+        env: { DEPLOY_HOOK_URL: "${{ secrets.DEPLOY_HOOK_URL }}" }
+        run: |
+          if [ -z "$DEPLOY_HOOK_URL" ]; then echo "DEPLOY_HOOK_URL is not set; the image is pushed but not deployed."; exit 0; fi
+          curl --fail --silent --show-error -X POST "$DEPLOY_HOOK_URL"
