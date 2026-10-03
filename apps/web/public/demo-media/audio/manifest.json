@@ -45,6 +45,16 @@
       "source": "lesson speaking-presenting-data-clearly · Model mini-presentation",
       "generatedAt": "2026-09-28T02:58:20.354Z"
     },
+    "10ce608b8e8b9f3436fb": {
+      "file": "ielts-listening-test-2-p4-1-10ce608b.mp3",
+      "spec": "20d351c3716c2932",
+      "voices": [
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 133410,
+      "source": "exam ielts-listening-test-2 · part 4 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
+    },
     "113613242890ec4d527f": {
       "file": "placement-listening-b1-2-11361324.mp3",
       "spec": "5c2004ddec27ffbc",
@@ -55,6 +65,17 @@
       "durationMs": 12882,
       "source": "placement placement-listening-b1-2",
       "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "117b9bc0679d5573c41a": {
+      "file": "toeic-mini-test-2-p2-q-117b9bc0.mp3",
+      "spec": "4d78bf08602a0e32",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 14580,
+      "source": "question toeic-mini-test-2 · 3c316e16-ea0e-5752-8d9a-f1acb58018bb",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
     },
     "11c9ef1085ce9fe97ace": {
       "file": "toeic-full-mock-1-p3-5-11c9ef10.mp3",
@@ -98,6 +119,18 @@
       "source": "placement placement-listening-c2-1",
       "generatedAt": "2026-09-30T02:44:51.488Z"
     },
+    "17b4889ab35a092d31b4": {
+      "file": "lesson-listening-a-panel-on-ai-in-the-classroom-17b4889a.mp3",
+      "spec": "6165408c80b21459",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 93265,
+      "source": "lesson listening-a-panel-on-ai-in-the-classroom · Panel discussion: should students use AI tools?",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
     "1803273d32a5035a700d": {
       "file": "toeic-full-mock-1-p3-7-1803273d.mp3",
       "spec": "7336ffb4a9e0d730",
@@ -119,6 +152,16 @@
       "durationMs": 14093,
       "source": "question toeic-part-2-practice · 90210270-aca5-5060-8d0e-e62960fa1ee9",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "1a2891ef27d1d195c0c2": {
+      "file": "lesson-listening-a-lecture-on-coral-reefs-1a2891ef.mp3",
+      "spec": "c9b66d4535db1744",
+      "voices": [
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 107501,
+      "source": "lesson listening-a-lecture-on-coral-reefs · Lecture: why coral reefs turn white",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "1ab75e84c78aa4f4424a": {
       "file": "ielts-listening-test-1-p3-1-1ab75e84.mp3",
@@ -195,6 +238,17 @@
       "source": "question toeic-part-1-practice · 90b5a3a2-4498-5c22-9eac-3d34715fd696",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "262ac29b8ed4067a819f": {
+      "file": "toeic-mini-test-2-p2-q-262ac29b.mp3",
+      "spec": "271c5a2f620a3762",
+      "voices": [
+        "en_GB-vctk-medium:p277",
+        "en_US-libritts_r-medium:600"
+      ],
+      "durationMs": 13176,
+      "source": "question toeic-mini-test-2 · 570caa5d-dcf4-53e0-8707-384f717b0ef0",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
+    },
     "2634e6ede777fb672758": {
       "file": "toeic-part-2-practice-p2-q-2634e6ed.mp3",
       "spec": "fc9dfba00865c916",
@@ -258,6 +312,17 @@
       "durationMs": 14534,
       "source": "question toeic-full-mock-1 · 2fcbf8d4-ea02-574c-bb1c-f0998c924458",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "32aae0f1e99d8e771e42": {
+      "file": "toeic-mini-test-2-p2-q-32aae0f1.mp3",
+      "spec": "930117ccf27489f3",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 12978,
+      "source": "question toeic-mini-test-2 · 4569af5b-00e3-5ab1-a373-71100063e476",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
     },
     "3452fbb73501577c3be2": {
       "file": "toeic-full-mock-1-p3-6-3452fbb7.mp3",
@@ -390,6 +455,17 @@
       "source": "lesson listening-train-station-announcements · Station announcements",
       "generatedAt": "2026-09-29T07:28:34.550Z"
     },
+    "445f36dea2777a580806": {
+      "file": "toeic-mini-test-2-p3-1-445f36de.mp3",
+      "spec": "f8b4d985a627890c",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 33916,
+      "source": "exam toeic-mini-test-2 · part 3 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
+    },
     "44c337f56074ce5a7784": {
       "file": "lesson-listening-buying-fruit-at-the-market-44c337f5.mp3",
       "spec": "354acdb2cf78b51a",
@@ -400,6 +476,17 @@
       "durationMs": 32456,
       "source": "lesson listening-buying-fruit-at-the-market · At the fruit stall",
       "generatedAt": "2026-09-29T07:28:34.550Z"
+    },
+    "45a756d8549e71138b1f": {
+      "file": "toeic-mini-test-2-p2-q-45a756d8.mp3",
+      "spec": "c7565ed95d28004b",
+      "voices": [
+        "en_US-libritts_r-medium:105",
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 13396,
+      "source": "question toeic-mini-test-2 · 5124f1dc-dddc-5a43-b03e-909b645801cb",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
     },
     "47dbd31602622d3f239f": {
       "file": "placement-listening-b2-2-47dbd316.mp3",
@@ -476,6 +563,16 @@
       "source": "lesson speaking-agreeing-and-disagreeing · Model discussion: should homework be banned?",
       "generatedAt": "2026-09-28T02:58:20.353Z"
     },
+    "52f78746637527378819": {
+      "file": "lesson-listening-a-short-lecture-on-the-placebo-effect-52f78746.mp3",
+      "spec": "78c015fd461ee832",
+      "voices": [
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 92559,
+      "source": "lesson listening-a-short-lecture-on-the-placebo-effect · Lecture: the placebo effect",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
     "5589bab8e7ea2d52bf85": {
       "file": "toeic-full-mock-1-p1-q-5589bab8.mp3",
       "spec": "eda47b43538e7f01",
@@ -496,6 +593,17 @@
       "source": "exam toeic-full-mock-1 · part 4 · passage 5",
       "generatedAt": "2026-09-28T02:58:20.351Z"
     },
+    "562038d8e78bf61bae52": {
+      "file": "toeic-mini-test-2-p2-q-562038d8.mp3",
+      "spec": "1168ad4f87313340",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 17088,
+      "source": "question toeic-mini-test-2 · ffeef321-74b4-5828-a345-dc75e226d2a1",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
+    },
     "56c4713957f59a2d473b": {
       "file": "toeic-full-mock-1-p3-9-56c47139.mp3",
       "spec": "9e82211fc134cc4c",
@@ -508,6 +616,28 @@
       "source": "exam toeic-full-mock-1 · part 3 · passage 9",
       "generatedAt": "2026-09-28T02:58:20.350Z"
     },
+    "58cb7328e1f24de1032f": {
+      "file": "lesson-speaking-talk-about-your-day-58cb7328.mp3",
+      "spec": "92b3137c89b42b75",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 31825,
+      "source": "lesson speaking-talk-about-your-day · Model conversation",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
+    "5a2233e2bcd21e8f7ce4": {
+      "file": "ielts-listening-test-2-p1-1-5a2233e2.mp3",
+      "spec": "0bf756545f91cfe9",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 125850,
+      "source": "exam ielts-listening-test-2 · part 1 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.883Z"
+    },
     "5baeceb9874b5750b772": {
       "file": "toeic-full-mock-1-p4-3-5baeceb9.mp3",
       "spec": "daf8c9a6d9773b60",
@@ -517,6 +647,30 @@
       "durationMs": 27259,
       "source": "exam toeic-full-mock-1 · part 4 · passage 3",
       "generatedAt": "2026-09-28T02:58:20.350Z"
+    },
+    "5c63f8f248861bf2bb88": {
+      "file": "lesson-speaking-taking-part-in-online-meetings-5c63f8f2.mp3",
+      "spec": "b6b90e8e70bb3bd6",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278",
+        "en_US-libritts_r-medium:450"
+      ],
+      "durationMs": 56787,
+      "source": "lesson speaking-taking-part-in-online-meetings · Model meeting",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
+    "5ebe0d318e8176357bab": {
+      "file": "ielts-listening-test-2-p3-1-5ebe0d31.mp3",
+      "spec": "df1df67d0507c661",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 152727,
+      "source": "exam ielts-listening-test-2 · part 3 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
     },
     "62b52917d08a5f398ca0": {
       "file": "toeic-full-mock-1-p2-q-62b52917.mp3",
@@ -667,6 +821,17 @@
       "source": "exam toeic-full-mock-1 · part 4 · passage 1",
       "generatedAt": "2026-09-28T02:58:20.350Z"
     },
+    "73b8470958ac640d4960": {
+      "file": "lesson-speaking-handling-questions-after-a-talk-73b84709.mp3",
+      "spec": "89d79c5dfd633234",
+      "voices": [
+        "en_GB-vctk-medium:p257",
+        "en_US-libritts_r-medium:330"
+      ],
+      "durationMs": 62875,
+      "source": "lesson speaking-handling-questions-after-a-talk · Model Q&A",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
     "73f57eb391c655a630b5": {
       "file": "toeic-part-2-practice-p2-q-73f57eb3.mp3",
       "spec": "a5470b9826f347d4",
@@ -698,6 +863,19 @@
       "durationMs": 15126,
       "source": "question toeic-full-mock-1 · a5d44feb-e00c-5322-ba6a-7392bee99992",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "789232d9aa73e9730ccd": {
+      "file": "lesson-listening-a-radio-phone-in-on-plastic-waste-789232d9.mp3",
+      "spec": "d440ffb5bf6026f8",
+      "voices": [
+        "en_GB-vctk-medium:p241",
+        "en_US-libritts_r-medium:150",
+        "en_GB-vctk-medium:p278",
+        "en_US-libritts_r-medium:180"
+      ],
+      "durationMs": 95888,
+      "source": "lesson listening-a-radio-phone-in-on-plastic-waste · Phone-in: should shops charge for plastic bags?",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "79404d5cc6aa306544aa": {
       "file": "toeic-full-mock-1-p2-q-79404d5c.mp3",
@@ -1022,6 +1200,16 @@
       "source": "question toeic-full-mock-1 · f683dde6-5bfc-50a7-a53c-a513a6e699d6",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "9cb8addfbdba796d8d7a": {
+      "file": "lesson-listening-a-talk-on-collective-memory-9cb8addf.mp3",
+      "spec": "5d61223a9677a6ad",
+      "voices": [
+        "en_GB-vctk-medium:p360"
+      ],
+      "durationMs": 113476,
+      "source": "lesson listening-a-talk-on-collective-memory · Talk: how places remember",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
     "9d34f1e23e7cd363d772": {
       "file": "toeic-full-mock-1-p4-8-9d34f1e2.mp3",
       "spec": "4930a4fd080c8415",
@@ -1117,6 +1305,17 @@
       "durationMs": 20753,
       "source": "question toeic-part-1-practice · f3eaf33d-7c71-54a2-8a07-92928ef0974d",
       "generatedAt": "2026-09-28T03:38:36.556Z"
+    },
+    "a8a56538481f32dd0ada": {
+      "file": "lesson-listening-booking-a-homestay-a8a56538.mp3",
+      "spec": "5419e2bd5a52c783",
+      "voices": [
+        "en_US-libritts_r-medium:15",
+        "en_GB-vctk-medium:p226"
+      ],
+      "durationMs": 84505,
+      "source": "lesson listening-booking-a-homestay · Phone call: a homestay in Sa Pa",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "a9fbe0eb9874da3d96d6": {
       "file": "placement-listening-c2-3-a9fbe0eb.mp3",
@@ -1254,6 +1453,16 @@
       "source": "lesson listening-ordering-at-a-cafe · At the café",
       "generatedAt": "2026-09-28T02:58:20.353Z"
     },
+    "c170402f75c451b9e950": {
+      "file": "toeic-mini-test-2-p4-1-c170402f.mp3",
+      "spec": "ce46442aa3fb8e9b",
+      "voices": [
+        "en_GB-vctk-medium:p277"
+      ],
+      "durationMs": 46345,
+      "source": "exam toeic-mini-test-2 · part 4 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
+    },
     "c3ea636c8a6eccebf191": {
       "file": "toeic-full-mock-1-p3-2-c3ea636c.mp3",
       "spec": "52291c9e82b07ff0",
@@ -1350,6 +1559,16 @@
       "durationMs": 11674,
       "source": "placement placement-listening-c1-2",
       "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "cf8e4c0fa2233d39d424": {
+      "file": "lesson-speaking-describing-a-memorable-experience-cf8e4c0f.mp3",
+      "spec": "0ffe92d4e1e4b8cc",
+      "voices": [
+        "en_GB-vctk-medium:p277"
+      ],
+      "durationMs": 58778,
+      "source": "lesson speaking-describing-a-memorable-experience · Model answer",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "cfb07cb0c5ea4cf7d043": {
       "file": "lesson-listening-calling-the-landlord-cfb07cb0.mp3",
@@ -1449,6 +1668,17 @@
       "source": "question toeic-part-2-practice · 6ef8db5b-837a-52d6-9648-8bb4e350b3ff",
       "generatedAt": "2026-09-28T03:38:36.556Z"
     },
+    "dbd31242cd9a60676728": {
+      "file": "lesson-listening-a-seminar-on-literary-translation-dbd31242.mp3",
+      "spec": "c99f08134858d6ca",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 101230,
+      "source": "lesson listening-a-seminar-on-literary-translation · Seminar: what is a faithful translation?",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
+    },
     "e00a2908214e2b9c9b4e": {
       "file": "lesson-nuance-e00a2908.mp3",
       "spec": "65c36609c5ea8aa6",
@@ -1458,6 +1688,16 @@
       "durationMs": 12851,
       "source": "lesson nuance · Team feedback",
       "generatedAt": "2026-09-28T02:58:20.353Z"
+    },
+    "e0be52807bc187e75420": {
+      "file": "ielts-listening-test-2-p2-1-e0be5280.mp3",
+      "spec": "549e872f4e1ab4d0",
+      "voices": [
+        "en_GB-vctk-medium:p236"
+      ],
+      "durationMs": 131111,
+      "source": "exam ielts-listening-test-2 · part 2 · passage 1",
+      "generatedAt": "2026-10-03T02:50:49.884Z"
     },
     "e1c99c95c30e2544eead": {
       "file": "toeic-full-mock-1-p3-3-e1c99c95.mp3",
@@ -1479,6 +1719,16 @@
       "durationMs": 17355,
       "source": "placement placement-listening-c1-3",
       "generatedAt": "2026-09-30T02:44:51.488Z"
+    },
+    "e565410e1131a30d13a6": {
+      "file": "lesson-speaking-telling-a-story-with-impact-e565410e.mp3",
+      "spec": "0173dd942c67cb6e",
+      "voices": [
+        "en_US-libritts_r-medium:345"
+      ],
+      "durationMs": 64834,
+      "source": "lesson speaking-telling-a-story-with-impact · Model story",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "e70f5f9241091eea7a31": {
       "file": "toeic-full-demo-p4-e70f5f92.mp3",
@@ -1521,6 +1771,17 @@
       "durationMs": 13617,
       "source": "question toeic-full-mock-1 · 0e77e844-8640-5f23-85d2-97c62bc77998",
       "generatedAt": "2026-09-28T03:38:36.550Z"
+    },
+    "f02fce9a37797f9b3175": {
+      "file": "lesson-speaking-shopping-for-clothes-f02fce9a.mp3",
+      "spec": "e31b0443f5c0df62",
+      "voices": [
+        "en_US-libritts_r-medium:180",
+        "en_GB-vctk-medium:p278"
+      ],
+      "durationMs": 45748,
+      "source": "lesson speaking-shopping-for-clothes · Model conversation",
+      "generatedAt": "2026-10-03T02:50:49.886Z"
     },
     "f18a2e9a67ab9c40f3ac": {
       "file": "placement-listening-a1-2-f18a2e9a.mp3",
@@ -1595,6 +1856,17 @@
       "durationMs": 25935,
       "source": "exam toeic-full-mock-1 · part 4 · passage 10",
       "generatedAt": "2026-09-28T02:58:20.351Z"
+    },
+    "fa4cba7ea7777df02a5a": {
+      "file": "toeic-mini-test-2-p2-q-fa4cba7e.mp3",
+      "spec": "03d5d20c3439ba02",
+      "voices": [
+        "en_US-libritts_r-medium:345",
+        "en_GB-vctk-medium:p264"
+      ],
+      "durationMs": 13768,
+      "source": "question toeic-mini-test-2 · d07401de-7d23-570c-8ee7-f260f45e4038",
+      "generatedAt": "2026-10-03T02:50:49.885Z"
     },
     "fb7a10cbad8505169de1": {
       "file": "toeic-mini-test-1-p2-q-fb7a10cb.mp3",

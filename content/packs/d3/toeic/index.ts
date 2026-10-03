@@ -4,6 +4,7 @@ import { mock1Part5, mock1Part6 } from "./mock1-reading-5-6";
 import { mock1Part7 } from "./mock1-reading-7";
 import { toeicPractice } from "./practice";
 import { toeicMini } from "./mini";
+import { toeicMini2 } from "./mini-2";
 
 /** A 200-question full mock in the official seven-part format, plus one practice set per part. */
 export const toeicFullMock: ExamDef = {
@@ -11,4 +12,4 @@ export const toeicFullMock: ExamDef = {
   parts: [mock1Part1, mock1Part2, mock1Part3, mock1Part4, mock1Part5, mock1Part6, mock1Part7]
 };
 
-export const toeicExams: ExamDef[] = [toeicFullMock, toeicMini, ...toeicPractice];
+export const toeicExams: ExamDef[] = [toeicFullMock, toeicMini, toeicMini2, ...toeicPractice];
