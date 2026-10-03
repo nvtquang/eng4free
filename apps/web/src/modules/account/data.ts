@@ -2,7 +2,7 @@ import { and, asc, eq, inArray } from "drizzle-orm";
 import type { Database } from "@/db/client";
 import {
   attemptAnswers, attempts, exams, learnerProfiles, learners, lessonCompletions, lessons, media, mistakes, placementAttempts,
-  progressEvents, speakingSessions, speakingTurns, users, verificationTokens, vocabulary, vocabularyReviews, writingFeedback,
+  progressEvents, reminderPreferences, speakingSessions, speakingTurns, users, verificationTokens, vocabulary, vocabularyReviews, writingFeedback,
   writingRevisions, writingSubmissions
 } from "@/db/schema";
 import { deleteRecording } from "@/modules/media/recording-storage";
@@ -16,8 +16,9 @@ export type DataOwner = { learnerId: string | null; userId: string | null };
  */
 export async function exportOwnerData(db: Database, owner: DataOwner) {
   const [user] = owner.userId ? await db.select({ name: users.name, email: users.email, createdVia: users.emailVerified }).from(users).where(eq(users.id, owner.userId)) : [];
+  const [reminders] = owner.userId ? await db.select({ enabled: reminderPreferences.enabled, hour: reminderPreferences.hour, lastSentAt: reminderPreferences.lastSentAt }).from(reminderPreferences).where(eq(reminderPreferences.userId, owner.userId)) : [];
   const learnerId = owner.learnerId;
-  if (!learnerId) return { exportedAt: new Date().toISOString(), account: user ?? null, learning: null };
+  if (!learnerId) return { exportedAt: new Date().toISOString(), account: user ? { ...user, reminders: reminders ?? null } : null, learning: null };
 
   const [learner] = await db.select({ createdAt: learners.createdAt, lastSeenAt: learners.lastSeenAt }).from(learners).where(eq(learners.id, learnerId));
   const [profile] = await db.select({ goal: learnerProfiles.goal, cefrLevel: learnerProfiles.cefrLevel, levelSource: learnerProfiles.levelSource, minutesPerDay: learnerProfiles.minutesPerDay, skillLevels: learnerProfiles.skillLevels, updatedAt: learnerProfiles.updatedAt }).from(learnerProfiles).where(eq(learnerProfiles.learnerId, learnerId));
@@ -43,7 +44,7 @@ export async function exportOwnerData(db: Database, owner: DataOwner) {
 
   return {
     exportedAt: new Date().toISOString(),
-    account: user ?? null,
+    account: user ? { ...user, reminders: reminders ?? null } : null,
     learning: {
       learner, profile: profile ?? null, placements, completedLessons,
       exams: examAttempts.map(({ id, ...attempt }) => ({ ...attempt, answers: answers.filter((answer) => answer.attemptId === id).map((answer) => ({ questionId: answer.questionId, response: answer.response })) })),

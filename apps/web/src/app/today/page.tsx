@@ -10,6 +10,23 @@ import { getRequestLearner } from "@/modules/auth/request-actor";
 import { lessonHref } from "@/modules/path/repository";
 import { buildTodayPlan, type TodayPlan } from "@/modules/today/recommendations";
 import { pageMetadata } from "@/lib/metadata";
+import { auth } from "@/auth";
+import { createDatabase } from "@/db/client";
+import { isEmailConfigured } from "@/modules/email/send";
+import { getReminderPreference } from "@/modules/reminders/service";
+
+const reminderInvite = {
+  vi: { text: "Muốn được nhắc học vào buổi tối những ngày bạn quên?", action: "Bật email nhắc học" },
+  en: { text: "Want an evening reminder on days you forget to study?", action: "Turn on email reminders" }
+} as const;
+
+/** Signed-in learners who have not chosen yet are invited once to turn on reminders. */
+async function showReminderInvite(): Promise<boolean> {
+  const session = await auth().catch(() => null);
+  const db = createDatabase();
+  if (!session?.user?.id || !session.user.email || !db || !isEmailConfigured()) return false;
+  return !(await getReminderPreference(db, session.user.id)).saved;
+}
 
 export function generateMetadata() {
   return pageMetadata({ vi: { title: "Hôm nay", description: "Việc nên học hôm nay." }, en: { title: "Today", description: "What to study today." } }, "/today", { index: false });
@@ -41,6 +58,7 @@ export default async function TodayPage() {
   const minutesShare = Math.min(100, Math.round((plan.minutesToday / Math.max(1, plan.minutesGoal)) * 100));
   const next = plan.nextLesson;
   const weakLabel = plan.weakSkill ? messages.onboarding.skills[plan.weakSkill.skill] : "";
+  const invite = await showReminderInvite() ? reminderInvite[locale] : null;
 
   return <Section>
     <Eyebrow>{copy.eyebrow}</Eyebrow>
@@ -52,6 +70,8 @@ export default async function TodayPage() {
         <Link className="px-2 text-brand hover:text-brand-deep" href="/profile">{copy.profileLink} →</Link>
       </div>
     </div>
+
+    {invite && <Card className="mt-6 flex flex-wrap items-center justify-between gap-3 py-4"><p className="text-sm font-semibold">{invite.text}</p><Link href="/profile#reminders"><Button variant="secondary">{invite.action}</Button></Link></Card>}
 
     <div className="mt-8 grid gap-6 lg:grid-cols-[1.6fr_1fr]">
       <Card className="flex flex-col justify-between bg-brand-soft">

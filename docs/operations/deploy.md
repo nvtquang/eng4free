@@ -117,6 +117,13 @@ production secrets. It deletes:
 
 On a single server, a cron entry that runs the tools image does the same.
 
+`.github/workflows/reminders.yml` runs `pnpm maintenance:reminders` at the start of every hour.
+
+- It sends study reminder emails to accounts that turned them on in their profile, at the hour each learner chose.
+- It needs `AUTH_SECRET` (it signs the unsubscribe links), `AUTH_RESEND_KEY`, the `AUTH_EMAIL_FROM` variable and the `APP_URL` variable.
+- Each email carries a one-click `List-Unsubscribe` header.
+- Without Resend configured, the profile hides the reminder settings.
+
 ## Monitoring
 
 - **Uptime**: point an external monitor (Better Stack, UptimeRobot) at `/api/health`. It returns

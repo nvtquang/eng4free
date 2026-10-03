@@ -14,6 +14,7 @@
     "qa:prepare": "pnpm db:reset && pnpm db:migrate && pnpm db:seed",
     "demo:prepare": "tsx scripts/demo-prepare.ts",
     "demo:start": "tsx scripts/demo-start.ts",
+    "maintenance:reminders": "tsx --conditions=react-server --tsconfig apps/web/tsconfig.json scripts/maintenance/reminders.ts",
     "maintenance:retention": "tsx --tsconfig apps/web/tsconfig.json scripts/maintenance/retention.ts",
     "db:clean-test-content": "tsx scripts/clean-test-content.ts",
     "test:e2e": "tsx scripts/run-e2e.ts",

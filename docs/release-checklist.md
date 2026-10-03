@@ -13,6 +13,9 @@ monitoring) is [operations/deploy.md](operations/deploy.md).
   the sitemap, share images and sign-in links are built from them.
 - [ ] For email sign-in, set `AUTH_RESEND_KEY` and `AUTH_EMAIL_FROM` (a verified Resend sender) and
   send yourself a link. Never set `E4F_MAIL_OUTBOX` or `E4F_DEMO_SIGN_IN` in a deployed app.
+- [ ] Schedule `pnpm maintenance:reminders` hourly (`.github/workflows/reminders.yml`): it needs
+  `AUTH_SECRET`, `AUTH_RESEND_KEY`, and the `AUTH_EMAIL_FROM` and `APP_URL` variables. Turn reminders on for
+  your own account and check that one arrives at the chosen hour.
 - [ ] Schedule `pnpm maintenance:retention -- --apply` daily (cron or a scheduled job), with the
   retention variables matching what the privacy page should promise. Run it once without
   `--apply` first to see what it would delete.

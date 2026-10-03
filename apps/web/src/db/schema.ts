@@ -241,3 +241,12 @@ export const telemetryEvents = pgTable("telemetry_events", {
   properties: jsonb("properties").notNull().default({}),
   createdAt: timestamp("created_at", { withTimezone: true }).notNull().defaultNow()
 }, (table) => [index("telemetry_events_kind_created_idx").on(table.kind, table.createdAt), index("telemetry_events_name_created_idx").on(table.name, table.createdAt)]);
+
+/** Study reminder emails, opt-in per account. `hour` is the local hour in Vietnam. */
+export const reminderPreferences = pgTable("reminder_preferences", {
+  userId: uuid("user_id").primaryKey().references(() => users.id, { onDelete: "cascade" }),
+  enabled: boolean("enabled").notNull().default(false),
+  hour: integer("hour").notNull().default(19),
+  lastSentAt: timestamp("last_sent_at", { withTimezone: true }),
+  updatedAt: timestamp("updated_at", { withTimezone: true }).notNull().defaultNow()
+});

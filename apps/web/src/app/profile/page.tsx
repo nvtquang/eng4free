@@ -1,6 +1,10 @@
 import Link from "next/link";
 import { ProfilePlanForm } from "@/components/profile-plan-form";
 import { AccountData } from "@/components/account-data";
+import { ReminderSettings } from "@/components/reminder-settings";
+import { createDatabase } from "@/db/client";
+import { isEmailConfigured } from "@/modules/email/send";
+import { getReminderPreference } from "@/modules/reminders/service";
 import { auth } from "@/auth";
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -25,8 +29,13 @@ export default async function ProfilePage() {
   let profile: LearnerProfile | null = null;
   let hasLearner = false;
   try { const { learner } = await getRequestLearner(false); hasLearner = true; profile = await findLearnerProfile(learner); } catch { /* No learner yet. */ }
-  const signedIn = Boolean((await auth().catch(() => null))?.user?.id);
-  const data = hasLearner || signedIn ? <AccountData locale={locale} signedIn={signedIn} /> : null;
+  const session = await auth().catch(() => null);
+  const signedIn = Boolean(session?.user?.id);
+  const db = createDatabase();
+  const reminder = signedIn && db ? await getReminderPreference(db, session!.user!.id!) : { enabled: false, hour: 19 };
+  // Reminders need a sending service; without one the card is left out rather than promising emails.
+  const reminders = isEmailConfigured() ? <ReminderSettings locale={locale} email={session?.user?.email ?? null} enabled={reminder.enabled} hour={reminder.hour} /> : null;
+  const data = <>{reminders}{hasLearner || signedIn ? <AccountData locale={locale} signedIn={signedIn} /> : null}</>;
 
   if (!profile) return <Section className="max-w-2xl">
     <Eyebrow>{copy.eyebrow}</Eyebrow>
