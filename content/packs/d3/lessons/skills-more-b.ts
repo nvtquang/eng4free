@@ -1,0 +1,101 @@
+import { lq, type LessonDef } from "../types";
+
+const B1 = "Skills for independent users";
+const B2 = "Skills for confident users";
+
+const tip = (body: string) => ({ kind: "text" as const, heading: "Listening tip", body });
+const before = (body: string) => ({ kind: "text" as const, heading: "Before you read", body });
+
+/** More B1–B2 listening and reading lessons (English 4 Free original). */
+export const moreSkillsB: LessonDef[] = [
+  {
+    key: "more:b1:listening-homestay", batch: "lessons", level: "B1", unit: B1, slug: "listening-booking-a-homestay", title: "Listen: booking a homestay", skill: "LISTENING", minutes: 15,
+    blocks: [
+      tip("Before you listen, look at the questions and predict the kind of answer: a date, a price, a name. While you listen, note numbers and dates immediately — speakers often correct themselves, so wait for the final answer."),
+      { kind: "listening", heading: "Phone call: a homestay in Sa Pa", voices: { Owner: "female", Guest: "male" }, script: "Owner: Good morning, Green Valley Homestay. This is Mai speaking.\nGuest: Hello. I'd like to book a room for two people, please. We're arriving on the fourteenth of March.\nOwner: For how many nights?\nGuest: Three nights. Actually, sorry — four. We're leaving on the eighteenth.\nOwner: No problem. We have a family room with a view of the rice terraces. It's six hundred thousand dong a night, including breakfast.\nGuest: That sounds lovely. Is it possible to have dinner at the homestay too?\nOwner: Yes. Dinner is a hundred and fifty thousand per person. My mother cooks local dishes, so please tell us if you don't eat meat or fish.\nGuest: My friend is vegetarian, actually.\nOwner: That's fine, we'll prepare vegetable dishes for her. How are you getting here from the town centre?\nGuest: We were going to take a taxi.\nOwner: You don't need to. We can pick you up from the church in the centre for free. Just call me when you arrive.\nGuest: Perfect. Shall I give you my name for the booking?\nOwner: Yes, please, and I'll send you a text message with my number.\nGuest: It's Daniel Brooks — B-R-O-O-K-S." },
+      { kind: "practice", instruction: "Listen and choose the best answer.", questions: [
+        lq("How many nights will the guests stay?", ["Three", "Four", "Five"], 1, "He corrects himself: actually, four. They leave on the eighteenth."),
+        lq("What is included in the room price?", ["Breakfast", "Dinner", "A taxi from the town"], 0, "Six hundred thousand dong a night, including breakfast."),
+        lq("How much is dinner?", ["150,000 dong per person", "600,000 dong per room", "It is free"], 0, "Dinner is a hundred and fifty thousand per person."),
+        lq("What does the owner need to know about the guests' food?", ["What time they eat", "If they don't eat meat or fish", "Which dishes they can cook"], 1, "Please tell us if you don't eat meat or fish."),
+        lq("How will the guests get to the homestay?", ["By taxi", "On foot", "The owner will pick them up"], 2, "We can pick you up from the church for free."),
+        lq("Why does the guest spell his surname?", ["To make sure the booking is in the right name", "Because the owner asks for his passport", "To pay by card"], 0, "Spelling names avoids mistakes in a booking.")
+      ] }
+    ]
+  },
+  {
+    key: "more:b1:reading-interview-tips", batch: "lessons", level: "B1", unit: B1, slug: "reading-tips-for-your-first-job-interview", title: "Read: tips for your first job interview", skill: "READING", minutes: 15,
+    blocks: [
+      before("Advice articles often use the imperative (Prepare…, Don't…) and give a reason after each tip. Look for the reason — it helps you remember the advice and answer 'why' questions."),
+      { kind: "text", heading: "Article", body: "Your first job interview can feel frightening, but good preparation makes a big difference. Here are five tips that work for almost any job.\n\n1. Learn about the company. Read its website and recent news. Interviewers are impressed when candidates know what the company does and can explain why they want to work there.\n\n2. Prepare examples, not just answers. Instead of saying 'I'm hard-working', tell a short story: a time you finished a difficult project or helped a team solve a problem. Examples are more convincing than adjectives.\n\n3. Plan your journey. Arrive ten minutes early. If the interview is online, test your camera and internet the day before, and choose a quiet room with a plain background.\n\n4. Ask questions at the end. Most interviews finish with 'Do you have any questions?' Saying 'No' can sound as if you are not interested. You could ask about training, the team you would join, or what a typical day looks like. Avoid asking about salary in the first interview unless the interviewer mentions it.\n\n5. Follow up. A short thank-you email on the same day reminds the interviewer of you and shows good manners.\n\nFinally, remember that an interview is a conversation. The company is finding out about you, but you are also finding out whether you want to work there." },
+      { kind: "practice", instruction: "Read the article and choose the best answer.", questions: [
+        lq("Why should you learn about the company before the interview?", ["To ask for a higher salary", "To explain why you want to work there", "To avoid answering questions"], 1, "Interviewers are impressed when candidates can explain why they want to work there."),
+        lq("According to tip 2, what is more convincing than adjectives?", ["Short examples from your experience", "Long lists of skills", "Certificates"], 0, "Examples are more convincing than adjectives."),
+        lq("What should you do the day before an online interview?", ["Buy a new camera", "Test your camera and internet", "Send a thank-you email"], 1, "Test your camera and internet the day before."),
+        lq("Why is it a bad idea to have no questions at the end?", ["It can sound as if you are not interested.", "It makes the interview longer.", "The interviewer will be angry."], 0, "Saying 'No' can sound as if you are not interested."),
+        lq("When should you send a thank-you email?", ["After you get the job", "A week later", "On the same day"], 2, "A short thank-you email on the same day."),
+        lq("What is the main idea of the final paragraph?", ["Interviews are tests you must pass.", "Both sides are finding out about each other.", "Companies never change their minds."], 1, "You are also finding out whether you want to work there.")
+      ] }
+    ]
+  },
+  {
+    key: "more:b2:listening-plastic-phone-in", batch: "lessons", level: "B2", unit: B2, slug: "listening-a-radio-phone-in-on-plastic-waste", title: "Listen: a radio phone-in on plastic waste", skill: "LISTENING", minutes: 17,
+    blocks: [
+      tip("In a phone-in, several people give different opinions. Make a quick note of each caller's name and whether they are for, against or somewhere in between. Listen for contrast words: but, however, on the other hand."),
+      { kind: "listening", heading: "Phone-in: should shops charge for plastic bags?", voices: { Host: "male", Thu: "female", Peter: "male", Linh: "female" }, script: "Host: Welcome back. Today's question: should every shop charge for plastic bags? Our first caller is Thu. Go ahead, Thu.\nThu: Hi. I think it's a great idea. When my local supermarket started charging just two thousand dong a bag, people changed their habits almost overnight. Now most customers bring their own bags.\nHost: So a small charge is enough?\nThu: For most people, yes. It's not about the money really — it makes you stop and think.\nHost: Thanks, Thu. Peter is on the line now.\nPeter: Hello. I agree there's too much plastic, but I'm not convinced a charge is fair. For street vendors and small shops, bags are part of the service. If customers have to pay, some vendors will lose business to bigger shops.\nHost: So what would you do instead?\nPeter: Support alternatives. If the government made paper or cloth bags cheaper for small businesses, they'd switch on their own.\nHost: Interesting. And finally, Linh.\nLinh: I'm somewhere in the middle. Charges work in supermarkets, as Thu said, but the bigger problem is packaging — the plastic around fruit, snacks, takeaway food. A bag charge alone won't solve that.\nHost: So you'd go further?\nLinh: Yes. Companies that produce the packaging should pay for collecting and recycling it. At the moment, it's the cities that pay." },
+      { kind: "practice", instruction: "Listen and choose the best answer.", questions: [
+        lq("What happened when Thu's supermarket started charging for bags?", ["Customers stopped shopping there.", "Most customers began bringing their own bags.", "The price of food went up."], 1, "People changed their habits almost overnight."),
+        lq("According to Thu, why does a small charge work?", ["It makes people stop and think.", "It raises a lot of money.", "It is required by law."], 0, "It's not about the money really — it makes you stop and think."),
+        lq("What is Peter worried about?", ["Bags are too expensive to produce.", "Small vendors could lose business.", "Paper bags are not strong enough."], 1, "Some vendors will lose business to bigger shops."),
+        lq("What does Peter suggest instead?", ["Making alternatives cheaper for small businesses", "Banning all bags", "Charging customers more"], 0, "If the government made paper or cloth bags cheaper…"),
+        lq("What is Linh's opinion?", ["Bag charges are useless.", "Bag charges help but packaging is a bigger problem.", "Cities should collect less waste."], 1, "A bag charge alone won't solve that."),
+        lq("Who does Linh think should pay for recycling packaging?", ["Customers", "Cities", "The companies that produce it"], 2, "Companies that produce the packaging should pay.")
+      ] }
+    ]
+  },
+  {
+    key: "more:b2:listening-placebo", batch: "lessons", level: "B2", unit: B2, slug: "listening-a-short-lecture-on-the-placebo-effect", title: "Listen: a short lecture on the placebo effect", skill: "LISTENING", minutes: 18,
+    blocks: [
+      tip("Lecturers signal structure: 'First…', 'Now, why does this happen?', 'The key point is…'. Use these signals to divide your notes into sections, and note examples under the idea they support."),
+      { kind: "listening", heading: "Lecture: the placebo effect", voices: { Lecturer: "female" }, script: "Lecturer: Today I want to talk about one of the most curious findings in medicine: the placebo effect.\nA placebo is a treatment with no active ingredient — for example, a sugar pill. Yet when patients believe they are receiving real medicine, many of them report feeling better. This is particularly true for symptoms such as pain, tiredness and nausea.\nNow, why does this happen? The key point is expectation. When we expect relief, the brain can change how strongly we feel pain. Context matters too. A friendly doctor, a careful explanation and even the colour and price of a pill can make the effect stronger.\nThis is why new medicines are tested against placebos. In a fair trial, one group receives the real drug and another group receives an identical-looking pill with no active ingredient. Ideally, neither the patients nor the doctors know who is getting which. Only if the real drug works clearly better than the placebo do we say it is effective.\nOne surprising discovery is that a placebo can sometimes help even when patients are told it is a placebo. Researchers are still debating why.\nI should stress one thing, though. Placebos may change how we feel, but they do not cure serious diseases. Feeling better is not the same as being treated, and no one should replace real medicine with a placebo." },
+      { kind: "practice", instruction: "Listen and choose the best answer.", questions: [
+        lq("What is a placebo?", ["A very strong medicine", "A treatment with no active ingredient", "A type of surgery"], 1, "A placebo is a treatment with no active ingredient."),
+        lq("For which symptoms is the placebo effect particularly strong?", ["Pain, tiredness and nausea", "Broken bones", "Infections"], 0, "Particularly true for pain, tiredness and nausea."),
+        lq("According to the lecturer, what is the key cause?", ["Expectation", "The sugar in the pill", "Sleep"], 0, "The key point is expectation."),
+        lq("Why are new medicines tested against placebos?", ["Placebos are cheaper.", "To check the drug works better than a pill with no active ingredient", "Doctors prefer placebos."], 1, "Only if the real drug works clearly better than the placebo…"),
+        lq("What surprising discovery does she mention?", ["Placebos cure serious diseases.", "Placebos can help even when patients know it is a placebo.", "Placebos only work on doctors."], 1, "A placebo can sometimes help even when patients are told it is a placebo."),
+        lq("What warning does the lecturer give?", ["Placebos are dangerous.", "Placebos should not replace real medicine.", "Doctors should never use placebos in trials."], 1, "No one should replace real medicine with a placebo.")
+      ] }
+    ]
+  },
+  {
+    key: "more:b2:reading-procrastination", batch: "lessons", level: "B2", unit: B2, slug: "reading-why-we-procrastinate", title: "Read: why we procrastinate", skill: "READING", minutes: 17,
+    blocks: [
+      before("At B2, writers often present a common belief and then challenge it. Look for phrases like 'many people assume…', 'in fact…', 'however…' — the writer's own view usually comes after them."),
+      { kind: "text", heading: "Article", body: "Almost everyone has done it: you have an important task, and instead of starting it you check your phone, tidy your desk or suddenly decide to clean the kitchen. Many people assume that procrastination is simply laziness or poor time management. In fact, psychologists increasingly describe it as a problem of emotions rather than time.\n\nWhen a task makes us feel anxious, bored or uncertain, putting it off gives us immediate relief. The bad feeling disappears — for now. Unfortunately, the task is still there, and the stress usually returns stronger as the deadline approaches. This cycle explains why people often procrastinate on the things that matter most to them: the more important the task, the more pressure we feel.\n\nIf procrastination is about feelings, then a better calendar alone will not fix it. Several simple strategies target the emotional side instead. One is to make the first step tiny: not 'write the essay' but 'write one sentence'. Starting is usually the hardest part, and small progress reduces anxiety. Another is to be kinder to yourself. People who forgive themselves for procrastinating in the past tend to procrastinate less afterwards, perhaps because guilt is just another bad feeling to avoid.\n\nRemoving distractions also helps. Keeping your phone in another room while you work is a small change, but it removes the easiest escape. None of these strategies will turn anyone into a perfect planner. However, understanding why we delay is the first step to delaying a little less." },
+      { kind: "practice", instruction: "Read the article and choose the best answer.", questions: [
+        lq("What common belief does the writer challenge?", ["That procrastination is a problem of emotions", "That procrastination is just laziness or poor time management", "That everyone procrastinates"], 1, "Many people assume… In fact, psychologists describe it as a problem of emotions."),
+        lq("Why does putting off a task feel good at first?", ["It gives immediate relief from a bad feeling.", "It makes the task easier.", "It moves the deadline."], 0, "Putting it off gives us immediate relief."),
+        lq("Why do people often delay the most important tasks?", ["They are the longest tasks.", "Important tasks create more pressure.", "They forget about them."], 1, "The more important the task, the more pressure we feel."),
+        lq("What is the purpose of making the first step 'tiny'?", ["To reduce anxiety and make starting easier", "To finish the task faster", "To impress others"], 0, "Starting is the hardest part; small progress reduces anxiety."),
+        lq("What does the writer say about forgiving yourself?", ["It makes people lazier.", "It may help people procrastinate less.", "It has no effect."], 1, "People who forgive themselves tend to procrastinate less afterwards."),
+        lq("What is the tone of the final paragraph?", ["Realistic but encouraging", "Completely negative", "Angry"], 0, "No one becomes perfect, but understanding helps us delay a little less.")
+      ] }
+    ]
+  },
+  {
+    key: "more:b2:reading-car-free-centres", batch: "lessons", level: "B2", unit: B2, slug: "reading-should-city-centres-be-car-free", title: "Read: should city centres be car-free?", skill: "READING", minutes: 18,
+    blocks: [
+      before("This is a discussion article. Divide a page into two columns — for and against — and note each argument. Then decide where the writer stands: the conclusion usually tells you."),
+      { kind: "text", heading: "Article", body: "In a growing number of cities, the busiest streets of the centre are being closed to private cars, either permanently or at weekends. Supporters see car-free centres as the future; critics see them as an expensive experiment. Who is right?\n\nThe case in favour is easy to understand. Streets without cars are quieter, cleaner and safer. Pedestrians can walk in the road, children can play, and cafés can put tables outside. In many cities where centres have been pedestrianised, shops have reported more visitors, not fewer, because people spend more time in places that are pleasant to be in.\n\nHowever, the arguments against deserve attention. Not everyone can walk or cycle easily. Older people, people with disabilities and parents with small children may find a car-free centre harder to reach. Delivery companies and small businesses also need vehicle access. And if traffic is simply pushed into the surrounding streets, those neighbourhoods may become more crowded and polluted than before.\n\nThe most successful projects seem to share three features. First, they are introduced gradually, often starting with weekends, so that people can get used to the change. Second, they come with real alternatives: frequent buses, safe bike lanes and parking at the edge of the centre. Third, they make exceptions for deliveries at certain hours and for people who genuinely need a vehicle.\n\nIn the end, the question may not be whether centres should be car-free, but how carefully the change is planned. A car-free street that nobody can reach is not much of an improvement." },
+      { kind: "practice", instruction: "Read the article and choose the best answer.", questions: [
+        lq("According to paragraph 2, what has happened to shops in some pedestrianised centres?", ["They have closed.", "They have reported more visitors.", "They have moved outside the city."], 1, "Shops have reported more visitors, not fewer."),
+        lq("Which group might find car-free centres harder to reach?", ["Office workers who cycle", "Older people and parents with small children", "Tourists who walk"], 1, "Older people, people with disabilities and parents with small children…"),
+        lq("What risk is mentioned for the surrounding streets?", ["They may become more crowded and polluted.", "They may become too quiet.", "Shops may open there."], 0, "If traffic is pushed into surrounding streets…"),
+        lq("Which is NOT one of the three features of successful projects?", ["Gradual introduction", "Banning all buses", "Exceptions for deliveries"], 1, "The features are gradual introduction, alternatives and exceptions — not banning buses."),
+        lq("What is the writer's overall view?", ["Car-free centres should never be built.", "Success depends on careful planning.", "All centres should be car-free immediately."], 1, "The question is how carefully the change is planned."),
+        lq("The phrase 'deserve attention' in paragraph 3 means the arguments…", ["should be taken seriously", "are wrong", "are very popular"], 0, "If something deserves attention, it should be considered seriously.")
+      ] }
+    ]
+  }
+];
