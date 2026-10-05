@@ -2,7 +2,8 @@
  * Imports content pack D3 (`pnpm content:d3:import`).
  *
  *   --check     run the quality gate only
- *   --only a,b  import only these batches (lessons, grammar, vocabulary, toeic, ielts, topics, pronunciation, placement)
+ *   --only a,b  import only these batches (lessons, grammar, toeic, ielts, topics, pronunciation, placement)
+ *               The vocabulary is not in the pack: it lives in PostgreSQL (pnpm vocab:check, /admin/vocabulary).
  *
  * Review rules, the same for every batch:
  * - The quality gate runs first; any issue stops the import.
@@ -18,10 +19,10 @@ import { createHash } from "node:crypto";
 import { and, eq, inArray, notInArray, sql } from "drizzle-orm";
 import type { AnyPgColumn } from "drizzle-orm/pg-core";
 import { buildQuestionFromAuthoring, parseAuthoredQuestion } from "@english4free/content-schemas";
-import { contentBatches, contentItemHashes, courseLevels, courseUnits, courses, examParts, exams, lessonBlocks, lessons, passages, placementItems, pronunciationItems, questions, speakingSessions, topicCategories, topics, vocabulary, writingSubmissions } from "../../../apps/web/src/db/schema";
-import { D3_VERSION, d3Batches, d3Exams, d3Lessons, d3Placement, d3Prompts, d3Pronunciation, d3SelfAssessment, d3TopicCategories, d3Vocabulary } from "../../../content/packs/d3";
+import { contentBatches, contentItemHashes, courseLevels, courseUnits, courses, examParts, exams, lessonBlocks, lessons, passages, placementItems, pronunciationItems, questions, speakingSessions, topicCategories, topics, writingSubmissions } from "../../../apps/web/src/db/schema";
+import { D3_VERSION, d3Batches, d3Exams, d3Lessons, d3Placement, d3Prompts, d3Pronunciation, d3SelfAssessment, d3TopicCategories } from "../../../content/packs/d3";
 import { arrangeLessonOptions, type BatchKey, type ExamDef, type LessonBlock, type LessonDef } from "../../../content/packs/d3/types";
-import { checkExams, checkLessons, checkPlacement, checkPrompts, checkPronunciation, checkPronunciationSet, checkTopics, checkVocabulary, type GateIssue } from "./quality-gate";
+import { checkExams, checkLessons, checkPlacement, checkPrompts, checkPronunciation, checkPronunciationSet, checkTopics, type GateIssue } from "./quality-gate";
 import { batchId, connect, d3Id, D3_COURSE_ID } from "./shared";
 
 const args = process.argv.slice(2);
@@ -40,9 +41,8 @@ const legacyTopicSlugs: Record<string, string> = {
 };
 
 export function runQualityGate() {
-  const vocabularyEntries = d3Vocabulary();
-  const issues: GateIssue[] = [...checkLessons(d3Lessons), ...checkExams(d3Exams), ...checkPrompts(d3Prompts), ...checkVocabulary(vocabularyEntries), ...checkTopics(d3TopicCategories), ...checkPronunciation(d3Pronunciation), ...checkPronunciationSet(d3Pronunciation), ...checkPlacement(d3Placement, d3SelfAssessment)];
-  return { issues, vocabularyEntries };
+  const issues: GateIssue[] = [...checkLessons(d3Lessons), ...checkExams(d3Exams), ...checkPrompts(d3Prompts), ...checkTopics(d3TopicCategories), ...checkPronunciation(d3Pronunciation), ...checkPronunciationSet(d3Pronunciation), ...checkPlacement(d3Placement, d3SelfAssessment)];
+  return { issues };
 }
 
 function lessonBlockRow(lesson: LessonDef, block: LessonBlock, index: number) {
@@ -67,10 +67,10 @@ function storedQuestion(exam: ExamDef, question: ExamDef["parts"][number]["group
 const keepStatus = (column: AnyPgColumn) => sql`CASE WHEN ${column} = 'ARCHIVED' THEN 'DRAFT'::content_status ELSE ${column} END`;
 
 async function main() {
-  const { issues, vocabularyEntries } = runQualityGate();
+  const { issues } = runQualityGate();
   const topicCount = d3TopicCategories.reduce((sum, category) => sum + category.topics.length, 0);
-  const counts = { lessons: d3Lessons.length, exams: d3Exams.length, questions: d3Exams.reduce((sum, exam) => sum + exam.parts.reduce((inner, part) => inner + part.groups.reduce((g, group) => g + group.questions.length, 0), 0), 0), prompts: d3Prompts.length, vocabulary: vocabularyEntries.length };
-  console.log(`D3 pack: ${counts.lessons} lessons · ${counts.exams} exams (${counts.questions} questions) · ${counts.prompts} IELTS tasks · ${topicCount} topics · ${d3Pronunciation.length} pronunciation items · ${counts.vocabulary} vocabulary`);
+  const counts = { lessons: d3Lessons.length, exams: d3Exams.length, questions: d3Exams.reduce((sum, exam) => sum + exam.parts.reduce((inner, part) => inner + part.groups.reduce((g, group) => g + group.questions.length, 0), 0), 0), prompts: d3Prompts.length };
+  console.log(`D3 pack: ${counts.lessons} lessons · ${counts.exams} exams (${counts.questions} questions) · ${counts.prompts} IELTS tasks · ${topicCount} topics · ${d3Pronunciation.length} pronunciation items`);
   if (issues.length) {
     console.log(`Quality gate: ${issues.length} issue(s)`);
     for (const issue of issues.slice(0, 80)) console.log(`  ✗ ${issue.item}: ${issue.problem}`);
@@ -260,17 +260,6 @@ async function main() {
           await tx.insert(placementItems).values({ id, ...fields, status: "DRAFT" }).onConflictDoUpdate({ target: placementItems.id, set: { ...fields, status: keepStatus(placementItems.status), updatedAt: now } });
         }
         await tx.update(placementItems).set({ status: "ARCHIVED" }).where(and(eq(placementItems.contentBatchId, batchId("placement")), notInArray(placementItems.id, rows.map((row) => d3Id(row.key)))));
-      }
-
-      if (only.has("vocabulary")) {
-        const existingRows = await tx.select({ headword: vocabulary.headword, partOfSpeech: vocabulary.partOfSpeech, cefrLevel: vocabulary.cefrLevel, status: vocabulary.status }).from(vocabulary);
-        const existing = new Map(existingRows.map((row) => [`${row.headword}|${row.partOfSpeech}|${row.cefrLevel}`, row.status]));
-        for (const entry of vocabularyEntries) {
-          track(`vocabulary:${entry.headword}:${entry.pos}:${entry.level}`, "vocabulary", entry, existing.get(`${entry.headword}|${entry.pos}|${entry.level}`));
-          const attribution = { ipaUs: entry.ipaUs, sense: entry.sense, sources: { ...entry.sources, example: { name: "English 4 Free", url: "https://github.com/nvtquang/eng4free", license: "English 4 Free original content" } } };
-          const values = { ipa: entry.ipa, meaning: entry.meaningVi, example: entry.example!, tags: ["d3", entry.level.toLowerCase(), entry.pos], attribution, contentBatchId: batchId("vocabulary"), updatedAt: now };
-          await tx.insert(vocabulary).values({ id: d3Id(`vocabulary:${entry.headword}:${entry.pos}:${entry.level}`), headword: entry.headword, partOfSpeech: entry.pos, cefrLevel: entry.level, ...values, status: "DRAFT" }).onConflictDoUpdate({ target: [vocabulary.headword, vocabulary.partOfSpeech, vocabulary.cefrLevel], set: { ...values, status: keepStatus(vocabulary.status) } });
-        }
       }
 
       // Batch status: any unpublished change (new or edited item) sends the batch back to REVIEW.

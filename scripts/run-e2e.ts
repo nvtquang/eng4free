@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
 import postgres from "postgres";
 
@@ -30,9 +30,28 @@ async function ensureDatabase() {
   } finally { await sql.end(); }
 }
 
-function run(command: string, args: string[]) {
-  const result = spawnSync(command, args, { stdio: "inherit", shell: true, env: { ...process.env, DATABASE_URL: target.toString() } });
+function run(command: string, args: string[], databaseUrl = target.toString()) {
+  const result = spawnSync(command, args, { stdio: "inherit", shell: true, env: { ...process.env, DATABASE_URL: databaseUrl } });
   if (result.status !== 0) process.exit(result.status ?? 1);
+}
+
+/**
+ * The vocabulary lives only in PostgreSQL, so the E2E database gets a copy of the local
+ * catalogue (the demo database in DATABASE_URL). Without one (CI) it gets synthetic test words.
+ */
+function loadVocabulary() {
+  const source = process.env.DATABASE_URL;
+  const file = ".cache/vocabulary/e2e-copy.json";
+  if (source && new URL(source).pathname !== target.pathname) {
+    const exported = spawnSync("pnpm", ["vocab:snapshot", "export", `--out=${file}`], { stdio: "inherit", shell: true, env: { ...process.env, DATABASE_URL: source } });
+    if (exported.status === 0 && existsSync(file) && (JSON.parse(readFileSync(file, "utf8")) as { words: unknown[] }).words.length > 0) {
+      run("pnpm", ["vocab:snapshot", "import", `--in=${file}`]);
+      run("pnpm", ["vocab:publish", "--test-db"]);
+      return;
+    }
+  }
+  console.log("No local vocabulary catalogue to copy; using synthetic test words.");
+  run("pnpm", ["exec", "tsx", "scripts/vocabulary/test-fixture.ts"]);
 }
 
 ensureDatabase().then(() => {
@@ -41,6 +60,7 @@ ensureDatabase().then(() => {
   // The E2E database gets content pack D3 published straight away; the demo database keeps it in review.
   run("pnpm", ["content:d3:import"]);
   run("pnpm", ["content:d3:publish", "--test-db"]);
+  loadVocabulary();
   // The demo scenarios sign in to the seeded demo account.
   run("pnpm", ["seed:demo-account"]);
   run("pnpm", ["--filter", "@english4free/web", "build"]);

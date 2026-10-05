@@ -1,19 +1,17 @@
-"""Builds the D3 vocabulary selection from open, attributed sources.
+"""Lists vocabulary candidates from open, attributed sources (`pnpm vocab:candidates`).
 
-  python scripts/content/d3/build_vocabulary.py
-
-Levels:   Words-CEFR dataset (A1–B2, MIT) and Octanove Vocabulary Profile C1/C2 (CC BY-SA 4.0).
+Levels:   Words-CEFR dataset (A1-B2, MIT) and Octanove Vocabulary Profile C1/C2 (CC BY-SA 4.0).
 Ranking:  wordfreq Zipf frequency, so each level starts with its most useful words.
-Meaning:  Vietnamese translations from English Wiktionary (CC BY-SA 4.0), read through the
+Meaning:  Vietnamese translation groups from English Wiktionary (CC BY-SA 4.0), read through the
           kaikki.org extraction, for the entry whose part of speech matches the level list.
 IPA:      Wiktionary pronunciation (Received Pronunciation first, General American kept too).
 
-A word without a sourced Vietnamese translation or Wiktionary IPA is skipped, never filled in
-by hand. Wiktionary does not order senses by frequency, so every Vietnamese translation group
-is kept; content/packs/d3/vocabulary/sense-choices.json records which group(s) a reviewer chose
-for the learner's sense (the words themselves are always Wiktionary's).
+Writes .cache/vocabulary/candidates.json, a transport file: `pnpm vocab:ingest` adds the words
+the catalogue (PostgreSQL, the only home of the vocabulary) does not have yet. A candidate
+without Wiktionary IPA is left out; one without a Vietnamese translation is kept with empty
+sense groups, so an editor can write its meaning. Wiktionary does not order senses by
+frequency, so every translation group is kept and a reviewer picks the learner's sense.
 Per-word Wiktionary data is cached in .cache/kaikki so reruns work offline.
-Writes content/packs/d3/vocabulary/selection.json.
 """
 import csv
 import json
@@ -26,18 +24,37 @@ from pathlib import Path
 
 from wordfreq import zipf_frequency
 
-ROOT = Path(__file__).resolve().parents[3]
+ROOT = Path(__file__).resolve().parents[2]
 CACHE = ROOT / ".cache"
-OUT = ROOT / "content/packs/d3/vocabulary/selection.json"
-QUOTAS = {"A1": 140, "A2": 140, "B1": 140, "B2": 140, "C1": 120, "C2": 120}
+OUT = CACHE / "vocabulary/candidates.json"
+LEVELS = ("A1", "A2", "B1", "B2", "C1", "C2")
 POS_MAP = {"noun": "noun", "verb": "verb", "adjective": "adj", "adverb": "adv"}
 LEVEL_SOURCES = {
     "words-cefr": {"name": "Words-CEFR Dataset", "url": "https://github.com/Maximax67/Words-CEFR-Dataset", "license": "MIT"},
     "octanove": {"name": "Octanove Vocabulary Profile C1/C2 1.0", "url": "https://github.com/openlanguageprofiles/olp-en-cefrj", "license": "CC BY-SA 4.0"},
 }
-WIKTIONARY_LICENSE = "CC BY-SA 4.0"
+IPA_SOURCES = {
+    "wiktionary": None,  # the catalogue links the word's Wiktionary page
+    "ipa-dict": {"name": "ipa-dict (open-dict-data), en_UK", "url": "https://github.com/open-dict-data/ipa-dict", "license": "MIT"},
+}
+
+
+def load_ipa_dict() -> dict[str, str]:
+    """British IPA from ipa-dict (MIT), used only when Wiktionary has no pronunciation for the word."""
+    path = CACHE / "ipa-dict-en_UK.txt"
+    if not path.exists():
+        return {}
+    table: dict[str, str] = {}
+    for line in path.read_text(encoding="utf8").splitlines():
+        word, _, ipa = line.partition("\t")
+        first = ipa.split(",")[0].strip()
+        if word and first.startswith("/") and first.endswith("/"):
+            table[word] = learner_ipa(first)
+    return table
+
+
+IPA_DICT: dict[str, str] = {}
 LATIN = re.compile(r"^[A-Za-z\u00C0-\u024F\u1E00-\u1EFF'’ ,.\-()]+$")
-CHOICES = ROOT / "content/packs/d3/vocabulary/sense-choices.json"
 # Grammatical adverbs belong to grammar lessons, not the vocabulary deck.
 FUNCTION_ADVERBS = set("not just when there then so very how where why here too as more most much less least about up down out off away back over even still yet ever else only also well".split())
 
@@ -78,8 +95,14 @@ def vietnamese_groups(entry: dict) -> list[dict]:
         if not word or len(word) > 40 or not LATIN.match(word) or tags & {"obsolete", "archaic", "rare", "dated"}:
             continue
         group = groups.setdefault(item.get("sense") or "", [])
-        if word not in group:
-            group.append(word)
+        # Wiktionary writes alternatives as "anh or anh trai"; keep them as separate words, and
+        # drop a bracket left unbalanced by the extraction ("tập)").
+        for part in word.split(" or "):
+            part = part.strip()
+            if part.count("(") != part.count(")"):
+                part = part.replace("(", "").replace(")", "").strip()
+            if part and part not in group:
+                group.append(part)
     return [{"sense": sense, "words": words[:4]} for sense, words in groups.items() if words]
 
 
@@ -91,6 +114,9 @@ def learner_ipa(ipa: str) -> str:
         ipa = phonemic.group(0)
     elif ipa.startswith("["):
         ipa = "/" + ipa[1:ipa.index("]")] + "/"
+    elif ipa.startswith("/"):
+        # A few Wiktionary entries drop the closing slash.
+        ipa = "/" + ipa[1:].split(",")[0].strip() + "/"
     for mark in ("\u0361", "\u035c", "\u032f", "\u02b0", "\u031e", "\u031d", "\u0320", "\u031a", "()"):
         ipa = ipa.replace(mark, "")
     # Learner dictionaries write /r/ and a plain /l/ rather than Wiktionary's narrower [ɹ] and dark [ɫ].
@@ -111,74 +137,44 @@ def pick_ipa(entry: dict) -> tuple[str | None, str | None]:
 
 
 def main() -> None:
-    choices = json.loads(CHOICES.read_text(encoding="utf8")) if CHOICES.exists() else {}
-    ranked: dict[str, list[tuple[float, str, str, str]]] = {level: [] for level in QUOTAS}
+    IPA_DICT.update(load_ipa_dict())
+    ranked: dict[str, list[tuple[float, str, str, str]]] = {level: [] for level in LEVELS}
     seen: set[tuple[str, str]] = set()
     for headword, pos, level, source in candidates():
-        if level not in QUOTAS or pos not in POS_MAP or not re.fullmatch(r"[a-z]+(?:-[a-z]+)?", headword) or (pos == "adverb" and headword in FUNCTION_ADVERBS):
+        if level not in LEVELS or pos not in POS_MAP or not re.fullmatch(r"[a-z]+(?:-[a-z]+)?", headword) or (pos == "adverb" and headword in FUNCTION_ADVERBS):
             continue
         if (headword, level) in seen:
             continue
         seen.add((headword, level))
         ranked[level].append((zipf_frequency(headword, "en"), headword, pos, source))
-    # Fetch the likely candidates in parallel first (six at a time); the selection loop then reads the cache.
-    likely = [headword for level, quota in QUOTAS.items() for _, headword, _, _ in sorted(ranked[level], reverse=True)[: quota * 2]]
+    every = [headword for level in LEVELS for _, headword, _, _ in sorted(ranked[level], reverse=True)]
+    # Fetch in parallel (six at a time); the loop below then reads the cache.
     with ThreadPoolExecutor(max_workers=6) as pool:
-        for index, _ in enumerate(pool.map(kaikki, likely), start=1):
-            if index % 100 == 0:
-                print(f"  fetched {index}/{len(likely)}", flush=True)
-    selection = []
-    used_headwords: set[str] = set()
-    for level, quota in QUOTAS.items():
-        chosen = 0
-        for _, headword, pos, source in sorted(ranked[level], reverse=True):
-            if chosen >= quota:
-                break
-            if headword in used_headwords:
-                continue
+        for index, _ in enumerate(pool.map(kaikki, every), start=1):
+            if index % 500 == 0:
+                print(f"  fetched {index}/{len(every)}", flush=True)
+    out: list[dict] = []
+    for level in LEVELS:
+        kept = translated = 0
+        for zipf, headword, pos, source in sorted(ranked[level], reverse=True):
             entries = [entry for entry in kaikki(headword) if entry.get("pos") == POS_MAP[pos] and entry.get("word") == headword]
-            found = next(((entry, vietnamese_groups(entry)) for entry in entries if vietnamese_groups(entry)), None)
-            if not found:
+            if not entries:
                 continue
-            entry, groups = found
+            entry, groups = next(((entry, vietnamese_groups(entry)) for entry in entries if vietnamese_groups(entry)), (entries[0], []))
             ipa, ipa_us = pick_ipa(entry)
+            ipa_source = IPA_SOURCES["wiktionary"]
+            if not ipa and headword in IPA_DICT:
+                ipa, ipa_us, ipa_source = IPA_DICT[headword], None, IPA_SOURCES["ipa-dict"]
             if not ipa:
                 continue
-            key = f"{headword}|{pos}"
-            # A reviewer's choice: group indexes (2), single words within a group ("2.1"), or "skip"
-            # when Wiktionary has no Vietnamese translation for the sense learners need.
-            choice = choices.get(key, [0])
-            if choice == "skip":
-                continue
-            words: list[str] = []
-            picked: list[int] = []
-            for pick in choice:
-                group_index, _, word_index = str(pick).partition(".")
-                if not group_index.isdigit() or int(group_index) >= len(groups):
-                    raise ValueError(f"{key}: no sense group {pick}")
-                group = groups[int(group_index)]
-                chosen_words = [group["words"][int(word_index)]] if word_index else group["words"]
-                words += [word for word in chosen_words if word not in words]
-                if int(group_index) not in picked:
-                    picked.append(int(group_index))
-            gloss = "; ".join(groups[index]["sense"] for index in picked if groups[index]["sense"]) or next((g for s in entry.get("senses") or [] for g in s.get("glosses") or []), "")
-            page = f"https://en.wiktionary.org/wiki/{urllib.parse.quote(headword)}"
-            selection.append({
-                "headword": headword, "pos": pos, "level": level,
-                "ipa": ipa, "ipaUs": ipa_us, "meaningVi": "; ".join(words[:4]), "sense": gloss,
-                "senseGroups": groups, "chosenGroups": picked,
-                "sources": {
-                    "level": LEVEL_SOURCES[source],
-                    "meaning": {"name": "English Wiktionary (via kaikki.org)", "url": f"{page}#Translations", "license": WIKTIONARY_LICENSE},
-                    "ipa": {"name": "English Wiktionary", "url": f"{page}#Pronunciation", "license": WIKTIONARY_LICENSE},
-                },
-            })
-            used_headwords.add(headword)
-            chosen += 1
-        print(f"{level}: {chosen}/{quota}", flush=True)
+            gloss = next((g for s in entry.get("senses") or [] for g in s.get("glosses") or []), "")
+            out.append({"headword": headword, "pos": pos, "level": level, "zipf": zipf, "ipa": ipa, "ipaUs": ipa_us, "ipaSource": ipa_source, "senseGroups": groups, "gloss": gloss, "levelSource": LEVEL_SOURCES[source]})
+            kept += 1
+            translated += bool(groups)
+        print(f"{level}: {kept} candidates with IPA, {translated} with a Vietnamese translation", flush=True)
     OUT.parent.mkdir(parents=True, exist_ok=True)
-    OUT.write_text(json.dumps(selection, ensure_ascii=False, indent=1) + "\n", encoding="utf8")
-    print(f"wrote {len(selection)} entries to {OUT.relative_to(ROOT)}")
+    OUT.write_text(json.dumps(out, ensure_ascii=False) + "\n", encoding="utf8")
+    print(f"wrote {len(out)} candidates to {OUT.relative_to(ROOT)}")
 
 
 if __name__ == "__main__":

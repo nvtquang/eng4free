@@ -1,5 +1,5 @@
 import { spawnSync } from "node:child_process";
-import { existsSync, mkdirSync, readdirSync } from "node:fs";
+import { existsSync, mkdirSync, readdirSync, readFileSync } from "node:fs";
 import { delimiter, join, resolve } from "node:path";
 import postgres from "postgres";
 
@@ -7,16 +7,20 @@ import postgres from "postgres";
  * Rebuilds the local demo database in one command (`pnpm demo:prepare`):
  *
  *   1. backs the current database up with pg_dump into .cache/demo-backups/
- *   2. resets the schema and runs every migration
- *   3. seeds the base data and imports content pack D3
- *   4. republishes the D3 batches whose content matches what was approved
+ *   2. saves the vocabulary catalogue (it lives only in PostgreSQL) to a snapshot in .cache/vocabulary/
+ *   3. resets the schema and runs every migration
+ *   4. seeds the base data and imports content pack D3
+ *   5. republishes the D3 batches whose content matches what was approved
  *      (content/packs/d3/qa/approved.json); a batch edited since then stays in review
- *   5. checks that every listening script has a recording, generating missing ones
- *   6. seeds the demo account with about three weeks of history
- *   7. makes the production build that `pnpm demo:start` serves
+ *   6. puts the vocabulary catalogue back, exactly as it was (words, history, statuses)
+ *   7. checks that every listening script has a recording, generating missing ones
+ *   8. seeds the demo account with about three weeks of history
+ *   9. makes the production build that `pnpm demo:start` serves
  *
  *   --no-backup    skip step 1 (for a database with nothing worth keeping)
- *   --skip-build   skip step 7
+ *   --skip-build   skip step 9
+ *   --vocabulary=<snapshot.json>   restore this catalogue snapshot instead of the one saved in step 2
+ *                                  (needed when the database is new or has no catalogue yet)
  *
  * Only local databases named english4free* are accepted, and never the E2E database.
  */
@@ -62,6 +66,19 @@ async function ensureDatabase(): Promise<boolean> {
   } finally { await sql.end(); }
 }
 
+/** Exports the vocabulary catalogue before the reset; null when the database has none yet. */
+function saveVocabulary(): string | null {
+  const file = `.cache/vocabulary/snapshot-${database}-before-demo-prepare-${new Date().toISOString().replace(/[:.]/gu, "-")}.json`;
+  console.log("\n▶ Saving the vocabulary catalogue");
+  const result = spawnSync("pnpm", ["vocab:snapshot", "export", `--out=${file}`], { stdio: "inherit", shell: true, env: process.env });
+  if (result.status !== 0) {
+    console.warn("Could not export the vocabulary (the database may predate the catalogue tables).");
+    return null;
+  }
+  const words = (JSON.parse(readFileSync(resolve(process.cwd(), file), "utf8")) as { words: unknown[] }).words.length;
+  return words > 0 ? file : null;
+}
+
 async function main() {
   console.log(`Preparing the demo on ${target.hostname}/${database}.`);
   const existed = await ensureDatabase();
@@ -78,11 +95,14 @@ async function main() {
     console.log(`Backup: ${file}\nRestore with: pg_restore --clean --if-exists --no-owner -d <DATABASE_URL> "${file}"`);
   }
 
+  const vocabularyFile = [...args].find((arg) => arg.startsWith("--vocabulary="))?.slice(13) ?? (existed ? saveVocabulary() : null);
   run("Resetting the schema", "pnpm", ["db:reset"]);
   run("Running migrations", "pnpm", ["db:migrate"]);
   run("Seeding base data", "pnpm", ["db:seed"]);
   run("Importing content pack D3", "pnpm", ["content:d3:import"]);
   run("Publishing approved content", "pnpm", ["content:d3:publish", "--from-record"]);
+  if (vocabularyFile) run("Restoring the vocabulary catalogue", "pnpm", ["vocab:snapshot", "import", `--in=${vocabularyFile}`]);
+  else console.warn("\n! No vocabulary catalogue was saved (new database). Restore one with: pnpm vocab:snapshot import --in=<snapshot.json>");
   if (!run("Checking listening audio", "pnpm", ["content:check-audio"], { allowFailure: true })) {
     run("Generating missing audio (Piper TTS)", "pnpm", ["content:generate-audio"]);
     run("Checking listening audio again", "pnpm", ["content:check-audio"]);

@@ -1,14 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { checkExams, checkLessons, checkVocabulary } from "../../../../../scripts/content/d3/quality-gate";
-import { arrangeLessonOptions, lq, mcq, type LessonDef, type VocabularySelection } from "../../../../../content/packs/d3/types";
+import { checkExams, checkLessons } from "../../../../../scripts/content/d3/quality-gate";
+import { arrangeLessonOptions, lq, mcq, type LessonDef } from "../../../../../content/packs/d3/types";
 
 const lesson = (questions: ReturnType<typeof lq>[], body = "A clear explanation of the grammar with enough words to pass the length check here."): LessonDef => ({
   key: "test", batch: "grammar", level: "A1", unit: "Unit", slug: "test-lesson", title: "Test lesson", skill: "GRAMMAR", minutes: 5,
   blocks: [{ kind: "grammar", heading: "Form", body }, { kind: "practice", instruction: "Choose.", questions }]
 });
 const four = [lq("Q1?", ["a", "b", "c"], 0, "Because a."), lq("Q2?", ["a", "b", "c"], 1, "Because b."), lq("Q3?", ["a", "b", "c"], 2, "Because c."), lq("Q4?", ["a", "b", "c"], 0, "Because a.")];
-const source = { name: "English Wiktionary", url: "https://en.wiktionary.org/wiki/test", license: "CC BY-SA 4.0" };
-const word: VocabularySelection & { example?: string } = { headword: "travel", pos: "verb", level: "A2", ipa: "/ˈtrævəl/", ipaUs: null, meaningVi: "đi du lịch", sense: "to be on a journey", sources: { level: source, meaning: source, ipa: source }, example: "We travelled by train." };
 
 describe("D3 quality gate", () => {
   it("accepts a complete lesson and rejects placeholder text", () => {
@@ -33,10 +31,4 @@ describe("D3 quality gate", () => {
     expect(issues.some((issue) => /lopsided/u.test(issue.problem))).toBe(true);
   });
 
-  it("requires sourced vocabulary with an example that uses the headword", () => {
-    expect(checkVocabulary([word])).toEqual([]);
-    expect(checkVocabulary([{ ...word, sources: { ...word.sources, meaning: { name: "", url: "", license: "" } } }]).some((issue) => /meaning source/u.test(issue.problem))).toBe(true);
-    expect(checkVocabulary([{ ...word, example: "We went to Paris by train." }]).some((issue) => /does not use/u.test(issue.problem))).toBe(true);
-    expect(checkVocabulary([{ ...word, ipa: "trævəl" }]).some((issue) => /IPA/u.test(issue.problem))).toBe(true);
-  });
 });

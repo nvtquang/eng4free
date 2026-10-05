@@ -13,7 +13,7 @@ import { resolve } from "node:path";
 import { buildQuestionFromAuthoring } from "@english4free/content-schemas";
 import { isNull, ne, or } from "drizzle-orm";
 import { contentItemHashes } from "../../../apps/web/src/db/schema";
-import { d3Batches, d3Exams, d3Lessons, d3Placement, d3Prompts, d3Pronunciation, d3SelfAssessment, d3TopicCategories, d3Vocabulary } from "../../../content/packs/d3";
+import { d3Batches, d3Exams, d3Lessons, d3Placement, d3Prompts, d3Pronunciation, d3SelfAssessment, d3TopicCategories } from "../../../content/packs/d3";
 import { connect } from "./shared";
 import { arrangeLessonOptions, type BatchKey } from "../../../content/packs/d3/types";
 
@@ -87,10 +87,6 @@ for (const item of d3Placement) {
 }
 for (const statement of d3SelfAssessment) sections.placement.push({ id: `self/${statement.skill}/${statement.level}`, markdown: `**Tự đánh giá ${statement.skill} · ${statement.level}** — ${statement.canDo.vi} / ${statement.canDo.en}` });
 
-for (const entry of d3Vocabulary()) {
-  const id = `vocab/${entry.headword}/${entry.pos}/${entry.level}`;
-  sections.vocabulary.push({ id, markdown: `**${entry.headword}** (${entry.pos}, ${entry.level}) ${entry.ipa} — *${entry.meaningVi}* — nghĩa Wiktionary: "${entry.sense}"\n\nVí dụ: ${entry.example ?? "(chưa có)"} · [nguồn](${entry.sources.meaning.url})` });
-}
 
 const lines = [
   "# D3 — Bảng duyệt ngẫu nhiên",

@@ -4,14 +4,13 @@
  *  - questions build with the shared authoring format and have exactly one valid key;
  *  - multiple-choice keys are spread across positions (no "always A");
  *  - listening scripts, passages and explanations are real text of a sensible length;
- *  - vocabulary has a sourced Vietnamese meaning, IPA in slashes, a part of speech from the
- *    level list, per-field source + licence, and an example sentence that uses the headword;
+ *  - (vocabulary is checked in PostgreSQL by apps/web/src/modules/vocabulary/catalog-rules.ts);
  *  - images exist on disk and carry a licence credit; no duplicate prompts or slugs.
  */
 import { existsSync } from "node:fs";
 import { resolve } from "node:path";
 import { buildQuestionFromAuthoring } from "@english4free/content-schemas";
-import { arrangeLessonOptions, type ExamDef, type Image, type LessonDef, type PlacementItemDef, type PromptDef, type PronunciationDef, type SelfAssessmentDef, type TopicCategoryDef, type VocabularySelection } from "../../../content/packs/d3/types";
+import { arrangeLessonOptions, type ExamDef, type Image, type LessonDef, type PlacementItemDef, type PromptDef, type PronunciationDef, type SelfAssessmentDef, type TopicCategoryDef } from "../../../content/packs/d3/types";
 
 export type GateIssue = { item: string; problem: string };
 const PLACEHOLDER = /(placeholder|original[- ]answer|example \d+ using|original example|lorem ipsum|\btodo\b|\btbd\b|xxx|kiểm tra renderer|sample text|\[insert|to be written)/iu;
@@ -131,35 +130,6 @@ export function checkPrompts(prompts: PromptDef[]): GateIssue[] {
 }
 
 /** Inflections that count as "using the headword" in an example sentence. */
-function mentions(sentence: string, headword: string) {
-  const lower = sentence.toLowerCase();
-  const stem = headword.replace(/(e|y)$/u, "");
-  return new RegExp(`\\b(${headword}|${stem}[a-z]{0,4})\\b`, "u").test(lower) || lower.includes(headword);
-}
-
-export function checkVocabulary(entries: Array<VocabularySelection & { example?: string }>): GateIssue[] {
-  const issues: GateIssue[] = [];
-  const seen = new Set<string>();
-  for (const entry of entries) {
-    const item = `vocab ${entry.headword} (${entry.pos}, ${entry.level})`;
-    if (seen.has(`${entry.headword}|${entry.pos}|${entry.level}`)) issues.push({ item, problem: "duplicate entry" });
-    seen.add(`${entry.headword}|${entry.pos}|${entry.level}`);
-    if (!["noun", "verb", "adjective", "adverb"].includes(entry.pos)) issues.push({ item, problem: `unexpected part of speech "${entry.pos}"` });
-    if (!/^\/[^/]+\/$/u.test(entry.ipa)) issues.push({ item, problem: `IPA "${entry.ipa}" is not in /slashes/` });
-    if (!entry.meaningVi.trim() || PLACEHOLDER.test(entry.meaningVi)) issues.push({ item, problem: "Vietnamese meaning missing" });
-    for (const field of ["level", "meaning", "ipa"] as const) {
-      const source = entry.sources[field];
-      if (!source?.url?.startsWith("https://") || !source.license) issues.push({ item, problem: `${field} source or licence missing` });
-    }
-    if (!entry.example) issues.push({ item, problem: "example sentence missing" });
-    else {
-      text(issues, item, entry.example, "example", 4, 220);
-      if (!mentions(entry.example, entry.headword)) issues.push({ item, problem: `example does not use "${entry.headword}": ${entry.example}` });
-    }
-  }
-  return issues;
-}
-
 /** Speaking/writing topics: unique keys and slugs, both languages filled, 5+ sentence frames with basic and advanced ones. */
 export function checkTopics(categories: TopicCategoryDef[]): GateIssue[] {
   const issues: GateIssue[] = [];

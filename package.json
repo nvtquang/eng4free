@@ -2,7 +2,9 @@
   "name": "english-4-free",
   "private": true,
   "packageManager": "pnpm@9.15.5",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "build": "pnpm --filter @english4free/web build",
     "test": "pnpm -r --if-present test",
@@ -37,6 +39,12 @@
     "content:d3:publish": "tsx scripts/content/d3/publish.ts",
     "content:d3:review-sample": "tsx scripts/content/d3/review-sample.ts",
     "content:d3:crosscheck": "tsx scripts/content/d3/crosscheck.ts",
+    "vocab:candidates": "python scripts/vocabulary/candidates.py",
+    "vocab:ingest": "tsx scripts/vocabulary/ingest.ts",
+    "vocab:apply": "tsx scripts/vocabulary/apply.ts",
+    "vocab:check": "tsx scripts/vocabulary/check.ts",
+    "vocab:publish": "tsx scripts/vocabulary/publish.ts",
+    "vocab:snapshot": "tsx scripts/vocabulary/snapshot.ts",
     "content:pack-v01:check": "tsx scripts/import/content-pack-v0.1.ts --check",
     "content:pack-v01:normalize": "tsx scripts/import/content-pack-v0.1.ts --normalize",
     "content:pack-v01:import": "tsx scripts/import/content-pack-v0.1.ts --import",

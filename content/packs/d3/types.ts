@@ -3,13 +3,13 @@
  *
  * Everything in this pack is original English 4 Free material drafted with AI assistance
  * (Claude) and reviewed through the DRAFT → REVIEW → APPROVED → PUBLISHED workflow, except
- * vocabulary meanings/IPA (Wiktionary, CC BY-SA 4.0) and photographs (CC0, see media credits).
+ * photographs (CC0, see media credits). The vocabulary is not in the pack; it lives in PostgreSQL.
  * Nothing here is copied or adapted from ETS or Cambridge materials.
  */
 import type { QuestionAuthoring } from "@english4free/content-schemas";
 
 export type Level = "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-export type BatchKey = "lessons" | "grammar" | "vocabulary" | "toeic" | "ielts" | "topics" | "pronunciation" | "placement";
+export type BatchKey = "lessons" | "grammar" | "toeic" | "ielts" | "topics" | "pronunciation" | "placement";
 export type Image = { src: string; alt: string; credit?: string };
 /** Speaker casting for generated audio: a gender, or an exact Piper voice such as "en_GB-vctk-medium:p236". */
 export type Voice = "female" | "male" | `${string}:${string}`;
@@ -72,11 +72,6 @@ export type PronunciationDef =
   | { key: string; kind: "SOUND"; slug: string; content: { symbol: string; keyword: string; examples: string[]; kind: "vowel" | "consonant" } }
   | { key: string; kind: "PAIR"; slug: string; content: { first: string; second: string; contrast: string[]; tip: Localized } }
   | { key: string; kind: "SHADOW"; slug: string; content: { transcript: Localized; targetText: string; durationSeconds: number; focusSounds: string[] } };
-
-export type VocabularySelection = {
-  headword: string; pos: string; level: Level; ipa: string; ipaUs: string | null; meaningVi: string; sense: string;
-  sources: Record<"level" | "meaning" | "ipa", { name: string; url: string; license: string }>;
-};
 
 // ---------- authoring helpers ----------
 

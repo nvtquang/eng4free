@@ -17,7 +17,7 @@
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { resolve } from "node:path";
 import { and, eq, inArray, like, ne, or, sql } from "drizzle-orm";
-import { contentBatches, contentItemHashes, courses, exams, lessons, placementItems, pronunciationItems, questions, topicCategories, topics, vocabulary } from "../../../apps/web/src/db/schema";
+import { contentBatches, contentItemHashes, courses, exams, lessons, placementItems, pronunciationItems, questions, topicCategories, topics } from "../../../apps/web/src/db/schema";
 import { d3Batches, d3Retires } from "../../../content/packs/d3";
 import type { BatchKey } from "../../../content/packs/d3/types";
 import { batchId, connect, D3_COURSE_ID, isTestDatabase } from "./shared";
@@ -71,7 +71,6 @@ async function main() {
         if (key === "lessons" || key === "grammar") await tx.update(courses).set({ status: "PUBLISHED" }).where(eq(courses.id, D3_COURSE_ID));
         await tx.update(exams).set({ status: "PUBLISHED" }).where(and(eq(exams.contentBatchId, id), ne(exams.status, "ARCHIVED")));
         await tx.update(questions).set({ status: "PUBLISHED" }).where(and(eq(questions.contentBatchId, id), ne(questions.status, "ARCHIVED")));
-        await tx.update(vocabulary).set({ status: "PUBLISHED" }).where(and(eq(vocabulary.contentBatchId, id), ne(vocabulary.status, "ARCHIVED")));
         await tx.update(topics).set({ status: "PUBLISHED" }).where(and(eq(topics.contentBatchId, id), ne(topics.status, "ARCHIVED")));
         await tx.update(topicCategories).set({ status: "PUBLISHED" }).where(and(eq(topicCategories.contentBatchId, id), ne(topicCategories.status, "ARCHIVED")));
         await tx.update(pronunciationItems).set({ status: "PUBLISHED" }).where(and(eq(pronunciationItems.contentBatchId, id), ne(pronunciationItems.status, "ARCHIVED")));
@@ -85,7 +84,6 @@ async function main() {
           if (old.length) await tx.update(lessons).set({ status: "ARCHIVED" }).where(and(inArray(lessons.contentBatchId, old.map((row) => row.id)), eq(lessons.skill, "GRAMMAR")));
         }
         if (retire.courseSlugPrefixes?.length) await tx.update(courses).set({ status: "ARCHIVED" }).where(or(...retire.courseSlugPrefixes.map((prefix) => like(courses.slug, `${prefix}%`))));
-        if (retire.vocabularyOutsideBatch) await tx.update(vocabulary).set({ status: "ARCHIVED" }).where(ne(vocabulary.contentBatchId, id));
         console.log(`  ${key}: published${fromRecord.has(key) ? " (matches the approval record)" : ""}`);
       }
     });

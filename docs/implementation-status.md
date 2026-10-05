@@ -41,18 +41,18 @@ Checked on 2026-10-01. Details and the list of fixes are in section 8 of
 
 ## D3 — Content expansion: DRAFTED, IN REVIEW
 
-Drafted on 2026-09-28. The content lives in the pack `content/packs/d3` (typed TypeScript plus JSON). It is imported into the database as DRAFT items in five batches (`lessons`, `grammar`, `vocabulary`, `toeic`, `ielts`), and each batch is set to REVIEW. Nothing reaches learners until a reviewer approves the batch in the CMS and runs `pnpm content:d3:publish`.
+Drafted on 2026-09-28. The content lives in the pack `content/packs/d3` (typed TypeScript plus JSON). It is imported into the database as DRAFT items in batches (`lessons`, `grammar`, `toeic`, `ielts`, `topics`, `pronunciation`, `placement`), and each changed batch is set to REVIEW. The vocabulary is not in the pack: it lives only in PostgreSQL (see [Vocabulary catalogue](content/vocabulary-catalogue.md)). Nothing reaches learners until a reviewer approves the batch in the CMS and runs `pnpm content:d3:publish`.
 
 **What the pack contains**
 
 | Area | Content |
 | --- | --- |
-| Grammar | 24 topics, four per level from A1 to C2. Each has a form and use explanation with Vietnamese notes, examples, common mistakes of Vietnamese learners, and 8 practice questions. They replace the 12 placeholder grammar lessons from content pack v0.1. |
-| Skill lessons | 24 lessons: Reading, Listening, Speaking and Writing at every level. Listening and speaking lessons include multi-voice recordings. |
-| Vocabulary | 763 words. Levels come from Words-CEFR (A1–B2, MIT) and the Octanove C1/C2 profile (CC BY-SA). Vietnamese meanings and IPA come from English Wiktionary via kaikki.org (CC BY-SA 4.0). Example sentences are original. |
-| TOEIC | Full Mock Test 1 with 200 questions across the 7 parts and 120 minutes. Mini Test 1 with 22 questions. One practice set per part, 71 questions in total. |
-| IELTS | Listening Test 1 (4 sections, 40 marks, 5 question types). Academic Reading Test 1 (3 passages, 40 marks, 7 question types). Six Writing tasks, three of them Task 1 with a figure. Five Speaking sets covering Parts 1–3. |
-| Media | 12 CC0 photographs from Openverse for TOEIC Part 1, with credits. 7 TOEIC graphics and 3 IELTS Task 1 figures drawn from the question data. About 110 audio files. |
+| Grammar | 36 topics, six per level from A1 to C2. Each has a form and use explanation with Vietnamese notes, examples, common mistakes of Vietnamese learners, and 8 practice questions. They replace the 12 placeholder grammar lessons from content pack v0.1. |
+| Skill lessons | 79 lessons: 28 Reading, 27 Listening, 12 Speaking and 12 Writing, spread across every level. Listening and speaking lessons include multi-voice recordings. |
+| Vocabulary (in PostgreSQL, not the pack) | 5,000 words (A1 600, A2 850, B1 1,300, B2 1,350, C1 450, C2 450), all reviewed and published. Moved from the pack into PostgreSQL on 2026-10-05, then extended from 2,429. Levels come from Words-CEFR (A1–B2, MIT) and the Octanove C1/C2 profile (CC BY-SA). IPA comes from English Wiktionary (CC BY-SA 4.0), or from ipa-dict (MIT) when Wiktionary has none. About 3,850 Vietnamese meanings come from Wiktionary via kaikki.org (CC BY-SA 4.0); the rest were written by English 4 Free editors (AI-drafted, then checked), and each word's source is recorded. Words whose only sourced meaning is wrong for learners, grammatical adverbs and spelling variants are excluded (170 decisions). Example sentences are original. Edited in `/admin/vocabulary`; see [Vocabulary catalogue](content/vocabulary-catalogue.md). |
+| TOEIC | Full Mock Test 1 with 200 questions across the 7 parts and 120 minutes. Mini Tests 1 and 2. One practice set per part, 71 questions in total. |
+| IELTS | Listening Tests 1 and 2 (4 sections, 40 marks each). Academic Reading Tests 1 and 2 (3 passages, 40 marks each). Six Writing tasks, three of them Task 1 with a figure. Five Speaking sets covering Parts 1–3. |
+| Media | 12 CC0 photographs from Openverse for TOEIC Part 1, with credits. 7 TOEIC graphics and 3 IELTS Task 1 figures drawn from the question data. About 135 audio files. |
 
 **How the quality rules are enforced**
 
@@ -62,12 +62,9 @@ Drafted on 2026-09-28. The content lives in the pack `content/packs/d3` (typed T
   - text of a sensible length
   - images that exist on disk and carry a licence credit
   - Speaking sets that have all three parts and Writing Task 1 prompts that have a figure
-  - vocabulary with a sourced meaning, IPA written as /…/, a per-field source and licence, and an example sentence that uses the headword
-- **Vocabulary sources.** `scripts/content/d3/build_vocabulary.py` keeps every Vietnamese translation group that Wiktionary lists.
-  - A reviewer picks the sense a learner needs in `sense-choices.json`, from 254 recorded decisions. The words themselves are always Wiktionary's.
-  - A word is skipped when Wiktionary has no Vietnamese translation for its learner sense (for example *interest*, whose only translation is *lãi*), or when the source has a typo or the entry is vulgar.
-  - Characters that look Latin but are Cyrillic are rejected.
-  - IPA is normalised to dictionary style: /r/, /l/, no tie bars.
+- **Vocabulary rules** (`apps/web/src/modules/vocabulary/catalog-rules.ts`, run by `pnpm vocab:check` and on every CMS save): a sourced meaning, IPA written as /…/, a per-field source and licence, and an original example of 4+ words that uses the headword. Only reviewed words are published.
+  - Every Vietnamese translation group Wiktionary lists is kept; a reviewer picks the sense a learner needs. A word is excluded when Wiktionary has no Vietnamese translation for its learner sense (for example *interest*, whose only translation is *lãi*), or when the entry has a typo or is vulgar.
+  - Characters that look Latin but are Cyrillic are rejected. IPA is normalised to dictionary style: /r/, /l/, no tie bars.
 - **Photographs.** Candidates were searched on Openverse with the CC0 filter and chosen by eye. One watermarked photo was rejected. Each Part 1 statement was written from what the photo actually shows.
 - **Blind cross-check** (`pnpm content:d3:crosscheck`). Gemini answers every question from the learner's material without seeing the key. For Part 1 it receives the actual photograph. Its answers are scored by `scoring-core`. Any disagreement is recorded in `content/packs/d3/qa/crosscheck.json` and highlighted in the review sheet.
 - **Review sheet** (`pnpm content:d3:review-sample`). This writes `docs/content/d3-review-sample.md`: a fixed random sample of 15% per batch plus every flagged item, showing exactly what the learner sees, the answer key and the explanation.
